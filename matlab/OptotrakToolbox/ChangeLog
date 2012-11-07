@@ -1,0 +1,6 @@
+2007-12-21  Volker Franz  <volker.franz@psychol.uni-giessen.de>
+
+	* optoUtil.c (struct NDIFLAG_TABLE_ENTRY): Commented flags that
+	are not used and conflict with Certus. Thanks to: Alessandra
+	Sciutti <alessandra.sciutti@iit.it> for this hint!
+

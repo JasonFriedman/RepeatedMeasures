@@ -1,0 +1,80 @@
+<HTML>
+<HEAD><TITLE>Protocol documentation</TITLE></HEAD>
+<BODY><H1>Protocol documentation</H1>
+In the section experimentDescription.setup, there can be the fields below. There must be at least one of the clients.
+<BR><BR><TABLE border="1">
+<TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
+<TR><TD>images</TD><TD>N</TD><TD>cellarray</TD><TD>[]</TD><TD>Cell array of the filenames of the images (which are in the stimuli directory)</TD></TR>
+<TR><TD>strings</TD><TD>N</TD><TD>cellarray</TD><TD>[]</TD><TD>Strings to replace the default (for feedback, etc). Each item should have fields name (name of string to replace) and value (the new string to use)</TD></TR>
+<TR><TD>sounds</TD><TD>N</TD><TD>cellarray</TD><TD>[]</TD><TD>Cell array of the filenames of .wav sound files to play (which are in the stimuli directory). All files need to have the same sample frequency and number of channels.</TD></TR>
+<TR><TD>symbols</TD><TD>N</TD><TD>cellarray</TD><TD>[]</TD><TD>A cell array of strings to display (e.g. {'<','>'})</TD></TR>
+<TR><TD>monitorWidth</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>70</TD><TD>The width of the monitor in cm</TD></TR>
+<TR><TD>viewingDistance</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>68</TD><TD>The viewing distance in cm</TD></TR>
+<TR><TD>xshift</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>Horizontal shift of stimuli from the center of the screen</TD></TR>
+<TR><TD>framerate</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>NaN</TD><TD>Frame rate to aim for (if the program can't keep up with the monitor frame rate</TD></TR>
+<TR><TD>vr</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="vr.html">struct</A></TD><TD>[]</TD><TD>details of the vr setup (if vrstimulus is going to be used)</TD></TR>
+<TR><TD>MCtrigger</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>[]</TD><TD>details of the DAQ card trigger (1 = input, 2 = output, empty if not used)</TD></TR>
+<TR><TD>mouseTargets</TD><TD>N</TD><TD><A title="A n by 4 matrix (see description for how to fill it)">n by 4 matrix</A></TD><TD>[]</TD><TD>details of mouse targets (that can be clicked). Each row should be (x,y,width,height), in the range 0-1</TD></TR>
+<TR><TD>boxes</TD><TD>N</TD><TD><A title="A n by 4 matrix (see description for how to fill it)">n by 4 matrix</A></TD><TD>NaN</TD><TD>details of boxes to show on the screen. Each row should be (x,y,width,height), in the range 0-1</TD></TR>
+<TR><TD>labels</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="labels.html">struct</A></TD><TD>[]</TD><TD>list of labels (strings) that can be shown</TD></TR>
+<TR><TD>DAQ</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="socketclient_DAQ.html">struct</A></TD><TD>[]</TD><TD>This client connects to a DAQ server to sample one or more channels (e.g. for a button box).</TD></TR>
+<TR><TD>fastrak</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="socketclient_fastrak.html">struct</A></TD><TD>[]</TD><TD>Connect to a fastrak server to record fastrak 6D data</TD></TR>
+<TR><TD>glove</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="socketclient_glove.html">struct</A></TD><TD>[]</TD><TD>Connect to the cyberglove server to collect glove data</TD></TR>
+<TR><TD>glovetracker</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="glovetracker.html">struct</A></TD><TD>[]</TD><TD>This connects to both a glove and tracker (fastrak / liberty) server.</TD></TR>
+<TR><TD>keyboard</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="socketclient_keyboard.html">struct</A></TD><TD>[]</TD><TD>Connect to a keyboard server to record keystroke information</TD></TR>
+<TR><TD>liberty</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="socketclient_liberty.html">struct</A></TD><TD>[]</TD><TD>Connect to the liberty to sample from it</TD></TR>
+<TR><TD>mouse</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="socketclient_mouse.html">struct</A></TD><TD>[]</TD><TD>Connect to the mouse server to sample the mouse location</TD></TR>
+<TR><TD>optotrak</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="socketclient_optotrak.html">struct</A></TD><TD>[]</TD><TD>Connects to the optotrak to sample 3D locations</TD></TR>
+<TR><TD>tablet</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="socketclient_tablet.html">struct</A></TD><TD>[]</TD><TD>Connects to server to sample location and other information from a WACOM tablet</TD></TR>
+<TR><TD>video</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="socketclient_video.html">struct</A></TD><TD>[]</TD><TD>A client to connect to a program to record video</TD></TR>
+</TABLE><BR><BR>Each trial can have the following fields:
+<BR><BR><TABLE border="1">
+<TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
+<TR><TD>checkMoving</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>Whether to check the subject is still moving at this time</TD></TR>
+<TR><TD>blockcounter</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>counter (used with triggers)</TD></TR>
+<TR><TD>waitTimeBefore</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>time to wait before showing the main stimulus (fixation is usually shown)</TD></TR>
+<TR><TD>showPosition</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>whether the current location should be shown (depends on the input device)</TD></TR>
+<TR><TD>drawFixation</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>whether to draw a fixation point during waitTimeBefore</TD></TR>
+<TR><TD>targetNum</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>NaN</TD><TD>correct target number</TD></TR>
+<TR><TD>textFeedback</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>whether to display text feedback after the trial</TD></TR>
+<TR><TD>textFeedbackShowBackground</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>whether to show the background when giving feedback</TD></TR>
+<TR><TD>checkRecording</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>whether to check the recording at the end of the trial (and give feedback if there is a problem, e.g. missing markers)</TD></TR>
+<TR><TD>auditoryFeedback</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>whether to provide auditory feedback (usually when incorrect)</TD></TR>
+<TR><TD>filename</TD><TD>N</TD><TD>string</TD><TD>[]</TD><TD>filename to save the results</TD></TR>
+<TR><TD>recordingTime</TD><TD>Y</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>[]</TD><TD>recording time in seconds</TD></TR>
+<TR><TD>movementonset</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="movementonset.html">struct</A></TD><TD>[]</TD><TD>how movement onset is determined</TD></TR>
+<TR><TD>recording</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>NaN</TD><TD>whether to record</TD></TR>
+<TR><TD>playAudioFile</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="playAudioFile.html">struct</A></TD><TD>[]</TD><TD>details of audio (wav) files to play</TD></TR>
+<TR><TD>boxes</TD><TD>N</TD><TD><A title="A matrix (see description for how to fill it)">matrix</A></TD><TD>[]</TD><TD>which boxes to show</TD></TR>
+<TR><TD>labels</TD><TD>N</TD><TD><A title="A matrix (see description for how to fill it)">matrix</A></TD><TD>[]</TD><TD>which labels to show</TD></TR>
+<TR><TD>stimulus</TD><TD>Y</TD><TD></TD><TD>[]</TD><TD>the stimulus to show for this trial</TD></TR>
+<TR><TD>starttrial</TD><TD>N</TD><TD>One of:<BR>
+<A HREF="stimulus_dots.html">dots</A><BR>
+<A HREF="stimulus_images.html">images</A><BR>
+<A HREF="stimulus_showImage.html">showImage</A><BR>
+<A HREF="stimulus_showText.html">showText</A><BR>
+<A HREF="stimulus_symbols.html">symbols</A><BR>
+<A HREF="stimulus_video.html">video</A><BR>
+<A HREF="stimulus_vr.html">vr</A><BR>
+</TD><TD>[]</TD><TD>how the trial starts</TD></TR>
+<TR><TD>targetType</TD><TD>N</TD><TD>One of:<BR>
+<A HREF="start_button.html">button</A><BR>
+<A HREF="start_dontWait.html">dontWait</A><BR>
+<A HREF="start_keyboard.html">keyboard</A><BR>
+<A HREF="mouseClick.html">mouseClick</A><BR>
+<A HREF="start_pedal.html">pedal</A><BR>
+<A HREF="start_stylusButton.html">stylusButton</A><BR>
+<A HREF="start_targetInSpace.html">targetInSpace</A><BR>
+</TD><TD>[]</TD><TD>the response for this trial</TD></TR>
+<TR><TD>beep</TD><TD>N</TD><TD>One of:<BR>
+<A HREF="response_buttonPress.html">buttonPress</A><BR>
+<A HREF="response_defineTarget.html">defineTarget</A><BR>
+<A HREF="response_dummy.html">dummy</A><BR>
+<A HREF="response_keyboard.html">keyboard</A><BR>
+<A HREF="keyboardsequence.html">keyboardsequence</A><BR>
+<A HREF="response_mouseEntersBox.html">mouseEntersBox</A><BR>
+<A HREF="movementThreshold.html">movementThreshold</A><BR>
+<A HREF="response_targetInSpace.html">targetInSpace</A><BR>
+<A HREF="response_targetOnScreen.html">targetOnScreen</A><BR>
+</TD><TD>[]</TD><TD>beeps througout the trial</TD></TR>
+</TABLE></BODY></HTML>

@@ -1,0 +1,14 @@
+<HTML>
+<HEAD><TITLE>liberty</TITLE></HEAD>
+<BODY><H1>liberty</H1>
+Connect to the liberty to sample from it<BR><BR>
+<TABLE border="1">
+<TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
+<TR><TD>server</TD><TD>Y</TD><TD>string</TD><TD>[]</TD><TD>Location of the server (e.g. 'localhost' or an IP address) </TD></TR>
+<TR><TD>port</TD><TD>Y</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>Port to connect to the server on</TD></TR>
+<TR><TD>numsensors</TD><TD>Y</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>Number of liberty receivers present</TD></TR>
+<TR><TD>hemisphere</TD><TD>N</TD><TD><A title="A 1 by 3 matrix (see description for how to fill it)">1 by 3 matrix</A></TD><TD>[0,0,1]</TD><TD>The hemisphere to use (should be a 1x3 vectors, e.g. [0 0 1] means use the +z hemisphere)</TD></TR>
+<TR><TD>recordOrientation</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>Whether to record orientation as well as position (so each data sample has 6 numbers rather than 3)</TD></TR>
+<TR><TD>samplerate</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>240</TD><TD>Sample rate (can be either 120 or 240 (in Hz))</TD></TR>
+<TR><TD>alignmentframe</TD><TD>N</TD><TD><A title="A 1 by 9 matrix (see description for how to fill it)">1 by 9 matrix</A></TD><TD>[0,0,0,1,0,0,0,1,0]</TD><TD>a 1x9 vector with the alignment frame. The first 3 are the zero position, the next three the direction of the x axis, the next three the direction of the y axis (in the coordinates of the transmitter cube</TD></TR>
+</TABLE></BODY></HTML>
