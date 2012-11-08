@@ -1,0 +1,54 @@
+134803.439248320010: Connected to mouse
+134811.292141399990: Opened window
+134811.294799160010: Trial 1
+134811.308449559990: Read stimulus
+134811.311714960000: Read target type
+134811.314360360000: Read starttrial
+134811.314593719990: Read trial parameters
+134811.320147680000: Setup stimulus
+134811.322196319990: Setup recording on mouse
+134811.334742240000: Ran prestart
+134811.335078159990: Ran starttrial setup
+134811.340643239990: Started sampling without recording on mouse
+134814.123606159990: Started recording on mouse
+134815.155912919990: Marked event in mouse with number 5
+134818.537730960000: Stopped recording on mouse
+134818.547146839990: Got data summary for mouse
+134818.547809479990: Succesful to target1
+134819.582682000010: Wrote text Success
+134819.675163800010: Saved file on mouse
+134819.712683160000: Saved dot/frame data to file results/MouseWords//trialinfo_7_8_1_1_1.mat
+134819.713263399990: Checked recording on mouse
+134819.715112280010: Trial 2
+134819.723963839990: Read stimulus
+134819.726713079990: Read target type
+134819.728430519990: Read starttrial
+134819.728643440000: Read trial parameters
+134819.734560360000: Setup stimulus
+134819.736460040000: Setup recording on mouse
+134819.749005440010: Ran prestart
+134819.749189880010: Ran starttrial setup
+134819.749791999990: Started sampling without recording on mouse
+134821.335689239990: Started recording on mouse
+134822.368975599990: Marked event in mouse with number 5
+134824.268383399990: Stopped recording on mouse
+134824.272336920000: Got data summary for mouse
+134824.272850999990: Succesful to target2
+134825.304044080000: Wrote text Success
+134825.376906319990: Saved file on mouse
+134825.417006039990: Saved dot/frame data to file results/MouseWords//trialinfo_1_2_2_1_2.mat
+134825.417246959990: Checked recording on mouse
+134825.418292160000: Trial 3
+134825.430077839990: Read stimulus
+134825.432895520000: Read target type
+134825.434730600010: Read starttrial
+134825.434916639990: Read trial parameters
+134825.438803160010: Setup stimulus
+134825.439624160000: Setup recording on mouse
+134825.451938240000: Ran prestart
+134825.452122919990: Ran starttrial setup
+134825.452611399990: Started sampling without recording on mouse
+134826.051655320010: Stopped recording on mouse
+134826.052062640000: Pressed q, quitting
+134826.052550800000: Pressed q, quitting
+134827.504095400010: Saved result data to file results/MouseWords//results.mat

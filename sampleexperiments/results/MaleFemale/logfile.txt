@@ -1,0 +1,155 @@
+134937.262986245012: Connected to keyboard
+134954.926749845006: Opened window
+134954.937181207002: Trial 1
+134954.968385679007: Read stimulus
+134954.979348186986: Read target type
+134954.985362509004: Read starttrial
+134954.985623757006: Read trial parameters
+134954.989021637011: Setup stimulus
+134955.058393904998: Ran prestart
+134955.060392307001: Ran starttrial setup
+134959.544218013005: Trial 2
+134959.566349825007: Read stimulus
+134959.570954072988: Read target type
+134959.575024187012: Read starttrial
+134959.575248823006: Read trial parameters
+134959.613966481003: Setup stimulus
+134959.711288365012: Setup recording on keyboard
+134959.719518858998: Ran prestart
+134959.720221866999: Ran starttrial setup
+134963.401026059000: Started recording on keyboard
+134963.412231922994: Marked event in keyboard with number 5
+134964.740082106990: Stopped recording on keyboard
+134964.762703218992: Got data summary for keyboard
+134964.778708984988: Succesful to target2
+134965.821617059002: Wrote text Success
+134965.836755008990: Saved file on keyboard
+134965.845745161001: Saved dot/frame data to file results/MaleFemale//trialinfo_2_3.mat
+134965.850485748990: Checked recording on keyboard
+134965.859280003002: Trial 3
+134965.873099585006: Read stimulus
+134965.875838148990: Read target type
+134965.878804117005: Read starttrial
+134965.878977788991: Read trial parameters
+134965.879512431013: Setup stimulus
+134965.880123490992: Setup recording on keyboard
+134965.885039176996: Ran prestart
+134965.885259814997: Ran starttrial setup
+134966.236769376992: Started recording on keyboard
+134966.237985352986: Marked event in keyboard with number 5
+134967.340179399005: Stopped recording on keyboard
+134967.351352102996: Got data summary for keyboard
+134967.352626548993: Wrong direction (correct = 1
+134968.390684259008: Wrote text Incorrect
+134968.397572373011: Saved file on keyboard
+134968.400996888988: Saved dot/frame data to file results/MaleFemale//trialinfo_1_2.mat
+134968.401324255014: Checked recording on keyboard
+134968.407656750991: Trial 4
+134968.422592368996: Read stimulus
+134968.426820018998: Read target type
+134968.429745950998: Read starttrial
+134968.429965836986: Read trial parameters
+134968.430773920991: Setup stimulus
+134968.431551785005: Setup recording on keyboard
+134968.441515226994: Ran prestart
+134968.441732832987: Ran starttrial setup
+134968.709316885012: Started recording on keyboard
+134968.710453050997: Marked event in keyboard with number 5
+134969.778992481006: Stopped recording on keyboard
+134969.792774697009: Got data summary for keyboard
+134969.794067359006: Wrong direction (correct = 2
+134970.829656315007: Wrote text Incorrect
+134970.838323228993: Saved file on keyboard
+134970.842097346991: Saved dot/frame data to file results/MaleFemale//trialinfo_2_4.mat
+134970.842430802993: Checked recording on keyboard
+134970.849199677003: Trial 5
+134970.862189497013: Read stimulus
+134970.866636521008: Read target type
+134970.870238883013: Read starttrial
+134970.870489964989: Read trial parameters
+134970.871310162998: Setup stimulus
+134970.872190550988: Setup recording on keyboard
+134970.880916077003: Ran prestart
+134970.881179031014: Ran starttrial setup
+134970.898369498987: Started recording on keyboard
+134970.899523197004: Marked event in keyboard with number 5
+134971.465937481000: Stopped recording on keyboard
+134971.479082559003: Got data summary for keyboard
+134971.480275546986: Succesful to target2
+134972.516915738990: Wrote text Success
+134972.524354722991: Saved file on keyboard
+134972.527949543000: Saved dot/frame data to file results/MaleFemale//trialinfo_2_4.mat
+134972.528299891012: Checked recording on keyboard
+134972.534622806998: Trial 6
+134972.549720281007: Read stimulus
+134972.553578605002: Read target type
+134972.557298405009: Read starttrial
+134972.557550250989: Read trial parameters
+134972.558347131009: Setup stimulus
+134972.559244534990: Setup recording on keyboard
+134972.568941989011: Ran prestart
+134972.569193281000: Ran starttrial setup
+134973.137321121001: Started recording on keyboard
+134973.138563098997: Marked event in keyboard with number 5
+134973.872549800988: Stopped recording on keyboard
+134973.885068862990: Got data summary for keyboard
+134973.886413755012: Succesful to target2
+134974.922878838988: Wrote text Success
+134974.932948600996: Saved file on keyboard
+134974.936285422998: Saved dot/frame data to file results/MaleFemale//trialinfo_2_3.mat
+134974.936648484989: Checked recording on keyboard
+134974.943228104996: Trial 7
+134974.957226027007: Read stimulus
+134974.961371270998: Read target type
+134974.964955653006: Read starttrial
+134974.965191956988: Read trial parameters
+134974.965959335008: Setup stimulus
+134974.966831236990: Setup recording on keyboard
+134974.974514892994: Ran prestart
+134974.974811733002: Ran starttrial setup
+134975.209070688987: Started recording on keyboard
+134975.210184049007: Marked event in keyboard with number 5
+134975.777294711006: Stopped recording on keyboard
+134975.789284975006: Got data summary for keyboard
+134975.790569831006: Succesful to target1
+134976.827175496990: Wrote text Success
+134976.833117520990: Saved file on keyboard
+134976.836355417006: Saved dot/frame data to file results/MaleFemale//trialinfo_1_1.mat
+134976.836640341004: Checked recording on keyboard
+134976.843072176998: Trial 8
+134976.858953093004: Read stimulus
+134976.863235600991: Read target type
+134976.866931333003: Read starttrial
+134976.867198813008: Read trial parameters
+134976.868010176986: Setup stimulus
+134976.868936624989: Setup recording on keyboard
+134976.879108527006: Ran prestart
+134976.879336874990: Ran starttrial setup
+134977.163955094991: Started recording on keyboard
+134977.164680927002: Marked event in keyboard with number 5
+134977.765697294992: Stopped recording on keyboard
+134977.782254402991: Got data summary for keyboard
+134977.783525011007: Succesful to target1
+134978.815610413003: Wrote text Success
+134978.823983220995: Saved file on keyboard
+134978.827216342994: Saved dot/frame data to file results/MaleFemale//trialinfo_1_1.mat
+134978.827579982986: Checked recording on keyboard
+134978.833426536992: Trial 9
+134978.848258796992: Read stimulus
+134978.852513073012: Read target type
+134978.856214175001: Read starttrial
+134978.856554058992: Read trial parameters
+134978.857430742995: Setup stimulus
+134978.858338416991: Setup recording on keyboard
+134978.867719358997: Ran prestart
+134978.867888109002: Ran starttrial setup
+134979.085767532990: Started recording on keyboard
+134979.086740555009: Marked event in keyboard with number 5
+134979.687206705014: Stopped recording on keyboard
+134979.707105382986: Got data summary for keyboard
+134979.708386343002: Succesful to target1
+134980.737836543005: Wrote text Success
+134980.748693277012: Saved file on keyboard
+134980.752146809013: Saved dot/frame data to file results/MaleFemale//trialinfo_1_2.mat
+134980.752466637001: Checked recording on keyboard
+134981.372371797013: Saved result data to file results/MaleFemale//results.mat

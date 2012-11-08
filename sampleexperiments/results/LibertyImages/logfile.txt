@@ -1,0 +1,207 @@
+2371.671301919497: Connected to liberty
+2374.346448888653: Opened window
+2374.359187117522: Trial 1
+2374.370220050495: Read stimulus
+2374.372554556855: Read target type
+2374.374349560812: Read starttrial
+2374.374529292952: Read trial parameters
+2374.376452388225: Setup stimulus
+2374.409576533536: Ran prestart
+2374.410605211735: Ran starttrial setup
+2374.415811314109: Started sampling without recording on liberty
+2374.452515906633: Started sampling without recording on liberty
+2375.698783470255: Stopped recording on liberty
+2375.707039887528: Trial 2
+2375.713090521787: Read stimulus
+2375.718413484411: Read target type
+2375.719669201659: Read starttrial
+2375.719814327675: Read trial parameters
+2375.719945137720: Setup stimulus
+2375.727982135413: Ran prestart
+2375.728125305147: Ran starttrial setup
+2375.728581339524: Started sampling without recording on liberty
+2375.736785794942: Started sampling without recording on liberty
+2379.283326049760: Stopped recording on liberty
+2379.286555640334: Trial 3
+2379.292534273389: Read stimulus
+2379.294606828594: Read target type
+2379.295632632565: Read starttrial
+2379.295732071875: Read trial parameters
+2379.295838930008: Setup stimulus
+2379.307988794574: Ran prestart
+2379.308122047464: Ran starttrial setup
+2379.308578177147: Started sampling without recording on liberty
+2379.350132828750: Started sampling without recording on liberty
+2389.622819883292: Stopped recording on liberty
+2389.623699211914: Trial 4
+2389.628817968811: Read stimulus
+2389.630829252266: Read target type
+2389.636486613682: Read starttrial
+2389.636640111581: Read trial parameters
+2389.636819863785: Setup stimulus
+2389.647529313016: Ran prestart
+2389.647727875623: Ran starttrial setup
+2389.655447464079: Started sampling without recording on liberty
+2389.706340768133: Started sampling without recording on liberty
+2389.716894386976: Stopped recording on liberty
+2389.717735773762: Trial 5
+2389.725239198092: Read stimulus
+2389.727432676595: Read target type
+2389.729602423894: Read starttrial
+2389.729720337528: Read trial parameters
+2389.767179979601: Setup stimulus
+2389.783450611408: Setup recording on liberty
+2389.797698472874: Ran prestart
+2389.798887355508: Ran starttrial setup
+2389.803087557825: Started sampling without recording on liberty
+2398.087755010534: Started recording on liberty
+2400.117662564234: Marked event in liberty with number 5
+2401.164163715710: Stopped recording on liberty
+2401.204744444940: Got data summary for liberty
+2401.212319313685: Succesful to target1
+2402.239188258965: Wrote text Success
+2402.392265276276: Saved file on liberty
+2402.398899203554: Saved dot/frame data to file results/LibertyImages//trialinfo_4_1.mat
+2402.401806318623: Checked recording on liberty
+2402.403767255409: Trial 6
+2402.410795233026: Read stimulus
+2402.413044214756: Read target type
+2402.414760174895: Read starttrial
+2402.414926208046: Read trial parameters
+2402.418350162745: Setup stimulus
+2402.420213305503: Setup recording on liberty
+2402.432075857476: Ran prestart
+2402.432220035447: Ran starttrial setup
+2402.441464997046: Started sampling without recording on liberty
+2402.724522180112: Started recording on liberty
+2404.747283842561: Marked event in liberty with number 5
+2405.720368977049: Stopped recording on liberty
+2405.734550154385: Got data summary for liberty
+2405.734908530169: Moved to wrong target1
+2406.753544789379: Wrote text Incorrect
+2406.897804538462: Saved file on liberty
+2406.903073412402: Saved dot/frame data to file results/LibertyImages//trialinfo_2_2.mat
+2406.903251424017: Checked recording on liberty
+2406.904059834914: Trial 7
+2406.910977693928: Read stimulus
+2406.913230768802: Read target type
+2406.914973725630: Read starttrial
+2406.915078492047: Read trial parameters
+2406.917419850408: Setup stimulus
+2406.918417032471: Setup recording on liberty
+2406.930041810926: Ran prestart
+2406.930183365474: Ran starttrial setup
+2406.939322216339: Started sampling without recording on liberty
+2407.072274882121: Started recording on liberty
+2409.083568379017: Marked event in liberty with number 5
+2410.235110348229: Stopped recording on liberty
+2410.246878181048: Got data summary for liberty
+2410.247254930834: Moved to wrong target2
+2411.259857550356: Wrote text Incorrect
+2411.411399443212: Saved file on liberty
+2411.416709073023: Saved dot/frame data to file results/LibertyImages//trialinfo_3_3.mat
+2411.416890811606: Checked recording on liberty
+2411.417689380901: Trial 8
+2411.424380692446: Read stimulus
+2411.426657628942: Read target type
+2411.428386029027: Read starttrial
+2411.428492520984: Read trial parameters
+2411.430822743588: Setup stimulus
+2411.433686860586: Setup recording on liberty
+2411.444696543902: Ran prestart
+2411.444820281236: Ran starttrial setup
+2411.448129402192: Started sampling without recording on liberty
+2411.461750169990: Started recording on liberty
+2413.473056367669: Marked event in liberty with number 5
+2414.440913664991: Stopped recording on liberty
+2414.453524259010: Got data summary for liberty
+2414.453929314688: Succesful to target1
+2415.465745649363: Wrote text Success
+2415.609005041188: Saved file on liberty
+2415.613694685156: Saved dot/frame data to file results/LibertyImages//trialinfo_4_4.mat
+2415.613918172800: Checked recording on liberty
+2415.614653689625: Trial 9
+2415.622753739787: Read stimulus
+2415.624779725452: Read target type
+2415.626402957831: Read starttrial
+2415.626567526279: Read trial parameters
+2415.629256741648: Setup stimulus
+2415.630280674611: Setup recording on liberty
+2415.642275611686: Ran prestart
+2415.642419900012: Ran starttrial setup
+2415.651739240450: Started sampling without recording on liberty
+2415.675998213709: Started recording on liberty
+2417.690500705042: Marked event in liberty with number 5
+2418.705228839830: Stopped recording on liberty
+2418.716109012273: Got data summary for liberty
+2418.716527676651: Succesful to target1
+2419.730093273400: Wrote text Success
+2419.876198237674: Saved file on liberty
+2419.880947182062: Saved dot/frame data to file results/LibertyImages//trialinfo_3_5.mat
+2419.881119861555: Checked recording on liberty
+2419.881920833565: Trial 10
+2419.888843081673: Read stimulus
+2419.891123604686: Read target type
+2419.892879467958: Read starttrial
+2419.893111031535: Read trial parameters
+2419.895824349299: Setup stimulus
+2419.896870313005: Setup recording on liberty
+2419.906559475984: Ran prestart
+2419.906753308401: Ran starttrial setup
+2419.915940986055: Started sampling without recording on liberty
+2419.923624358217: Started recording on liberty
+2421.934957366990: Marked event in liberty with number 5
+2422.944532966415: Stopped recording on liberty
+2422.953295809879: Got data summary for liberty
+2422.953717177938: Succesful to target2
+2423.969376262108: Wrote text Success
+2424.114758691242: Saved file on liberty
+2424.119610967440: Saved dot/frame data to file results/LibertyImages//trialinfo_1_6.mat
+2424.119787740076: Checked recording on liberty
+2424.120585667310: Trial 11
+2424.129009562373: Read stimulus
+2424.131033024936: Read target type
+2424.132726081528: Read starttrial
+2424.132831831102: Read trial parameters
+2424.135555161017: Setup stimulus
+2424.136514642017: Setup recording on liberty
+2424.145831815496: Ran prestart
+2424.146025427205: Ran starttrial setup
+2424.155181092062: Started sampling without recording on liberty
+2424.179606299116: Started recording on liberty
+2426.190946696615: Marked event in liberty with number 5
+2427.225534051566: Stopped recording on liberty
+2427.235379260626: Got data summary for liberty
+2427.235841098639: Succesful to target2
+2428.250388959548: Wrote text Success
+2428.398068690573: Saved file on liberty
+2428.402853891384: Saved dot/frame data to file results/LibertyImages//trialinfo_1_7.mat
+2428.403028140919: Checked recording on liberty
+2428.403825681912: Trial 12
+2428.411169839819: Read stimulus
+2428.414157348040: Read target type
+2428.415877802611: Read starttrial
+2428.415984399906: Read trial parameters
+2428.418756882657: Setup stimulus
+2428.419824375495: Setup recording on liberty
+2428.426829966225: Ran prestart
+2428.426975267804: Ran starttrial setup
+2428.436429350916: Started sampling without recording on liberty
+2428.452216761044: Started recording on liberty
+2430.463582138757: Marked event in liberty with number 5
+2431.459643788387: Stopped recording on liberty
+2431.461420398279: Got data summary for liberty
+2431.461767718563: Succesful to target2
+2432.481259314354: Wrote text Success
+2432.625791879480: Saved file on liberty
+2432.630561660777: Saved dot/frame data to file results/LibertyImages//trialinfo_2_8.mat
+2432.630733738338: Checked recording on liberty
+2432.631531048589: Trial 13
+2432.638135526301: Read stimulus
+2432.639136329993: Read target type
+2432.641037123653: Read starttrial
+2432.641155849896: Read trial parameters
+2432.641263209640: Setup stimulus
+2432.649409192296: Ran prestart
+2432.649554323327: Ran starttrial setup
+2435.839497058889: Saved result data to file results/LibertyImages//results.mat

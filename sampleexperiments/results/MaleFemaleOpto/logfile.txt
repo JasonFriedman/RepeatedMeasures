@@ -1,0 +1,160 @@
+2033.905611104747: Connected to optotrak client
+2033.907722974588: TransputerInitializeSystem
+2037.911252468924: OptotrakLoadCameraParameters
+2041.922648752908: OptotrakPrintStatus
+2041.922867587516: Connected to optotrak
+2051.081462093277: Opened MC library
+2054.671815625387: Opened window
+2054.679997589840: Trial 1
+2054.698209529006: Read stimulus
+2054.704018412565: Read target type
+2054.710716208262: Read starttrial
+2054.710810893130: Read trial parameters
+2054.711646834711: Setup stimulus
+2054.758583713011: Ran prestart
+2054.758690316254: Ran starttrial setup
+2129.960755770645: Trial 2
+2129.968211045288: Read stimulus
+2129.971806752819: Read target type
+2129.975235934166: Read starttrial
+2129.975305789086: Read trial parameters
+2130.033721717862: Setup stimulus
+2130.036586100659: Setup recording on optotrak
+2130.053037099915: Ran prestart
+2130.053124501332: Ran starttrial setup
+2132.006498493981: Started recording on optotrak
+2133.121893856277: Marked event in optotrak with number 5
+2134.539525304366: Stopped recording on optotrak
+2134.582829395745: Got data summary for optotrak
+2134.597281418658: Succesful to target2
+2135.726192880360: Wrote text Success
+2135.815138719953: Saved file on optotrak
+2135.829232860549: Saved dot/frame data to file results/MaleFemaleOpto//trialinfo_2_3.mat
+2135.832303166381: Checked recording on optotrak
+2135.833357280439: Trial 3
+2135.836469631649: Read stimulus
+2135.837131101463: Read target type
+2135.837657165294: Read starttrial
+2135.837719405697: Read trial parameters
+2135.838169655420: Setup stimulus
+2135.838540118244: Setup recording on optotrak
+2135.851236167236: Ran prestart
+2135.851306353222: Ran starttrial setup
+2136.234961824783: Started recording on optotrak
+2137.267893288167: Marked event in optotrak with number 5
+2138.434330746825: Stopped recording on optotrak
+2138.441926393440: Got data summary for optotrak
+2138.442252824490: Moved to wrong target2
+2139.467255257824: Wrote text Incorrect
+2139.548638557400: Saved file on optotrak
+2139.551051035144: Saved dot/frame data to file results/MaleFemaleOpto//trialinfo_1_2.mat
+2139.551168563564: Checked recording on optotrak
+2139.551633711256: Trial 4
+2139.554754008050: Read stimulus
+2139.555422761315: Read target type
+2139.555963060983: Read starttrial
+2139.556028612046: Read trial parameters
+2139.556483165627: Setup stimulus
+2139.556864222561: Setup recording on optotrak
+2139.583480602514: Ran prestart
+2139.583550788500: Ran starttrial setup
+2140.033820044456: Started recording on optotrak
+2141.066807126923: Marked event in optotrak with number 5
+2142.266490230574: Stopped recording on optotrak
+2142.272431871589: Got data summary for optotrak
+2142.272636470360: Succesful to target2
+2143.316147809038: Wrote text Success
+2143.393504022120: Saved file on optotrak
+2143.395910871743: Saved dot/frame data to file results/MaleFemaleOpto//trialinfo_2_4.mat
+2143.396018468184: Checked recording on optotrak
+2143.396498844911: Trial 5
+2143.399567495413: Read stimulus
+2143.400229627359: Read target type
+2143.400755691190: Read starttrial
+2143.400817931592: Read trial parameters
+2143.401263546392: Setup stimulus
+2143.401633347084: Setup recording on optotrak
+2143.415661605551: Ran prestart
+2143.415734108999: Ran starttrial setup
+2143.682737160765: Started recording on optotrak
+2144.715844420181: Marked event in optotrak with number 5
+2145.848788927565: Stopped recording on optotrak
+2145.854036654300: Got data summary for optotrak
+2145.854229996829: Succesful to target2
+2146.881752504349: Wrote text Success
+2146.958710113999: Saved file on optotrak
+2146.961012346774: Saved dot/frame data to file results/MaleFemaleOpto//trialinfo_2_4.mat
+2146.961121267480: Checked recording on optotrak
+2146.961598333546: Trial 6
+2146.964604743646: Read stimulus
+2146.965257605744: Read target type
+2146.965784662773: Read starttrial
+2146.965846903176: Read trial parameters
+2146.966301456756: Setup stimulus
+2146.966679865163: Setup recording on optotrak
+2146.981321257812: Ran prestart
+2146.981443752222: Ran starttrial setup
+2147.231725323832: Started recording on optotrak
+2148.264632288335: Marked event in optotrak with number 5
+2149.397692999875: Stopped recording on optotrak
+2149.403714758855: Got data summary for optotrak
+2149.403908763515: Succesful to target2
+2150.447371766561: Wrote text Success
+2150.524874641869: Saved file on optotrak
+2150.527251033423: Saved dot/frame data to file results/MaleFemaleOpto//trialinfo_2_3.mat
+2150.527367568645: Checked recording on optotrak
+2150.527847283240: Trial 7
+2150.530916926940: Read stimulus
+2150.531567140511: Read target type
+2150.532089562616: Read starttrial
+2150.532151471953: Read trial parameters
+2150.532594107158: Setup stimulus
+2150.532962252520: Setup recording on optotrak
+2150.546886556272: Ran prestart
+2150.546958066522: Ran starttrial setup
+2150.763965852531: Started recording on optotrak
+2151.796905592565: Marked event in optotrak with number 5
+2152.763471239968: Stopped recording on optotrak
+2152.768735520002: Got data summary for optotrak
+2152.768929855728: Succesful to target1
+2153.796368272491: Wrote text Success
+2153.875525484466: Saved file on optotrak
+2153.877892937237: Saved dot/frame data to file results/MaleFemaleOpto//trialinfo_1_1.mat
+2153.878006823932: Checked recording on optotrak
+2153.878468660964: Trial 8
+2153.881465470150: Read stimulus
+2153.882118001183: Read target type
+2153.882640754354: Read starttrial
+2153.882702332625: Read trial parameters
+2153.883141657171: Setup stimulus
+2153.883508809335: Setup recording on optotrak
+2153.895895311642: Ran prestart
+2153.895966159761: Ran starttrial setup
+2153.996331457955: Started recording on optotrak
+2155.029342046107: Marked event in optotrak with number 5
+2155.979126290412: Stopped recording on optotrak
+2155.984385935523: Got data summary for optotrak
+2155.984579940183: Succesful to target1
+2157.012073644964: Wrote text Success
+2157.089071644663: Saved file on optotrak
+2157.091377188098: Saved dot/frame data to file results/MaleFemaleOpto//trialinfo_1_1.mat
+2157.091485115605: Checked recording on optotrak
+2157.091965161266: Trial 9
+2157.095038446691: Read stimulus
+2157.095716800870: Read target type
+2157.096243195766: Read starttrial
+2157.096305436170: Read trial parameters
+2157.096808656448: Setup stimulus
+2157.097180774602: Setup recording on optotrak
+2157.111632466448: Ran prestart
+2157.111703976698: Ran starttrial setup
+2157.462017794134: Started recording on optotrak
+2158.495066454873: Marked event in optotrak with number 5
+2159.478121174119: Stopped recording on optotrak
+2159.483112986857: Got data summary for optotrak
+2159.483304674056: Succesful to target1
+2160.511131100139: Wrote text Success
+2160.584283437498: Saved file on optotrak
+2160.586578055756: Saved dot/frame data to file results/MaleFemaleOpto//trialinfo_1_2.mat
+2160.586686645394: Checked recording on optotrak
+2160.827842383463: Saved result data to file results/MaleFemaleOpto//results.mat

@@ -1,0 +1,117 @@
+3827.746792970289: Connected to glovetracker
+3832.459741488047: Opened window
+3832.462280586942: Trial 1
+3832.471615435049: Read stimulus
+3832.472397172357: Read target type
+3832.473785568852: Read starttrial
+3832.473892515256: Read trial parameters
+3832.474753307489: Setup stimulus
+3832.515779370412: Ran prestart
+3832.515908463984: Ran starttrial setup
+3847.032567507662: Trial 2
+3847.036461640947: Read stimulus
+3847.037172013486: Read target type
+3847.038023154678: Read starttrial
+3847.038074898572: Read trial parameters
+3847.061189691522: Setup stimulus
+3847.077699527523: Ran prestart
+3847.077745599288: Ran starttrial setup
+3847.080891628045: Started sampling without recording on glovetracker
+3847.152940788504: Marked event in glovetracker with number 10
+3863.941809565628: Stopped recording on glovetracker
+3863.988316478348: Trial 3
+3863.991416964659: Read stimulus
+3863.992381909336: Read target type
+3863.993114558365: Read starttrial
+3863.993166473686: Read trial parameters
+3863.994153595607: Setup stimulus
+3863.997914878964: Setup recording on glovetracker
+3864.005624848498: Ran prestart
+3864.005690258434: Ran starttrial setup
+3864.006149727973: Started sampling without recording on glovetracker
+3866.024522876485: Started recording on glovetracker
+3866.025930773557: Marked event in glovetracker with number 5
+3866.028006932269: Marked event in glovetracker with number 10
+3871.020278902747: Stopped recording on glovetracker
+3871.027347542729: Got data summary for glovetracker
+3872.078411866961: Wrote text  
+3872.271872722953: Saved file on glovetracker
+3872.275388760402: Saved dot/frame data to file results/ShowHand//trialinfo_file1.mat
+3872.277736200877: Checked recording on glovetracker
+3872.279839836031: Trial 4
+3872.283578469969: Read stimulus
+3872.284251654872: Read target type
+3872.284929943489: Read starttrial
+3872.285037813193: Read trial parameters
+3872.286082700006: Setup stimulus
+3872.290726516753: Setup recording on glovetracker
+3872.302957062042: Ran prestart
+3872.303015933691: Ran starttrial setup
+3872.304920686430: Started sampling without recording on glovetracker
+3877.736505827015: Started recording on glovetracker
+3877.738442447136: Marked event in glovetracker with number 5
+3877.741440444147: Marked event in glovetracker with number 10
+3882.736458687591: Stopped recording on glovetracker
+3882.738740904593: Got data summary for glovetracker
+3883.766310261862: Wrote text  
+3883.956871516949: Saved file on glovetracker
+3883.959245083503: Saved dot/frame data to file results/ShowHand//trialinfo_file2.mat
+3883.959336478167: Checked recording on glovetracker
+3883.960696832811: Trial 5
+3883.964311801698: Read stimulus
+3883.964994036144: Read target type
+3883.965675873601: Read starttrial
+3883.965726465626: Read trial parameters
+3883.966829950407: Setup stimulus
+3883.972517793824: Setup recording on glovetracker
+3883.982574614364: Ran prestart
+3883.982626613895: Ran starttrial setup
+3883.984782429031: Started sampling without recording on glovetracker
+3905.894303353654: Started recording on glovetracker
+3905.896453809439: Marked event in glovetracker with number 5
+3905.899909531644: Marked event in glovetracker with number 10
+3910.894052769449: Stopped recording on glovetracker
+3910.896414107542: Got data summary for glovetracker
+3911.923961976283: Wrote text  
+3912.115788131235: Saved file on glovetracker
+3912.118170708234: Saved dot/frame data to file results/ShowHand//trialinfo_file3.mat
+3912.118262987101: Checked recording on glovetracker
+3912.119724306247: Trial 6
+3912.122874704890: Read stimulus
+3912.123583339098: Read target type
+3912.124321103870: Read starttrial
+3912.124440847150: Read trial parameters
+3912.125498536856: Setup stimulus
+3912.131332733840: Setup recording on glovetracker
+3912.140211345462: Ran prestart
+3912.140264352502: Ran starttrial setup
+3912.142597597616: Started sampling without recording on glovetracker
+3935.268164828588: Started recording on glovetracker
+3935.270468558178: Marked event in glovetracker with number 5
+3935.273690414823: Marked event in glovetracker with number 10
+3940.268081794751: Stopped recording on glovetracker
+3940.270509986376: Got data summary for glovetracker
+3941.297887531842: Wrote text  
+3941.488845589363: Saved file on glovetracker
+3941.491414549643: Saved dot/frame data to file results/ShowHand//trialinfo_file4.mat
+3941.491507742787: Checked recording on glovetracker
+3941.492866993681: Trial 7
+3941.495952544789: Read stimulus
+3941.496604385524: Read target type
+3941.497416510528: Read starttrial
+3941.497513511156: Read trial parameters
+3941.498565646024: Setup stimulus
+3941.504358099025: Setup recording on glovetracker
+3941.514113054619: Ran prestart
+3941.514171183418: Ran starttrial setup
+3941.516571742210: Started sampling without recording on glovetracker
+3951.129665651137: Started recording on glovetracker
+3951.131933257745: Marked event in glovetracker with number 5
+3951.135065578356: Marked event in glovetracker with number 10
+3956.129588003717: Stopped recording on glovetracker
+3956.131935778023: Got data summary for glovetracker
+3957.159423508961: Wrote text  
+3957.350051196530: Saved file on glovetracker
+3957.352617765855: Saved dot/frame data to file results/ShowHand//trialinfo_file5.mat
+3957.352710195096: Checked recording on glovetracker
+3957.413577657946: Saved result data to file results/ShowHand//results.mat

@@ -1,0 +1,67 @@
+3113.378662996690: Connected to optotrak client
+3113.379446629848: TransputerInitializeSystem
+3117.387214761835: OptotrakLoadCameraParameters
+3121.394835900529: OptotrakPrintStatus
+3121.395015007221: Connected to optotrak
+3121.399005345391: Connected to video
+3124.212132177428: Opened window
+3124.212440068782: Trial 1
+3124.215008478599: Read stimulus
+3124.215331930055: Read target type
+3124.216148338744: Read starttrial
+3124.216212565543: Read trial parameters
+3124.242491589269: Showed image in showImage
+3124.242593226523: Setup stimulus
+3124.259153146484: Ran prestart
+3124.259210089831: Ran starttrial setup
+3126.875476486701: Trial 2
+3126.878006161800: Read stimulus
+3126.878608039739: Read target type
+3126.879427096955: Read starttrial
+3126.879489006292: Read trial parameters
+3126.879556543751: Setup stimulus
+3126.879938924949: Setup recording on optotrak
+3126.880005138144: Setup recording on video
+3126.908471183687: Ran prestart
+3126.908551632718: Ran starttrial setup
+3132.390529725421: Started recording on optotrak
+3132.391076315342: Started recording on video
+3132.391452075221: Marked event in optotrak with number 5
+3132.391907953066: Marked event in video with number 5
+3135.373173591795: Marked event in optotrak with number 6
+3135.373726803035: Marked event in video with number 6
+3135.406367590495: Stopped recording on optotrak
+3135.406462275364: Stopped recording on video
+3135.428402017384: Got data summary for optotrak
+3136.455981468251: Wrote text  
+3136.551776731757: Saved file on optotrak
+3136.551876051548: Saved file on video
+3136.554071681080: Saved dot/frame data to file results/recordVideo//trialinfo_trial2.mat
+3136.554253436299: Checked recording on optotrak
+3136.554370302588: Checked recording on video
+3136.554837767741: Trial 3
+3136.557432331771: Read stimulus
+3136.558053080470: Read target type
+3136.558887697787: Read starttrial
+3136.558951593520: Read trial parameters
+3136.559021117374: Setup stimulus
+3136.559391249132: Setup recording on optotrak
+3136.559459779788: Setup recording on video
+3136.588859762440: Ran prestart
+3136.588942528933: Ran starttrial setup
+3153.784244305500: Started recording on optotrak
+3153.784788909025: Started recording on video
+3153.785248428595: Marked event in optotrak with number 5
+3153.785767871107: Marked event in video with number 5
+3156.766762035738: Marked event in optotrak with number 6
+3156.767297369416: Marked event in video with number 6
+3156.799993775960: Stopped recording on optotrak
+3156.800091109356: Stopped recording on video
+3156.807075277119: Got data summary for optotrak
+3157.833023234872: Wrote text  
+3157.931921248675: Saved file on optotrak
+3157.932018582071: Saved file on video
+3157.934148660540: Saved dot/frame data to file results/recordVideo//trialinfo_trial3.mat
+3157.934258905509: Checked recording on optotrak
+3157.934324787638: Checked recording on video
+3158.175365314748: Saved result data to file results/recordVideo//results.mat

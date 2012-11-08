@@ -1,0 +1,43 @@
+5223.726493157197: Connected to optotrak client
+5223.729541612675: TransputerInitializeSystem
+5227.740100630813: OptotrakLoadCameraParameters
+5231.748674246312: OptotrakPrintStatus
+5231.748923870056: Connected to optotrak
+5236.267904213344: Opened window
+5236.289788667347: Trial 1
+5236.337467464492: Read stimulus
+5236.343842470865: Read target type
+5236.358497437218: Read starttrial
+5236.358658004215: Read trial parameters
+5237.157215615985: Setup stimulus
+5237.161599260531: Setup recording on optotrak
+5237.201548660408: Ran prestart
+5237.201680755731: Ran starttrial setup
+5244.336501745049: Started recording on optotrak
+5244.341974927712: Marked event in optotrak with number 5
+5245.849294796371: Marked event in optotrak with number 6
+5247.386858203782: Stopped recording on optotrak
+5247.410257615677: Got data summary for optotrak
+5248.493261152123: Wrote text  
+5248.613046449218: Saved file on optotrak
+5248.616900719274: Saved dot/frame data to file results/copyMovements//trialinfo_trial1.mat
+5248.620020353936: Checked recording on optotrak
+5248.621260196004: Trial 2
+5248.623995794138: Read stimulus
+5248.624541390861: Read target type
+5248.625347205439: Read starttrial
+5248.625409445842: Read trial parameters
+5248.688003758261: Setup stimulus
+5248.688445069202: Setup recording on optotrak
+5248.714577761769: Ran prestart
+5248.714640995369: Ran starttrial setup
+5250.797780930997: Started recording on optotrak
+5250.798692686686: Marked event in optotrak with number 5
+5255.346600581484: Marked event in optotrak with number 6
+5256.829340125924: Stopped recording on optotrak
+5256.837257568664: Got data summary for optotrak
+5257.862288142607: Wrote text  
+5258.057529996233: Saved file on optotrak
+5258.060148065946: Saved dot/frame data to file results/copyMovements//trialinfo_trial2.mat
+5258.060262945838: Checked recording on optotrak
+5258.298890002006: Saved result data to file results/copyMovements//results.mat
