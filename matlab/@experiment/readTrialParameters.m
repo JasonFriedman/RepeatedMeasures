@@ -76,7 +76,7 @@ if nargout>1
                 paramstruct{count} = p;
             end
         end
-        params.type{end-m+1} = paramstruct;
+        params.type{end-m} = paramstruct;
     end
     thistrial = [];
     return;
