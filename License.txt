@@ -2,7 +2,8 @@
 % -----------------------------------------
 %
 % The Repeated Measures project is licensed under the MIT open-source
-% license, apart from several packages which are licensed as specified:
+% license, apart from several external packages which are included with the software and
+% are licensed as specified:
 % XMLTree: XML Toolbox for Matlab -> GNU GPL
 % MSOCKET -> GNU LGPL
 % OptotrakToolbox -> GNU GPL
