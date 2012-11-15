@@ -8,13 +8,9 @@ end
 
 generateMaleFemaleProtocol;
 generateMouseWordsProtocol;
-generateRDKProtocol;
-%generateMaskedPrimingProtocol;
-generateNCEProtocol;
-generateQuestImagesProtocol;
 generateCopyShapesProtocol;
 generateCopyMovementsProtocol;
 generateRecordVideoProtocol;
 generateShowHandProtocol;
-generateSequenceLearningProtocol;
-generateTMSTriggerProtocol;
+generateLibertyImagesProtocol;
+generateRecordVideoProtocol;
