@@ -12,13 +12,15 @@
 
 function [lc,params] = libertyclient(inputParams,experiment,debug)
 
-params.name = {'numsensors','hemisphere','recordOrientation','samplerate','alignmentframe'};
-params.type = {'number','matrix_1_3','number','number','matrix_1_9'};
+params.name = {'numsensors','hemisphere','recordOrientation','samplerate','alignmentframe','displayRangeX','displayRangeY'};
+params.type = {'number','matrix_1_3','number','number','matrix_1_9','matrix_1_6','matrix_1_6'};
 params.description = {'Number of liberty receivers present','The hemisphere to use (should be a 1x3 vectors, e.g. [0 0 1] means use the +z hemisphere)',...
 'Whether to record orientation as well as position (so each data sample has 6 numbers rather than 3)',...
-'Sample rate (can be either 120 or 240 (in Hz))','a 1x9 vector with the alignment frame. The first 3 are the zero position, the next three the direction of the x axis, the next three the direction of the y axis (in the coordinates of the transmitter cube'};
-params.required = [1 0 0 0 0];
-params.default = {1,[0 0 1],0,240,[0 0 0 1 0 0 0 1 0]};
+'Sample rate (can be either 120 or 240 (in Hz))','a 1x9 vector with the alignment frame. The first 3 are the zero position, the next three the direction of the x axis, the next three the direction of the y axis (in the coordinates of the transmitter cube',...
+'Range of values to show when using showPosition as the dot position on the x axis. Use the first two values to show the liberty x values, next two for y, last two for z, e.g. [-10 10 0 0 0 0] to show x values of -10 to 10 as the dot x position',... 
+'Range of values to show when using showPosition as the dot position on the y axis. Use the first two values to show the liberty x values, next two for y, last two for z, e.g. [0 0 0 0 -10 10] to show z values of -10 to 10 as the dot y position'}; 
+params.required = [1 0 0 0 0 0 0];
+params.default = {1,[0 0 1],0,240,[0 0 0 1 0 0 0 1 0],[-10 10 0 0 0 0],[0 0 0 0 -10 10]};
 params.classdescription = 'Connect to the liberty to sample from it';
 params.classname = 'liberty';
 params.parentclassname = 'socketclient';
