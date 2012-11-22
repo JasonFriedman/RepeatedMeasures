@@ -37,5 +37,6 @@ eval(cmd);
 
 system('del *.obj');
 system('move *.mexw32 ..');
+system('move *.mexw64 ..');
 
 
