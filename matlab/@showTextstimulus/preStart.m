@@ -1,6 +1,6 @@
 % PRESTART - show the text before the trial starts
 
-function preStart(s,experimentdata,thistrial)
+function preStart(s,experimentdata,thistrial,firsttime)
 
 if ~isempty(experimentdata.vr) && experimentdata.vr.stereomode>0
     for k=0:1
