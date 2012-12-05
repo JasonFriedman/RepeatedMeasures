@@ -1,10 +1,18 @@
-%This function will set the jointangles of the cyberglove
-%It will set the tracker positions and orientation as well
-%and draw the hand offscreen
+% RENDER_FINGERTIPS Draw only the fingertip positions 
+% 
+% The fingertip location is calculated using the Virtualhand SDK
+% 
+% This function will set the jointangles of the cyberglove
+% It will set the tracker positions and orientation as well
+% and draw the hand offscreen
 
-function render_hand( jointangles, positions, orientations, translation ,scale, cameraRotation, winptr,isflipped,stereo,eye_distance)
+function render_fingertips(gtc, jointangles, positions, orientations, vr, winptr, isflipped)
 
-ALL_AT_ONCE = 0;
+translation = vr.translation;
+scale = vr.scale;
+cameraRotation = vr.rotate;
+stereo = vr.stereomode;
+eye_distance = vr.eyedistance;
 
 if nargin<9
     stereo = 0; % i.e. just render in mono
@@ -18,7 +26,9 @@ global GL;
 Screen('BeginOpenGL', winptr);
 % We only want lighting for drawing the glove
 glEnable( GL.LIGHTING );
-if ~ALL_AT_ONCE
+if gtc.noVHT
+    %
+else
     % pass the glove joint angles
     Glove_Rendering(1, jointangles);
     % pass the position and orientation of the fastrak
@@ -28,8 +38,8 @@ end
 
 if stereo==0
     glClear();
-    if ALL_AT_ONCE
-        Glove_Rendering(10,jointangles,positions,orientations,[0 0 0],[1 1 1],cameraRotation);
+    if gtc.noVHT
+        ;%
     else
         Glove_Rendering(4, [0 0 0],[1 1 1],cameraRotation);
     end
@@ -44,8 +54,8 @@ else
         Screen('SelectStereoDrawBuffer', winptr, k);
         Screen('BeginOpenGL', winptr);
         glClear();
-        if ALL_AT_ONCE
-            Glove_Rendering(10,jointangles,positions,orientations,[ed 0 0],[1 1 1],cameraRotation);
+        if gtc.noVHT
+            %
         else
             Glove_Rendering(4, [ed 0 0],[1 1 1],cameraRotation);
         end

@@ -7,7 +7,7 @@
 % The windowNum parameter is ignored here, but it can be used by a
 % subclass (e.g. for tablet recording)
 
-function setupRecording(gfc,filename,maxtime,windowNum)
+function gfc = setupRecording(gfc,filename,maxtime,windowNum)
 
-setupRecording(gfc.glove,filename,maxtime,windowNum);
-setupRecording(gfc.tracker,filename,maxtime,windowNum);
+gfc.glove = setupRecording(gfc.glove,filename,maxtime,windowNum);
+gfc.tracker = setupRecording(gfc.tracker,filename,maxtime,windowNum);

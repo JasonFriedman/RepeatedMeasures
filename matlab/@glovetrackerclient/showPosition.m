@@ -83,10 +83,18 @@ if frame>0
             positions = previoustracker(2:4) + positionarray(frame,:);
             orientations = previoustracker(5:7) + orientationarray(frame,:);
         end
-
-        render_hand(jointangles, positions, orientations, experimentdata.vr.translation , experimentdata.vr.scale,...
-            experimentdata.vr.rotate, experimentdata.screenInfo.curWindow,...
-            get(thistrial.thisstimulus,'showFlipped'),experimentdata.vr.stereomode,...
-            experimentdata.vr.eyedistance);
+        
+        % Whether to render the hand or just the fingertip positions
+        spt = get(thistrial.thisstimulus,'showPositionType');
+        
+        if strcmp(spt,'hand')
+            render_hand(gfc,jointangles, positions, orientations, experimentdata.vr,experimentdata.screenInfo.curWindow,...
+                get(thistrial.thisstimulus,'showFlipped'));
+        elseif strcmp(spt,'fingertips')
+            render_fingertips(gfc,jointangles,positions,orientations,experimentdata.vr,experimentdata.screenInfo.curWindow,...
+                get(thistrial.thisstimulus,'showFlipped'));
+        else
+            error(['Unknown value for showPositionType ' spt]);
+        end
     end
 end

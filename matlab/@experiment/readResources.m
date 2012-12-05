@@ -19,7 +19,7 @@ vrparams.type = {'matrix_1_3','matrix_1_3','matrix_1_3','number','number','matri
 vrparams.description = {'Scale factor for the hand','Rotation to apply to the hand','Translation to apply to the hand',...
     'stereomode (see Psychtoolbox for the values)','eye distance (when using stereo)','camera location (x,y,z)',...
     'center of scene (x,y,z)','up direction (x,y,z)','Viewing transformation'};
-vrparams.default = {[1 1 1],[0 0 0],[0 0 0],0,1,[0 2 22],[5 5 5],[0 1 0],[]};
+vrparams.default = {[1 1 1],[0 0 0],[0 0 0],0,1,[0 2 22],[5 5 5],[0 1 0],readParameters(frustumparams,[])};
 vrparams.required = [0 0 0 0 0 0 0 0 0];
 vrparams.classdescription = 'rendering parameters for virtual reality';
 vrparams.classname = 'vr';

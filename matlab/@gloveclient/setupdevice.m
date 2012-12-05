@@ -2,7 +2,7 @@
 %
 % Send initial commands to get the glove setup
 
-function setupdevice(cgc)
+function cgc = setupdevice(cgc)
 
 initializeDevice(cgc);
 codes = messagecodes;

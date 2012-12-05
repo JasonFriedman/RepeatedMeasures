@@ -8,6 +8,8 @@
 #include <vhandtk/vhtBaseException.h>
 #include <vhandtk/vhtOglDrawer.h>
 #include <vhandtk/vhtHumanHand.h>
+#include <vhandtk/vhtHumanFinger.h>
+#include <vhandtk/vhtPhalanx.h>
 #include "mex.h"
 #include <windows.h>
 #include <GL/glut.h>
@@ -19,13 +21,17 @@ bool CreateVirtualHand();
 void updateGloveJointAngles(double jointAngles[23]);
 void updateTrackerPosition(double position[3], double orientation[3]);
 void DrawVirtualHand(double translation[3], double scaleFactor[3], double rotationAngle[3]);
+void getVirtualHandFingertipLocations(double translation[3], double scaleFactor[3], double rotationAngle[3]);
 bool DeleteVirtualHand();
 void render_target(double position[3], double targetColor[3]);
+void getFingertipPositions(double translation[3], double scaleFactor[3], double rotationAngle[3],mxArray* fingertipPositions);
 
 // Define Global variables
 static vhtCyberGloveEmulator *glove; 
 static vhtHumanHand *hand;
 static vhtTrackerEmulator *tracker ;
+
+// For usage, see Glove_Rendering.m
 
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 {
@@ -99,6 +105,22 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 		}
 		render_target( PositionValues,Colorcode);    
 		break;
+        
+   case 7:
+		if (nrhs!=4) {
+			mexErrMsgTxt("Four arguments are required\n");
+			return;
+		}
+		translationarray = mxGetPr(prhs[1]);
+		scalexyz = mxGetPr(prhs[2]);    
+		rotation = mxGetPr(prhs[3]);          
+        
+        // Create a 1x15 (5 fingers * xyz data) array to return the data
+        plhs[0] = mxCreateNumericMatrix(1, 15, mxSINGLE_CLASS, mxREAL);
+        getFingertipPositions(translationarray,scalexyz, rotation,plhs[0]);
+		
+		break;         
+        
 	case 10:
 		if(nrhs != 7) { 
 			mexErrMsgTxt("Seven arguments are required.....\n");
@@ -213,12 +235,6 @@ void DrawVirtualHand(double translation[3], double scaleFactor[3], double rotati
 {
 	vhtOglDrawer  *drawer = new vhtOglDrawer();
 	vhtTransform3D *cameraXForm = new vhtTransform3D();
-	//vhtVrTransform *aTransform;
-	//vhtTransform3D *XForm = new vhtTransform3D();
-	//vhtHandGeometry *handgeometry = new vhtHandGeometry();
-
-
-	//vhtVrTransform *transform = new vhtVrTransform();
 
 	cameraXForm->setRotation(VHT_Z,rotationAngle[0]);
 	cameraXForm->setRotation(VHT_Y,rotationAngle[1]);
@@ -231,23 +247,43 @@ void DrawVirtualHand(double translation[3], double scaleFactor[3], double rotati
 	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, handDiffuse);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, handAmbient); 
 
-	//cameraXForm->scale(0.2);
-	//cameraXForm->translate(translation[0],translation[1],translation[2]); 
-	//mexPrintf("Translation %f....\n", translation[0]); 
-	//drawer->setLocalTransform(transform);
 	if (hand!= NULL){
 		hand->update(true);
-		//mexPrintf("The hand has been updated ....\n");
-		//drawer->unsetLocalTransform (transform) ;
-		//transform->setTranslation (translation[0],translation[1],translation[2]);
-		//transform->setScale (3.0, 1.0, 1.0) ;
-		//drawer->setLocalTransform (transform) ;
 		drawer->renderHand( cameraXForm, hand ); 
-		//glFlush();
-		//drawer->unsetLocalTransform (transform) ;
 	}
 
 } 
+
+// Get the 3D locations of the fingertips
+// translation[3] is the camera translation
+// rotationAngle[3] is the ZYX camera rotation (first Z, then Y, then X)
+void getFingertipPositions(double translation[3], double scaleFactor[3], double rotationAngle[3],mxArray* fingertipPositions)
+{
+	vhtOglDrawer  *drawer = new vhtOglDrawer();
+	vhtTransform3D *cameraXForm = new vhtTransform3D();
+
+	cameraXForm->setRotation(VHT_Z,rotationAngle[0]);
+	cameraXForm->setRotation(VHT_Y,rotationAngle[1]);
+	cameraXForm->setRotation(VHT_X,rotationAngle[2]);
+
+	cameraXForm->setTranslation(translation[0],translation[1],translation[2]);
+    double* pointer;
+    pointer = mxGetPr(fingertipPositions);
+    
+	if (hand!= NULL){
+		hand->update(true);
+        vhtVector3d trans;
+        for( int j = 0; j < 5; j++ ) {
+             hand->getFinger((GHM::Fingers)j)->getPhalanx((GHM::Joints)3)->getLM().getTranslation(trans);
+             pointer[j*3-3] = trans.x;
+             pointer[j*3-2] = trans.y;
+             pointer[j*3-1] = trans.z;
+        }		
+	}
+
+} 
+
+
 
 void render_target(double position[3], double targetColor[3])
 {

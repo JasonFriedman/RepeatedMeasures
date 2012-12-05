@@ -7,6 +7,8 @@ function dataSummary = getDataSummary(gfc)
 dataSummaryGlove = getDataSummary(gfc.glove);
 dataSummarytracker = getDataSummary(gfc.tracker);
 
+dataSummary = struct;
+
 thefields = fields(dataSummaryGlove);
 for m=1:length(thefields)
     dataSummary.(thefields{m}) = dataSummaryGlove.(thefields{m});
