@@ -106,7 +106,19 @@ for j=1:2
                 end
                 fprintf(fp,']</TD>');
             else
-                if round(p.default{k})==p.default{k}
+                if isstruct(p.default{k})
+                    f = fields(p.default{k});
+                    fprintf(fp,'<TD>');
+                    for m=1:numel(f)
+                        fprintf(fp,'%s: ',f{m});
+                        if round(p.default{k}.(f{m}))==p.default{k}.(f{m})
+                            fprintf(fp,'%d</BR>',p.default{k}.(f{m}));
+                        else
+                            printf(fp,'%.2f</BR>',p.default{k}.(f{m}));
+                        end
+                    end
+                    fprintf(fp,'</TD>');
+                elseif round(p.default{k})==p.default{k}
                     fprintf(fp,'<TD>%d</TD>',p.default{k});
                 else
                     fprintf(fp,'<TD>%.2f</TD>',p.default{k});

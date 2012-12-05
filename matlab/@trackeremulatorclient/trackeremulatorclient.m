@@ -17,7 +17,7 @@ params.type = {};
 params.description = {};
 params.required = [];
 params.default = {};
-params.classdescription = 'Read tracker data from a file';
+params.classdescription = 'Read tracker data from a file. The files should be in the directory "emulated" and the name of the file to read is specified in each trial in the filename field.';
 params.classname = 'trackeremulator';
 
 if nargout>1

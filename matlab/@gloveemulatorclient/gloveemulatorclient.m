@@ -20,7 +20,7 @@ params.type = {};
 params.description = {};
 params.required = [];
 params.default = {};
-params.classdescription = 'Read glovedata from a file';
+params.classdescription = 'Read glove data from a file. The files should be in the directory "emulated" and the name of the file to read is specified in each trial in the filename field.';
 params.classname = 'gloveemulator';
 
 if nargout>1

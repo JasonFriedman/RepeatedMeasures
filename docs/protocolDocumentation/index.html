@@ -20,12 +20,14 @@ In the section experimentDescription.setup, there can be the fields below. There
 <TR><TD>DAQ</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="socketclient_DAQ.html">struct</A></TD><TD>[]</TD><TD>This client connects to a DAQ server to sample one or more channels (e.g. for a button box).</TD></TR>
 <TR><TD>fastrak</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="socketclient_fastrak.html">struct</A></TD><TD>[]</TD><TD>Connect to a fastrak server to record fastrak 6D data</TD></TR>
 <TR><TD>glove</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="socketclient_glove.html">struct</A></TD><TD>[]</TD><TD>Connect to the cyberglove server to collect glove data</TD></TR>
-<TR><TD>glovetracker</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="glovetracker.html">struct</A></TD><TD>[]</TD><TD>This connects to both a glove and tracker (fastrak / liberty) server.</TD></TR>
+<TR><TD>gloveemulator</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="gloveemulator.html">struct</A></TD><TD>[]</TD><TD>Read glove data from a file. The files should be in the directory "emulated" and the name of the file to read is specified in each trial in the filename field.</TD></TR>
+<TR><TD>glovetracker</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="glovetracker.html">struct</A></TD><TD>[]</TD><TD>This connects to both a glove and tracker (fastrak / liberty) server (or emulator).</TD></TR>
 <TR><TD>keyboard</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="socketclient_keyboard.html">struct</A></TD><TD>[]</TD><TD>Connect to a keyboard server to record keystroke information</TD></TR>
 <TR><TD>liberty</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="socketclient_liberty.html">struct</A></TD><TD>[]</TD><TD>Connect to the liberty to sample from it</TD></TR>
 <TR><TD>mouse</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="socketclient_mouse.html">struct</A></TD><TD>[]</TD><TD>Connect to the mouse server to sample the mouse location</TD></TR>
 <TR><TD>optotrak</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="socketclient_optotrak.html">struct</A></TD><TD>[]</TD><TD>Connects to the optotrak to sample 3D locations</TD></TR>
 <TR><TD>tablet</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="socketclient_tablet.html">struct</A></TD><TD>[]</TD><TD>Connects to server to sample location and other information from a WACOM tablet</TD></TR>
+<TR><TD>trackeremulator</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="trackeremulator.html">struct</A></TD><TD>[]</TD><TD>Read tracker data from a file. The files should be in the directory "emulated" and the name of the file to read is specified in each trial in the filename field.</TD></TR>
 <TR><TD>video</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="socketclient_video.html">struct</A></TD><TD>[]</TD><TD>A client to connect to a program to record video</TD></TR>
 </TABLE><BR><BR>Each trial can have the following fields:
 <BR><BR><TABLE border="1">
@@ -50,6 +52,7 @@ In the section experimentDescription.setup, there can be the fields below. There
 <TR><TD>stimulus</TD><TD>Y</TD><TD>One of:<BR>
 <A HREF="stimulus_dots.html">dots</A><BR>
 <A HREF="stimulus_images.html">images</A><BR>
+<A HREF="stimulus_none.html">none</A><BR>
 <A HREF="stimulus_showImage.html">showImage</A><BR>
 <A HREF="stimulus_showText.html">showText</A><BR>
 <A HREF="stimulus_symbols.html">symbols</A><BR>
