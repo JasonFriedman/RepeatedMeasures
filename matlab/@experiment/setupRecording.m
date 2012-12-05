@@ -7,11 +7,11 @@
 % maxseconds = maximum number of seconds to record (better to specify a
 % little more than you need)
 
-function setupRecording(e,filename,maxseconds,curWindow)
+function e = setupRecording(e,filename,maxseconds,curWindow)
 
 devicelist = fields(e.devices);
 for k=1:length(devicelist)
-    setupRecording(e.devices.(devicelist{k}),filename,maxseconds,curWindow);
+    e.devices.(devicelist{k}) = setupRecording(e.devices.(devicelist{k}),filename,maxseconds,curWindow);
     writetolog(e,['Setup recording on ' devicelist{k}]);
 end
 

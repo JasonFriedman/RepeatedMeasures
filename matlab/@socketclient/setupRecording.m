@@ -7,7 +7,7 @@
 % The windowNum parameter is ignored here, but it can be used by a
 % subclass (e.g. for tablet recording)
 
-function setupRecording(sc,filename,maxtime,windowNum)
+function sc = setupRecording(sc,filename,maxtime,windowNum)
 
 codes = messagecodes;
 

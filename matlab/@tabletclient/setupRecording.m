@@ -6,7 +6,7 @@
 % windowNum is the number of the psychtoolbox window (so that tablet
 % software can attach to it)
 
-function setupRecording(tc,filename,maxtime,windowNum)
+function tc = setupRecording(tc,filename,maxtime,windowNum)
 
 codes = messagecodes;
 

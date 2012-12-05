@@ -6,7 +6,7 @@
 %
 % The windowNum parameter is ignored here
 
-function setupRecording(fc,filename,maxtime,windowNum)
+function fc = setupRecording(fc,filename,maxtime,windowNum)
 
 codes = messagecodes;
 

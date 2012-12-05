@@ -4,7 +4,7 @@
 % maxtime is the maximum amount of time (in seconds) that will be captured.
 % You can stop the recording anytime before this maximum
 
-function setupRecording(lc,filename,maxtime,curWindow)
+function lc = setupRecording(lc,filename,maxtime,curWindow)
 
 codes = messagecodes;
 

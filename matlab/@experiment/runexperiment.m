@@ -131,12 +131,12 @@ try
         
         % Setup the recording devices, if appropriate
         if thistrial.recording
-            setupRecording(e,[e.resultDir '/' thistrial.filename],thistrial.recordingTime + 5,experimentdata.screenInfo.curWindow);
+            e = setupRecording(e,[e.resultDir '/' thistrial.filename],thistrial.recordingTime + 5,experimentdata.screenInfo.curWindow);
         end
         
         % Run any actions before the trial starts. This is used for stimuli that just show something for an infinite
         % amount of  time until a key is pressed (e.g. showText or showImage)
-        preStart(thistrial.thisstimulus,experimentdata,thistrial);
+        preStart(thistrial.thisstimulus,experimentdata,thistrial,1);
         DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,1);
         writetolog(e,'Ran prestart');
         
@@ -156,6 +156,7 @@ try
             [started,keyCode] = hasStarted(thistrial.thisstarttrial,e,experimentdata);
             
             if thistrial.showPosition
+                preStart(thistrial.thisstimulus,experimentdata,thistrial,0);
                 DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
                 [lastposition,thistrial, experimentdata] = showPosition(e,thistrial,experimentdata,-1);
                 Screen('Flip',experimentdata.screenInfo.curWindow,1);
@@ -355,13 +356,13 @@ try
             if frame <= thistrial.stimuliFrames
                 % Present a frame
                 DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
-                if thistrial.showPosition
-                    [lastposition,thistrial,experimentdata] = showPosition(e,thistrial,experimentdata,frame);
-                end
                 % run the appropriate trial. This files (e.g. frame.m) should be in e.g. @videostimulus
                 % If the file is absent, the default from @stimulus will be used (which does nothing)
                 [thistrial,experimentdata,breakfromloop,thistrial.thisstimulus] = displayFrame(thistrial.thisstimulus,e,frame,thistrial,experimentdata);
-                
+                if thistrial.showPosition
+                    [lastposition,thistrial,experimentdata] = showPosition(e,thistrial,experimentdata,frame);
+                end
+
                 if breakfromloop
                     break;
                 end

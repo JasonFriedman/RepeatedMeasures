@@ -4,4 +4,4 @@
 %
 % For recordVideo, this does nothing
 
-function setupRecording(sc,filename,maxtime,windowNum)
+function sc = setupRecording(sc,filename,maxtime,windowNum)
