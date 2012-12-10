@@ -41,7 +41,14 @@ if stereo==0
     if gtc.noVHT
         ;%
     else
-        Glove_Rendering(4, [0 0 0],[1 1 1],cameraRotation);
+        fingertippositions = Glove_Rendering(7, [0 0 0],[1 1 1],cameraRotation);
+        for k=1:5
+            glPushMatrix;
+            glColor3d(0,0,0);	
+            glTranslated(fingertippositions(k*3-2),fingertippositions(k*3-1),fingertippositions(k*3));
+            glutSolidSphere(1,100,100);
+            glPopMatrix;
+        end
     end
 else
     for k=[0 1]
@@ -57,7 +64,7 @@ else
         if gtc.noVHT
             %
         else
-            Glove_Rendering(4, [ed 0 0],[1 1 1],cameraRotation);
+            fingertippositions = Glove_Rendering(7, [ed 0 0],[1 1 1],cameraRotation)
         end
     end
 end

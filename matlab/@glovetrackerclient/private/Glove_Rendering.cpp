@@ -12,7 +12,11 @@
 #include <vhandtk/vhtPhalanx.h>
 #include "mex.h"
 #include <windows.h>
-#include <GL/glut.h>
+#ifdef OLD_VHT
+    #include <GL/glut.h>
+#else
+    #include <Unsupported/glut/glut.h>
+#endif
 
 #define M_PI 3.14159265
 
@@ -116,7 +120,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 		rotation = mxGetPr(prhs[3]);          
         
         // Create a 1x15 (5 fingers * xyz data) array to return the data
-        plhs[0] = mxCreateNumericMatrix(1, 15, mxSINGLE_CLASS, mxREAL);
+        plhs[0] = mxCreateNumericMatrix(1, 15, mxDOUBLE_CLASS, mxREAL);
         getFingertipPositions(translationarray,scalexyz, rotation,plhs[0]);
 		
 		break;         
@@ -271,13 +275,13 @@ void getFingertipPositions(double translation[3], double scaleFactor[3], double 
     pointer = mxGetPr(fingertipPositions);
     
 	if (hand!= NULL){
-		hand->update(true);
+        hand->update(true);
         vhtVector3d trans;
         for( int j = 0; j < 5; j++ ) {
-             hand->getFinger((GHM::Fingers)j)->getPhalanx((GHM::Joints)3)->getLM().getTranslation(trans);
-             pointer[j*3-3] = trans.x;
-             pointer[j*3-2] = trans.y;
-             pointer[j*3-1] = trans.z;
+             hand->getFinger((GHM::Fingers)j)->getDistalPhalanx()->getLM().getTranslation(trans);
+             pointer[j*3] = trans.x;
+             pointer[j*3+1] = trans.y;
+             pointer[j*3+2] = trans.z;
         }		
 	}
 
