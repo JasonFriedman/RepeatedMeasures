@@ -17,6 +17,10 @@ if tex==0 % this should never be run
 elseif tex<0
     % it is finished
     Screen('Flip',experimentdata.screenInfo.curWindow,1);
+    % If the background is not white, then draw it
+    if ~all(thistrial.backgroundColor==0)
+        Screen(screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
+    end
     breakfromloop = 1;
 else
     % Draw the new texture immediately to screen:

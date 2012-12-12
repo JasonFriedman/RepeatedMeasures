@@ -134,8 +134,14 @@ try
             e = setupRecording(e,[e.resultDir '/' thistrial.filename],thistrial.recordingTime + 5,experimentdata.screenInfo.curWindow);
         end
         
+        % If the background is not white, then draw it
+        if ~all(thistrial.backgroundColor==0)
+            Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
+        end
+        
         % Run any actions before the trial starts. This is used for stimuli that just show something for an infinite
         % amount of  time until a key is pressed (e.g. showText or showImage)
+        
         preStart(thistrial.thisstimulus,experimentdata,thistrial,1);
         DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,1);
         writetolog(e,'Ran prestart');
@@ -160,6 +166,10 @@ try
                 DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
                 [lastposition,thistrial, experimentdata] = showPosition(e,thistrial,experimentdata,-1);
                 Screen('Flip',experimentdata.screenInfo.curWindow,1);
+                % If the background is not white, then draw it
+                if ~all(thistrial.backgroundColor==0)
+                    Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
+                end
             end
             if find(keyCode,1)==KbName('q') % q = quit
                 if thistrial.showPosition || thistrial.sampleWhenNotRecording
@@ -213,7 +223,12 @@ try
             [lastposition,thistrial, experimentdata] = showPosition(e,thistrial,experimentdata,-1);
         end
         Screen('Flip',experimentdata.screenInfo.curWindow,1);
-        
+        % If the background is not white, then draw it
+        if ~all(thistrial.backgroundColor==0)
+            Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
+        end
+
+      
         % Start recording with the devices
         if thistrial.recording
             startRecording(e,thistrial.filename,thistrial.recordingTime + 2);
@@ -235,6 +250,10 @@ try
                 [lastposition,thistrial] = showPosition(e,thistrial,experimentdata,-1);
             end
             Screen('Flip',experimentdata.screenInfo.curWindow,1);
+            % If the background is not white, then draw it
+            if ~all(thistrial.backgroundColor==0)
+                Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
+            end
             aborted=0;
             startFixation = GetSecs;
             while(GetSecs<startFixation+thistrial.waitTimeBefore)
@@ -243,7 +262,7 @@ try
                 % (because the stimuli has not yet been shown)
                 if ~stillAtStart(thistrial.thisstarttrial,e)
                     responseText = experimentdata.texts.TOO_EARLY;
-                    drawText(experimentdata.screenInfo,'Courier',100,0,responseText);
+                    drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText);
                     writetolog(e,sprintf('Wrote text %s',responseText));
                     if thistrial.recording || thistrial.sampleWhenNotRecording || thistrial.showPosition
                         stopRecording(e);
@@ -267,6 +286,10 @@ try
                     [lastposition,thistrial] = showPosition(e,thistrial,experimentdata,-1);
                 end
                 Screen('Flip',experimentdata.screenInfo.curWindow,1);
+                % If the background is not white, then draw it
+                if ~all(thistrial.backgroundColor==0)
+                    Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
+                end
             end
             if aborted
                 continue;
@@ -336,7 +359,7 @@ try
                 if stillPressing(thistrial.thisstarttrial,e,experimentdata)
                     DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
                     responseText = experimentdata.texts.TOO_LATE;
-                    drawText(experimentdata.screenInfo,'Courier',100,0,responseText);
+                    drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText);
                     writetolog(e,sprintf('Wrote text %s',responseText));
                     if ispc
                         wavplay(experimentdata.annoyingBeep,experimentdata.annoyingBeepf);
@@ -362,7 +385,7 @@ try
                 if thistrial.showPosition
                     [lastposition,thistrial,experimentdata] = showPosition(e,thistrial,experimentdata,frame);
                 end
-
+                
                 if breakfromloop
                     break;
                 end
@@ -380,6 +403,10 @@ try
                     thistrial.FlipTimestamp(frame) thistrial.Missed(frame) ...
                     thistrial.Beampos(frame)] = ...
                     Screen('Flip',experimentdata.screenInfo.curWindow,nextflip,thistrial.dontclear);
+                % If the background is not white, then draw it
+                if ~all(thistrial.backgroundColor==0)
+                    Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
+                end
             else
                 % Pass time until the end of the trial (so there will be the right number of frames)
                 DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
@@ -387,6 +414,10 @@ try
                     [lastposition,thistrial] = showPosition(e,thistrial,experimentdata,frame);
                 end
                 Screen('Flip',experimentdata.screenInfo.curWindow,0,0);
+                % If the background is not white, then draw it
+                if ~all(thistrial.backgroundColor==0)
+                    Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
+                end
             end
             % check if the trial should be ended
             if ~isempty(lastposition)
@@ -434,8 +465,12 @@ try
         if thistrial.textFeedback==1 && isfield(thistrial,'responseText')
             if ~thistrial.textFeedbackShowBackground
                 Screen('Flip',experimentdata.screenInfo.curWindow,0,0);
+                % If the background is not white, then draw it
+                if ~all(thistrial.backgroundColor==0)
+                    Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
+                end
             end
-            drawText(experimentdata.screenInfo,'Courier',100,0,thistrial.responseText);
+            drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,thistrial.responseText);
             WaitSecs(1);
             writetolog(e,sprintf('Wrote text %s',thistrial.responseText));
         end

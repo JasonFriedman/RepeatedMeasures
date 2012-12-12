@@ -10,7 +10,7 @@ if isstruct(dataSummary) && isfield(dataSummary,'nancount') && dataSummary.nanco
     if thistrial.textFeedbackShowBackground
         DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
     end
-    drawText(experimentdata.screenInfo,'Courier',100,0,thistrial.responseText);
+    drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,thistrial.responseText);
     writetolog(e,sprintf('Wrote text %s',thistrial.responseText));
     WaitSecs(2);
     if thistrial.textFeedbackShowBackground

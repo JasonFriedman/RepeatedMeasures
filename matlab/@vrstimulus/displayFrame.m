@@ -8,13 +8,11 @@
 function [thistrial,experimentdata,breakfromloop,s] = displayFrame(s,e,frame,thistrial,experimentdata)
 codes = messagecodes;
 
-% If the glove has not been drawn, then clear the opengl buffer
-if thistrial.showPosition==0 || ~isfield(get(e,'devices'),'glovetracker')
-    Screen('BeginOpenGL', experimentdata.screenInfo.curWindow );
-    glClearColor(0.0,0.0,0.0,0.0);
-    glClear();
-    Screen('EndOpenGL', experimentdata.screenInfo.curWindow );
-end
+% Draw the background color
+Screen('BeginOpenGL', experimentdata.screenInfo.curWindow );
+glClearColor(thistrial.backgroundColor(1)/255,thistrial.backgroundColor(2)/255,thistrial.backgroundColor(3)/255,0.0);
+glClear();
+Screen('EndOpenGL', experimentdata.screenInfo.curWindow );
 
 breakfromloop = 0;
 % check whether the target should be on
