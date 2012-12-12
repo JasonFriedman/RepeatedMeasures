@@ -41,7 +41,11 @@ if nargin==0
 end
 
 % enforce 2 arguments
-narginchk(2,2);
+if exist('narginchk','builtin')
+    narginchk(2,2);
+else
+    error(nargchk(2,2,nargin));
+end
 
 % Load the protocol file
 tree = xmltree(protocolFile);
