@@ -93,7 +93,7 @@ for j=1:2
             if isempty(p.default{k})
                 fprintf(fp,'<TD>[]</TD>');
             elseif strcmp(p.type{k},'string')
-                fprintf(fp,'<TD>%s</TD>',p.default{k});
+                fprintf(fp,'<TD>''%s''</TD>',p.default{k});
             elseif isnumeric(p.default{k}) && numel(p.default{k})>1
                 fprintf(fp,'<TD>[');
                 for n=1:numel(p.default{k})

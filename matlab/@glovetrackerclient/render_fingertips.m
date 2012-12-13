@@ -6,7 +6,7 @@
 % It will set the tracker positions and orientation as well
 % and draw the hand offscreen
 
-function render_fingertips(gtc, jointangles, positions, orientations, vr, winptr, isflipped)
+function render_fingertips(gtc, jointangles, positions, orientations, vr, winptr, isflipped,showPositionFingers)
 
 translation = vr.translation;
 scale = vr.scale;
@@ -42,10 +42,10 @@ if stereo==0
         ;%
     else
         fingertippositions = Glove_Rendering(7, [0 0 0],[1 1 1],cameraRotation);
-        for k=1:5
+        for m=find(showPositionFingers)
             glPushMatrix;
             glColor3d(0,0,0);	
-            glTranslated(fingertippositions(k*3-2),fingertippositions(k*3-1),fingertippositions(k*3));
+            glTranslated(fingertippositions(m*3-2),fingertippositions(m*3-1),fingertippositions(m*3));
             glutSolidSphere(1,100,100);
             glPopMatrix;
         end
@@ -64,7 +64,14 @@ else
         if gtc.noVHT
             %
         else
-            fingertippositions = Glove_Rendering(7, [ed 0 0],[1 1 1],cameraRotation)
+            fingertippositions = Glove_Rendering(7, [ed 0 0],[1 1 1],cameraRotation);
+            for m=find(showPositionFingers)
+                glPushMatrix;
+                glColor3d(0,0,0);
+                glTranslated(fingertippositions(m*3-2),fingertippositions(m*3-1),fingertippositions(m*3));
+                glutSolidSphere(1,100,100);
+                glPopMatrix;
+            end
         end
     end
 end

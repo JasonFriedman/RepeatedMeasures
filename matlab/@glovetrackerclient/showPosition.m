@@ -92,7 +92,7 @@ if frame>0
                 get(thistrial.thisstimulus,'showFlipped'));
         elseif strcmp(spt,'fingertips')
             render_fingertips(gfc,jointangles,positions,orientations,experimentdata.vr,experimentdata.screenInfo.curWindow,...
-                get(thistrial.thisstimulus,'showFlipped'));
+                get(thistrial.thisstimulus,'showFlipped'),get(thistrial.thisstimulus,'showPositionFingers'));
         else
             error(['Unknown value for showPositionType ' spt]);
         end
