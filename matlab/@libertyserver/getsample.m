@@ -18,31 +18,40 @@ else
     datalength = 3;
 end
 
-data = zeros(1,nummarkers*datalength+2);
-bytesexpected = (nummarkers * datalength + 3) * 4;
-bytesavailable = IOPort('BytesAvailable',l.s);
-%fprintf('Bytes expected = %d, bytes available = %d\n',bytesexpected,bytesavailable);
-while(bytesavailable < bytesexpected)
-    pause(0.000001);
-    bytesavailable = IOPort('BytesAvailable',l.s);
-end
-skipped = 0;
-for k=1:nummarkers
-    [thisdata,framenumber,libertyMarkerNum] = getLibertyFrame(l,datalength);
-    while libertyMarkerNum ~= k
-        fprintf('Wrong marker: %d instead of %d\n',libertyMarkerNum,k);
-        [thisdata,framenumber,libertyMarkerNum] = getLibertyFrame(l,datalength);
+if usingUSB(l)
+    data = zeros(1,nummarkers*datalength+2);
+    tmpdata = LibertyMex(3,nummarkers,datalength/3);
+    if numel(tmpdata)>0
+       data(1:end-1) = tmpdata;
     end
-    data(1,(k-1)*datalength+2:k*datalength+1) = thisdata;
+    framenumber = data(1);
+    data(end) = GetSecs;
+else
+    data = zeros(1,nummarkers*datalength+2);
+    bytesexpected = (nummarkers * datalength + 3) * 4;
+    bytesavailable = IOPort('BytesAvailable',l.s);
+    %fprintf('Bytes expected = %d, bytes available = %d\n',bytesexpected,bytesavailable);
+    while(bytesavailable < bytesexpected)
+        pause(0.000001);
+        bytesavailable = IOPort('BytesAvailable',l.s);
+    end
+    
+    for k=1:nummarkers
+        [thisdata,framenumber,libertyMarkerNum] = getLibertyFrame(l,datalength);
+        while libertyMarkerNum ~= k
+            fprintf('Wrong marker: %d instead of %d\n',libertyMarkerNum,k);
+            [thisdata,framenumber,libertyMarkerNum] = getLibertyFrame(l,datalength);
+        end
+        data(1,(k-1)*datalength+2:k*datalength+1) = thisdata;
+    end
+    
+    if any(data(1:datalength)>1000) || any(data(1:datalength)<-1000)
+        fprintf('Strange result so calling again\n');
+        [data,framenumber] = getsample(l,nummarkers);
+        fprintf('This time got (%.2f,%.2f,%.2f)\n',data(1),data(2),data(3));
+    end
+    
+    data(1) = framenumber;
+    data(end) = GetSecs;
 end
-
-if any(data(1:datalength)>1000) || any(data(1:datalength)<-1000)
-    fprintf('Strange result so calling again\n');
-    [data,framenumber] = getsample(l,nummarkers);
-    fprintf('This time got (%.2f,%.2f,%.2f)\n',data(1),data(2),data(3));
-end
-
-data(1) = framenumber;
-data(end) = GetSecs;
-
 

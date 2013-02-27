@@ -36,6 +36,7 @@ if nargin>4 && ~isempty(sampleContinuously)
     l.sampleContinuously = sampleContinuously;
 end
 
+% COMPort of -1 indicates USB
 if nargin<6 || isempty(COMport)
     l.COMport = 1;
 else
@@ -48,16 +49,20 @@ end
 
 l = class(l,'libertyserver',socketserver(port,samplerate,debug));
 
-% Connect to the serial port
-COMportname = ['COM' num2str(l.COMport)];
-l.s = IOPort('OpenSerialPort',COMportname,'BaudRate=115200 Terminator=13');
+if usingUSB(l)
+    LibertyMex(0);
+else
+    % Connect to the serial port
+    COMportname = ['COM' num2str(l.COMport)];
+    l.s = IOPort('OpenSerialPort',COMportname,'BaudRate=115200 Terminator=13');
 
-if debug
-    fprintf(['Connected on port ' COMportname '\n']);
-end
+    if debug
+        fprintf(['Connected on port ' COMportname '\n']);
+    end
 
-% Clear anything on the port
-inBuffer = IOPort('BytesAvailable',l.s);
-if inBuffer>0
-    IOPort('Read',l.s);
+    % Clear anything on the port
+    inBuffer = IOPort('BytesAvailable',l.s);
+    if inBuffer>0
+        IOPort('Read',l.s);
+    end
 end

@@ -5,9 +5,13 @@
 
 function rate = getupdaterate(l)
 
-IOPort('Write',l.s,['R' char(13)]);
-result = IOPort('Read',l.s,1,12);
-rate = result(9);
+if usingUSB(l)
+    rate = LibertyMex(6);
+else
+    IOPort('Write',l.s,['R' char(13)]);
+    result = IOPort('Read',l.s,1,12);
+    rate = result(9);
+end
 
 
 

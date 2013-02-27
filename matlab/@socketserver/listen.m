@@ -16,7 +16,6 @@ dataSummary = []; % This can record a "summary" of the data,
                   % (it is calculated by the subclass) 
 
 % Keep listening until a connection is received
-
 while sock == -1
   sock = msaccept(s.socket,0.1);
   %WaitSecs(0.000001);
@@ -45,9 +44,8 @@ while 1
     %if (currenttime - lastsampletime) < 0.5*(1 / s.framerate)
     %    WaitSecs(0.9*((1/s.framerate) - (currenttime - lastsampletime) ));
     %end
-    
     [data,framenumber] = getsample(s,nummarkers);
-    if framenumber>lastframe
+    if (framenumber-lastframe) > 0.0001 % account for rounding errors
       sampletime(currentSample) = GetSecs;
       databuffer(currentSample,1:end-1) = data;
       databuffer(currentSample,end) = marker;
@@ -57,6 +55,8 @@ while 1
       if maximumframes < inf
           currentSample = currentSample + 1;
       end
+    % else
+    % fprintf('Ignoring new frame because framenumber is not greater (difference=%.2f)\n',framenumber - lastframe);
     end
   end
   

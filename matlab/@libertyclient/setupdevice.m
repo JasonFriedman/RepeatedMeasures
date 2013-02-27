@@ -27,10 +27,9 @@ if(getupdaterate(lc)~=lc.samplerate)
 end
 
 % set the active hemisphere
-for k=1:lc.numsensors
-    sethemisphere(lc,k);
-    pause(0.5);
-end
+sethemisphere(lc,-1);
+pause(0.5);
+
 if(getupdaterate(lc)~=lc.samplerate)
     error('Problem after sethemisphere');
 end
@@ -44,19 +43,17 @@ if(getupdaterate(lc)~=lc.samplerate)
 end
 
 % set the output format
-for k=1:lc.numsensors
-    setoutputformat(lc,k);
-    pause(0.5);
-end
+setoutputformat(lc,-1);
+pause(0.1);
+
 if(getupdaterate(lc)~=lc.samplerate)
     error('Problem after setoutputformat');
 end
 
 % set the alignment reference frame (which way are x,y,z)
-for k=1:lc.numsensors
-    setalignmentframe(lc,k);
-    pause(0.5);
-end
+setalignmentframe(lc,-1);
+pause(0.5);
+
 if(getupdaterate(lc)~=lc.samplerate)
     error('Problem after setalignmentframe');
 end

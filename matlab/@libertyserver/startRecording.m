@@ -9,10 +9,14 @@ if ls.sampleContinuously
             fprintf('Already sampling continuously so not starting again\n');
         end
     else
-        IOPort('Write',ls.s,['C' char(13)]);
-        ls.samplingContinuously = 1;
-        if isdebug(ls)
-            fprintf('Started recording continuously\n');
+        if usingUSB(ls)
+            LibertyMex(2);
+        else
+            IOPort('Write',ls.s,['C' char(13)]);
+            ls.samplingContinuously = 1;
+            if isdebug(ls)
+                fprintf('Started recording continuously\n');
+            end
         end
     end
 end
