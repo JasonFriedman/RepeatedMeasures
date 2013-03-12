@@ -13,6 +13,8 @@ returnValue = NaN;
 switch(command)
     case {t.codes.getbuttons}
         returnValue = getbuttons(t);
+    case {t.codes.TABLET_attachTablet}
+        WinTabMex(0,parameters{1});
     otherwise
-        error(['Unknown command ' command]);
+        error(['Unknown command ' command]);      
 end

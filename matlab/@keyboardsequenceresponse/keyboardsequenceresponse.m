@@ -10,7 +10,7 @@ params.required = [1 1];
 params.default = {'',1};
 params.classdescription = 'The response is pressing a certain sequence of keys N times';
 params.classname = 'keyboardsequenceresponse';
-params.parentclassanem = 'response';
+params.parentclassname = 'response';
 
 if nargout>1
     r = [];

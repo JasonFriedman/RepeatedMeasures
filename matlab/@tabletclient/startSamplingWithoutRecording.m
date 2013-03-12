@@ -8,6 +8,11 @@ function thistrial = startSamplingWithoutRecording(sc,thistrial,experimentdata)
 
 codes = messagecodes;
 
+% For the tablet, setupRecording must be run first (the filename is ignored)
+m.parameters = {experimentdata.screenInfo.curWindow};
+m.command = codes.TABLET_attachTablet;
+sendmessage(sc,m,'TABLET_attachTablet');
+
 m.parameters = 1; % number of markers
 m.command = codes.startwithoutrecord;
 sendmessage(sc,m,'startWithoutRecord');

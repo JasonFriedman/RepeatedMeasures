@@ -2,9 +2,9 @@
 %
 % The last frame only is stored in memory until the recording is stopped
 % 
-% startSamplingWithoutRecording(lc)
+% startSamplingWithoutRecording(lc,thistrial,experimentdata)
 
-function thistrial = startSamplingWithoutRecording(lc,thistrial)
+function thistrial = startSamplingWithoutRecording(lc,thistrial,experimentdata)
 
 codes = messagecodes;
 

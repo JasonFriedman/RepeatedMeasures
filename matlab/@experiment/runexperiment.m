@@ -154,8 +154,10 @@ try
         writetolog(e,'Ran starttrial setup');
         % Do the actual waiting.
         % If we need to show the position, we need to turn on sampling (but not record yet)
+        startedSamplingWithoutRecording = 0;
         if thistrial.showPosition || thistrial.sampleWhenNotRecording
-            thistrial = startSamplingWithoutRecording(e,thistrial);
+            thistrial = startSamplingWithoutRecording(e,thistrial,experimentdata);
+            startedSamplingWithoutRecording = 1;
         end
         started = 0;
         while started==0
@@ -232,8 +234,9 @@ try
         % Start recording with the devices
         if thistrial.recording
             startRecording(e,thistrial.filename,thistrial.recordingTime + 2);
-        elseif thistrial.sampleWhenNotRecording
-            startSamplingWithoutRecording(e,thistrial);
+        elseif thistrial.sampleWhenNotRecording && startedSamplingWithoutRecording==0
+            startSamplingWithoutRecording(e,thistrial,experimentdata);
+            startedSamplingWithoutRecording=1;
         end
         if thistrial.showPosition
             thistrial.lastx = []; thistrial.lasty = [];

@@ -1,5 +1,5 @@
 % STARTSAMPLINGWITHOUTRECORDING - do nothing
 % 
-% startSamplingWithoutRecording(sc)
+% startSamplingWithoutRecording(gc,thistrial,experimentdata)
 
-function thistrial = startSamplingWithoutRecording(gc,thistrial)
+function thistrial = startSamplingWithoutRecording(gc,thistrial,experimentdata)

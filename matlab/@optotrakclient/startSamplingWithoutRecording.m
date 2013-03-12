@@ -2,9 +2,9 @@
 %
 % The last frame only is stored in memory until the recording is stopped
 % 
-% startSamplingWithoutRecording(oc)
+% startSamplingWithoutRecording(oc,thistrial,experimentdata)
 
-function thistrial = startSamplingWithoutRecording(oc,thistrial)
+function thistrial = startSamplingWithoutRecording(oc,thistrial,experimentdata)
 
 OptotrakActivateMarkers(oc);
 

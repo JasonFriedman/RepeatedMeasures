@@ -1,4 +1,7 @@
 % DRAWTEXT - draw text using the psychtoolbox, centered on the screen
+%
+% textsize = drawText(thistrial,screenInfo,font,fontsize,fontstyle,thetext,noflip,textsize)
+
 
 function textsize = drawText(thistrial,screenInfo,font,fontsize,fontstyle,thetext,noflip,textsize)
 

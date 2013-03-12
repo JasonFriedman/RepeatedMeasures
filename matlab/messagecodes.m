@@ -25,7 +25,7 @@ codes.markEvent = 7;
 codes.savefile = 8;
 % Start sampling without recording to memory (only keeps the last frame)
 codes.startwithoutrecord = 9;
-% Start state of buttons (for tablet stylus)
+% State of buttons (for tablet stylus)
 codes.getbuttons = 10;
 % Initialize the device
 codes.initializeDevice = 11;
@@ -77,6 +77,10 @@ codes.LIBERTY_AlignmentReferenceFrame = 78;
 
 % Wake up minibird
 codes.MINIBIRD_birdRS232WakeUp = 80;
+
+% Attach to the Wacom tablet
+codes.TABLET_attachTablet = 90;
+
 %% Mark event codes [ Not that these are separate from the above codes, so they can overlap]
 
 % First frame displayed

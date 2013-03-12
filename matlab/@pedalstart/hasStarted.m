@@ -6,6 +6,7 @@ function [started,keyCode] = hasStarted(p,e,experimentdata)
 notpressed = 1;
 if p.joystickType==1
     [x,y,notpressed] = WinJoystickMex(0);
+    
 elseif p.joystickType==2
     [x,y,z,buttons] = WinJoystick8Mex(0);
     notpressed = ~buttons(p.joystickButton);

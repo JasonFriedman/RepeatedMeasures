@@ -2,13 +2,13 @@
 %
 % This may be ignored by some devices (e.g. the video recorder)
 %
-% startSamplingWithoutRecording(e)
+% startSamplingWithoutRecording(e,thistrial,experimentdata)
 
-function thistrial = startSamplingWithoutRecording(e,thistrial)
+function thistrial = startSamplingWithoutRecording(e,thistrial,experimentdata)
 
 devicelist = fields(e.devices);
 for k=1:length(devicelist)
-    startSamplingWithoutRecording(e.devices.(devicelist{k}), thistrial);
+    startSamplingWithoutRecording(e.devices.(devicelist{k}), thistrial,experimentdata);
     writetolog(e,['Started sampling without recording on ' devicelist{k}]);
 end
 

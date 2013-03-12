@@ -2,9 +2,10 @@
 %
 % The last frame only is stored in memory until the recording is stopped
 % 
-% startSamplingWithoutRecording(sc)
+% startSamplingWithoutRecording(gfc,thistrial,experimentdata)
 
-function thistrial = startSamplingWithoutRecording(gfc,thistrial)
 
-thistrial = startSamplingWithoutRecording(gfc.glove,thistrial);
-thistrial = startSamplingWithoutRecording(gfc.tracker,thistrial);
+function thistrial = startSamplingWithoutRecording(gfc,thistrial,experimentdata)
+
+thistrial = startSamplingWithoutRecording(gfc.glove,thistrial,experimentdata);
+thistrial = startSamplingWithoutRecording(gfc.tracker,thistrial,experimentdata);
