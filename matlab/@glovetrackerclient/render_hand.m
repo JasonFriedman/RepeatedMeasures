@@ -12,10 +12,6 @@ cameraRotation = vr.rotate;
 stereo = vr.stereomode;
 eye_distance = vr.eyedistance;
 
-if nargin<9
-    stereo = 0; % i.e. just render in mono
-end
-
 positions(1) = positions(1) * scale(1)  +  translation(1);
 positions(2) = positions(2) * scale(2)  +  translation(2);
 positions(3) = positions(3) * scale(3)  +  translation(3);
