@@ -1,0 +1,229 @@
+112823.083842464690: Connected to tablet
+112826.600504643760: Opened window
+112826.607776367770: Trial 1
+112826.624209437720: Read stimulus
+112826.629357902840: Read target type
+112826.635745489050: Read starttrial
+112826.635849025840: Read trial parameters
+112826.636578311240: Setup stimulus
+112826.667035032270: Ran prestart
+112826.667150341450: Ran starttrial setup
+112828.372071991570: Trial 2
+112828.376313377800: Read stimulus
+112828.379980029170: Read target type
+112828.381974093470: Read starttrial
+112828.382041407470: Read trial parameters
+112828.382109325190: Setup stimulus
+112828.400201398680: Ran prestart
+112828.400273844250: Ran starttrial setup
+112828.405259910550: Started sampling without recording on tablet
+112830.285022301160: Stopped recording on tablet
+112830.285874442170: Trial 3
+112830.288913835650: Read stimulus
+112830.289842648230: Read target type
+112830.290366067460: Read starttrial
+112830.290422816480: Read trial parameters
+112830.290481980370: Setup stimulus
+112830.300123881930: Ran prestart
+112830.300180630950: Ran starttrial setup
+112830.300501504450: Started sampling without recording on tablet
+112831.450396518750: Stopped recording on tablet
+112831.450869829800: Trial 4
+112831.453604951890: Read stimulus
+112831.454532255190: Read target type
+112831.455058994850: Read starttrial
+112831.455116951300: Read trial parameters
+112831.455177322610: Setup stimulus
+112831.466799704910: Ran prestart
+112831.466854642800: Ran starttrial setup
+112831.467192420260: Started sampling without recording on tablet
+112832.350278855070: Stopped recording on tablet
+112832.350739790010: Trial 5
+112832.353590523150: Read stimulus
+112832.354516015300: Read target type
+112832.355042151250: Read starttrial
+112832.355100711410: Read trial parameters
+112832.355161686440: Setup stimulus
+112832.366730338270: Ran prestart
+112832.366785879870: Ran starttrial setup
+112832.367126072190: Started sampling without recording on tablet
+112833.366926243160: Stopped recording on tablet
+112833.367408006200: Trial 6
+112833.370554256910: Read stimulus
+112833.371530460950: Read target type
+112833.372061728460: Read starttrial
+112833.372121797900: Read trial parameters
+112833.372182772930: Setup stimulus
+112833.383393121050: Ran prestart
+112833.383442927380: Ran starttrial setup
+112833.383758669330: Started sampling without recording on tablet
+112834.333528232030: Stopped recording on tablet
+112834.334019352620: Trial 7
+112834.336748739440: Read stimulus
+112834.337675439020: Read target type
+112834.338199160120: Read starttrial
+112834.338257116570: Read trial parameters
+112834.338316884170: Setup stimulus
+112834.350006580470: Ran prestart
+112834.350061216510: Ran starttrial setup
+112834.350389636410: Started sampling without recording on tablet
+112835.283505773910: Stopped recording on tablet
+112835.284001120500: Trial 8
+112835.286744392710: Read stimulus
+112835.287669884860: Read target type
+112835.288196020800: Read starttrial
+112835.288254882830: Read trial parameters
+112835.288315556000: Setup stimulus
+112835.299988650190: Ran prestart
+112835.300041173240: Ran starttrial setup
+112835.300378648840: Started sampling without recording on tablet
+112836.200177974620: Stopped recording on tablet
+112836.200655209800: Trial 9
+112836.203868170790: Read stimulus
+112836.204806039070: Read target type
+112836.205333684290: Read starttrial
+112836.205393150030: Read trial parameters
+112836.205454426900: Setup stimulus
+112836.216626439260: Ran prestart
+112836.216678962290: Ran starttrial setup
+112836.216994100510: Started sampling without recording on tablet
+112837.200139035120: Stopped recording on tablet
+112837.200621401880: Trial 10
+112837.203821986750: Read stimulus
+112837.204760156860: Read target type
+112837.205292028080: Read starttrial
+112837.205351493830: Read trial parameters
+112837.205412770710: Setup stimulus
+112837.216616477990: Ran prestart
+112837.216666586170: Ran starttrial setup
+112837.216971159420: Started sampling without recording on tablet
+112838.933425238590: Stopped recording on tablet
+112838.933914548030: Trial 11
+112838.937104869790: Read stimulus
+112838.942347514150: Read target type
+112838.943516302660: Read starttrial
+112838.943574259130: Read trial parameters
+112838.943632517430: Setup stimulus
+112838.945968585190: Setup recording on tablet
+112838.966717901790: Ran prestart
+112838.966794573340: Ran starttrial setup
+112844.268441321500: Started recording on tablet
+112844.271256435580: Marked event in tablet with number 5
+112851.766494648690: Stopped recording on tablet
+112851.770044783440: Got data summary for tablet
+112851.832818265470: Saved file on tablet
+112851.837311098180: Saved dot/frame data to file results/CentreOut//trialinfo_01.mat
+112851.838766650410: Checked recording on tablet
+112851.839270750830: Trial 12
+112851.841990478230: Read stimulus
+112851.844163543460: Read target type
+112851.845283129350: Read starttrial
+112851.845341689520: Read trial parameters
+112851.845402362700: Setup stimulus
+112851.845747988420: Setup recording on tablet
+112851.866302909420: Ran prestart
+112851.866375354980: Ran starttrial setup
+112858.332878033050: Started recording on tablet
+112858.333268031700: Marked event in tablet with number 5
+112866.582677902170: Stopped recording on tablet
+112866.585218326800: Got data summary for tablet
+112866.650269014540: Saved file on tablet
+112866.652644625500: Saved dot/frame data to file results/CentreOut//trialinfo_02.mat
+112866.652734578750: Checked recording on tablet
+112866.653137557240: Trial 13
+112866.655942106330: Read stimulus
+112866.657974506410: Read target type
+112866.659088960750: Read starttrial
+112866.659144502350: Read trial parameters
+112866.659203062520: Setup stimulus
+112866.659552612390: Setup recording on tablet
+112866.682514537420: Ran prestart
+112866.682592416400: Ran starttrial setup
+112869.149194405270: Started recording on tablet
+112869.149557236830: Marked event in tablet with number 5
+112875.998894299500: Stopped recording on tablet
+112876.001224330120: Got data summary for tablet
+112876.056128110330: Saved file on tablet
+112876.058604239520: Saved dot/frame data to file results/CentreOut//trialinfo_03.mat
+112876.058700833600: Checked recording on tablet
+112876.059119206770: Trial 14
+112876.061837123040: Read stimulus
+112876.063846883870: Read target type
+112876.064958319650: Read starttrial
+112876.065013257540: Read trial parameters
+112876.065071213990: Setup stimulus
+112876.065444006820: Setup recording on tablet
+112876.082063020400: Ran prestart
+112876.082135164110: Ran starttrial setup
+112878.798901362940: Started recording on tablet
+112878.799289248590: Marked event in tablet with number 5
+112886.415236571000: Stopped recording on tablet
+112886.418079455890: Got data summary for tablet
+112886.472328207410: Saved file on tablet
+112886.474664577020: Saved dot/frame data to file results/CentreOut//trialinfo_04.mat
+112886.474753020990: Checked recording on tablet
+112886.475159018020: Trial 15
+112886.477935494460: Read stimulus
+112886.479916880780: Read target type
+112886.481011412590: Read starttrial
+112886.481068463470: Read trial parameters
+112886.481128231070: Setup stimulus
+112886.481464801110: Setup recording on tablet
+112886.498394123220: Ran prestart
+112886.498462644650: Ran starttrial setup
+112888.681943726700: Started recording on tablet
+112888.682327084510: Marked event in tablet with number 5
+112897.981538454110: Stopped recording on tablet
+112897.984082199150: Got data summary for tablet
+112898.057614753780: Saved file on tablet
+112898.060202871740: Saved dot/frame data to file results/CentreOut//trialinfo_05.mat
+112898.060293730570: Checked recording on tablet
+112898.060708481440: Trial 16
+112898.063610228350: Read stimulus
+112898.065712960990: Read target type
+112898.066837980310: Read starttrial
+112898.066915859310: Read trial parameters
+112898.066985588160: Setup stimulus
+112898.067315215510: Setup recording on tablet
+112898.081386559900: Ran prestart
+112898.081460514750: Ran starttrial setup
+112899.881562361140: Started recording on tablet
+112899.881920061150: Marked event in tablet with number 5
+112906.714587096470: Stopped recording on tablet
+112906.717004363640: Got data summary for tablet
+112906.773437650930: Saved file on tablet
+112906.775765568560: Saved dot/frame data to file results/CentreOut//trialinfo_06.mat
+112906.775857332930: Checked recording on tablet
+112906.776273291250: Trial 17
+112906.779061540100: Read stimulus
+112906.781088204890: Read target type
+112906.782188471970: Read starttrial
+112906.782254578560: Read trial parameters
+112906.782340909530: Setup stimulus
+112906.782668423870: Setup recording on tablet
+112906.797756722950: Ran prestart
+112906.797827961100: Ran starttrial setup
+112909.214617885840: Started recording on tablet
+112909.214970454280: Marked event in tablet with number 5
+112915.980968548960: Stopped recording on tablet
+112915.983410870220: Got data summary for tablet
+112916.036831327390: Saved file on tablet
+112916.039020692870: Saved dot/frame data to file results/CentreOut//trialinfo_07.mat
+112916.039112759110: Checked recording on tablet
+112916.039534150840: Trial 18
+112916.042299458600: Read stimulus
+112916.044285976470: Read target type
+112916.045491289620: Read starttrial
+112916.045548340510: Read trial parameters
+112916.045607202540: Setup stimulus
+112916.045955846840: Setup recording on tablet
+112916.064134855010: Ran prestart
+112916.064206093160: Ran starttrial setup
+112918.230985452930: Started recording on tablet
+112918.231353114200: Marked event in tablet with number 5
+112925.513985315280: Stopped recording on tablet
+112925.516353681680: Got data summary for tablet
+112925.579575118810: Saved file on tablet
+112925.582033740310: Saved dot/frame data to file results/CentreOut//trialinfo_08.mat
+112925.582123391710: Checked recording on tablet
+112925.851074548900: Saved result data to file results/CentreOut//results.mat
