@@ -76,7 +76,9 @@ switchframe = -0.2 * 60; % switch at 200ms after movement onset(12 frames)
 switchframe2 = -0.4 * 60; % switch at 400ms after movement onset (24 frames) - for the RT block
 if inputDevice==1
     starttrial.pedal.joystickType = 2;
-    starttrial.pedal.joystickButton = 8;
+    %starttrial.pedal.joystickButton = 8;
+    starttrial.pedal.joystickButton=3;
+
     blockend_starttrial = 'stylusButton';
 else
     starttrial = 'mouseClick';

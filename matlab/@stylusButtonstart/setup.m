@@ -5,6 +5,3 @@
 function thistrial = setup(s,thistrial)
 
 thistrial.sampleWhenNotRecording = 1;
-% We pretend to record so that the setup
-thistrial.recording = 1;
-thistrial.filename = 'tablet_dummy';

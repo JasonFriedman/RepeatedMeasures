@@ -9,9 +9,12 @@ function thistrial = startSamplingWithoutRecording(sc,thistrial,experimentdata)
 codes = messagecodes;
 
 % For the tablet, setupRecording must be run first (the filename is ignored)
-m.parameters = {experimentdata.screenInfo.curWindow};
-m.command = codes.TABLET_attachTablet;
-sendmessage(sc,m,'TABLET_attachTablet');
+% If recording is on for this trial, this has already be run
+if ~thistrial.recording
+    m.parameters = {experimentdata.screenInfo.curWindow};
+    m.command = codes.TABLET_attachTablet;
+    sendmessage(sc,m,'TABLET_attachTablet');
+end
 
 m.parameters = 1; % number of markers
 m.command = codes.startwithoutrecord;
