@@ -1,11 +1,14 @@
 % GLOVETRACKERCLIENT - create an object to connect to the glove and a tracker (fastrak or liberty) and send commands to them
 %
-% gfc = glovetrackerclient(glove,tracker)
-% gloveserver is the glove server to connect to (for this machine, use 'localhost')
-% gloveport is the TCP/IP port to connect on for the glove
-% and similarly for the fastrak
+% gfc = glovetrackerclient(inputParams,e,debug)
 %
-% experiment is a pointer to the parent object (which must have a
+% inputParams.glove is the glove
+% inputParams.tracker is the tracker (fastrak / liberty / emulator / fixed)
+% inputParams.noVHT is set to 1 if the Virtualhand SDK is not installed
+%
+% See the html documentation for more details
+%
+% e is a pointer to the parent object (which must have a
 % function called "writetolog",e.g. writetolog(experiment,'Message');
 % If debug=1, then the client will print more messages
 %
@@ -16,7 +19,9 @@ function [gfc,params] = glovetrackerclient(inputParams,e,debug)
 
 params.name = {'glove','tracker','noVHT'};
 params.type = {'ignore','ignore','number'};
-params.description = {'Parameters for a glove','Parameters for a tracker (fastrak or liberty)','Set to 1 if you do not have or want to use the Virtualhand toolkit'};
+params.description = {'Parameters for a glove (i.e., host and port). Use "emulator" to use an emalated glove (see gloveemulator documentation for more details)',...
+    'Parameters for a tracker (fastrak or liberty), use "emulator" to use an emulated tracker (see trackereumator documentation) or "fixed" for a fixed hand orientation (see fixedtracker documentation)',...
+    'Set to 1 if you do not have or want to use the Virtualhand toolkit (limited functionality)'};
 params.required = [1 1 0];
 params.default = {[],[],0};
 params.classdescription = 'This connects to both a glove and tracker (fastrak / liberty) server (or emulator).';
@@ -43,6 +48,9 @@ elseif isfield(inputParams.tracker,'liberty')
 elseif isfield(inputParams.tracker,'emulator')
     gfc.tracker = trackeremulatorclient(inputParams.tracker.emulator,e,debug);
     gfc.trackerType = 'emulator';
+elseif isfield(inputParams.tracker,'fixed')
+    gfc.tracker = fixedtrackerclient(inputParams.tracker.fixed,e,debug);
+    gfc.trackerType = 'fixed';
 else
     error('Unknown tracker type');
 end

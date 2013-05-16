@@ -111,6 +111,10 @@ if ~isempty(thistrial.movementonset)
     thistrial.movementonset.type = - thistrial.movementonset.type;
 end
 
+if ~isfield(thistrialprotocol,'stimulus')
+    error('Each trial must specify a stimulus');
+end
+
 if isstruct(thistrialprotocol.stimulus)
     stimulusname_all = fields(thistrialprotocol.stimulus);
     stimulusname = stimulusname_all{1};
