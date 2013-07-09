@@ -158,6 +158,6 @@ else
 end
 writetolog(e,'Read starttrial');
 
-if thistrial.recording && isempty(thistrial.filename)
+if ~isnan(thistrial.recording) && thistrial.recording && isempty(thistrial.filename)
     error('Must specify a filename when recording');
 end
