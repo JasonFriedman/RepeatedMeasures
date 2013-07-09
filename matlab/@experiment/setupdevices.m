@@ -29,6 +29,6 @@ if e.MCPresent
     % Setup the card for triggering the MC device
     dllpath = [pwd '\cbw'];
     in_or_out = str2double(e.protocol.setup.MCtrigger);
-    e.MCtrigger = MCtrigger(dllpath,in_or_out);
+    e.MCtrigger = MCDAQ(dllpath,in_or_out);
     writetolog(e,'Opened MC library');
 end

@@ -6,8 +6,10 @@
 % If appopriate, the function will return a value in returnValue,
 % otherwise NaN
 
-function returnValue = runcommand(t,command,parameters)
+function [returnValue,changedParameters,changedValues] = runcommand(t,command,parameters)
 
+changedParameters = [];
+changedValues = [];
 returnValue = NaN;
 
 switch(command)

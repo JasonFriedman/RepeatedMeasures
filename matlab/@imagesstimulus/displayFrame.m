@@ -9,7 +9,7 @@ breakfromloop = 0;
 % frame. As it is using textures, it should be able
 % keep up with the frame rate
 for k=1:length(thistrial.starttiming)
-    if thistrial.starttiming(k)>0
+    if thistrial.starttiming(k)>=0
         thisstart = thistrial.starttiming(k);
     elseif thistrial.starttiming(k)==-Inf
         thisstart = -Inf;
@@ -36,6 +36,7 @@ for k=1:length(thistrial.starttiming)
     end
     %[frame thisstart thisend]
     if frame >= thisstart && frame <= thisend
+        fprintf('Drawing the image');
         if isempty(thistrial.imagerectangle)
             Screen('DrawTexture',experimentdata.screenInfo.curWindow,thistrial.textures(k));
         else

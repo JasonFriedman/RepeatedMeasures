@@ -23,6 +23,18 @@ if isfield(params,'parentclassname')
             newParams = rmfield(newParams,paramsParent.name{m});
         end
     end
+    % Also do for grandparent (if exists)
+    if isfield(paramsParent,'parentclassname')
+        eval(['[v_tmp,paramsGrandParent] = ' paramsParent.parentclassname '();']);
+        if numel(paramsGrandParent.name)>0
+            for m=1:numel(paramsGrandParent.name)
+                if isfield(newParams,paramsGrandParent.name{m})
+                    newParamsParent.(paramsGrandParent.name{m}) = newParams.(paramsGrandParent.name{m});
+                    newParams = rmfield(newParams,paramsGrandParent.name{m});
+                end
+            end
+        end
+    end
 else
     newParamsParent = struct;
 end
@@ -77,71 +89,76 @@ end
 
 %%%%%%%%%%%%%%%%%%%%
 function newparam = parseField(params,thisparamname,thisparam)
-    
-    setVal = 0;
-    for m=1:numel(params.name)
-        if strcmp(thisparamname,params.name{m})
-            if isstruct(params.type{m})
-                % If it is a struct, this is the definition for more parameters
-                %params.type{m}.classname = [params.classname ':' thisparamname];
-                newparam = readParameters(params.type{m},thisparam);
-            elseif iscell(params.type{m})
-                % If it is a cell array, the child can be any of the classes
-                % So pick the appropriate one
-                cellsetVal = 0;
-                for n=1:numel(params.type{m})
-                    if strcmp(params.type{m}{n}.classname,fields(thisparam))
-                        %params.type{m}{n}.classname = [params.classname ':' thisparamname ':' params.type{m}{n}.classname];
-                        newparam.(params.type{m}{n}.classname) = readParameters(params.type{m}{n},thisparam.(params.type{m}{n}.classname));
-                        cellsetVal = 1;
-                    end
+
+setVal = 0;
+for m=1:numel(params.name)
+    if strcmp(thisparamname,params.name{m})
+        if isstruct(params.type{m})
+            % If it is a struct, this is the definition for more parameters
+            %params.type{m}.classname = [params.classname ':' thisparamname];
+            newparam = readParameters(params.type{m},thisparam);
+        elseif iscell(params.type{m})
+            % If it is a cell array, the child can be any of the classes
+            % So pick the appropriate one
+            cellsetVal = 0;
+            for n=1:numel(params.type{m})
+                if strcmp(params.type{m}{n}.classname,fields(thisparam))
+                    %params.type{m}{n}.classname = [params.classname ':' thisparamname ':' params.type{m}{n}.classname];
+                    newparam.(params.type{m}{n}.classname) = readParameters(params.type{m}{n},thisparam.(params.type{m}{n}.classname));
+                    cellsetVal = 1;
                 end
-                if cellsetVal==0
-                    error(['The parameter ' thisparamname ' did not match any of the options in ' params.classname]);
-                end
-            elseif strcmp(params.type{m},'matrix')
-                newparam = str2num(thisparam); %#ok
-                % matrix_1_3 requires it to be 1 1x3 matrix
-            elseif strncmp(params.type{m},'matrix',6)
-                newparam = str2num(thisparam); %#ok
-                sizeparams = regexp(params.type{m},'matrix_([n0-9]*)_([n0-9]*)','tokens');
-                if strcmp(sizeparams{1}{1},'n') % ignore this param if n
-                else
-                    matrixheight = str2double(sizeparams{1}{1});
-                    if size(newparam,1) ~= matrixheight
-                        error(['Height of matrix ' params.type{m} ' in ' params.classname ' is the wrong size (should be ' num2str(matrixheight) ')']);
-                    end
-                end
-                if strcmp(sizeparams{1}{2},'n') % ignore this param if n
-                else
-                    matrixwidth = str2double(sizeparams{1}{2});
-                    if size(newparam,2) ~= matrixwidth
-                        error(['Width of matrix ' params.type{m} ' in ' params.classname ' is the wrong size (should be ' num2str(matrixwidth) ')']);
-                    end
-                end
-            elseif strcmp(params.type{m},'number')
-                newparam = str2double(thisparam);
-            elseif strcmp(params.type{m},'cellarray')
-                newparam = thisparam;
-                if ~iscell(newparam)
-                    tmp = newparam;
-                    clear newparam;
-                    newparam{1} = tmp;
-                end
-            elseif strcmp(params.type{m},'string')
-                newparam = thisparam;
-            elseif strcmp(params.type{m},'loadArray')
-                newparam = load(['stimuli/' thisparam]);
-            elseif strcmp(params.type{m},'ignore') % This will be dealt with by the class
-                newparam = [];
-            else
-                error(['Unknown type of field ' params.type{m} ' in ' params.classname]);
             end
-            setVal = 1;
+            if cellsetVal==0
+                error(['The parameter ' thisparamname ' did not match any of the options in ' params.classname]);
+            end
+        elseif strcmp(params.type{m},'matrix')
+            newparam = str2num(thisparam); %#ok
+            % matrix_1_3 requires it to be 1 1x3 matrix
+        elseif strncmp(params.type{m},'matrix',6)
+            newparam = str2num(thisparam); %#ok
+            sizeparams = regexp(params.type{m},'matrix_([n0-9]*)_([n0-9]*)','tokens');
+            if strcmp(sizeparams{1}{1},'n') % ignore this param if n
+            else
+                matrixheight = str2double(sizeparams{1}{1});
+                if size(newparam,1) ~= matrixheight
+                    error(['Height of matrix ' thisparamname ' in ' params.classname ' is the wrong size (should be ' num2str(matrixheight) ')']);
+                end
+            end
+            if strcmp(sizeparams{1}{2},'n') % ignore this param if n
+            else
+                matrixwidth = str2double(sizeparams{1}{2});
+                if size(newparam,2) ~= matrixwidth
+                    error(['Width of matrix ' thisparamname ' in ' params.classname ' is the wrong size (should be ' num2str(matrixwidth) ')']);
+                end
+            end
+        elseif strcmp(params.type{m},'number')
+            newparam = str2double(thisparam);
+        elseif strcmp(params.type{m},'boolean')
+            newparam = str2double(thisparam);
+            if newparam~=0 && newparam ~=1
+                error(['The parameter ' thisparamname ' in ' params.classname ' needs to be boolean (0 or 1) ']);
+            end
+        elseif strcmp(params.type{m},'cellarray')
+            newparam = thisparam;
+            if ~iscell(newparam)
+                tmp = newparam;
+                clear newparam;
+                newparam{1} = tmp;
+            end
+        elseif strcmp(params.type{m},'string')
+            newparam = thisparam;
+        elseif strcmp(params.type{m},'loadArray')
+            newparam = load(['stimuli/' thisparam]);
+        elseif strcmp(params.type{m},'ignore') % This will be dealt with by the class
+            newparam = [];
+        else
+            error(['Unknown type of field ' params.type{m} ' in ' params.classname]);
         end
+        setVal = 1;
     end
-    if setVal==0
-        error(['Unknown field ' thisparamname ' in ' params.classname]);
-    end
+end
+if setVal==0
+    error(['Unknown field ' thisparamname ' in ' params.classname]);
+end
 end
 

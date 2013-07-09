@@ -153,3 +153,7 @@ else
     eval(['thistrial.thisstarttrial = ' thistrialprotocol.starttrial 'start(struct,experimentdata);']);
 end
 writetolog(e,'Read starttrial');
+
+if thistrial.recording && isempty(thistrial.filename)
+    error('Must specify a filename when recording');
+end

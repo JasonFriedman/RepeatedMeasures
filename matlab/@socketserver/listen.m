@@ -76,7 +76,9 @@ while 1
     % do nothing
    case {codes.getsample}
       if isempty(received.parameters) || isempty(received.parameters{1})
-          nummarkers = NaN;
+          if ~exist('nummarkers','var')
+            nummarkers = NaN;
+          end
       else
           nummarkers = received.parameters{1};
       end
@@ -246,13 +248,15 @@ while 1
 	fprintf('Received request to mark event (marker %d)\n',marker);
     end
       otherwise
-    returnValue = runcommand(s,received.command,received.parameters);
+    [returnValue,changedParameters,changedValues] = runcommand(s,received.command,received.parameters);
     % If something has been returned, send it back
     if isstruct(returnValue) || isempty(returnValue) || ~isnan(returnValue(1))
       success = mssend(sock,returnValue);
-%      if isdebug(s)
-%        fprintf('Return a value, result %d\n',success);
-%      end
+    end
+    if ~isempty(changedParameters)
+        for k=1:numel(changedParameters)
+            s = set(s,changedParameters{k},changedValues{k});
+        end
     end
   end
 end

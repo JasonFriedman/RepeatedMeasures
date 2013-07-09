@@ -6,8 +6,10 @@
 % If appopriate, the function will return a value in returnValue,
 % otherwise NaN
 
-function returnValue = runcommand(fts,command,parameters)
+function [returnValue,changedParameters,changedValues] = runcommand(fts,command,parameters)
 
+changedParameters = [];
+changedValues = [];
 returnValue = NaN;
 switch(command)
     case {fts.codes.isServerRunning}

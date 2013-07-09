@@ -499,6 +499,9 @@ try
         if isfield(thistrial,'successful')
             experimentdata.successful(currentTrial) = thistrial.successful;
         end
+        if isfield(thistrial,'hitTarget')
+            experimentdata.hitTarget(currentTrial) = thistrial.hitTarget;
+        end
         if isstruct(dataSummary) && isfield(dataSummary,'RT')
             % include some other useful data
             thistrial.RT = dataSummary.RT;
@@ -525,7 +528,7 @@ try
         end
         
         % any post-trial cleanup for the stimulus
-        [thistrial,experimentdata] = postTrial(thistrial.thisstimulus,dataSummary,thistrial,experimentdata);
+        [thistrial,experimentdata] = postTrial(thistrial.thisstimulus,dataSummary,thistrial,experimentdata,e);
         
         % Write screenshots to disk, if appropriate
         if experimentdata.recordingStimuli
@@ -561,6 +564,9 @@ try
     else
         results = [];
     end
+    
+    % close the log file
+    closelog(e);
 catch err
     fprintf('Caught an error\n');
     fprintf('Error caught on line %d in %s: \n %s \n',err.stack(1).line,err.stack(1).file,err.message);
@@ -578,4 +584,6 @@ catch err
         writetolog(e,sprintf('No variable results to write to file'));
     end
     closescreen;
+    % close the log file
+    closelog(e);
 end

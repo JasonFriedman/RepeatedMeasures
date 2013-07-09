@@ -11,7 +11,7 @@ elseif p.joystickType==2
     [x,y,z,buttons] = WinJoystick8Mex(0);
     notpressed = ~buttons(p.joystickButton);
 else
-    error('Unknown joystick type');
+    error(['Unknown joystick type ' num2str(p.joystickType)]);
 end
 
 started = ~notpressed;

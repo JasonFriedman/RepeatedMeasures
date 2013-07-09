@@ -1,13 +1,13 @@
-% FEEDBACKCOMMON - provide feedback for button press / keyboard
+% FEEDBACKCOMMON - provide feedback for button press / keyboard for 2AFC tasks
 
 function thistrial = feedbackCommon(r,e,thistrial,RT,firstpressed,LEFT,RIGHT,experimentdata)
 
 if firstpressed == LEFT
-    hitTarget = 1;
+    thistrial.hitTarget = 1;
 elseif firstpressed == RIGHT
-    hitTarget = 2;
+    thistrial.hitTarget = 2;
 else
-    hitTarget = 0;
+    thistrial.hitTarget = 0;
 end
 if RT<0
     thistrial.successful = -5;
@@ -15,16 +15,16 @@ if RT<0
     thistrial.playsound = 1;
     writetolog(e,'Too early');
     thistrial.responseText = experimentdata.texts.TOO_EARLY;
-elseif hitTarget == 0
+elseif thistrial.hitTarget == 0
     thistrial.successful = -4;
     thistrial.questSuccess = -1;
     thistrial.playsound = 1;
     writetolog(e,'No button pressed');
     thistrial.responseText = experimentdata.texts.TOO_SLOW;
-elseif hitTarget == thistrial.targetNum
+elseif thistrial.hitTarget == thistrial.targetNum
     thistrial.successful=1;
     thistrial.questSuccess = 1;
-    writetolog(e,['Succesful to target' num2str(hitTarget)]);
+    writetolog(e,['Succesful to target' num2str(thistrial.hitTarget)]);
     thistrial.responseText = experimentdata.texts.SUCCESS;
 else
     thistrial.successful = 0;

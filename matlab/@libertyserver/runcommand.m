@@ -6,8 +6,10 @@
 % If appopriate, the function will return a value in returnValue,
 % otherwise NaN
 
-function returnValue = runcommand(ls,command,parameters)
+function [returnValue,changedParameters,changedValues] = runcommand(ls,command,parameters)
 
+changedParameters = [];
+changedValues = [];
 returnValue = NaN;
 dontsend = 0;
 
