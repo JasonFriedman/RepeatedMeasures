@@ -31,10 +31,10 @@ function fn = makeindividualpage(params,superclassparams)
     else
         parent = '';
     end
-    fn = [parent params.classname '.html'];
+    fn = [parent char(params.classname) '.html'];
     fp = fopen(['docs/protocolDocumentation/' fn],'w');
-    open_html(fp,params.classname);
-    fprintf(fp,'%s<BR><BR>\n',params.classdescription);
+    open_html(fp,char(params.classname));
+    fprintf(fp,'%s<BR><BR>\n',char(params.classdescription));
     maketable(fp,params,superclassparams)
     close_html(fp);
     fclose(fp);
@@ -60,7 +60,11 @@ for j=1:2
     if ~isempty(p)
         for k=1:numel(p.name)
             fprintf(fp,'<TR><TD>%s</TD>',p.name{k});
-            fprintf(fp,'<TD>%s</TD>',NY(p.required(k)+1));
+            required_tmp = p.required(k);
+            if iscell(required_tmp)
+                required_tmp = required_tmp{1};
+            end
+            fprintf(fp,'<TD>%s</TD>',NY(required_tmp+1));
             if isstruct(p.type{k})
                 fn = makeindividualpage(p.type{k},[]);
                 fprintf(fp,'<TD><A title="follow link to see details of the struct" HREF="%s">struct</A></TD>',fn);
