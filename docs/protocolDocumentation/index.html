@@ -21,11 +21,8 @@ In the section experimentDescription.setup, there can be the fields below. There
 <TR><TD>labels</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="labels.html">struct</A></TD><TD>[]</TD><TD>list of labels (strings) that can be shown</TD></TR>
 <TR><TD>DAQ</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="socketclient_DAQ.html">struct</A></TD><TD>[]</TD><TD>This client connects to a DAQ server to sample one or more channels (e.g. for a button box or force sensors).</TD></TR>
 <TR><TD>fastrak</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="socketclient_fastrak.html">struct</A></TD><TD>[]</TD><TD>Connect to a fastrak server to record fastrak 6D data</TD></TR>
-<<<<<<< HEAD
-<TR><TD>forcesensors</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="DAQclient_forcesensors.html">struct</A></TD><TD>[]</TD><TD>This client connects to a DAQ server to sample force sensors.</TD></TR>
-=======
 <TR><TD>fixedtracker</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="fixedtracker.html">struct</A></TD><TD>[]</TD><TD>Use a fixed position / orientation in place of a tracker.</TD></TR>
->>>>>>> 2d0d7b2c0cbcf0425ebe50871b704e5ea8d06210
+<TR><TD>forcesensors</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="DAQclient_forcesensors.html">struct</A></TD><TD>[]</TD><TD>This client connects to a DAQ server to sample force sensors.</TD></TR>
 <TR><TD>glove</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="socketclient_glove.html">struct</A></TD><TD>[]</TD><TD>Connect to the cyberglove server to collect glove data</TD></TR>
 <TR><TD>gloveemulator</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="gloveemulator.html">struct</A></TD><TD>[]</TD><TD>Read glove data from a file. The files should be in the directory "emulated" and the name of the file to read is specified in each trial in the filename field.</TD></TR>
 <TR><TD>glovetracker</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="glovetracker.html">struct</A></TD><TD>[]</TD><TD>This connects to both a glove and tracker (fastrak / liberty) server (or emulator).</TD></TR>
@@ -62,6 +59,7 @@ In the section experimentDescription.setup, there can be the fields below. There
 <A HREF="stimulus_calibrateForceSensors.html">calibrateForceSensors</A><BR>
 <A HREF="stimulus_circle.html">circle</A><BR>
 <A HREF="stimulus_dots.html">dots</A><BR>
+<A HREF="stimulus_fingerOppositionSequence.html">fingerOppositionSequence</A><BR>
 <A HREF="stimulus_images.html">images</A><BR>
 <A HREF="stimulus_none.html">none</A><BR>
 <A HREF="stimulus_rectangle.html">rectangle</A><BR>
@@ -85,6 +83,7 @@ In the section experimentDescription.setup, there can be the fields below. There
 <A HREF="response_buttonPress.html">buttonPress</A><BR>
 <A HREF="response_defineTarget.html">defineTarget</A><BR>
 <A HREF="response_dummy.html">dummy</A><BR>
+<A HREF="response_fingerOppositionsequence.html">fingerOppositionsequence</A><BR>
 <A HREF="response_keyboard.html">keyboard</A><BR>
 <A HREF="response_keyboardsequence.html">keyboardsequence</A><BR>
 <A HREF="response_mouseEntersBox.html">mouseEntersBox</A><BR>
