@@ -4,5 +4,5 @@
 
 function datalength = getdatalength(s,numberofmarkers)
 
-% each frame has the sampled time, one bit for each marker, and an event indicator
+% each frame has the sampled time, one result for each channel, and an event indicator
 datalength = numberofmarkers + 2;

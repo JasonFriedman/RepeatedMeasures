@@ -81,6 +81,10 @@ codes.MINIBIRD_birdRS232WakeUp = 80;
 % Attach to the Wacom tablet
 codes.TABLET_attachTablet = 90;
 
+% Force sensors
+codes.FORCESENSORS_setParameters = 100;
+codes.FORCESENSORS_getParameters = 101;
+
 %% Mark event codes [ Not that these are separate from the above codes, so they can overlap]
 
 % First frame displayed
