@@ -22,4 +22,17 @@ if ~isempty(thistrial.movementonset) && thistrial.movementonset.type<0
 end
 thistrial.lastx = x;
 thistrial.lasty = y;
-Screen('DrawDots', experimentdata.screenInfo.curWindow, [x;y], 6, [192 192 192],[],1);
+
+if strcmp(tc.showPositionType,'dot')
+    Screen('DrawDots', experimentdata.screenInfo.curWindow, [x;y], 6, tc.showPositionColor,[],1);
+% The rectangle only shows the y position
+elseif strcmp(tc.showPositionType,'rectangle')
+    left = 0.55 * experimentdata.screenInfo.screenRect(3);
+    top = y;
+    height = 0.9 * experimentdata.screenInfo.screenRect(4) - y;
+    width = 0.15 * experimentdata.screenInfo.screenRect(3);
+    rect = [left top left+width top+height];
+    Screen('FillRect', experimentdata.screenInfo.curWindow, tc.showPositionColor, rect);
+else
+    error(['Unknown showPositionType: ' tc.showPositionType]);
+end

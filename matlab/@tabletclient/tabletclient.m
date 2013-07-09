@@ -15,12 +15,14 @@
 
 function [tc,params] = tabletclient(inputParams,experiment,debug)
 
-params.name = {'maxx','maxy'};
-params.type = {'number','number'};
+params.name = {'maxx','maxy','showPositionType','showPositionColor'};
+params.type = {'number','number','string','matrix_1_3'};
 params.description = {'Maximum x value in tablet coordinates (43600 for the Cintiq 21UX)',...
-    'Maximum y value in tablet coordinates (32799 for the Cintiq 21UX)'};
-params.required = [1 1];
-params.default = {1,1};
+    'Maximum y value in tablet coordinates (32799 for the Cintiq 21UX)',...
+    'If showing position, how to show the current position (either ''dot'' or ''rectangle'')',...
+    'If showing position, the color of the feedback (each number between 0 and 255)'};
+params.required = [1 1 0 0];
+params.default = {1,1,'dot',[192 192 192]};
 params.classdescription = 'Connects to server to sample location and other information from a WACOM tablet';
 params.classname = 'tablet';
 params.parentclassname = 'socketclient';

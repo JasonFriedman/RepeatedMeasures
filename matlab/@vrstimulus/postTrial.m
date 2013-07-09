@@ -1,4 +1,4 @@
-function [thistrial,experimentdata] = postTrial(s,dataSummary,thistrial,experimentdata)
+function [thistrial,experimentdata] = postTrial(s,dataSummary,thistrial,experimentdata,e)
 % POSTTRIAL - do anything that needs to be done post-trial
 
 % Clear the screen
