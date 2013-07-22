@@ -13,7 +13,7 @@ end
 fp = fopen('docs/protocolDocumentation/index.html','w');
 open_html(fp,'Protocol documentation');
 
-fprintf(fp,'In the section experimentDescription.setup, there can be the fields below. There must be at least one of the clients.\n<BR><BR>');
+fprintf(fp,'In the section experimentDescription.setup, there can be the fields below.\n<BR><BR>');
 [~,params] = readResources(experiment);
 maketable(fp,params,[]);
 

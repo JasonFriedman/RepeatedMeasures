@@ -15,12 +15,14 @@
 
 function [mc,params] = mouseclient(inputParams,experiment,debug)
 
-params.name = {'maxx','maxy'};
-params.type = {'number','number'};
+params.name = {'maxx','maxy','showPositionType','showPositionColor'};
+params.type = {'number','number','string','matrix_1_3'};
 params.description = {'Maximum x coordinate on the screen (i.e. horizontal screen width in pixels)',...
-    'Maximum y coordinate on the screen (i.e. vertical screen height in pixels)'};
-params.required = [1 1];
-params.default = {0,0};
+    'Maximum y coordinate on the screen (i.e. vertical screen height in pixels)',...
+    'If showing position, how to show the current position (either ''dot'' or ''rectangle'')',...
+    'If showing position, the color of the feedback (each number between 0 and 255)'};
+params.required = [1 1 0 0];
+params.default = {0,0,'dot',[192 192 192]};
 params.classdescription = 'Connect to the mouse server to sample the mouse location';
 params.classname = 'mouse';
 params.parentclassname = 'socketclient';
