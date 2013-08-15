@@ -21,6 +21,7 @@ experimentDescription.setup.mouse.maxy = screenheight; %1200; % screen height
 targetnames = {'candle','candy','dollar','dolphin','pickle','picture','sandal','sandwich'};
 for k=1:numel(targetnames)
     experimentDescription.setup.sounds{k} = [targetnames{k} '.wav'];
+    experimentDescription.setup.images{k} = [targetnames{k} '.jpg'];
 end
 
 % each image is 300 x 300
@@ -36,10 +37,6 @@ experimentDescription.setup.mouseTargets  = ...
 experimentDescription.setup.boxes = [0.45 0.9 0.1 0.1];
 
 experimentDescription.common.showPosition = 1; % need to show the mouse position
-
-for k=1:numel(targetnames)
-    experimentDescription.setup.images{k} = [targetnames{k} '.jpg'];
-end
 
 % target1 target2 distractor?
 combos = [1 2 1
@@ -94,5 +91,3 @@ save(tree,filename);
 % load the protocol file and validate it
 e = experiment(filename,'testData');
 validate(e);
-
-
