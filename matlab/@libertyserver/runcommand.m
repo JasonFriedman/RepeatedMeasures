@@ -108,6 +108,9 @@ else
             else
                 error(['Unknown output format ' parameters{2}]);
             end
+            if (parameters{2}==1 && ls.recordOrientation) || (parameters{2}==2 && ~ls.recordOrientation)
+                error('The output format (whether to record orientations) does not match the command line arguments for libertyserver');
+            end
             thename = 'SetOutputFormat';
         case {ls.codes.LIBERTY_GetSingleSample}
             returnValue = getsinglesample(ls,ls.numsensors);
@@ -128,7 +131,7 @@ else
                 framenum = num2str(parameters{1});
             end
             % clear the previous reference frame
-            thecommand = sprintf('%c%d',18,parameters{1}); % 18 is control-R (maybe)
+            thecommand = sprintf('%c%c',18,framenum); % 18 is control-R (maybe)
             IOPort('Write',ls.s,[thecommand char(13)]);
             thecommand = sprintf('A%c,%d,%d,%d,%d,%d,%d,%d,%d,%d',framenum,parameters{2}(1),parameters{2}(2),parameters{2}(3),...
                 parameters{2}(4),parameters{2}(5),parameters{2}(6),parameters{2}(7),parameters{2}(8),parameters{2}(9));
@@ -149,6 +152,6 @@ else
     pause(0.1);
     if IOPort('BytesAvailable',ls.s)
         inBuffer = IOPort('Read',ls.s,1,IOPort('BytesAvailable',ls.s));
-        error(['Error: ' char(inBuffer)]);
+        error(['Error after executing ' thename ', buffer contains: ' char(inBuffer)]);
     end
 end

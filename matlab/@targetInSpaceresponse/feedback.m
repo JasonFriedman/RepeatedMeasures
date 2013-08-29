@@ -42,6 +42,8 @@ else
     if r.delayedFeedback && ~isempty(previoustrial)
         % Show the feedback from the previous trial
         thistrial.responseText = previoustrial.responseText;
+        writetolog(e,['Set response text to text from previous trial: ' previoustrial.responseText]);
+        thistrial.textFeedback = 1;
     end
     
     if isfield(thistrial,'targetFeedback') && isfield(thistrial.targetFeedback,'text')
