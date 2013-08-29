@@ -7,7 +7,14 @@ function [toFinish,thistrial,experimentdata] = finishTrial(r,thistrial,experimen
 toFinish = false;
 
 m = get(e,'devices');
-lastsample = getsample(m.tablet);
+if isfield(m,'tablet')
+    lastsample = getsample(m.tablet);
+else
+    lastsample = getxyz(e);
+    lastsample(4) = 1;
+end
+
+[maxx,maxy] = getmaxxy(e);
 
 % movement stages:
 % -1: has not started
@@ -22,7 +29,7 @@ if ~isempty(lastsample)
     if lastsample(4)==0
         thistrial.movementStage = -1;
     elseif thistrial.movementStage == -1;
-        if sqrt(sum((lastsample(1:2) - experimentdata.targetPosition(r.start,:)).^2)) <= r.startDistance
+        if sqrt(sum((lastsample(1:2).*[maxx maxy] - experimentdata.targetPosition(r.start,:).*[maxx maxy]).^2)) <= r.startDistance
             thistrial.movementStage = 0;
         end
     elseif thistrial.movementStage == 0
@@ -35,7 +42,7 @@ if ~isempty(lastsample)
             thistrial.movementStage = 1;
         end
     elseif thistrial.movementStage == 1
-        if sqrt(sum((lastsample(1:2) - experimentdata.targetPosition(r.end,:)).^2)) <= r.endDistance
+        if sqrt(sum((lastsample(1:2).*[maxx maxy] - experimentdata.targetPosition(r.end,:).*[maxx maxy]).^2)) <= r.endDistance
             thistrial.movementStage = 2;
         end
     end
@@ -43,6 +50,7 @@ end
 
 if thistrial.movementStage == 2
     thistrial.completedMovements = thistrial.completedMovements + 1;
+    fprintf('Completed %d of %d repetitions\n',thistrial.completedMovements,r.repetitions);
     thistrial.movementStage = -1;
 end
 

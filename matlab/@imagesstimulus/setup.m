@@ -12,6 +12,10 @@ thistrial.addnoise = thistrial.stimuli(:,4); % this column contains whether
 % positive values = amount of noise
 % negative values = percent accurate (using quest)
 
+% start in state 1
+if ~isempty(s.stateTransitions)
+    thistrial.imageState = 1;
+end
 
 if ~isfield(thistrial,'movementOnsetType')
     % default value

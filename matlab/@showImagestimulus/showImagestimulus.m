@@ -19,7 +19,7 @@ end
 [v,parent] = readParameters(params,inputParams);
 
 if numel(experimentdata.images) < v.stimuli
-    error(['There are not enough images in setup.images (there needs to be at least ' v.stimuli ')']);
+    error(['There are not enough images in setup.images (there needs to be at least ' num2str(v.stimuli) ')']);
 end
 
 v = class(v,'showImagestimulus',stimulus(parent));
