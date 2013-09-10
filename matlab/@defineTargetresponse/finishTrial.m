@@ -13,7 +13,10 @@ if isfield(thistrial,'pressedKey') && isempty(find(keyCode,1))
     toFinish=1;
 end
 
-if ~isempty(find(keyCode,1)) && find(keyCode,1)==KbName('space')
+if ~isfield(thistrial,'pressedKey') && ~isempty(find(keyCode,1)) && find(keyCode,1)==KbName('space')
+    if size(experimentdata.targetPosition,1)>=r.targetNum && ~all(experimentdata.targetPosition(r.targetNum,:)==0)
+        experimentdata.targetPositionOld(r.targetNum,:) = experimentdata.targetPosition(r.targetNum,:);
+    end
     experimentdata.targetPosition(r.targetNum,:) = getxyz(e);
     % Don't finish the trial yet, rather when the key is released
     thistrial.pressedKey = 1;
