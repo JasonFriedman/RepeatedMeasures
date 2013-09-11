@@ -444,9 +444,13 @@ try
             % Stop recording
             if thistrial.recording || thistrial.sampleWhenNotRecording || thistrial.showPosition
                 stopRecording(e);
+                thistrial = startSamplingWithoutRecording(e,thistrial,experimentdata);
             end
             while stillPressing(thistrial.thisstarttrial,e,experimentdata)
                 %    ; % wait for them to release the button
+            end
+            if thistrial.recording || thistrial.sampleWhenNotRecording || thistrial.showPosition
+                stopRecording(e);
             end
             continue;
         end
