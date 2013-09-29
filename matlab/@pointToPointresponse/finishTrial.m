@@ -51,6 +51,9 @@ end
 if thistrial.movementStage == 2
     thistrial.completedMovements = thistrial.completedMovements + 1;
     fprintf('Completed %d of %d repetitions\n',thistrial.completedMovements,r.repetitions);
+    if r.beep
+        beep;
+    end
     thistrial.movementStage = -1;
 end
 

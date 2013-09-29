@@ -35,7 +35,9 @@ else
 end
 
 if strcmp(tc.showPositionType,'dot')
-    Screen('DrawDots', experimentdata.screenInfo.curWindow, [x;y], 6, tc.showPositionColor(therow,:),[],1);
+    if thistrial.showPosition==1 || (thistrial.showPosition==2 && isa(thistrial.thisstimulus,'imagesstimulus') && thistrial.imageState == 1)
+        Screen('DrawDots', experimentdata.screenInfo.curWindow, [x;y], 6, tc.showPositionColor(therow,:),[],1);
+    end
 % The rectangle only shows the y position
 elseif strcmp(tc.showPositionType,'rectangle')
     left = 0.55 * experimentdata.screenInfo.screenRect(3);
