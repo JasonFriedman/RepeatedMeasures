@@ -29,7 +29,7 @@ if ~isempty(lastsample)
     if lastsample(4)==0
         thistrial.movementStage = -1;
     elseif thistrial.movementStage == -1;
-        if sqrt(sum((lastsample(1:2).*[maxx maxy] - experimentdata.targetPosition(r.start,:).*[maxx maxy]).^2)) <= r.startDistance
+        if sqrt(sum((lastsample(1:2).*[maxx maxy] - experimentdata.targetPosition(r.start,:).*[maxx maxy]).^2)) <= (r.startDistance * maxx)
             thistrial.movementStage = 0;
         end
     elseif thistrial.movementStage == 0
@@ -42,7 +42,7 @@ if ~isempty(lastsample)
             thistrial.movementStage = 1;
         end
     elseif thistrial.movementStage == 1
-        if sqrt(sum((lastsample(1:2).*[maxx maxy] - experimentdata.targetPosition(r.end,:).*[maxx maxy]).^2)) <= r.endDistance
+        if sqrt(sum((lastsample(1:2).*[maxx maxy] - experimentdata.targetPosition(r.end,:).*[maxx maxy]).^2)) <= (r.endDistance * maxx)
             thistrial.movementStage = 2;
         end
     end
