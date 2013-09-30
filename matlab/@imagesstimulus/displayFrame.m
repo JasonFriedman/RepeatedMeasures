@@ -20,11 +20,13 @@ if ~isempty(e) && ~isempty(s.stateTransitions)
         lastsample(4) = 1;
     end
     [maxx,maxy] = getmaxxy(e);
-    for m=1:size(s.stateTransitions,1)
-        if thistrial.imageState==s.stateTransitions(m,1) && ...
-                sqrt(sum((lastsample(1:2).*[maxx maxy] - experimentdata.targetPosition(s.stateTransitions(m,2),:).*[maxx maxy]).^2)) < (s.stateTransitions(m,3) * maxx)
-            if s.stateTransitions(m,4)==0 || (s.stateTransitions(m,4)==1 && lastsample(4)>0) || (s.stateTransitions(m,4)==2 && lastsample(4)==0) 
-                thistrial.imageState = s.stateTransitions(m,5);
+    for m=1:numel(s.stateTransitions)
+        if thistrial.imageState==s.stateTransitions{m}.currentState && ...
+                (GetSecs - thistrial.stateSwitchTime) >= s.stateTransitions{m}.timeElapsed && ...
+                sqrt(sum((lastsample(1:2).*[maxx maxy] - experimentdata.targetPosition(s.stateTransitions{m}.position,:).*[maxx maxy]).^2)) < (s.stateTransitions{m}.distanceAllowed * maxx)
+            if s.stateTransitions{m}.penTouching==0 || (s.stateTransitions{m}.penTouching==1 && lastsample(4)>0) || (s.stateTransitions{m}.penTouching==2 && lastsample(4)==0) 
+                thistrial.imageState = s.stateTransitions{m}.newState;
+                thistrial.stateSwitchTime = GetSecs;
                 break;
             end
         end     

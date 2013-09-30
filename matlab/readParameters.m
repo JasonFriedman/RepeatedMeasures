@@ -73,6 +73,9 @@ else
     if isempty(newParams)
         newParamsFields = [];
     else
+        if ~isstruct(newParams)
+            error([params.classname ' is expected to be a struct']);
+        end
         newParamsFields = fields(newParams);
     end
     for k=1:numel(newParamsFields)

@@ -15,6 +15,7 @@ thistrial.addnoise = thistrial.stimuli(:,4); % this column contains whether
 % start in state 1
 if ~isempty(s.stateTransitions)
     thistrial.imageState = 1;
+    thistrial.stateSwitchTime = GetSecs;
 end
 
 if ~isfield(thistrial,'movementOnsetType')
