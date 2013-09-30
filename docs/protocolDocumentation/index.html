@@ -1,7 +1,7 @@
 <HTML>
 <HEAD><TITLE>Protocol documentation</TITLE></HEAD>
 <BODY><H1>Protocol documentation</H1>
-In the section experimentDescription.setup, there can be the fields below. There must be at least one of the clients.
+In the section experimentDescription.setup, there can be the fields below.
 <BR><BR><TABLE border="1">
 <TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
 <TR><TD>images</TD><TD>N</TD><TD>cellarray</TD><TD>[]</TD><TD>Cell array of the filenames of the images (which are in the stimuli directory)</TD></TR>
@@ -56,6 +56,7 @@ In the section experimentDescription.setup, there can be the fields below. There
 <TR><TD>beep</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="beep.html">struct</A></TD><TD>[]</TD><TD>beeps througout the trial</TD></TR>
 <TR><TD>backgroundColor</TD><TD>N</TD><TD><A title="A 1 by 3 matrix (see description for how to fill it)">1 by 3 matrix</A></TD><TD>[0,0,0]</TD><TD>Background color (1x3 RGB matrix, [0 0 0] = black, [255 255 255] = white)</TD></TR>
 <TR><TD>stimulus</TD><TD>Y</TD><TD>One of:<BR>
+<A HREF="stimulus_VCRDM.html">VCRDM</A><BR>
 <A HREF="stimulus_calibrateForceSensors.html">calibrateForceSensors</A><BR>
 <A HREF="stimulus_circle.html">circle</A><BR>
 <A HREF="stimulus_dots.html">dots</A><BR>
