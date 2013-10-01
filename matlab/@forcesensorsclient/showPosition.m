@@ -13,8 +13,10 @@ else
     lastposition(2) = 0;
 end
 
-for k=1:get(m,'numchannels')
-    
+ tofilter(1) = 0;
+ tofilter(2) = 0;
+
+for k=1:get(m,'numchannels')   
     if thistrial.showPosition==2
         if numel(m.offsetX)>1
             lastposition(1) = m.offsetX(k);
@@ -32,9 +34,11 @@ for k=1:get(m,'numchannels')
     
     if m.displayRangeX(k,1) ~= m.displayRangeX(k,2)
         lastposition(1) = lastposition(1) + (thisval - m.displayRangeX(k,1)) / (m.displayRangeX(k,2) - m.displayRangeX(k,1));
+        tofilter(1) = 1;
     end
     if m.displayRangeY(k,1) ~= m.displayRangeY(k,2)
         lastposition(2) = lastposition(2) + (thisval - m.displayRangeY(k,1)) / (m.displayRangeY(k,2) - m.displayRangeY(k,1));
+        tofilter(2) = 1;
     end
        
     if m.displayRangeX(k,3) ~= 0
@@ -55,6 +59,31 @@ for k=1:get(m,'numchannels')
     end
     
 end
+
+if thistrial.showPosition==1 || thistrial.showPosition==5
+    if ~isfield(thistrial,'combined')
+        thistrial.combined = [];
+    end
+    thistrial.combined = [thistrial.combined lastposition'];
+   % filter the data 
+   Wn = m.filterCutoff ./ (m.samplerate / 2);
+   if numel(Wn)==2
+       [B,A] = butter(m.filterOrder/2,Wn);
+   else
+       [B,A] = butter(m.filterOrder,Wn);
+   end
+   
+   if tofilter(2)
+       output(2,:) = filter(B,A,thistrial.combined(2,:));
+       lastposition(2) = output(2,end);
+   end
+   if tofilter(1)
+       output(1,:) = filter(B,A,thistrial.combined(1,:));
+       lastposition(1) = output(1,end);
+   end
+   
+end
+
 % i.e. one dot for all sensors
 if thistrial.showPosition==1
     lastposition(1) = lastposition(1) * experimentdata.screenInfo.screenRect(3);
