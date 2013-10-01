@@ -1,0 +1,155 @@
+158759.592997068070: Connected to DAQ
+158763.164631505120: Opened window
+158763.170533388100: Trial 1
+158763.187510659280: Read stimulus
+158763.192379290150: Read target type
+158763.205452661320: Read starttrial
+158763.205678751260: Read trial parameters
+158763.206357624760: Setup stimulus
+158763.228310383740: Ran prestart
+158763.228425088920: Ran starttrial setup
+158764.399406430920: Trial 2
+158764.411283849710: Read stimulus
+158764.414710817680: Read target type
+158764.416651448120: Read starttrial
+158764.416728421320: Read trial parameters
+158764.423070409950: Setup stimulus
+158764.426957707910: Setup recording on DAQ
+158764.444912689740: Ran prestart
+158764.444983625840: Ran starttrial setup
+158764.463046370160: Started recording on DAQ
+158764.465494721900: Marked event in DAQ with number 5
+158765.330098244970: Stopped recording on DAQ
+158765.334268079870: Got data summary for DAQ
+158765.347068271600: Succesful to target2
+158766.399225317490: Wrote text Success
+158766.412655482100: Saved file on DAQ
+158766.421656215910: Saved dot/frame data to file results/MaleFemaleButton//trialinfo_2_3.mat
+158766.424380765650: Checked recording on DAQ
+158766.426464777530: Trial 3
+158766.436776168850: Read stimulus
+158766.438686613690: Read target type
+158766.439408048870: Read starttrial
+158766.439475664550: Read trial parameters
+158766.439758805210: Setup stimulus
+158766.440095072470: Setup recording on DAQ
+158766.444791645600: Ran prestart
+158766.444842055500: Ran starttrial setup
+158766.461665078420: Started recording on DAQ
+158766.462029418270: Marked event in DAQ with number 5
+158767.062059724560: Stopped recording on DAQ
+158767.064067366940: Got data summary for DAQ
+158767.064679228500: Succesful to target1
+158768.094971959100: Wrote text Success
+158768.104864374710: Saved file on DAQ
+158768.108619158010: Saved dot/frame data to file results/MaleFemaleButton//trialinfo_1_2.mat
+158768.108819288350: Checked recording on DAQ
+158768.110464703870: Trial 4
+158768.117888543410: Read stimulus
+158768.119644438120: Read target type
+158768.120617017240: Read starttrial
+158768.120739570640: Read trial parameters
+158768.121213785980: Setup stimulus
+158768.121803913930: Setup recording on DAQ
+158768.128196010630: Ran prestart
+158768.128290793310: Ran starttrial setup
+158768.145229728810: Started recording on DAQ
+158768.145862116540: Marked event in DAQ with number 5
+158768.911801079490: Stopped recording on DAQ
+158768.912872667310: Got data summary for DAQ
+158768.913199275180: Wrong direction (correct = 2
+158769.944898351590: Wrote text Incorrect
+158769.951792736220: Saved file on DAQ
+158769.954950147020: Saved dot/frame data to file results/MaleFemaleButton//trialinfo_2_4.mat
+158769.955114658400: Checked recording on DAQ
+158769.956273180640: Trial 5
+158769.962423490880: Read stimulus
+158769.963956616090: Read target type
+158769.964913800560: Read starttrial
+158769.965031826170: Read trial parameters
+158769.965501211790: Setup stimulus
+158769.966094660140: Setup recording on DAQ
+158769.978189716930: Ran prestart
+158769.978284801470: Ran starttrial setup
+158769.994932144360: Started recording on DAQ
+158769.995291956350: Marked event in DAQ with number 5
+158770.761579260810: Stopped recording on DAQ
+158770.762318505470: Got data summary for DAQ
+158770.762516824670: Succesful to target1
+158771.794887228200: Wrote text Success
+158771.803705339320: Saved file on DAQ
+158771.807468876420: Saved dot/frame data to file results/MaleFemaleButton//trialinfo_1_1.mat
+158771.807664780760: Checked recording on DAQ
+158771.808816058470: Trial 6
+158771.816122777990: Read stimulus
+158771.817951419940: Read target type
+158771.819096660530: Read starttrial
+158771.819238230880: Read trial parameters
+158771.819786702720: Setup stimulus
+158771.820484895000: Setup recording on DAQ
+158771.828178593540: Ran prestart
+158771.828293902420: Ran starttrial setup
+158771.845298944330: Started recording on DAQ
+158771.846051470640: Marked event in DAQ with number 5
+158772.544911754000: Stopped recording on DAQ
+158772.545737329380: Got data summary for DAQ
+158772.545969758270: Succesful to target1
+158773.578139729620: Wrote text Success
+158773.585481766260: Saved file on DAQ
+158773.588376260740: Saved dot/frame data to file results/MaleFemaleButton//trialinfo_1_2.mat
+158773.588534131270: Checked recording on DAQ
+158773.590144531540: Trial 7
+158773.596013512260: Read stimulus
+158773.597478418060: Read target type
+158773.598390927920: Read starttrial
+158773.598503821940: Read trial parameters
+158773.598948757280: Setup stimulus
+158773.599526207250: Setup recording on DAQ
+158773.611390948120: Ran prestart
+158773.611481806700: Ran starttrial setup
+158773.628421044060: Started recording on DAQ
+158773.629040451980: Marked event in DAQ with number 5
+158774.128142280300: Stopped recording on DAQ
+158774.128848924530: Got data summary for DAQ
+158774.129038489920: Succesful to target2
+158775.161454473680: Wrote text Success
+158775.168203363810: Saved file on DAQ
+158775.171940337600: Saved dot/frame data to file results/MaleFemaleButton//trialinfo_2_3.mat
+158775.172136845680: Checked recording on DAQ
+158775.173959752370: Trial 8
+158775.181231758470: Read stimulus
+158775.183034742690: Read target type
+158775.184184812970: Read starttrial
+158775.184332722270: Read trial parameters
+158775.184890853500: Setup stimulus
+158775.185593875470: Setup recording on DAQ
+158775.194733462910: Ran prestart
+158775.194846960660: Ran starttrial setup
+158775.211418235880: Started recording on DAQ
+158775.211754805000: Marked event in DAQ with number 5
+158775.878071721530: Stopped recording on DAQ
+158775.878809456890: Got data summary for DAQ
+158775.879010190950: Succesful to target2
+158776.911363086840: Wrote text Success
+158776.920026044100: Saved file on DAQ
+158776.923561982000: Saved dot/frame data to file results/MaleFemaleButton//trialinfo_2_4.mat
+158776.923756075240: Checked recording on DAQ
+158776.924895882400: Trial 9
+158776.932266293500: Read stimulus
+158776.934132667400: Read target type
+158776.935282737690: Read starttrial
+158776.935426119160: Read trial parameters
+158776.935979722530: Setup stimulus
+158776.936685763070: Setup recording on DAQ
+158776.944666526400: Ran prestart
+158776.944779722310: Ran starttrial setup
+158776.961760615730: Started recording on DAQ
+158776.962519179160: Marked event in DAQ with number 5
+158777.527987609410: Stopped recording on DAQ
+158777.528718100280: Got data summary for DAQ
+158777.528915513920: Succesful to target1
+158778.561314895570: Wrote text Success
+158778.567803586110: Saved file on DAQ
+158778.571353107490: Saved dot/frame data to file results/MaleFemaleButton//trialinfo_1_1.mat
+158778.571553237850: Checked recording on DAQ
+158779.127907436540: Saved result data to file results/MaleFemaleButton//results.mat
