@@ -72,20 +72,38 @@ for k=1:m.numsensors
     
 end
 
-if thistrial.showPosition==1
-    lastposition(1) = lastposition(1) * experimentdata.screenInfo.screenRect(3);
-    lastposition(2) = lastposition(2) * experimentdata.screenInfo.screenRect(4);
-    Screen('DrawDots', experimentdata.screenInfo.curWindow, lastposition, 6, m.showPositionColor,[],1);
+if strcmp(m.showPositionType,'dot')
+    if thistrial.showPosition==1
+        lastposition(1) = lastposition(1) * experimentdata.screenInfo.screenRect(3);
+        lastposition(2) = lastposition(2) * experimentdata.screenInfo.screenRect(4);
+        Screen('DrawDots', experimentdata.screenInfo.curWindow, lastposition, 6, m.showPositionColor,[],1);
+    else
+        positions(1,:) = positions(1,:) .* experimentdata.screenInfo.screenRect(3);
+        positions(2,:) = positions(2,:) * experimentdata.screenInfo.screenRect(4);
+        Screen('DrawDots', experimentdata.screenInfo.curWindow, positions, 6, m.showPositionColor,[],1);
+    end
+    
+    if thistrial.showPosition==3
+        fingertips(1,:) = fingertips(1,:) .* experimentdata.screenInfo.screenRect(3);
+        fingertips(2,:) = fingertips(2,:) * experimentdata.screenInfo.screenRect(4);
+        Screen('DrawDots', experimentdata.screenInfo.curWindow, fingertips, 6, [255 0 0],[],1);
+    end
+elseif strcmp(m.showPositionType,'rectangle')
+    if thistrial.showPosition==1
+        %lastposition(1) = lastposition(1) * experimentdata.screenInfo.screenRect(3);
+        lastposition(2) = lastposition(2) * experimentdata.screenInfo.screenRect(4);
+        left = 0.55 * experimentdata.screenInfo.screenRect(3);
+        top = lastposition(2);
+        height = 0.9 * experimentdata.screenInfo.screenRect(4) - lastposition(2);
+        if height<0
+            height = 0;
+        end
+        width = 0.15 * experimentdata.screenInfo.screenRect(3);
+        rect = [left top left+width top+height];
+        Screen('FillRect', experimentdata.screenInfo.curWindow, m.showPositionColor, rect);
+    end
 else
-    positions(1,:) = positions(1,:) .* experimentdata.screenInfo.screenRect(3);
-    positions(2,:) = positions(2,:) * experimentdata.screenInfo.screenRect(4);
-    Screen('DrawDots', experimentdata.screenInfo.curWindow, positions, 6, m.showPositionColor,[],1);
-end
-
-if thistrial.showPosition==3
-    fingertips(1,:) = fingertips(1,:) .* experimentdata.screenInfo.screenRect(3);
-    fingertips(2,:) = fingertips(2,:) * experimentdata.screenInfo.screenRect(4);
-    Screen('DrawDots', experimentdata.screenInfo.curWindow, fingertips, 6, [255 0 0],[],1);
+    error(['Unknown showPositionType: ' m.showPositionType]);
 end
 
 lastposition(3) = 0;
