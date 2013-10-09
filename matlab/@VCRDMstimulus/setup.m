@@ -8,7 +8,7 @@ function thistrial = setup(s,e,thistrial,experimentdata)
 
     % Copy over the relevant info
     dotInfo.numDotField = 1; %s.numFrames; % how many frames to show
-    dotInfo.apXYD = [experimentdata.xshift 0 50]; %first number is shift in x, second shift in y (both from center)
+    dotInfo.apXYD = [experimentdata.xshift 0 s.aperture*10]; %first number is shift in x, second shift in y (both from center)
                                                  %third number is apeture (50 =  5 degrees)
     if isfield(thistrial,'quest') && str2double(thistrial.quest)
         % Get the coherence to test from quest
@@ -38,7 +38,7 @@ function thistrial = setup(s,e,thistrial,experimentdata)
         end
     end
     dotInfo.coh = thistrial.coherence * 1000; % coherence (0 = none ... 1000 = all same)
-    dotInfo.speed = s.speed;
+    dotInfo.speed = s.speed * 10;
     dotInfo.dir = s.direction; % 0 = L to R, 90 = D to U, 180 = R to L, 270 = U to D
     dotInfo.dotColor = 255; % white dots
     dotInfo.dotSize = 2; % dot size in pixels

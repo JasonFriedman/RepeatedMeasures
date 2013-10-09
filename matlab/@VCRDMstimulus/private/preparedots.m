@@ -40,11 +40,6 @@ function dotInfo = preparedots(screenInfo, dotInfo)
 % structures are not altered in this function, so should not have memory
 % problems from matlab creating new structures...
 
-% CURRENTLY THERE IS AN ALMOST ONE SECOND DELAY FROM THE TIME DOTSX IS
-% CALLED UNTIL THE DOTS START ON THE SCREEN! THIS IS BECAUSE OF PRIORITY.
-% NEED TO EVALUATE WHETHER PRIORITY IS REALLY NECESSARY.
-%
-
 rseed = screenInfo.rseed;
 
 % SEED THE RANDOM NUMBER GENERATOR ... if "[]" is given, reset
@@ -69,9 +64,9 @@ apD = dotInfo.apXYD(:,3); % diameter of aperture
 % screenInfo.center;
 % disp('dotInfo.apXYD')
 % dotInfo.apXYD(:,1:2)/10*screenInfo.ppd
-size(screenInfo.center);
+%size(screenInfo.center);
 center = repmat(screenInfo.center,size(dotInfo.apXYD(:,1)));
-size(dotInfo.apXYD(:,1:2));
+%size(dotInfo.apXYD(:,1:2));
 % change the xy coordinates to pixels (y is inverted - pos on bottom, neg.
 % on top
 dotInfo.center = [center(:,1) + dotInfo.apXYD(:,1)/10*screenInfo.ppd center(:,2) - dotInfo.apXYD(:,2)/10*screenInfo.ppd]; % where you want the center of the aperture
@@ -86,7 +81,7 @@ dotInfo.d_ppd 	= floor(apD/10 * screenInfo.ppd);	% size of aperture in pixels
 % maxDotsPerFrame was originally in setupScreen as a field in screenInfo,
 % but makes more sense in createDotInfo as a field in dotInfo
 dotInfo.ndots 	= min(dotInfo.maxDotsPerFrame, ceil(16.7 * apD .* apD * 0.01 / screenInfo.monRefresh));
-% i.e. for this one typically 16.7 * 50 * 50 * 0.01 / 60 = 
+% i.e. for this one typically 16.7 * 50 * 50 * 0.01 / 60 = 7
 
 if numel(dotInfo.speed==1)
     dotInfo.speed = repmat(dotInfo.speed,dotInfo.numDotField,1);
