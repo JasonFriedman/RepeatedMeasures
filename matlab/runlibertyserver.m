@@ -1,6 +1,6 @@
-function runlibertyserver(nummarkers,COMport,recordOrientation)
+function runlibertyserver(nummarkers,COMport,recordOrientation,samplerate)
 % RUNLIBERTYSERVER - run the liberty server with standard settings
-% runlibertyservetr(nummarkers,COMport,recordOrientation)
+% runlibertyserver(nummarkers,COMport,recordOrientation,samplerate)
 %
 % COMport of -1 indicates to use USB
 %
@@ -17,8 +17,10 @@ if nargin<3 || isempty(recordOrientation)
     recordOrientation = 1;
 end
 
+if nargin<4 || isempty(samplerate)
+    samplerate = 240;
+end
 
-
-system(sprintf('matlab -nojvm -nosplash -r "l = libertyserver(3015,240,%d,%d,1,%d,1);listen(l);" &',nummarkers,recordOrientation,COMport));
+system(sprintf('matlab -nojvm -nosplash -r "l = libertyserver(3015,%d,%d,%d,1,%d,1);listen(l);" &',samplerate,nummarkers,recordOrientation,COMport));
 
 

@@ -270,7 +270,7 @@ try
                 % In the button press cases, they should be still pressing
                 % the button, otherwise abort and repeat the trial
                 % (because the stimuli has not yet been shown)
-                if ~stillAtStart(thistrial.thisstarttrial,e)
+                if ~stillAtStart(thistrial.thisstarttrial,e,experimentdata)
                     responseText = experimentdata.texts.TOO_EARLY;
                     drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText);
                     writetolog(e,sprintf('Wrote text %s',responseText));
