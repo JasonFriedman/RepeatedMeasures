@@ -38,7 +38,7 @@ while 1
  
   if currentSample>0
     if currentSample > maximumframes
-        error('Buffer overflow!');
+        fprintf('Buffer overflow! - Not enough memory allocated - check that the sample rate is sufficient and the program is keeping up!!!!!!!\n');
     end
     %currenttime = GetSecs;
     %if (currenttime - lastsampletime) < 0.5*(1 / s.framerate)
@@ -58,6 +58,8 @@ while 1
     % else
     % fprintf('Ignoring new frame because framenumber is not greater (difference=%.2f)\n',framenumber - lastframe);
     end
+  else
+      idle(s);
   end
   
   success = -1;
@@ -69,6 +71,8 @@ while 1
     if currentSample>0 && success<0
       success=0;
       received.command = codes.dummy;
+    else
+        idle(s);
     end
   end
   switch received.command
