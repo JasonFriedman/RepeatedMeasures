@@ -20,7 +20,7 @@ if nargin<5 || isempty(sampletype)
     sampletype=2;
 end
 
-if nargin<6 || isempty(debug)
+if nargin<7 || isempty(debug)
     debug = 0;
 end
 
@@ -30,7 +30,8 @@ end
 
 d.codes = messagecodes;
 d.bits = channels;
-d.sampletype = sampletype; 
+d.sampletype = sampletype;
+
 if d.sampletype==2
     d.t = MCDAQ(dllpath,d.sampletype);
 else

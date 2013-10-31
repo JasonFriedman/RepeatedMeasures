@@ -1,6 +1,6 @@
 % FORCESENSORSSERVER - create a server to listen for connections and sample the DAQ card
 %
-% d = forcesensorsserver(port,maxsamplerate,channels,range,parameters,debug)
+% d = forcesensorsserver(port,maxsamplerate,channels,range,parameters,sampleContinuously,debug)
 %
 % parameters should be a 2 x N matrix (N is the number of channels)
 % The first row is the offset, the second row the gain (Force in N = gain * (voltage - offset) )
@@ -14,14 +14,15 @@
 % d = forcesensorsserver(3001,6000,[0 4],4,0);
 % listen(d);
 
-function d = forcesensorsserver(port,samplerate,channels,range,parameters,debug)
+function d = forcesensorsserver(port,samplerate,channels,range,parameters,sampleContinuously,debug)
 
-if nargin<6 || isempty(debug)
+if nargin<7 || isempty(debug)
     debug = 0;
 end
 
 d.parameters = parameters;
 d.codes = messagecodes;
+d.sampleContinuously = sampleContinuously;
 
 if ~all(size(channels)==[1 2])
     error('Channels must be a 1x2 matrix');
