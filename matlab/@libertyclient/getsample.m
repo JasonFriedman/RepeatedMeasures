@@ -12,5 +12,11 @@ sendmessage(lc,m,'getsample');
 [data,success] = receivemessage(lc);
 
 if success < 0
-  error('Error in receiving data');
+  if lc.recordOrientation
+      datalength=6;
+  else
+      datalength=3;
+  end
+  data = zeros(1,lc.numsensors*datalength+2);
+  warning('Error in receiving data in libertyclient/getsample');
 end
