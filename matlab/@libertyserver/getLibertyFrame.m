@@ -2,7 +2,7 @@ function [data,framenumber,libertyMarkerNum] = getLibertyFrame(l,datalength)
 
 header = IOPort('Read',l.s,1,8);
 % If this is the carriage return, read two more bytes
-if all(header(1:2)==[13 10])
+if all(header(1:2)==[13 10]) && numel(header)==8
     header = [header(3:8) IOPort('Read',l.s,1,2)];
 end
 if ~all(header(1:2)=='LY')
