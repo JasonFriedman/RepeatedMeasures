@@ -13,3 +13,9 @@ end
 hitTarget = whichTargetHit(r,lastposition,experimentdata);
 
 toFinish = (hitTarget>0);
+
+[keyIsDown, secs, keycode] = KbCheck;
+if ~isempty(find(keycode,1)) && (find(keycode,1)==KbName('q') || find(keycode,1)==KbName('n'))
+    toFinish = true;
+end
+

@@ -14,4 +14,8 @@ for k=1:numel(r.targets)
     end
 end
 
+[keyIsDown, secs, keycode] = KbCheck;
+if ~isempty(find(keycode,1)) && (find(keycode,1)==KbName('q') || find(keycode,1)==KbName('n'))
+    toFinish = true;
+end
 

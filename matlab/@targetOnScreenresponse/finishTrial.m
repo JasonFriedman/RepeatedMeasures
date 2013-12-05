@@ -11,4 +11,8 @@ if buttons(1)
     toFinish = 1;
 end
 
+[keyIsDown, secs, keycode] = KbCheck;
+if ~isempty(find(keycode,1)) && (find(keycode,1)==KbName('q') || find(keycode,1)==KbName('n'))
+    toFinish = true;
+end
 

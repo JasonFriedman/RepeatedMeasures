@@ -5,7 +5,7 @@
 function [toFinish,thistrial,experimentdata] = finishTrial(r,thistrial,experimentdata,e,lastposition)
 toFinish = false;
 [keyIsDown, secs, keycode] = KbCheck;
-if ~isempty(find(keycode,1)) && find(keycode,1)==KbName('q')
+if ~isempty(find(keycode,1)) && (find(keycode,1)==KbName('q') || find(keycode,1)==KbName('n'))
     toFinish = true;
 end
 

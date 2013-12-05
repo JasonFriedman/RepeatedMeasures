@@ -64,6 +64,6 @@ end
 %drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,thetext,1);
 
 [keyIsDown, secs, keycode] = KbCheck;
-if ~isempty(find(keycode,1)) && find(keycode,1)==KbName('q')
+if ~isempty(find(keycode,1)) && (find(keycode,1)==KbName('q') || find(keycode,1)==KbName('n'))
     toFinish = true;
 end
