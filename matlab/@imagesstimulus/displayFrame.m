@@ -32,6 +32,11 @@ if ~isempty(e) && ~isempty(s.stateTransitions)
         end     
     end
     todraw = thistrial.imageState;
+    if isempty(thistrial.imagerectangle)
+        Screen('DrawTexture',experimentdata.screenInfo.curWindow,thistrial.textures(todraw));
+    else
+        Screen('DrawTexture',experimentdata.screenInfo.curWindow,thistrial.textures(todraw),[],thistrial.imagerectangle(todraw,:));
+    end
 else
      for k=1:length(thistrial.starttiming)
         if thistrial.starttiming(k)>=0
@@ -63,17 +68,16 @@ else
         %[frame thisstart thisend]
         if frame >= thisstart && frame <= thisend
             todraw = k;
-            break;
+            if isempty(thistrial.imagerectangle)
+                Screen('DrawTexture',experimentdata.screenInfo.curWindow,thistrial.textures(todraw));
+            else
+                Screen('DrawTexture',experimentdata.screenInfo.curWindow,thistrial.textures(todraw),[],thistrial.imagerectangle(todraw,:));
+            end
         end
     end
 end
 
 if todraw>0
-    if isempty(thistrial.imagerectangle)
-        Screen('DrawTexture',experimentdata.screenInfo.curWindow,thistrial.textures(todraw));
-    else
-        Screen('DrawTexture',experimentdata.screenInfo.curWindow,thistrial.textures(todraw),[],thistrial.imagerectangle(todraw,:));
-    end
     if experimentdata.recordingStimuli && mod(frame,4)==0
         thistrial.imageArray = [thistrial.imageArray; {Screen('GetImage', experimentdata.screenInfo.curWindow)}];
     end
