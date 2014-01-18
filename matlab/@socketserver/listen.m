@@ -4,7 +4,6 @@
 
 function listen(s)
 
-fp = 0;
 sock = -1;
 codes = messagecodes;
 filename = '';
@@ -129,9 +128,6 @@ while 1
     if isdebug(s)
       fprintf('Closed socket\n');
     end
-    if fp>0
-        fclose(fp);
-    end	
     break;
     case {codes.initializeDevice}
         s = initializeDevice(s);
@@ -149,11 +145,12 @@ while 1
           if ~exist(pathstr,'dir')
               mkdir(pathstr);
           end
-          % Open the file for writing
+          % Check that the file can be opened for writing
           fp = fopen(filename,'wt');
           if fp==-1
               error(['Cannot open file ' filename ' for writing']);
           end
+          fclose(fp);
       end
     
       nummarkers = received.parameters{2};
@@ -223,15 +220,7 @@ while 1
         end
     if ~isnan(filename(1))
         % Write to disk
-        for i=1:size(thisdata,1)
-            fprintf(fp,'%.8f',thisdata(i,1));
-            for j=2:size(thisdata,2)
-                fprintf(fp,',%.8f',thisdata(i,j));
-            end
-            fprintf(fp,'\n');
-        end
-        fclose(fp);
-        fp = -1;
+        dlmwrite(filename,thisdata,'precision',8);
         success = mssend(sock,1);
         if isdebug(s)
             fprintf('Return a value to indicate end of savefile, result %d\n',success);
