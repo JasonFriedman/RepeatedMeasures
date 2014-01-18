@@ -9,6 +9,8 @@ toFinish = 0;
 for k=1:numel(r.targets)
     thisdistance = sqrt(sum((lastposition - experimentdata.targetPosition(r.targets(k),:)).^2));
     if thisdistance < r.threshold
+        thistrial.pressedLocation = r.targets(k);
+        thistrial.pressedTime = GetSecs;
         toFinish = 1;
         break;
     end

@@ -11,7 +11,7 @@ DrawFormattedText(experimentdata.screenInfo.curWindow, thistrial.textArraytext,s
 % If recording screen shots (for testing), record every 4th frame
 if experimentdata.recordingStimuli && mod(frame,4)==0
     %GetImage call. Alter the rect argument to change the location of the screen shot
-    thistrial.imageArray = [thistrial.imageArray; {Screen('GetImage', screenInfo.curWindow)}];
+    thistrial.imageArray = [thistrial.imageArray; {Screen('GetImage', experimentdata.screenInfo.curWindow)}];
 end
 
 breakfromloop = 0;
