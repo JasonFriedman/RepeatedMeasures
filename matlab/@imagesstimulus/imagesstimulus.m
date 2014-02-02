@@ -48,6 +48,6 @@ end
 % Make sure there are enough images
 minNumImages = max(v.stimuli(:,1));
 if numel(experimentdata.images) < minNumImages
-    error(['There are not enough images specified (there needs to be at least ' num2str(minNumImages) ')']);
+    error('There are not enough images specified (only %d) whereas there needs to be at least %d',numel(experimentdata.images),minNumImages);
 end
 v = class(v,'imagesstimulus',stimulus(parent));

@@ -52,7 +52,11 @@ tree = xmltree(protocolFile);
 % convert it to a struct
 e.protocol = convert(tree);
 
-
+protocolfields = fields(e.protocol);
+if numel(protocolfields)>2 || ~isfield(e.protocol,'setup') || ~isfield(e.protocol,'trial')
+    error('The protocol file must have exactly 2 fields: setup and trial');
+end
+    
 % Check which recording devices are being used
 for k=1:length(clientdirs)
     thisclient = strrep(clientdirs(k).name,'@','');
