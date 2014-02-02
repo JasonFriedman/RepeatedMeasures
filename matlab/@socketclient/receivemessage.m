@@ -3,7 +3,7 @@
 
 function [received,success] = receivemessage(sc)
 
-[received,success] = msrecv(sc.sock,10);
+[received,success] = msrecv(sc.sock,30);
 
 if sc.debug
     fprintf('Received response on socket, returned %d\n',success);
