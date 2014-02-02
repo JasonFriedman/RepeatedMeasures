@@ -1,14 +1,12 @@
-% FEEDBACKCOMMON - provide feedback for button press / keyboard for 2AFC tasks
+% FEEDBACKCOMMON - provide feedback for button press / keyboard tasks
 
-function thistrial = feedbackCommon(r,e,thistrial,RT,firstpressed,LEFT,RIGHT,experimentdata)
+function thistrial = feedbackCommon(r,e,thistrial,RT,firstpressed,options,experimentdata)
 
-if firstpressed == LEFT
-    thistrial.hitTarget = 1;
-elseif firstpressed == RIGHT
-    thistrial.hitTarget = 2;
-else
+thistrial.hitTarget = find(firstpressed==options);
+if isempty(thistrial.hitTarget)
     thistrial.hitTarget = 0;
 end
+
 if RT<0
     thistrial.successful = -5;
     thistrial.questSuccess = -1;

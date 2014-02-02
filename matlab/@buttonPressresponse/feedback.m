@@ -6,4 +6,4 @@ function thistrial = feedback(r,e,thistrial,previoustrial,experimentdata,dataSum
 firstpressed = dataSummary.firstpressed;
 RT = dataSummary.RT;
 
-thistrial = feedbackCommon(r,e,thistrial,RT,firstpressed,r.leftButton,r.rightButton,experimentdata);
+thistrial = feedbackCommon(r,e,thistrial,RT,firstpressed,[r.leftButton r.rightButton],experimentdata);
