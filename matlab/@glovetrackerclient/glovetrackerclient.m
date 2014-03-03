@@ -36,6 +36,8 @@ gfc = readParameters(params,inputParams);
 
 if isfield(inputParams.glove,'emulator')
     gfc.glove = gloveemulatorclient(inputParams.glove.emulator,e,debug);
+elseif isfield(inputParams.glove,'fixed')
+    gfc.glove = fixedgloveclient(inputParams.glove.fixed,e,debug);
 else
     gfc.glove = gloveclient(inputParams.glove,e,debug);
 end
