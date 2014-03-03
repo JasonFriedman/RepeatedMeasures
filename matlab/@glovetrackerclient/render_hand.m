@@ -31,7 +31,6 @@ else
 end
 
 if stereo==0
-    glClear();
     if gtc.noVHT
         ;%
     else
@@ -47,7 +46,6 @@ else
         Screen('EndOpenGL', winptr);
         Screen('SelectStereoDrawBuffer', winptr, k);
         Screen('BeginOpenGL', winptr);
-        glClear();
         if gtc.noVHT
             %
         else
