@@ -83,12 +83,12 @@ for j=1:2
                 r = regexp(p.type{k},'matrix_([n0-9]*)_([n0-9]*)','tokens');
                 for b=1:2
                     if strcmp(r{1}{b},'n')
-                        num(b) = 'n';
+                        num{b} = 'n';
                     else
-                        num(b) = num2str(r{1}{b});
+                        num{b} = num2str(r{1}{b});
                     end
                 end
-                fprintf(fp,'<TD><A title="A %c by %c matrix (see description for how to fill it)">%c by %c matrix</A></TD>',num(1),num(2),num(1),num(2));
+                fprintf(fp,'<TD><A title="A %s by %s matrix (see description for how to fill it)">%s by %s matrix</A></TD>',num{1},num{2},num{1},num{2});
             elseif strcmp(p.type{k},'ignore')
                 fprintf(fp,'<TD></TD>');
             else
