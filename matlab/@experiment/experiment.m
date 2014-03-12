@@ -53,8 +53,8 @@ tree = xmltree(protocolFile);
 e.protocol = convert(tree);
 
 protocolfields = fields(e.protocol);
-if numel(protocolfields)>2 || ~isfield(e.protocol,'setup') || ~isfield(e.protocol,'trial')
-    error('The protocol file must have exactly 2 fields: setup and trial');
+if numel(protocolfields)<2 || numel(protocolfields)>3 || ~isfield(e.protocol,'setup') || ~isfield(e.protocol,'trial')
+    error('The protocol file must have 2 or 3 fields: setup and trial (and optionally common)');
 end
     
 % Check which recording devices are being used
