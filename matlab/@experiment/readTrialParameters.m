@@ -28,7 +28,7 @@ beepParams.name = {'time','frequency','duration','volume'};
 beepParams.type = {'number','number','number','number'};
 beepParams.default = {0,400,0.15,0.4};
 beepParams.required = [1 0 0 0];
-beepParams.description = {'Onset time','beep frequency (in Hz) - CURRENTLY IGNORED','beep duration (in seconds) - CURRENTLY IGNORED','volume - CURRENTLY IGNORED'};
+beepParams.description = {'Onset time (in seconds)','beep frequency (in Hz) - CURRENTLY IGNORED','beep duration (in seconds) - CURRENTLY IGNORED','volume - CURRENTLY IGNORED'};
 beepParams.classdescription = 'Beeps throughout the trial';
 beepParams.classname = 'beep';
 

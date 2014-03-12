@@ -61,4 +61,4 @@ function thistrial = setup(s,e,thistrial,experimentdata)
     end
     thistrial.dotInfo = dotInfo;
                     
-    thistrial.stimuliFrames = s.numFrames;
+    thistrial.stimuliFrames = s.numFrames+s.firstframe-1;
