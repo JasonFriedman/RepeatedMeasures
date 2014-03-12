@@ -225,6 +225,10 @@ try
         % setup any beeps
         thistrial = setupBeeps(thistrial);
         
+        % setup any tactor stimulations
+        thistrial = setupTactors(thistrial);
+
+        
         DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
         
         % Show the position (e.g. mouse, cursor) if appropriate
@@ -349,6 +353,19 @@ try
                         end
                         beep;
                         thistrial.beeped(m) = 1;
+                    end
+                end
+            end
+            
+            % send tactor stimuli if appropriate
+            if any(~thistrial.tactored)
+                for m=1:numel(thistrial.tactor)
+                    if ~thistrial.tactored(m) && thisFrameTime > thistrial.tactor{m}.time
+                        if thistrial.recording
+                            markEvent(e,codes.tactored+thistrial.tactor{m}.sequenceNumber);
+                        end
+                        playSequence(experimentdata.tactor,thistrial.tactor{m}.sequenceNumber);
+                        thistrial.tactored(m) = 1;
                     end
                 end
             end
@@ -558,12 +575,8 @@ try
             continue;
         end
     end
-    
     % Set the screen back to normal
     closescreen;
-    if ~isempty(experimentdata.sounds)
-        PsychPortAudio('Close');
-    end
     if exist('experimentdata','var')
         results.experimentdata = experimentdata;
     end
@@ -575,7 +588,12 @@ try
     else
         results = [];
     end
-    
+    if ~isempty(experimentdata.tactor)
+        close(experimentdata.tactor);
+    end
+    if ~isempty(experimentdata.sounds)
+        PsychPortAudio('Close');
+    end
     % close the log file
     closelog(e);
 catch err
@@ -595,6 +613,9 @@ catch err
         writetolog(e,sprintf('No variable results to write to file'));
     end
     closescreen;
+    if ~isempty(experimentdata.tactor)
+        close(experimentdata.tactor);
+    end
     % close the log file
     closelog(e);
 end

@@ -36,10 +36,26 @@ labelparams.required = [1 1 1];
 labelparams.classname = 'labels';
 labelparams.classdescription = 'Text to show on the screen throughout the experiment (e.g. target labels)';
 
+tactorSequencesparams.name = {'commands','parameters'};
+tactorSequencesparams.type = {'matrix_1_n','cellarray'};
+tactorSequencesparams.description = {'Each element should be 1 (turn on specified tactors), 2 (wait for a specified time) or 3(turn off all tactors)','Each cell should be (depending on the command): for 1, an array with the tactors to turn on; for 2, the duration (in ms); for 3, empty'};
+tactorSequencesparams.default = {1,{'1'}};
+tactorSequencesparams.required = [1 1];
+tactorSequencesparams.classname = 'tactorSequences';
+tactorSequencesparams.classdescription = 'Define sequences of tactor events for later playback';
+
+tactorparams.name = {'COMport','sequences'};
+tactorparams.type = {'number',tactorSequencesparams};
+tactorparams.description = {'serial port to connect to (can be found in Device manager)','description of the tactor sequences that can be played back later'};
+tactorparams.default = {1,[]};
+tactorparams.required = [1 0];
+tactorparams.classname = 'tactor';
+tactorparams.classdescription = 'Define details of the tactor stimulation';
+
 params.name = {'images','strings','sounds','symbols','monitorWidth','monitorHeight',...
-    'viewingDistance','xshift','framerate','vr','MCtrigger','mouseTargets','targetPosition','boxes','labels'};
+    'viewingDistance','xshift','framerate','vr','MCtrigger','mouseTargets','targetPosition','boxes','labels','tactor'};
 params.type = {'cellarray','cellarray','cellarray','cellarray','number','number',...
-    'number','number','number',vrparams,'number','matrix_n_4','matrix_n_2','matrix_n_4',labelparams};
+    'number','number','number',vrparams,'number','matrix_n_4','matrix_n_2','matrix_n_4',labelparams,tactorparams};
 params.description = {'Cell array of the filenames of the images (which are in the stimuli directory)',...
     'Strings to replace the default (for feedback, etc). Each item should have fields name (name of string to replace) and value (the new string to use)',...
     'Cell array of the filenames of .wav sound files to play (which are in the stimuli directory). All files need to have the same sample frequency and number of channels.',...
@@ -54,10 +70,11 @@ params.description = {'Cell array of the filenames of the images (which are in t
     'details of mouse targets (that can be clicked). Each row should be (x,y,width,height), in the range 0-1',...
     'details of target positions. Each row should be (x,y) or (x,y,z), depending on the recording device used. These values can be overridden using the defineTarget response.',...
     'details of boxes to show on the screen. Each row should be (x,y,width,height), in the range 0-1',...
-    'list of labels (strings) that can be shown'};
+    'list of labels (strings) that can be shown',...
+    'details of the tactor stimulation (vibration)'};
 params.default = {[],[],[],[],70,30,...
-    68,0,NaN,[],[],[],[],NaN,[]};
-params.required = [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
+    68,0,NaN,[],[],[],[],NaN,[],[]};
+params.required = [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
 
 if nargout>1
     % If making documentation, add all clients, otherwise just the relevant ones
@@ -143,6 +160,20 @@ if ~isempty(experimentdata.images)
                 experimentdata.images{m} = experimentdata.images{m}(:,:,1);
             end
         end
+    end
+end
+
+if ~isempty(experimentdata.tactor) && ~validating
+    experimentdata.tactorSequences = experimentdata.tactor.sequences;
+    % connect to the tactor
+    experimentdata.tactor = tactor(experimentdata.tactor.COMport,1);
+    % Setup the sequences
+    for k=1:numel(experimentdata.tactorSequences)
+        clear seqParams;
+        for m=1:numel(experimentdata.tactorSequences{k}.parameters)
+            seqParams{m} = str2num(experimentdata.tactorSequences{k}.parameters{m});
+        end
+        defineSequence(experimentdata.tactor,k,experimentdata.tactorSequences{k}.commands,seqParams);
     end
 end
 

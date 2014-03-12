@@ -32,15 +32,23 @@ beepParams.description = {'Onset time','beep frequency (in Hz) - CURRENTLY IGNOR
 beepParams.classdescription = 'Beeps throughout the trial';
 beepParams.classname = 'beep';
 
+tactorParams.name = {'time','sequenceNumber'};
+tactorParams.type = {'number','number'};
+tactorParams.default = {1,1};
+tactorParams.required = [1 1];
+tactorParams.description = {'Time to start tactile presentation','Sequence number to play (as defined in setup section, under tactor)'};
+tactorParams.classdescription = 'Generate tactile stimulation';
+tactorParams.classname = 'tactor';
+
 params.name = {'checkMoving','blockcounter','waitTimeBefore','showPosition','drawFixation','targetNum','textFeedback',...
     'textFeedbackShowBackground','checkRecording','auditoryFeedback','filename','recordingTime','movementonset','recording','playAudioFile',...
-    'boxes','labels','beep','backgroundColor','stimulus','starttrial','targetType'};
+    'boxes','labels','beep','backgroundColor','stimulus','starttrial','targetType','tactor'};
 params.type = {'number','number','number','number','number','number','number',...
     'number','number','number','string','number',movementonsetParams,'number',audioFileParams,...
-    'matrix','matrix',beepParams,'matrix_1_3','ignore','ignore','ignore'};
+    'matrix','matrix',beepParams,'matrix_1_3','ignore','ignore','ignore',tactorParams};
 params.default = {0,          1,             0,               0,             1,            NaN,         1,...
     0,                           1,               1,                 '',        [],             [],              NaN, [],...
-    [],[],[],[0 0 0],[],[],[]};
+    [],[],[],[0 0 0],[],[],[],[]};
 params.description = {'Whether to check the subject is still moving at this time','counter (used with triggers)',...
     'time to wait before showing the main stimulus (fixation is usually shown)','whether the current location should be shown (depends on the input device)',...
     'whether to draw a fixation point during waitTimeBefore','correct target number','whether to display text feedback after the trial',...
@@ -48,10 +56,10 @@ params.description = {'Whether to check the subject is still moving at this time
     'whether to provide auditory feedback (usually when incorrect)','filename to save the results','recording time in seconds',...
     'how movement onset is determined','whether to record','details of audio (wav) files to play',...
     'which boxes to show','which labels to show','beeps througout the trial','Background color (1x3 RGB matrix, [0 0 0] = black, [255 255 255] = white)',...
-    'the stimulus to show for this trial','how the trial starts','the response for this trial'};
+    'the stimulus to show for this trial','how the trial starts','the response for this trial','when to produce tactile stimulation (vibration)'};
 params.required = [0 0 0 0 0 0 0 ...
     0 0 0 0 1 0 0 0 ...
-    0 0 0 0 1 0 0];
+    0 0 0 0 1 0 0 0];
 params.classdescription = 'The trial is the basic unit of the experiment.';
 params.classname = 'trial';
 
@@ -94,6 +102,12 @@ thistrial.stimuliFrames = 0; % If there are stimuli to present, this will be ove
 % read in playAudioFile, if appropriate
 if ~isempty(thistrial.playAudioFile)
     thistrial = readAudioFileDetails(thistrial,experimentdata,validating);
+end
+
+if ~isempty(thistrial.tactor)
+    if isempty(experimentdata.tactor)
+        error('Cannot have tactor events in trials without tactor in the setup section');
+    end
 end
 
 % Default is to display all boxes / labels on every trial

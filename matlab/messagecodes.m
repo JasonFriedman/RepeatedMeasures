@@ -97,6 +97,8 @@ codes.beeped = 7;
 codes.soundPlayed = 8;
 % Target on: value in file will be 1000 + target number
 codes.targetOn = 1000;
+% Sent a tactor stimuli: value in file will be 2000 + sequence number
+codes.tactored = 2000;
 % Stimulus on
 codes.stimulusOn = 10;
 % trigger marked in file will be 20 + value sent (i.e., high = 21, low = 20)
