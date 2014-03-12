@@ -1,4 +1,8 @@
 % TACTOR - class for connecting and sending commands to a tactor
+% This is designed for tactors from Engineering Acoustics, Inc
+% Communication is via the serial port, accessing using the IOPort command
+% from psychtoolbox
+% 
 % t = tactor(COMport);
 
 function t = tactor(COMport,debug)
