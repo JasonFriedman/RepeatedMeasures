@@ -77,8 +77,14 @@ for j=1:2
                 fprintf(fp,'</TD>');
             elseif strcmp(p.type{k},'number')
                 fprintf(fp,'<TD><A title="A single number (i.e. not a matrix)">%s</A></TD>',p.type{k});
+            elseif strcmp(p.type{k},'boolean')
+                fprintf(fp,'<TD><A title="True or false">%s</A></TD>',p.type{k});
+            elseif strcmp(p.type{k},'integer')
+                fprintf(fp,'<TD><A title="A single integer (i.e. not a matrix)">%s</A></TD>',p.type{k});
             elseif strcmp(p.type{k},'matrix')
                 fprintf(fp,'<TD><A title="A matrix (see description for how to fill it)">%s</A></TD>',p.type{k});
+            elseif strcmp(p.type{k},'integermatrix')
+                fprintf(fp,'<TD><A title="A matrix with all integers (see description for how to fill it)">%s</A></TD>',p.type{k});
             elseif strncmp(p.type{k},'matrix_',7)
                 r = regexp(p.type{k},'matrix_([n0-9]*)_([n0-9]*)','tokens');
                 for b=1:2
@@ -96,7 +102,7 @@ for j=1:2
             end
             if isempty(p.default{k})
                 fprintf(fp,'<TD>[]</TD>');
-            elseif strcmp(p.type{k},'string')
+            elseif strcmp(p.type{k},'string') || strcmp(p.type{k},'boolean')
                 fprintf(fp,'<TD>''%s''</TD>',p.default{k});
             elseif isnumeric(p.default{k}) && numel(p.default{k})>1
                 fprintf(fp,'<TD>[');
@@ -124,6 +130,15 @@ for j=1:2
                         end
                     end
                     fprintf(fp,'</TD>');
+                elseif iscell(p.default{k})
+                    fprintf(fp,'<TD>{');
+                    for m=1:numel(p.default{k})
+                        fprintf(fp,'%s',p.default{k}{m});
+                        if m<numel(p.default{k})
+                            fprintf(fp,',');
+                        end
+                    end
+                    fprintf(fp,'}</TD>');
                 elseif round(p.default{k})==p.default{k}
                     fprintf(fp,'<TD>%d</TD>',p.default{k});
                 else

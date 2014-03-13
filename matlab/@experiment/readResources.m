@@ -38,7 +38,7 @@ labelparams.classdescription = 'Text to show on the screen throughout the experi
 
 tactorSequencesparams.name = {'commands','parameters'};
 tactorSequencesparams.type = {'matrix_1_n','cellarray'};
-tactorSequencesparams.description = {'Each element should be 1 (turn on specified tactors), 2 (wait for a specified time) or 3(turn off all tactors)','Each cell should be (depending on the command): for 1, an array with the tactors to turn on; for 2, the duration (in ms); for 3, empty'};
+tactorSequencesparams.description = {'Each element should be 1 (turn on specified tactors), 2 (wait for a specified time), 3(turn off all tactors) or 4(set source)','Each cell should be (depending on the command): for 1, an array with the tactors to turn on; for 2, the duration (in ms); for 3, empty; for 4(0=none,1=sin1,2=sin2,3=sin1+sin2)'};
 tactorSequencesparams.default = {1,{'1'}};
 tactorSequencesparams.required = [1 1];
 tactorSequencesparams.classname = 'tactorSequences';

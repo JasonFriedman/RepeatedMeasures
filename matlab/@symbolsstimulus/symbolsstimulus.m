@@ -4,9 +4,9 @@ function [v,params] = symbolsstimulus(inputParams,experimentdata)
 
 params.name = {'stimuli'};
 params.type = {'matrix_n_3'};
-params.description = {'An n x 3 matrix. The first column is which symbol to show. The second is the frame to start showing that symbol. The third is the frame to stop showing that symbol. A 0 in the first column indicates no symbol'};
+params.description = {'An n x 3 matrix. The first column is which symbol to show (a number, indicating which element from the list of symbols in the experiment description. The second is the frame to start showing that symbol. The third is the frame to stop showing that symbol. A 0 in the first column indicates no symbol'};
 params.required = 1;
-params.default = {[]};
+params.default = {[1 0 50]};
 params.classdescription = 'Present some symbols (i.e. arbitrary text) at specified times';
 params.classname = 'symbolsstimulus';
 params.parentclassname = 'stimulus';

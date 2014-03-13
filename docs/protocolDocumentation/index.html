@@ -12,13 +12,14 @@ In the section experimentDescription.setup, there can be the fields below.
 <TR><TD>monitorHeight</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>30</TD><TD>The height of the monitor in cm</TD></TR>
 <TR><TD>viewingDistance</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>68</TD><TD>The viewing distance in cm</TD></TR>
 <TR><TD>xshift</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>Horizontal shift of stimuli from the center of the screen</TD></TR>
-<TR><TD>framerate</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>NaN</TD><TD>Frame rate to aim for (if the program can't keep up with the monitor frame rate</TD></TR>
+<TR><TD>framerate</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>NaN</TD><TD>Frame rate to aim for (if the program can't keep up with the monitor frame rate)</TD></TR>
 <TR><TD>vr</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="vr.html">struct</A></TD><TD>[]</TD><TD>details of the vr setup (if vrstimulus is going to be used)</TD></TR>
 <TR><TD>MCtrigger</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>[]</TD><TD>details of the DAQ card trigger (1 = input, 2 = output, empty if not used)</TD></TR>
 <TR><TD>mouseTargets</TD><TD>N</TD><TD><A title="A n by 4 matrix (see description for how to fill it)">n by 4 matrix</A></TD><TD>[]</TD><TD>details of mouse targets (that can be clicked). Each row should be (x,y,width,height), in the range 0-1</TD></TR>
 <TR><TD>targetPosition</TD><TD>N</TD><TD><A title="A n by 2 matrix (see description for how to fill it)">n by 2 matrix</A></TD><TD>[]</TD><TD>details of target positions. Each row should be (x,y) or (x,y,z), depending on the recording device used. These values can be overridden using the defineTarget response.</TD></TR>
 <TR><TD>boxes</TD><TD>N</TD><TD><A title="A n by 4 matrix (see description for how to fill it)">n by 4 matrix</A></TD><TD>NaN</TD><TD>details of boxes to show on the screen. Each row should be (x,y,width,height), in the range 0-1</TD></TR>
 <TR><TD>labels</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="labels.html">struct</A></TD><TD>[]</TD><TD>list of labels (strings) that can be shown</TD></TR>
+<TR><TD>tactor</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="tactor.html">struct</A></TD><TD>[]</TD><TD>details of the tactor stimulation (vibration)</TD></TR>
 <TR><TD>DAQ</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="socketclient_DAQ.html">struct</A></TD><TD>[]</TD><TD>This client connects to a DAQ server to sample one or more channels (e.g. for a button box or force sensors).</TD></TR>
 <TR><TD>fastrak</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="socketclient_fastrak.html">struct</A></TD><TD>[]</TD><TD>Connect to a fastrak server to record fastrak 6D data</TD></TR>
 <TR><TD>fixedglove</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="fixedglove.html">struct</A></TD><TD>[]</TD><TD>Use fixed joint angles in place of a glove.</TD></TR>
@@ -39,29 +40,31 @@ In the section experimentDescription.setup, there can be the fields below.
 <TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
 <TR><TD>checkMoving</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>Whether to check the subject is still moving at this time</TD></TR>
 <TR><TD>blockcounter</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>counter (used with triggers)</TD></TR>
-<TR><TD>waitTimeBefore</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>time to wait before showing the main stimulus (fixation is usually shown)</TD></TR>
+<TR><TD>waitTimeBefore</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>time to wait (in seconds) before showing the main stimulus (fixation is usually shown)</TD></TR>
 <TR><TD>showPosition</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>whether the current location should be shown (depends on the input device)</TD></TR>
-<TR><TD>drawFixation</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>whether to draw a fixation point during waitTimeBefore</TD></TR>
+<TR><TD>drawFixation</TD><TD>N</TD><TD><A title="True or false">boolean</A></TD><TD>''</TD><TD>whether to draw a fixation point during waitTimeBefore</TD></TR>
 <TR><TD>targetNum</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>NaN</TD><TD>correct target number</TD></TR>
-<TR><TD>textFeedback</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>whether to display text feedback after the trial</TD></TR>
-<TR><TD>textFeedbackShowBackground</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>whether to show the background when giving feedback</TD></TR>
-<TR><TD>checkRecording</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>whether to check the recording at the end of the trial (and give feedback if there is a problem, e.g. missing markers)</TD></TR>
-<TR><TD>auditoryFeedback</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>whether to provide auditory feedback (usually when incorrect)</TD></TR>
-<TR><TD>filename</TD><TD>N</TD><TD>string</TD><TD>[]</TD><TD>filename to save the results</TD></TR>
+<TR><TD>textFeedback</TD><TD>N</TD><TD><A title="True or false">boolean</A></TD><TD>''</TD><TD>whether to display text feedback after the trial</TD></TR>
+<TR><TD>textFeedbackShowBackground</TD><TD>N</TD><TD><A title="True or false">boolean</A></TD><TD>' '</TD><TD>whether to show the background when giving feedback</TD></TR>
+<TR><TD>checkRecording</TD><TD>N</TD><TD><A title="True or false">boolean</A></TD><TD>''</TD><TD>whether to check the recording at the end of the trial (and give feedback if there is a problem, e.g. missing markers)</TD></TR>
+<TR><TD>auditoryFeedback</TD><TD>N</TD><TD><A title="True or false">boolean</A></TD><TD>''</TD><TD>whether to provide auditory feedback (usually when incorrect)</TD></TR>
+<TR><TD>filename</TD><TD>N</TD><TD>string</TD><TD>[]</TD><TD>filename to save the results (without extension)</TD></TR>
 <TR><TD>recordingTime</TD><TD>Y</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>[]</TD><TD>recording time in seconds</TD></TR>
 <TR><TD>movementonset</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="movementonset.html">struct</A></TD><TD>[]</TD><TD>how movement onset is determined</TD></TR>
-<TR><TD>recording</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>NaN</TD><TD>whether to record</TD></TR>
+<TR><TD>recording</TD><TD>N</TD><TD><A title="True or false">boolean</A></TD><TD>'NaN'</TD><TD>whether to record</TD></TR>
 <TR><TD>playAudioFile</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="playAudioFile.html">struct</A></TD><TD>[]</TD><TD>details of audio (wav) files to play</TD></TR>
 <TR><TD>boxes</TD><TD>N</TD><TD><A title="A matrix (see description for how to fill it)">matrix</A></TD><TD>[]</TD><TD>which boxes to show</TD></TR>
 <TR><TD>labels</TD><TD>N</TD><TD><A title="A matrix (see description for how to fill it)">matrix</A></TD><TD>[]</TD><TD>which labels to show</TD></TR>
 <TR><TD>beep</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="beep.html">struct</A></TD><TD>[]</TD><TD>beeps througout the trial</TD></TR>
 <TR><TD>backgroundColor</TD><TD>N</TD><TD><A title="A 1 by 3 matrix (see description for how to fill it)">1 by 3 matrix</A></TD><TD>[0,0,0]</TD><TD>Background color (1x3 RGB matrix, [0 0 0] = black, [255 255 255] = white)</TD></TR>
-<TR><TD>stimulus</TD><TD>Y</TD><TD>One of:<BR>
+<TR><TD>stimulus</TD><TD>Y</TD><TD></TD><TD>[]</TD><TD>the stimulus to show for this trial</TD></TR>
+<TR><TD>starttrial</TD><TD>N</TD><TD>One of:<BR>
 <A HREF="stimulus_VCRDM.html">VCRDM</A><BR>
 <A HREF="stimulus_calibrateForceSensors.html">calibrateForceSensors</A><BR>
 <A HREF="stimulus_circle.html">circle</A><BR>
 <A HREF="stimulus_dots.html">dots</A><BR>
 <A HREF="stimulus_fingerOppositionSequence.html">fingerOppositionSequence</A><BR>
+<A HREF="stimulus_fixation.html">fixation</A><BR>
 <A HREF="stimulus_images.html">images</A><BR>
 <A HREF="stimulus_none.html">none</A><BR>
 <A HREF="stimulus_rectangle.html">rectangle</A><BR>
@@ -71,8 +74,8 @@ In the section experimentDescription.setup, there can be the fields below.
 <A HREF="stimulus_textArray.html">textArray</A><BR>
 <A HREF="stimulus_video.html">video</A><BR>
 <A HREF="stimulus_vr.html">vr</A><BR>
-</TD><TD>[]</TD><TD>the stimulus to show for this trial</TD></TR>
-<TR><TD>starttrial</TD><TD>N</TD><TD>One of:<BR>
+</TD><TD>[]</TD><TD>how the trial starts</TD></TR>
+<TR><TD>targetType</TD><TD>N</TD><TD>One of:<BR>
 <A HREF="start_button.html">button</A><BR>
 <A HREF="start_dontWait.html">dontWait</A><BR>
 <A HREF="start_keyboard.html">keyboard</A><BR>
@@ -80,12 +83,12 @@ In the section experimentDescription.setup, there can be the fields below.
 <A HREF="start_pedal.html">pedal</A><BR>
 <A HREF="start_stylusButton.html">stylusButton</A><BR>
 <A HREF="start_targetInSpace.html">targetInSpace</A><BR>
-</TD><TD>[]</TD><TD>how the trial starts</TD></TR>
-<TR><TD>targetType</TD><TD>N</TD><TD>One of:<BR>
+</TD><TD>[]</TD><TD>the response for this trial</TD></TR>
+<TR><TD>tactor</TD><TD>N</TD><TD>One of:<BR>
 <A HREF="response_buttonPress.html">buttonPress</A><BR>
 <A HREF="response_defineTarget.html">defineTarget</A><BR>
 <A HREF="response_dummy.html">dummy</A><BR>
-<A HREF="response_fingerOppositionsequence.html">fingerOppositionsequence</A><BR>
+<A HREF="response_fingerOppositionSequence.html">fingerOppositionSequence</A><BR>
 <A HREF="response_keyboard.html">keyboard</A><BR>
 <A HREF="response_keyboardsequence.html">keyboardsequence</A><BR>
 <A HREF="response_mouseEntersBox.html">mouseEntersBox</A><BR>
@@ -93,5 +96,5 @@ In the section experimentDescription.setup, there can be the fields below.
 <A HREF="response_pointToPoint.html">pointToPoint</A><BR>
 <A HREF="response_targetInSpace.html">targetInSpace</A><BR>
 <A HREF="response_targetOnScreen.html">targetOnScreen</A><BR>
-</TD><TD>[]</TD><TD>the response for this trial</TD></TR>
+</TD><TD>[]</TD><TD>when to produce tactile stimulation (vibration)</TD></TR>
 </TABLE></BODY></HTML>
