@@ -14,9 +14,9 @@ commands{1+hex2dec('02')} = 'Sleep';
  
 commands{1+hex2dec('11')} = 'TacOnTime';
 commands{1+hex2dec('12')} = 'SetSinFreq1';
-commands{1+hex2dec('13')} = 'SetSinFreq2';
-commands{1+hex2dec('14')} = 'SetSigSrc';
-commands{1+hex2dec('15')} = 'PulseOnTime';
+commands{1+hex2dec('14')} = 'SetSinFreq2';
+commands{1+hex2dec('15')} = 'SetSigSrc';
+commands{1+hex2dec('16')} = 'PulseOnTime';
 
 commands{1+hex2dec('1a')} = 'PlaySeq';
 commands{1+hex2dec('1b')} = 'SeqStart';

@@ -9,11 +9,13 @@
 % commands can be 1 = turn on specified tactors
 %                 2 = wait (for a specified number of ms)
 %                 3 = turn off all tactors
+%                 4 = set signal source (sin1 or sin2 or sin1+sin2)
 % 
 % parameters should have the parameters for these commands
 % for 1, an array with the tactors to turn on
 % for 2, the duration (in ms)
 % for 3, empty
+% for 4, two values, one for tactors 1-4, one for tactors 5-8, with values 0 = none, 1 = sin1, 2 = sin2, 3 = sin1+sin2
 %
 %
 % e.g. for 3 on-off vibrations for sensors 1 and 3
@@ -37,6 +39,8 @@ for k=1:numel(commands)
         seqdata = [seqdata seqWaitCommand(parameters{k})];
     elseif commands(k)==3
         seqdata = [seqdata turnAllOffCommand];
+    elseif commands(k)==4
+        seqdata = [seqdata setSigSrcCommand(parameters{k}(1),parameters{k}(2))];
     else
         error('Unknown command (must be 1,2 or 3)');
     end
