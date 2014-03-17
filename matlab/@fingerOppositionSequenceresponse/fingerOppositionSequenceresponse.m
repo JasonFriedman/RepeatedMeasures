@@ -20,7 +20,7 @@ end
 
 [r,parent] = readParameters(params,inputParams);
 
-r = class(r,'fingerOppositionsequenceresponse',response(parent));
+r = class(r,'fingerOppositionSequenceresponse',response(parent));
 
 if any(r.sequence>4)
     r.sequence
