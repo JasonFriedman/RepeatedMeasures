@@ -22,7 +22,7 @@ params.type = {'string','number'};
 params.description = {'Location of the server (e.g. ''localhost'' or an IP address) ',...
     'Port to connect to the server on'};
 params.required = [1 1];
-params.default = {'',0};
+params.default = {'localhost',0};
 params.classdescription = 'The is the superclass for all the socket clients, which connect to the servers which sample the devices';
 params.classname = 'socketclient';
 

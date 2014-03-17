@@ -10,7 +10,7 @@ params.description = {'The sequence to be performed (e.g. [4 1 2 3 4])','The num
 params.required = [1 1 1 0 0 0];
 params.default = {[],1,[6 7 8 9 10],2,3,2};
 params.classdescription = 'The response is touching the thumb and another finger in a sequence N times';
-params.classname = 'fingerOppositionsequenceresponse';
+params.classname = 'fingerOppositionSequenceresponse';
 params.parentclassname = 'response';
 
 if nargout>1
@@ -20,7 +20,7 @@ end
 
 [r,parent] = readParameters(params,inputParams);
 
-r = class(r,'fingerOppositionsequenceresponse',response(parent));
+r = class(r,'fingerOppositionSequenceresponse',response(parent));
 
 if any(r.sequence>4)
     r.sequence
