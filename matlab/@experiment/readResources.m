@@ -46,7 +46,7 @@ tactorSequencesparams.classdescription = 'Define sequences of tactor events for 
 
 tactorparams.name = {'COMport','sequences',...
     'sinFreq1','sinFreq2'};
-tactorparams.type = {'number',tactorSequencesparams};
+tactorparams.type = {'number',tactorSequencesparams,'number','number'};
 tactorparams.description = {'serial port to connect to (can be found in Device manager)','description of the tactor sequences that can be played back later',...
     'Frequency of the first sine wave (sine wave(s) to use can be defined in sequences)','Frequency of the second sine wave (sine wave(s) to use can be defined in sequences)'};
 tactorparams.default = {1,[],250,240};
