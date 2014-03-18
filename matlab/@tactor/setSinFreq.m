@@ -1,4 +1,6 @@
-% SETSINFREQ - set the gain (strength) of the tactor
+% SETSINFREQ - set the frequency of one of the sine wave. 
+% Which sine wave to use (or both) is set in setSigSrc
+%
 % setSinFreq(index,frequency)
 %
 % index can be 1 or 2

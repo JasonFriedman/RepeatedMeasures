@@ -44,11 +44,13 @@ tactorSequencesparams.required = [1 1];
 tactorSequencesparams.classname = 'tactorSequences';
 tactorSequencesparams.classdescription = 'Define sequences of tactor events for later playback';
 
-tactorparams.name = {'COMport','sequences'};
+tactorparams.name = {'COMport','sequences',...
+    'sinFreq1','sinFreq2'};
 tactorparams.type = {'number',tactorSequencesparams};
-tactorparams.description = {'serial port to connect to (can be found in Device manager)','description of the tactor sequences that can be played back later'};
-tactorparams.default = {1,[]};
-tactorparams.required = [1 0];
+tactorparams.description = {'serial port to connect to (can be found in Device manager)','description of the tactor sequences that can be played back later',...
+    'Frequency of the first sine wave (sine wave(s) to use can be defined in sequences)','Frequency of the second sine wave (sine wave(s) to use can be defined in sequences('}
+tactorparams.default = {1,[],250,240};
+tactorparams.required = [1 0,0,0];
 tactorparams.classname = 'tactor';
 tactorparams.classdescription = 'Define details of the tactor stimulation';
 
@@ -164,9 +166,10 @@ if ~isempty(experimentdata.images)
 end
 
 if ~isempty(experimentdata.tactor) && ~validating
-    experimentdata.tactorSequences = experimentdata.tactor.sequences;
+    tactorData = experimentdata.tactor;
+    experimentdata.tactorSequences = tactorData.sequences;
     % connect to the tactor
-    experimentdata.tactor = tactor(experimentdata.tactor.COMport,1);
+    experimentdata.tactor = tactor(tactorData.COMport,1);
     % Setup the sequences
     for k=1:numel(experimentdata.tactorSequences)
         clear seqParams;
@@ -174,6 +177,8 @@ if ~isempty(experimentdata.tactor) && ~validating
             seqParams{m} = str2num(experimentdata.tactorSequences{k}.parameters{m});
         end
         defineSequence(experimentdata.tactor,k,experimentdata.tactorSequences{k}.commands,seqParams);
+        setSinFreq(experimentdata.tactor,1,tactorData.sinFreq1);
+        setSinFreq(experimentdata.tactor,2,tactorData.sinFreq2);
     end
 end
 
