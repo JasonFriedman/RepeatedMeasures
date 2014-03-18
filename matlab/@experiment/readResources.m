@@ -48,7 +48,7 @@ tactorparams.name = {'COMport','sequences',...
     'sinFreq1','sinFreq2'};
 tactorparams.type = {'number',tactorSequencesparams};
 tactorparams.description = {'serial port to connect to (can be found in Device manager)','description of the tactor sequences that can be played back later',...
-    'Frequency of the first sine wave (sine wave(s) to use can be defined in sequences)','Frequency of the second sine wave (sine wave(s) to use can be defined in sequences('}
+    'Frequency of the first sine wave (sine wave(s) to use can be defined in sequences)','Frequency of the second sine wave (sine wave(s) to use can be defined in sequences)'};
 tactorparams.default = {1,[],250,240};
 tactorparams.required = [1 0,0,0];
 tactorparams.classname = 'tactor';
@@ -174,7 +174,7 @@ if ~isempty(experimentdata.tactor) && ~validating
     for k=1:numel(experimentdata.tactorSequences)
         clear seqParams;
         for m=1:numel(experimentdata.tactorSequences{k}.parameters)
-            seqParams{m} = str2num(experimentdata.tactorSequences{k}.parameters{m});
+            seqParams{m} = str2num(experimentdata.tactorSequences{k}.parameters{m}); %#ok<AGROW,ST2NM>
         end
         defineSequence(experimentdata.tactor,k,experimentdata.tactorSequences{k}.commands,seqParams);
         setSinFreq(experimentdata.tactor,1,tactorData.sinFreq1);
