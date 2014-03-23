@@ -59,7 +59,7 @@ experimentdata = prepareStaircase(e,experimentdata,e.protocol);
 
 % Put everything inside a giant "try" so that we can close the screen if it crashes
 try
-    if ~isempty(experimentdata.sounds)
+    if ~isempty(experimentdata.sounds) || ~isempty(experimentdata.beeps)
         experimentdata.pahandle = PsychPortAudio('Open', [], [], 0, experimentdata.freq, experimentdata.nrchannels);
     end
     % Call psychtoolbox to open the screen (can take a while)
@@ -223,7 +223,7 @@ try
         [triggerSent,triggerTime,triggerOffTime] = setupTrigger(thistrial);
         
         % setup any beeps
-        thistrial = setupBeeps(thistrial);
+        thistrial = setupBeeps(thistrial,experimentdata);
         
         % setup any tactor stimulations
         thistrial = setupTactors(thistrial);
@@ -322,6 +322,10 @@ try
         % run the appropriate start of trial setup. These files (e.g. startEvent.m) should be in the appropriate directories if
         % needed. For most stimuli types, it is not needed, and so the default (from @stimulus) will be run which does nothing
         [thistrial,experimentdata] = startEvent(thistrial.thisstimulus,thistrial,experimentdata,codes);
+        if numel(thistrial.beeped) && isnan(thistrial.beeped(1))
+            PsychPortAudio('Start', experimentdata.pahandle, [], GetSecs);
+            thistrial.beeped = []; % This has triggered all the beeps for the trial
+        end
         
         abortTrial=0;
         for frame = 1:min(thistrial.numFrames,10^8)
@@ -591,7 +595,7 @@ try
     if ~isempty(experimentdata.tactor)
         close(experimentdata.tactor);
     end
-    if ~isempty(experimentdata.sounds)
+    if ~isempty(experimentdata.sounds) || ~isempty(experimentdata.beeps)
         PsychPortAudio('Close');
     end
     % close the log file

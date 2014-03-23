@@ -54,13 +54,22 @@ tactorparams.required = [1 0,0,0];
 tactorparams.classname = 'tactor';
 tactorparams.classdescription = 'Define details of the tactor stimulation';
 
-params.name = {'images','strings','sounds','symbols','monitorWidth','monitorHeight',...
+beepsparams.name = {'frequency','duration'};
+beepsparams.type = {'number','number'};
+beepsparams.default = {500,0.15};
+beepsparams.required = [1 1];
+beepsparams.description = {'beep frequency (in Hz). ','beep duration (in seconds)'};
+beepsparams.classdescription = 'Beeps throughout the trial';
+beepsparams.classname = 'beep';
+
+params.name = {'images','strings','sounds','beeps','symbols','monitorWidth','monitorHeight',...
     'viewingDistance','xshift','framerate','vr','MCtrigger','mouseTargets','targetPosition','boxes','labels','tactor'};
-params.type = {'cellarray','cellarray','cellarray','cellarray','number','number',...
+params.type = {'cellarray','cellarray','cellarray',beepsparams,'cellarray','number','number',...
     'number','number','number',vrparams,'number','matrix_n_4','matrix_n_2','matrix_n_4',labelparams,tactorparams};
 params.description = {'Cell array of the filenames of the images (which are in the stimuli directory)',...
     'Strings to replace the default (for feedback, etc). Each item should have fields name (name of string to replace) and value (the new string to use)',...
     'Cell array of the filenames of .wav sound files to play (which are in the stimuli directory). All files need to have the same sample frequency and number of channels.',...
+    'Details of custom beeps to play back during the trials',...
     'A cell array of strings to display (e.g. {''<'',''>''})',...
     'The width of the monitor in cm',...
     'The height of the monitor in cm',...
@@ -74,9 +83,9 @@ params.description = {'Cell array of the filenames of the images (which are in t
     'details of boxes to show on the screen. Each row should be (x,y,width,height), in the range 0-1',...
     'list of labels (strings) that can be shown',...
     'details of the tactor stimulation (vibration)'};
-params.default = {[],[],[],[],70,30,...
+params.default = {[],[],[],[],[],70,30,...
     68,0,NaN,[],[],[],[],NaN,[],[]};
-params.required = [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
+params.required = [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
 
 if nargout>1
     % If making documentation, add all clients, otherwise just the relevant ones
@@ -207,6 +216,38 @@ if ~isempty(experimentdata.sounds)
         end
         if ~validating
             experimentdata.audioBuffer(k) = PsychPortAudio('CreateBuffer',[],wavedata);
+        end
+    end
+end
+
+% load the beeps
+if ~isempty(experimentdata.beeps)
+    % First we have to initialise the sound (if not already initalized)
+    if ~validating && ~isempty(experimentdata.sounds)
+        InitializePsychSound;
+    end
+    % If not specified (from the audio files), set to empty (i.e. use default values)
+    if ~isfield(experimentdata,'freq')
+        experimentdata.freq = [];
+    end
+    % If not specified by the audio files, set the number of channels to 1 (mono)
+    if ~isfield(experimentdata,'nrchannels')
+        experimentdata.nrchannels = 1;
+    end
+   
+    if numel(experimentdata.beeps)==1
+        thebeep = experimentdata.beeps;
+        experimentdata = rmfield(experimentdata,'beeps');
+        experimentdata.beeps{1} = thebeep;
+    end
+
+    if ~validating
+        for k=1:numel(experimentdata.beeps)
+            beepdata = MakeBeep(experimentdata.beeps{k}.frequency, experimentdata.beeps{k}.duration);
+            if experimentdata.nrchannels>1
+                beepdata = repmat(beepdata,experimentdata.nrchannels,1);
+            end
+            experimentdata.beepbuffer{k} = PsychPortAudio('CreateBuffer',[],beepdata);
         end
     end
 end

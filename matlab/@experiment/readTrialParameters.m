@@ -24,11 +24,11 @@ audioFileParams.description = {'Number of the file to play (from the .wav files 
 audioFileParams.classdescription = 'Play a wav file at a specified time';
 audioFileParams.classname = 'playAudioFile';
 
-beepParams.name = {'time','frequency','duration','volume'};
-beepParams.type = {'number','number','number','number'};
-beepParams.default = {0,400,0.15,0.4};
-beepParams.required = [1 0 0 0];
-beepParams.description = {'Onset time (in seconds)','beep frequency (in Hz) - CURRENTLY IGNORED','beep duration (in seconds) - CURRENTLY IGNORED','volume - CURRENTLY IGNORED'};
+beepParams.name = {'time','beepNumber'};
+beepParams.type = {'number','number'};
+beepParams.default = {0,0};
+beepParams.required = [1 0];
+beepParams.description = {'Onset time (in seconds)','Beep to play (from those specified in the ''beeps'' section in the setup). If beepNumber is 0, the system beep is used.'};
 beepParams.classdescription = 'Beeps throughout the trial';
 beepParams.classname = 'beep';
 
@@ -102,6 +102,18 @@ thistrial.stimuliFrames = 0; % If there are stimuli to present, this will be ove
 % read in playAudioFile, if appropriate
 if ~isempty(thistrial.playAudioFile)
     thistrial = readAudioFileDetails(thistrial,experimentdata,validating);
+end
+
+if ~isempty(thistrial.beep)
+    for k=1:numel(thistrial.beep)
+        if thistrial.beep{k}.beepNumber>0 
+            if isempty(experimentdata.beeps) 
+                error('If using beepNumber>0, must specify beep details in setup section under beeps');
+            elseif thistrial.beep{k}.beepNumber>numel(experimentdata.beeps)
+                error('Not enough beeps specified in setup section (%d required, %d present)',thistrial.beep{k}.beepNumber,numel(experimentdata.beeps));
+            end
+        end
+    end
 end
 
 if ~isempty(thistrial.tactor)
