@@ -60,7 +60,7 @@ params.description = {'Whether to check the subject is still moving at this time
     'the stimulus to show for this trial','how the trial starts','the response for this trial'};
 params.required = [0 0 0 0 0 0 0 ...
     0 0 0 0 1 0 0 0 ...
-    0 0 0 0 1 0 0 0];
+    0 0 0 0 0 1 0 0];
 params.classdescription = 'The trial is the basic unit of the experiment.';
 params.classname = 'trial';
 

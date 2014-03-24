@@ -368,7 +368,7 @@ try
                         if thistrial.recording
                             markEvent(e,codes.tactored+thistrial.tactor{m}.sequenceNumber);
                         end
-                        playSequence(experimentdata.tactor,thistrial.tactor{m}.sequenceNumber);
+                        playSequence(experimentdata.tactors,thistrial.tactor{m}.sequenceNumber);
                         thistrial.tactored(m) = 1;
                     end
                 end
@@ -592,8 +592,8 @@ try
     else
         results = [];
     end
-    if ~isempty(experimentdata.tactor)
-        close(experimentdata.tactor);
+    if ~isempty(experimentdata.tactors)
+        close(experimentdata.tactors);
     end
     if ~isempty(experimentdata.sounds) || ~isempty(experimentdata.beeps)
         PsychPortAudio('Close');
@@ -617,8 +617,8 @@ catch err
         writetolog(e,sprintf('No variable results to write to file'));
     end
     closescreen;
-    if ~isempty(experimentdata.tactor)
-        close(experimentdata.tactor);
+    if ~isempty(experimentdata.tactors)
+        close(experimentdata.tactors);
     end
     % close the log file
     closelog(e);

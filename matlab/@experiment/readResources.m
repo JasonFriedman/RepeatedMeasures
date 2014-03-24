@@ -174,20 +174,20 @@ if ~isempty(experimentdata.images)
     end
 end
 
-if ~isempty(experimentdata.tactor) && ~validating
-    tactorData = experimentdata.tactor;
+if ~isempty(experimentdata.tactors) && ~validating
+    tactorData = experimentdata.tactors;
     experimentdata.tactorSequences = tactorData.sequences;
     % connect to the tactor
-    experimentdata.tactor = tactor(tactorData.COMport,1);
+    experimentdata.tactors = tactor(tactorData.COMport,1);
     % Setup the sequences
     for k=1:numel(experimentdata.tactorSequences)
         clear seqParams;
         for m=1:numel(experimentdata.tactorSequences{k}.parameters)
             seqParams{m} = str2num(experimentdata.tactorSequences{k}.parameters{m}); %#ok<AGROW,ST2NM>
         end
-        defineSequence(experimentdata.tactor,k,experimentdata.tactorSequences{k}.commands,seqParams);
-        setSinFreq(experimentdata.tactor,1,tactorData.sinFreq1);
-        setSinFreq(experimentdata.tactor,2,tactorData.sinFreq2);
+        defineSequence(experimentdata.tactors,k,experimentdata.tactorSequences{k}.commands,seqParams);
+        setSinFreq(experimentdata.tactors,1,tactorData.sinFreq1);
+        setSinFreq(experimentdata.tactors,2,tactorData.sinFreq2);
     end
 end
 
