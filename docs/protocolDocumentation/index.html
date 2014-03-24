@@ -20,7 +20,7 @@ In the section experimentDescription.setup, there can be the fields below.
 <TR><TD>targetPosition</TD><TD>N</TD><TD><A title="A n by 2 matrix (see description for how to fill it)">n by 2 matrix</A></TD><TD>[]</TD><TD>details of target positions. Each row should be (x,y) or (x,y,z), depending on the recording device used. These values can be overridden using the defineTarget response.</TD></TR>
 <TR><TD>boxes</TD><TD>N</TD><TD><A title="A n by 4 matrix (see description for how to fill it)">n by 4 matrix</A></TD><TD>NaN</TD><TD>details of boxes to show on the screen. Each row should be (x,y,width,height), in the range 0-1</TD></TR>
 <TR><TD>labels</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="labels.html">struct</A></TD><TD>[]</TD><TD>list of labels (strings) that can be shown</TD></TR>
-<TR><TD>tactor</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="tactor.html">struct</A></TD><TD>[]</TD><TD>details of the tactor stimulation (vibration)</TD></TR>
+<TR><TD>tactors</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="tactors.html">struct</A></TD><TD>[]</TD><TD>details of the tactor stimulation (vibration)</TD></TR>
 <TR><TD>DAQ</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="socketclient_DAQ.html">struct</A></TD><TD>[]</TD><TD>This client connects to a DAQ server to sample one or more channels (e.g. for a button box or force sensors).</TD></TR>
 <TR><TD>fastrak</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="socketclient_fastrak.html">struct</A></TD><TD>[]</TD><TD>Connect to a fastrak server to record fastrak 6D data</TD></TR>
 <TR><TD>fixedglove</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="fixedglove.html">struct</A></TD><TD>[]</TD><TD>Use fixed joint angles in place of a glove.</TD></TR>
@@ -58,8 +58,8 @@ In the section experimentDescription.setup, there can be the fields below.
 <TR><TD>labels</TD><TD>N</TD><TD><A title="A matrix (see description for how to fill it)">matrix</A></TD><TD>[]</TD><TD>which labels to show</TD></TR>
 <TR><TD>beep</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="beep.html">struct</A></TD><TD>[]</TD><TD>beeps througout the trial</TD></TR>
 <TR><TD>backgroundColor</TD><TD>N</TD><TD><A title="A 1 by 3 matrix (see description for how to fill it)">1 by 3 matrix</A></TD><TD>[0,0,0]</TD><TD>Background color (1x3 RGB matrix, [0 0 0] = black, [255 255 255] = white)</TD></TR>
-<TR><TD>stimulus</TD><TD>Y</TD><TD></TD><TD>[]</TD><TD>the stimulus to show for this trial</TD></TR>
-<TR><TD>starttrial</TD><TD>N</TD><TD>One of:<BR>
+<TR><TD>tactor</TD><TD>Y</TD><TD><A title="follow link to see details of the struct" HREF="tactor.html">struct</A></TD><TD>[]</TD><TD>when to produce tactile stimulation (vibration)</TD></TR>
+<TR><TD>stimulus</TD><TD>N</TD><TD>One of:<BR>
 <A HREF="stimulus_VCRDM.html">VCRDM</A><BR>
 <A HREF="stimulus_calibrateForceSensors.html">calibrateForceSensors</A><BR>
 <A HREF="stimulus_circle.html">circle</A><BR>
@@ -75,8 +75,8 @@ In the section experimentDescription.setup, there can be the fields below.
 <A HREF="stimulus_textArray.html">textArray</A><BR>
 <A HREF="stimulus_video.html">video</A><BR>
 <A HREF="stimulus_vr.html">vr</A><BR>
-</TD><TD>[]</TD><TD>how the trial starts</TD></TR>
-<TR><TD>targetType</TD><TD>N</TD><TD>One of:<BR>
+</TD><TD>[]</TD><TD>the stimulus to show for this trial</TD></TR>
+<TR><TD>starttrial</TD><TD>N</TD><TD>One of:<BR>
 <A HREF="start_button.html">button</A><BR>
 <A HREF="start_dontWait.html">dontWait</A><BR>
 <A HREF="start_keyboard.html">keyboard</A><BR>
@@ -84,8 +84,8 @@ In the section experimentDescription.setup, there can be the fields below.
 <A HREF="start_pedal.html">pedal</A><BR>
 <A HREF="start_stylusButton.html">stylusButton</A><BR>
 <A HREF="start_targetInSpace.html">targetInSpace</A><BR>
-</TD><TD>[]</TD><TD>the response for this trial</TD></TR>
-<TR><TD>tactor</TD><TD>N</TD><TD>One of:<BR>
+</TD><TD>[]</TD><TD>how the trial starts</TD></TR>
+<TR><TD>targetType</TD><TD>N</TD><TD>One of:<BR>
 <A HREF="response_buttonPress.html">buttonPress</A><BR>
 <A HREF="response_defineTarget.html">defineTarget</A><BR>
 <A HREF="response_dummy.html">dummy</A><BR>
@@ -97,5 +97,5 @@ In the section experimentDescription.setup, there can be the fields below.
 <A HREF="response_pointToPoint.html">pointToPoint</A><BR>
 <A HREF="response_targetInSpace.html">targetInSpace</A><BR>
 <A HREF="response_targetOnScreen.html">targetOnScreen</A><BR>
-</TD><TD>[]</TD><TD>when to produce tactile stimulation (vibration)</TD></TR>
+</TD><TD>[]</TD><TD>the response for this trial</TD></TR>
 </TABLE></BODY></HTML>

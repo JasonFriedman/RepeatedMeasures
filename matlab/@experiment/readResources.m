@@ -51,7 +51,7 @@ tactorparams.description = {'serial port to connect to (can be found in Device m
     'Frequency of the first sine wave (sine wave(s) to use can be defined in sequences)','Frequency of the second sine wave (sine wave(s) to use can be defined in sequences)'};
 tactorparams.default = {1,[],250,240};
 tactorparams.required = [1 0,0,0];
-tactorparams.classname = 'tactor';
+tactorparams.classname = 'tactors';
 tactorparams.classdescription = 'Define details of the tactor stimulation';
 
 beepsparams.name = {'frequency','duration'};
@@ -63,7 +63,7 @@ beepsparams.classdescription = 'Beeps throughout the trial';
 beepsparams.classname = 'beep';
 
 params.name = {'images','strings','sounds','beeps','symbols','monitorWidth','monitorHeight',...
-    'viewingDistance','xshift','framerate','vr','MCtrigger','mouseTargets','targetPosition','boxes','labels','tactor'};
+    'viewingDistance','xshift','framerate','vr','MCtrigger','mouseTargets','targetPosition','boxes','labels','tactors'};
 params.type = {'cellarray','cellarray','cellarray',beepsparams,'cellarray','number','number',...
     'number','number','number',vrparams,'number','matrix_n_4','matrix_n_2','matrix_n_4',labelparams,tactorparams};
 params.description = {'Cell array of the filenames of the images (which are in the stimuli directory)',...

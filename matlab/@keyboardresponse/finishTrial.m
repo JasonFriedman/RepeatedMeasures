@@ -7,7 +7,11 @@ function [toFinish,thistrial,experimentdata] = finishTrial(r,thistrial,experimen
 devices = get(e,'devices');
 if isfield(devices,'keyboard')
     data = getsample(devices.keyboard);
-    keypressed = data(2);
+    if numel(data)>1
+        keypressed = data(2);
+    else
+        keypressed = [];
+    end
 else
     [keyIsDown, secs, keyCode] = KbCheck;
     keypressed = find(keyCode);
