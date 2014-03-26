@@ -5,6 +5,9 @@ function [thistrial,experimentdata,breakfromloop,s] = displayFrame(s,e,frame,thi
     
     breakfromloop = 0;
     if frame<s.firstframe
+        if s.showFixationBefore
+            drawFixation(experimentdata);
+        end
         return;
     end
     thistrial.dotInfo = draw_prepared_dots_frame(experimentdata.screenInfo,thistrial.dotInfo,frame-s.firstframe+1,thistrial);
