@@ -407,6 +407,25 @@ try
                 end
             end
             
+            if thistrial.checkMovingAfter && thisFrameTime <= thistrial.checkMovingAfter
+                if ~stillPressing(thistrial.thisstarttrial,e,experimentdata)
+                    DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
+                    responseText = experimentdata.texts.TOO_EARLY;
+                    drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText);
+                    writetolog(e,sprintf('Wrote text %s',responseText));
+                    if ispc
+                        wavplay(experimentdata.annoyingBeep,experimentdata.annoyingBeepf);
+                    else
+                        audioplayer(experimentdata.annoyingBeep,experimentdata.annoyingBeepf);
+                    end
+                    WaitSecs(1);
+                    DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,1);
+                    abortTrial = 1;
+                    break;
+                end
+            end
+                 
+            
             if frame <= thistrial.stimuliFrames
                 % Present a frame
                 DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);

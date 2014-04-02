@@ -40,6 +40,7 @@ In the section experimentDescription.setup, there can be the fields below.
 <BR><BR><TABLE border="1">
 <TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
 <TR><TD>checkMoving</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>Whether to check the subject is still moving at this time</TD></TR>
+<TR><TD>checkMovingAfter</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>Whether to check that the subject starts moving after this time (i.e. is NOT moving before this time) (0=don't check)</TD></TR>
 <TR><TD>blockcounter</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>counter (used with triggers)</TD></TR>
 <TR><TD>waitTimeBefore</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>time to wait (in seconds) before showing the main stimulus (fixation is usually shown)</TD></TR>
 <TR><TD>showPosition</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>whether the current location should be shown (depends on the input device)</TD></TR>
@@ -54,12 +55,12 @@ In the section experimentDescription.setup, there can be the fields below.
 <TR><TD>movementonset</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="movementonset.html">struct</A></TD><TD>[]</TD><TD>how movement onset is determined</TD></TR>
 <TR><TD>recording</TD><TD>N</TD><TD><A title="True or false">boolean</A></TD><TD>'NaN'</TD><TD>whether to record</TD></TR>
 <TR><TD>playAudioFile</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="playAudioFile.html">struct</A></TD><TD>[]</TD><TD>details of audio (wav) files to play</TD></TR>
-<TR><TD>boxes</TD><TD>N</TD><TD><A title="A matrix (see description for how to fill it)">matrix</A></TD><TD>[]</TD><TD>which boxes to show</TD></TR>
-<TR><TD>labels</TD><TD>N</TD><TD><A title="A matrix (see description for how to fill it)">matrix</A></TD><TD>[]</TD><TD>which labels to show</TD></TR>
+<TR><TD>boxes</TD><TD>N</TD><TD><A title="A matrix (see description for how to fill it)">matrix</A></TD><TD>NaN</TD><TD>which boxes to show</TD></TR>
+<TR><TD>labels</TD><TD>N</TD><TD><A title="A matrix (see description for how to fill it)">matrix</A></TD><TD>NaN</TD><TD>which labels to show</TD></TR>
 <TR><TD>beep</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="beep.html">struct</A></TD><TD>[]</TD><TD>beeps througout the trial</TD></TR>
 <TR><TD>backgroundColor</TD><TD>N</TD><TD><A title="A 1 by 3 matrix (see description for how to fill it)">1 by 3 matrix</A></TD><TD>[0,0,0]</TD><TD>Background color (1x3 RGB matrix, [0 0 0] = black, [255 255 255] = white)</TD></TR>
-<TR><TD>tactor</TD><TD>Y</TD><TD><A title="follow link to see details of the struct" HREF="tactor.html">struct</A></TD><TD>[]</TD><TD>when to produce tactile stimulation (vibration)</TD></TR>
-<TR><TD>stimulus</TD><TD>N</TD><TD>One of:<BR>
+<TR><TD>tactor</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="tactor.html">struct</A></TD><TD>[]</TD><TD>when to produce tactile stimulation (vibration)</TD></TR>
+<TR><TD>stimulus</TD><TD>Y</TD><TD>One of:<BR>
 <A HREF="stimulus_VCRDM.html">VCRDM</A><BR>
 <A HREF="stimulus_calibrateForceSensors.html">calibrateForceSensors</A><BR>
 <A HREF="stimulus_circle.html">circle</A><BR>
@@ -81,6 +82,7 @@ In the section experimentDescription.setup, there can be the fields below.
 <A HREF="start_dontWait.html">dontWait</A><BR>
 <A HREF="start_keyboard.html">keyboard</A><BR>
 <A HREF="mouseClick.html">mouseClick</A><BR>
+<A HREF="mouseInBox.html">mouseInBox</A><BR>
 <A HREF="start_pedal.html">pedal</A><BR>
 <A HREF="start_stylusButton.html">stylusButton</A><BR>
 <A HREF="start_targetInSpace.html">targetInSpace</A><BR>

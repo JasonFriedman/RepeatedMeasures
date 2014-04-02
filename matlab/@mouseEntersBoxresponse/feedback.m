@@ -23,38 +23,18 @@ elseif isnan(thistrial.targetNum(1))
 elseif hitTarget == thistrial.targetNum
     thistrial.successful=1;
     thistrial.questSuccess = 1;
-    writetolog(e,['Succesful to target' num2str(hitTarget)]);
+    writetolog(e,['Succesful to target ' num2str(hitTarget)]);
     thistrial.responseText = experimentdata.texts.SUCCESS;
 else
     thistrial.successful=0;
     thistrial.questSuccess = 0;
-    writetolog(e,['Moved to wrong target' num2str(hitTarget)]);
+    writetolog(e,['Moved to wrong target ' num2str(hitTarget)]);
     thistrial.responseText = experimentdata.texts.WRONG;
 end
 
 if r.delayedFeedback && ~isempty(previoustrial)
     % Show the feedback from the previous trial
     thistrial.responseText = previoustrial.responseText;
-end
-
-if isfield(thistrial,'targetFeedback') && isfield(thistrial.targetFeedback,'text')
+    writetolog(e,['Set response text to text from previous trial: ' previoustrial.responseText]);
     thistrial.textFeedback = 1;
-end
-
-% If we are giving feedback on arrival time
-if isfield(thistrial,'arrivalFeedback')
-    arrivaltime = thistrial.pressedTime - frameInfo{currentTrial}.startFrame(1);
-    if arrivaltime > str2double(thistrial.arrivalFeedback.cutofftime)
-        thistrial.successful = -3;
-        thistrial.questSuccess = -1;
-        writetolog(e,'Arrived at target too late');
-        thistrial.responseText = experimentdata.texts.TARGET_TOO_LATE;
-        thistrial.playsound = 1;
-        if isfield(thistrial.arrivalFeedback,'text')
-            thistrial.textFeedback = 1;
-        end
-    else
-        % do nothing
-    end
-end
 end

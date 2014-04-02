@@ -1,4 +1,4 @@
-% MOUSECLICKSTART - constructor for class representing to start when the mouse enters a box
+% MOUSECLICKSTART - constructor for class representing to start when the mouse clocks (optionally in a box)
 
 function [m,params] = mouseClickstart(inputParams,experimentdata)
 
