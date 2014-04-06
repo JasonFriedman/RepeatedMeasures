@@ -107,6 +107,12 @@ if ~isempty(thistrial.playAudioFile)
 end
 
 if ~isempty(thistrial.beep)
+    if numel(thistrial.beep)==1
+        beeptmp = thistrial.beep;
+        thistrial = rmfield(thistrial,'beep');
+        thistrial.beep{1} = beeptmp;
+    end
+
     for k=1:numel(thistrial.beep)
         if thistrial.beep{k}.beepNumber>0 
             if isempty(experimentdata.beeps) 
