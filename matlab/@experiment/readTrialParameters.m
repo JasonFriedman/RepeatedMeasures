@@ -125,7 +125,7 @@ if ~isempty(thistrial.beep)
 end
 
 if ~isempty(thistrial.tactor)
-    if isempty(experimentdata.tactor)
+    if isempty(experimentdata.tactors)
         error('Cannot have tactor events in trials without tactor in the setup section');
     end
 end

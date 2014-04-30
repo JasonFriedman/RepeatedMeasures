@@ -45,12 +45,13 @@ tactorSequencesparams.classname = 'tactorSequences';
 tactorSequencesparams.classdescription = 'Define sequences of tactor events for later playback';
 
 tactorparams.name = {'COMport','sequences',...
-    'sinFreq1','sinFreq2'};
-tactorparams.type = {'number',tactorSequencesparams,'number','number'};
+    'sinFreq1','sinFreq2','gain'};
+tactorparams.type = {'number',tactorSequencesparams,'number','number','number'};
 tactorparams.description = {'serial port to connect to (can be found in Device manager)','description of the tactor sequences that can be played back later',...
-    'Frequency of the first sine wave (sine wave(s) to use can be defined in sequences)','Frequency of the second sine wave (sine wave(s) to use can be defined in sequences)'};
-tactorparams.default = {1,[],250,240};
-tactorparams.required = [1 0,0,0];
+    'Frequency of the first sine wave (sine wave(s) to use can be defined in sequences)','Frequency of the second sine wave (sine wave(s) to use can be defined in sequences)',...
+    'Gain level of the amplifiers (0,1,2 or 3)'};
+tactorparams.default = {1,[],250,240,3};
+tactorparams.required = [1 0,0,0,0];
 tactorparams.classname = 'tactors';
 tactorparams.classdescription = 'Define details of the tactor stimulation';
 
@@ -180,15 +181,22 @@ if ~isempty(experimentdata.tactors) && ~validating
     % connect to the tactor
     experimentdata.tactors = tactor(tactorData.COMport,1);
     % Setup the sequences
+    if ~iscell(experimentdata.tactorSequences)
+        tmpfield = experimentdata.tactorSequences;
+        experimentdata = rmfield(experimentdata,'tactorSequences');
+        experimentdata.tactorSequences{1} = tmpfield;
+    end
+    
     for k=1:numel(experimentdata.tactorSequences)
         clear seqParams;
         for m=1:numel(experimentdata.tactorSequences{k}.parameters)
             seqParams{m} = str2num(experimentdata.tactorSequences{k}.parameters{m}); %#ok<AGROW,ST2NM>
         end
         defineSequence(experimentdata.tactors,k,experimentdata.tactorSequences{k}.commands,seqParams);
-        setSinFreq(experimentdata.tactors,1,tactorData.sinFreq1);
-        setSinFreq(experimentdata.tactors,2,tactorData.sinFreq2);
     end
+    setSinFreq(experimentdata.tactors,1,tactorData.sinFreq1);
+    setSinFreq(experimentdata.tactors,2,tactorData.sinFreq2);
+    setGain(experimentdata.tactors,tactorData.gain);
 end
 
 % load the sounds
