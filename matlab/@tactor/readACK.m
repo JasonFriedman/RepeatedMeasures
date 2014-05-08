@@ -4,7 +4,7 @@
 
 function readACK(t)
 
-message = parseACK(IOPort('Read',t.s));
+message = parseACK(readmessage(t));
 
 if t.debug
     fprintf('%s\n',message);

@@ -20,6 +20,8 @@ elseif gain==2
     gainVal = uint8(hex2dec('80'));
 elseif gain==3
     gainVal = uint8(hex2dec('c0'));
+else
+    error('gain must be 0,1,2 or 3');
 end
 
 command = withChecksum([PacketStartByte MasterBoard setGain DataLength gainVal PacketEndByte]);

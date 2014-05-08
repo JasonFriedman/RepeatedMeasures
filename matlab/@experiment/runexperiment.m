@@ -322,9 +322,12 @@ try
         % run the appropriate start of trial setup. These files (e.g. startEvent.m) should be in the appropriate directories if
         % needed. For most stimuli types, it is not needed, and so the default (from @stimulus) will be run which does nothing
         [thistrial,experimentdata] = startEvent(thistrial.thisstimulus,thistrial,experimentdata,codes);
+        thistrial.needToStopAudio = 0;
         if numel(thistrial.beeped) && isnan(thistrial.beeped(1))
             PsychPortAudio('Start', experimentdata.pahandle, [], GetSecs);
+            writetolog(e,'Started preprogrammed beeps');
             thistrial.beeped = []; % This has triggered all the beeps for the trial
+            thistrial.needToStopAudio = 1;
         end
         
         abortTrial=0;
@@ -368,7 +371,9 @@ try
                         if thistrial.recording
                             markEvent(e,codes.tactored+thistrial.tactor{m}.sequenceNumber);
                         end
+                        writetolog(e,'Sent tactor stimuli');
                         playSequence(experimentdata.tactors,thistrial.tactor{m}.sequenceNumber);
+                        writetolog(e,'Finished sending tactor stimuli');
                         thistrial.tactored(m) = 1;
                     end
                 end
@@ -378,9 +383,11 @@ try
             for m=1:numel(thistrial.playAudioFile)
                 if ~thistrial.playAudioFile{m}.started && thisFrameTime > thistrial.playAudioFile{m}.starttime
                     PsychPortAudio('FillBuffer',experimentdata.pahandle,experimentdata.audioBuffer(thistrial.playAudioFile{m}.number));
-                    PsychPortAudio('Start', experimentdata.pahandle, [], 0, 0);
-                    thistrial.playAudioFile{m}.started = GetSecs;
+                    startTime = PsychPortAudio('Start', experimentdata.pahandle, [], 0, 0);
+                    thistrial.playAudioFile{m}.started = startTime;
+                    writetolog(e,sprintf('Started audio at %f',startTime));
                     markEvent(e,codes.soundPlayed);
+                    thistrial.needToStopAudio = 1;
                 end
             end
             
@@ -485,6 +492,9 @@ try
             if thistrial.recording || thistrial.sampleWhenNotRecording || thistrial.showPosition
                 stopRecording(e);
                 thistrial = startSamplingWithoutRecording(e,thistrial,experimentdata);
+            end
+            if thistrial.needToStopAudio
+                PsychPortAudio('Stop',experimentdata.pahandle);
             end
             while stillPressing(thistrial.thisstarttrial,e,experimentdata)
                 %    ; % wait for them to release the button

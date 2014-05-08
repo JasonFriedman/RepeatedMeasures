@@ -10,19 +10,21 @@
 %                 2 = wait (for a specified number of ms)
 %                 3 = turn off all tactors
 %                 4 = set signal source (sin1 or sin2 or sin1+sin2)
+%                 5 = vibrate for set time
 % 
 % parameters should have the parameters for these commands
 % for 1, an array with the tactors to turn on
 % for 2, the duration (in ms)
 % for 3, empty
 % for 4, two values, one for tactors 1-4, one for tactors 5-8, with values 0 = none, 1 = sin1, 2 = sin2, 3 = sin1+sin2
+% for 5, an array with the sensors numbers, with the last number the duration in ms (e.g. sensors 1+2 for 100 ms is [1 2 100])
 %
 %
 % e.g. for 3 on-off vibrations for sensors 1 and 3
 % 
 % commands =    [1    2   3  2   1     2   3  2   1     2   3];
-% parameters = {[1 3],250,[],250,[1 3],250,[],250,[1 3],250,[]};
-% defineSequence(t,0,commands,parameters);
+% parameters = {[1 2],250,[],250,[1 2],250,[],250,[1 2],250,[]};
+% defineSequence(t,1,commands,parameters);
 %
 
 function defineSequence(t,sequenceNumber,commands,parameters)
@@ -41,21 +43,24 @@ for k=1:numel(commands)
         seqdata = [seqdata turnAllOffCommand];
     elseif commands(k)==4
         seqdata = [seqdata setSigSrcCommand(parameters{k}(1),parameters{k}(2))];
+    elseif commands(k)==5
+        seqdata = [seqdata vibrateTactorCommand(parameters{k}(1:end-1),parameters{k}(end))];
     else
         error('Unknown command (must be 1,2 or 3)');
     end
 end
-
-[nwritten,when,errmsg] = IOPort('Write',t.s,seqStartCommand(sequenceNumber,numel(seqdata)));
+sendmessage(t,seqStartCommand(sequenceNumber,numel(seqdata)));
 pause(0.5);
+fprintf('seqStartCommand:');
 readACK(t);
-
 sequenceData = seqDataCommand(seqdata);
 for k=1:numel(sequenceData)
-    [nwritten,when,errmsg] = IOPort('Write',t.s,sequenceData{k});
-    pause(1.0);
+    sendmessage(t,sequenceData{k});
+    pause(2.0);
+    fprintf('SequenceData:');
     readACK(t);
 end
-[nwritten,when,errmsg] = IOPort('Write',t.s,seqEndCommand(seqdata));
+pause(0.5);
+sendmessage(t,seqEndCommand(seqdata));
 pause(0.5);
 readACK(t);

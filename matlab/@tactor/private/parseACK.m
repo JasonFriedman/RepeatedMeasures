@@ -76,5 +76,5 @@ elseif ACK(2)==NAKResponse
     end
     message = [message 'NAK:' m];
 else
-    message = [message 'Unknown second byte (not ACK or NAK)!!!\n'];
+    message = [message 'Unknown second byte (not ACK or NAK)!!!'];
 end

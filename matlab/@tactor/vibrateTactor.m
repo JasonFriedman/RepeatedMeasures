@@ -8,6 +8,6 @@ function vibrateTactor(t,tactorNumbers,duration)
 
 command = vibrateTactorCommand(tactorNumbers,duration);
 
-[nwritten,when,errmsg] = IOPort('Write',t.s,command);
+sendmessage(t,command);
 pause(0.1);
 readACK(t);

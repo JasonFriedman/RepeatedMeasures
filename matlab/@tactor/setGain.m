@@ -7,6 +7,6 @@ function setGain(t,gain)
 
 command = setGainCommand(gain);
 
-[nwritten,when,errmsg] = IOPort('Write',t.s,command);
+sendmessage(t,command);
 pause(0.1);
 readACK(t);

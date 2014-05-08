@@ -4,4 +4,8 @@
 
 function close(t)
 
-IOPort('Close',t.s);
+if t.connectionType==1
+    IOPort('Close',t.s);
+elseif t.connectionType==2
+    fclose(t.s);
+end

@@ -14,6 +14,6 @@ function setSigSrc(t,lownibble,highnibble)
 
 command = setSigSrcCommand(lownibble,highnibble);
 
-[nwritten,when,errmsg] = IOPort('Write',t.s,command);
+sendcommand(t,command);
 pause(0.1);
 readACK(t);

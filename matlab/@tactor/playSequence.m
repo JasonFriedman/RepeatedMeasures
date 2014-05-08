@@ -5,6 +5,6 @@
 
 function playSequence(t,sequenceNum)
 
-[nwritten,when,errmsg] = IOPort('Write',t.s,playSeqCommand(sequenceNum));
+sendmessage(t,playSeqCommand(sequenceNum));
 pause(0.01);
 readACK(t);
