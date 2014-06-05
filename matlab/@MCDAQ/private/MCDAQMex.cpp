@@ -26,7 +26,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
                 cbErrHandling (PRINTALL, DONTSTOP);
                 // Declare that we are using single (not differential) input
                 {int boardNum = 0;
-                cbSetConfig(BOARDINFO, boardNum, 0, BINUMADCHANS, 16);}
+                cbSetConfig(BOARDINFO, boardNum, 0, BINUMADCHANS, 8);}
                 //cbSetNumAdChans(ANALOG_SE);
                 // Allocate some memory (we allocate 1000)
                 bufferHandle = cbWinBufAlloc(1000);

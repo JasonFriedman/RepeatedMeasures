@@ -1,5 +1,8 @@
 % RUNFORCESENSORSSERVER - run a force sensors server on port 3016 in another matlab process
 % The sensors are specificied on channels 0 to 4, with range "4" (-1V to +1V, see cbw.h for definitions)
+%
+% runforcesensorsserver(parameters,numsensors,firstsensor,sampleContinuously)
+%
 function runforcesensorsserver(parameters,numsensors,firstsensor,sampleContinuously)
 
 if nargin<1 || isempty(parameters)
