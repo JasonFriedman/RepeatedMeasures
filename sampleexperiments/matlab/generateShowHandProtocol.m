@@ -5,28 +5,44 @@
 % needs to be run before this experiment can be run
 %
 %
-% generateShowHandProtocol
+% generateShowHandProtocol(isEmulated)
 
-function generateShowHandProtocol
+function generateShowHandProtocol(isEmulated)
 
-filename = 'protocols/ShowHand.xml';
+if nargin<1 || isempty(isEmulated)
+    isEmulated = 0;
+end
+
 
 % These should be changed appropriately
-showFlipped = 1; % If using a mirror setup, you need to horizontally flip the display
+if isEmulated
+    filename = 'protocols/ShowHandEmulated.xml';
+    showFlipped = 0;
+    stereomode = 0;
+else
+    filename = 'protocols/ShowHand.xml';
+    showFlipped = 1; 
+    % upper half of screen is left eye, lower half is right eye
+    % the monitor will make it look stereo. Set to 0 for mono
+    % (or see Psychtoolbox documentation for other types of stereo)
+    stereomode = 2;
+end
+% If using a mirror setup, you need to horizontally flip the display
 % Set the frame rate to 30 Hz, because the computer cannot keep up with 60% Hz 
 % (it is worthwhile changing this to find the fastest your computer can manage).
 % Note that this is the display frame rate, not the recording framerate
 framerate = 30;
-% upper half of screen is left eye, lower half is right eye
-% the monitor will make it look stereo. Set to 0 for mono
-% (or see Psychtoolbox documentation for other types of stereo)
-stereomode = 2;
 
-experimentDescription.setup.glovetracker.glove.server = 'localhost';
-experimentDescription.setup.glovetracker.glove.port = 3011;
-experimentDescription.setup.glovetracker.tracker.fastrak.server = 'localhost';
-experimentDescription.setup.glovetracker.tracker.fastrak.port = 3015;
-experimentDescription.setup.glovetracker.tracker.fastrak.numReceivers = 1;
+if isEmulated
+    experimentDescription.setup.glovetracker.glove.emulator = struct();
+    experimentDescription.setup.glovetracker.tracker.emulator = struct();
+else
+    experimentDescription.setup.glovetracker.glove.server = 'localhost';
+    experimentDescription.setup.glovetracker.glove.port = 3011;
+    experimentDescription.setup.glovetracker.tracker.fastrak.server = 'localhost';
+    experimentDescription.setup.glovetracker.tracker.fastrak.port = 3015;
+    experimentDescription.setup.glovetracker.tracker.fastrak.numReceivers = 1;
+end
 experimentDescription.setup.framerate = framerate;
 
 % Setup the VR environment
