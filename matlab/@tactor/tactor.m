@@ -31,15 +31,21 @@ else
     t.connectionType = 2; % Bluetooth
 end
 
-if t.connectionType==1
-    t.s = IOPort('OpenSerialPort',['COM' num2str(t.COMport)],'BaudRate=115200');
-elseif t.connectionType==2
-    t.s = Bluetooth(t.COMport,1);
-    pause(1.0);
-    fopen(t.s);
+global connectedTactor;
+if ~isempty(connectedTactor)
+    t = connectedTactor;
+else
+    if t.connectionType==1
+        % If a connection has already been make outside the program, use that connected
+        t.s = IOPort('OpenSerialPort',['COM' num2str(t.COMport)],'BaudRate=115200');
+    elseif t.connectionType==2
+        t.s = Bluetooth(t.COMport,1);
+        pause(1.0);
+        fopen(t.s);
+    end
+    t = class(t,'tactor');
 end
 
-t = class(t,'tactor');
 readmessage(t); % clear the buffer
 
 
