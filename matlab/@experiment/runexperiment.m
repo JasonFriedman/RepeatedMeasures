@@ -502,6 +502,14 @@ try
             if thistrial.recording || thistrial.sampleWhenNotRecording || thistrial.showPosition
                 stopRecording(e);
             end
+            if experimentdata.incrementOnAbort
+                results.thistrial{currentTrial} = thistrial;
+                currentTrial = currentTrial+1;
+                writetolog(e,'Trial aborted, skipping to next trial');
+            else
+                writetolog(e,'Trial aborted, repeating trial');
+            end
+                
             continue;
         end
         % Clear the screen
