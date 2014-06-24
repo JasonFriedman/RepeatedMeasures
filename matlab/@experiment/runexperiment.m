@@ -384,7 +384,7 @@ try
                 if ~thistrial.playAudioFile{m}.started && thisFrameTime > thistrial.playAudioFile{m}.starttime
                     PsychPortAudio('FillBuffer',experimentdata.pahandle,experimentdata.audioBuffer(thistrial.playAudioFile{m}.number));
                     startTime = PsychPortAudio('Start', experimentdata.pahandle, [], 0, 0);
-                    thistrial.playAudioFile{m}.started = startTime;
+                    thistrial.playAudioFile{m}.started = GetSecs;
                     writetolog(e,sprintf('Started audio at %f',startTime));
                     markEvent(e,codes.soundPlayed);
                     thistrial.needToStopAudio = 1;
