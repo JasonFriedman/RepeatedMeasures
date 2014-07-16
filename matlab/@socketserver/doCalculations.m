@@ -2,6 +2,6 @@
 % 
 % This should be implemented by the child clases
 
-function returnValue = doCalculations(s)
+function returnValue = doCalculations(s,data)
 
 error('This should be implemented by the child class');
