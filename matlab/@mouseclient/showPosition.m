@@ -1,7 +1,7 @@
 % SHOWPOSITION - show the position for the mouse
 % If showPosition (set per trial) =1 -> show the actual position of the mouse
 %                                 =2 -> do nothing (for compatibility with liberty / force sensors)
-%                                 =3 -> 
+%                                 =3 -> calculate position based on displayRangeX / displayRangeY / offsetX / offsetY
 
 function [lastposition,thistrial] = showPosition(m,thistrial,experimentdata,e,frame)
 % get the current position
