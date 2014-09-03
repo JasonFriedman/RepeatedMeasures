@@ -59,8 +59,9 @@ for k=1:get(m,'numchannels')
     end
     
 end
+devices = get(e,'devices');
 
-if thistrial.showPosition==1 || thistrial.showPosition==5
+if (thistrial.showPosition==1 || thistrial.showPosition==5) && ~isempty(devices.forcesensors.filterType)
     if ~isfield(thistrial,'combined')
         thistrial.combined = [];
     end
@@ -70,12 +71,35 @@ if thistrial.showPosition==1 || thistrial.showPosition==5
    if numel(Wn)==2
        [B,A] = butter(m.filterOrder/2,Wn);
    else
-       [B,A] = butter(m.filterOrder,Wn);
+       [B,A] = butter(m.filterOrder,Wn); % low pass filter
    end
    
    if tofilter(2)
+       % first the high pass filter, then the Kalman filter
        output(2,:) = filter(B,A,thistrial.combined(2,:));
        lastposition(2) = output(2,end);
+       
+%        % p = estimated error
+%        % q = process noise
+%        % r = sensor noise
+%        % k = Kalman gain
+%        
+%        if ~isfield(thistrial,'Kalman');
+%            thistrial.Kalman.q = 0.05;
+%            thistrial.Kalman.p = 0;
+%            thistrial.Kalman.r = 32;
+%            thistrial.Kalman.x = 0;
+%        end
+%        
+%        % kalman filter
+%        % x = x; x = filtered data
+%        thistrial.Kalman.p = thistrial.Kalman.p + thistrial.Kalman.q; 
+%        thistrial.Kalman.k = thistrial.Kalman.p / (thistrial.Kalman.p + thistrial.Kalman.r);
+%        thistrial.Kalman.x = thistrial.Kalman.x + thistrial.Kalman.k * (lastposition(2) - thistrial.Kalman.x);
+%        thistrial.Kalman.p = (1 - thistrial.Kalman.k) * thistrial.Kalman.p;
+%    
+%   
+%        lastposition(2) = thistrial.Kalman.x;
    end
    if tofilter(1)
        output(1,:) = filter(B,A,thistrial.combined(1,:));
@@ -88,6 +112,7 @@ end
 if thistrial.showPosition==1
     lastposition(1) = lastposition(1) * experimentdata.screenInfo.screenRect(3);
     lastposition(2) = lastposition(2) * experimentdata.screenInfo.screenRect(4);
+    lastposition
     Screen('DrawDots', experimentdata.screenInfo.curWindow, lastposition, 6, m.showPositionColor,[],1);
 elseif thistrial.showPosition==2 % multiple dots
     for k=1:get(m,'numchannels')
@@ -144,7 +169,7 @@ elseif thistrial.showPosition==6 % draw the force as a rectangle (one per sensor
         height = positions(2,k) * experimentdata.screenInfo.screenRect(3);
         if height > 0
             if k==1
-                left = 0.3  * experimentdata.screenInfo.screenRect(3);
+                left = 0.3  * experimentdasa.screenInfo.screenRect(3);
             else
                 left = 0.55 * experimentdata.screenInfo.screenRect(3);
             end
