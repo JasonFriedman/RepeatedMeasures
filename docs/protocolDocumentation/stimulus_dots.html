@@ -4,7 +4,10 @@
 A dot to be drawn in each frame<BR><BR>
 <TABLE border="1">
 <TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
-<TR><TD>dotsFilename</TD><TD>Y</TD><TD>string</TD><TD>[]</TD><TD>A file containing the locations of the dots to draw (in the stimuli directory)</TD></TR>
+<TR><TD>dotsFilename</TD><TD>Y</TD><TD>string</TD><TD>[]</TD><TD>A file containing the locations of the dots to draw (in the stimuli directory). It should be an Nx2 array (each line is the x and y coordinate)</TD></TR>
 <TR><TD>flip</TD><TD>N</TD><TD><A title="A 1 by 2 matrix (see description for how to fill it)">1 by 2 matrix</A></TD><TD>[0,0]</TD><TD>whether to flip the x (1) or y (1) values</TD></TR>
+<TR><TD>type</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>type of dot, 0 = square, 1 = circle, 2 = high quality anti-aliased circle, 3 = ellipse</TD></TR>
 <TR><TD>framesPerDot</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>4</TD><TD>number of frames to show each dot for</TD></TR>
+<TR><TD>color</TD><TD>N</TD><TD><A title="A 1 by 3 matrix (see description for how to fill it)">1 by 3 matrix</A></TD><TD>[255,255,255]</TD><TD>The color of the rectangle (RGB, 1x3 matrix, from 0 to 255)</TD></TR>
+<TR><TD>size</TD><TD>N</TD><TD><A title="A matrix (see description for how to fill it)">matrix</A></TD><TD>10</TD><TD>width of the dot (in pixels) (for types 1-3), or a 1x2 matrix (width and height) for type 4 (ellipse)</TD></TR>
 </TABLE></BODY></HTML>
