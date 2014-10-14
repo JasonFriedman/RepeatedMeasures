@@ -64,6 +64,14 @@ serialparams.required = [1 0];
 serialparams.classname = 'serial';
 serialparams.classdescription = 'Define the parameters of the serial port to be used for sending triggers';
 
+parallelparams.name = {'portname'};
+parallelparams.type={'string'};
+parallelparams.description = {'The name of the serial port, e.g. LPT1'};
+parallelparams.default = {'LPT1'};
+parallelparams.required = [1];
+parallelparams.classname = 'parallel';
+parallelparams.classdescription = 'Define the parameters of the parallel port to be used for sending triggers';
+
 beepsparams.name = {'frequency','duration'};
 beepsparams.type = {'number','number'};
 beepsparams.default = {500,0.15};
@@ -73,9 +81,9 @@ beepsparams.classdescription = 'Beeps throughout the trial';
 beepsparams.classname = 'beep';
 
 params.name = {'images','strings','sounds','beeps','symbols','monitorWidth','monitorHeight',...
-    'viewingDistance','xshift','framerate','vr','MCtrigger','incrementOnAbort','mouseTargets','targetPosition','boxes','labels','tactors','serial'};
+    'viewingDistance','xshift','framerate','vr','MCtrigger','incrementOnAbort','mouseTargets','targetPosition','boxes','labels','tactors','serial','parallel'};
 params.type = {'cellarray','cellarray','cellarray',beepsparams,'cellarray','number','number',...
-    'number','number','number',vrparams,'number','boolean','matrix_n_4','matrix_n_2','matrix_n_4',labelparams,tactorparams,serialparams};
+    'number','number','number',vrparams,'number','boolean','matrix_n_4','matrix_n_2','matrix_n_4',labelparams,tactorparams,serialparams,parallelparams};
 params.description = {'Cell array of the filenames of the images (which are in the stimuli directory)',...
     'Strings to replace the default (for feedback, etc). Each item should have fields name (name of string to replace) and value (the new string to use)',...
     'Cell array of the filenames of .wav sound files to play (which are in the stimuli directory). All files need to have the same sample frequency and number of channels.',...
@@ -94,11 +102,12 @@ params.description = {'Cell array of the filenames of the images (which are in t
     'details of boxes to show on the screen. Each row should be (x,y,width,height), in the range 0-1',...
     'list of labels (strings) that can be shown',...
     'details of the tactor stimulation (vibration)',...
-    'details of the serial port to be used for a trigger'};
+    'details of the serial port to be used for a trigger',...
+    'details of the parallel port to be used for a trigger'};
 
 params.default = {[],[],[],[],[],70,30,...
-    68,0,NaN,[],[],0,[],[],NaN,[],[],[]};
-params.required = [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
+    68,0,NaN,[],[],0,[],[],NaN,[],[],[],[]};
+params.required = [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
 
 if nargout>1
     % If making documentation, add all clients, otherwise just the relevant ones
@@ -211,6 +220,12 @@ if ~isempty(experimentdata.serial) && ~validating
     serialData = experimentdata.serial;
     % connect to the serial port
     experimentdata.serial = serialport(serialData.COMport,serialData.baudRate);
+end
+
+if ~isempty(experimentdata.parallel) && ~validating
+    parallelData = experimentdata.parallel;
+    % connect to the parallel port
+    experimentdata.parallel = parallelport(parallelData.portname);
 end
 
 % load the sounds

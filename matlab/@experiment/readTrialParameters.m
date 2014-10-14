@@ -36,7 +36,7 @@ triggerParams.name = {'time','type','value','duration'};
 triggerParams.type = {'number','string','number','number'};
 triggerParams.default = {0,'serial',1,0.05};
 triggerParams.required = [1 1 0 0];
-triggerParams.description = {'Trigger time (in seconds)','Type of trigger, one of ''serial'' or ''DAQ''','Value to send','Duration (in seconds)'};
+triggerParams.description = {'Trigger time (in seconds)','Type of trigger, one of ''serial'' or ''parallel''','Value to send','Duration (in seconds)'};
 triggerParams.classdescription = 'Provide a trigger at the specified time';
 triggerParams.classname = 'trigger';
 
@@ -136,11 +136,20 @@ if ~isempty(thistrial.tactor)
 end
 
 if ~isempty(thistrial.trigger)
-    if isempty(experimentdata.serial)
-        error('Cannot have serial triggers in trials without serial in the setup section');
+    for k=1:numel(thistrial.trigger)
+        if strcmp(thistrial.trigger{k}.type,'serial')
+            if isempty(experimentdata.serial)
+                error('Cannot have serial triggers in trials without serial in the setup section');
+            end
+        elseif strcmp(thistrial.trigger{k}.type,'parallel')
+            if isempty(experimentdata.parallel)
+                error('Cannot have parallel triggers in trials without parallel in the setup section');
+            end
+        else
+            error(['Unknown trigger type ' thistrial.trigger{k}.type]);
+        end
     end
 end
-
 
 % Default is to display all boxes / labels on every trial
 if ~isempty(experimentdata.boxes) && numel(thistrial.boxes) && isnan(thistrial.boxes(1))
