@@ -5,7 +5,7 @@ function [thistrial,experimentdata,breakfromloop,s] = displayFrame(s,e,frame,thi
 
 screenInfo = experimentdata.screenInfo;
 % Show each frame N times (i.e. 4 = 15 Hz with a 60 Hz monitor)
-thisdot = thistrial.dotArray(ceil(frame/s.framesPerDot),:)';
+thisdot = thistrial.dotArray(min([size(thistrial.dotArray,1) ceil(frame/s.framesPerDot)]),:)';
 if s.type<=2
     Screen('DrawDots', screenInfo.curWindow, thisdot, s.size , s.color,[],s.type);
 elseif s.type==3

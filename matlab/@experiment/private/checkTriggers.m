@@ -1,16 +1,20 @@
 % CHECKTRIGGERS - check if a trigger needs to be sent
 
-function [triggerSent,frameInfo] = checkTriggers(frameInfo,triggerSent,triggerTime,triggerOffTime,thisFrameTime,blockcounter,e)
+function thistrial = checkTriggers(e,thistrial,thisFrameTime,experimentdata)
 
-if ~triggerSent && thisFrameTime >= triggerTime
-    frameInfo.triggerTime = GetSecs;
-    triggerSent = 1;
-    toSend = blockcounter * 2 + 1;
-    writetolog(e,['Sending trigger' num2str(toSend)]);
-    sendTriggers(e,1,toSend);
-elseif triggerSent==1 && thisFrameTime >= triggerOffTime
-    writetolog(e,'Sending trigger low (0)');
-    frameInfo.triggerTimeOff = GetSecs;
-    triggerSent=2;
-    sendTriggers(e,0);
+if ~isempty(thistrial.trigger)
+    for k=1:numel(thistrial.trigger)
+        if ~thistrial.trigger{k}.sent && thisFrameTime >= thistrial.trigger{k}.time
+            thistrial.trigger{k}.senttime = GetSecs;
+            thistrial.trigger{k}.sent = 1;
+            value = thistrial.trigger{k}.value;
+            writetolog(e,['Sending trigger' num2str(value)]);
+            sendTriggers(e,experimentdata,thistrial.trigger{k}.type,1,value);
+        elseif thistrial.trigger{k}.sent==1 && thisFrameTime > thistrial.trigger{k}.offTime
+                writetolog(e,'Sending trigger low (0)');
+                thistrial.trigger{k}.offtime = GetSecs;
+                thistrial.trigger{k}.sent=2;
+                sendTriggers(e,experimentdata,thistrial.trigger{k}.type,0,0);
+        end
+    end
 end

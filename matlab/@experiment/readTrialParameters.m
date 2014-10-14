@@ -32,6 +32,14 @@ beepParams.description = {'Onset time (in seconds)','Beep to play (from those sp
 beepParams.classdescription = 'Beeps throughout the trial';
 beepParams.classname = 'beep';
 
+triggerParams.name = {'time','type','value','duration'};
+triggerParams.type = {'number','string','number','number'};
+triggerParams.default = {0,'serial',1,0.05};
+triggerParams.required = [1 1 0 0];
+triggerParams.description = {'Trigger time (in seconds)','Type of trigger, one of ''serial'' or ''DAQ''','Value to send','Duration (in seconds)'};
+triggerParams.classdescription = 'Provide a trigger at the specified time';
+triggerParams.classname = 'trigger';
+
 tactorParams.name = {'time','sequenceNumber'};
 tactorParams.type = {'number','number'};
 tactorParams.default = {1,1};
@@ -42,26 +50,26 @@ tactorParams.classname = 'tactor';
 
 params.name = {'checkMoving','checkMovingAfter','blockcounter','waitTimeBefore','showPosition','drawFixation','targetNum','textFeedback',...
     'textFeedbackShowBackground','checkRecording','auditoryFeedback','filename','recordingTime','movementonset','recording','playAudioFile',...
-    'boxes','labels','beep','backgroundColor','tactor','stimulus','starttrial','targetType'};
+    'boxes','labels','beep','trigger','backgroundColor','tactor','stimulus','starttrial','targetType'};
 params.type = {'number','number','number','number','number','boolean','number','boolean',...
     'boolean','boolean','boolean','string','number',movementonsetParams,'boolean',audioFileParams,...
-    'matrix','matrix',beepParams,'matrix_1_3',tactorParams,'ignore','ignore','ignore'};
+    'matrix','matrix',beepParams,triggerParams,'matrix_1_3',tactorParams,'ignore','ignore','ignore'};
 params.default = {0,          0,                 1,             0,               0,             1,            NaN,         1,...
     0,                           1,               1,                 '',        [],             [],              NaN, [],...
-    NaN,NaN,[],[0 0 0],[],[],[],[]};
+    NaN,NaN,[],[],[0 0 0],[],[],[],[]};
 params.description = {'Whether to check the subject is still moving at this time',...
-    'Whether to check that the subject starts moving after this time (i.e. is NOT moving before this time) (0=don''t check)','counter (used with triggers)',...
+    'Whether to check that the subject starts moving after this time (i.e. is NOT moving before this time) (0=don''t check)','counter',...
     'time to wait (in seconds) before showing the main stimulus (fixation is usually shown)','whether the current location should be shown (depends on the input device)',...
     'whether to draw a fixation point during waitTimeBefore','correct target number','whether to display text feedback after the trial',...
     'whether to show the background when giving feedback','whether to check the recording at the end of the trial (and give feedback if there is a problem, e.g. missing markers)',...
     'whether to provide auditory feedback (usually when incorrect)','filename to save the results (without extension)','recording time in seconds',...
     'how movement onset is determined','whether to record','details of audio (wav) files to play',...
-    'which boxes to show','which labels to show','beeps througout the trial','Background color (1x3 RGB matrix, [0 0 0] = black, [255 255 255] = white)',...
+    'which boxes to show','which labels to show','beeps througout the trial','external triggers to send','Background color (1x3 RGB matrix, [0 0 0] = black, [255 255 255] = white)',...
     'when to produce tactile stimulation (vibration)',...
     'the stimulus to show for this trial','how the trial starts','the response for this trial'};
 params.required = [0 0 0 0 0 0 0 0 ...
     0 0 0 0 1 0 0 0 ...
-    0 0 0 0 0 1 0 0];
+    0 0 0 0 0 0 1 0 0];
 params.classdescription = 'The trial is the basic unit of the experiment.';
 params.classname = 'trial';
 
@@ -106,13 +114,10 @@ if ~isempty(thistrial.playAudioFile)
     thistrial = readAudioFileDetails(thistrial,experimentdata,validating);
 end
 
-if ~isempty(thistrial.beep)
-    if numel(thistrial.beep)==1
-        beeptmp = thistrial.beep;
-        thistrial = rmfield(thistrial,'beep');
-        thistrial.beep{1} = beeptmp;
-    end
+thistrial = makecellifnot(thistrial,'trigger');
+thistrial = makecellifnot(thistrial,'beep');
 
+if ~isempty(thistrial.beep)
     for k=1:numel(thistrial.beep)
         if thistrial.beep{k}.beepNumber>0 
             if isempty(experimentdata.beeps) 
@@ -129,6 +134,13 @@ if ~isempty(thistrial.tactor)
         error('Cannot have tactor events in trials without tactor in the setup section');
     end
 end
+
+if ~isempty(thistrial.trigger)
+    if isempty(experimentdata.serial)
+        error('Cannot have serial triggers in trials without serial in the setup section');
+    end
+end
+
 
 % Default is to display all boxes / labels on every trial
 if ~isempty(experimentdata.boxes) && numel(thistrial.boxes) && isnan(thistrial.boxes(1))

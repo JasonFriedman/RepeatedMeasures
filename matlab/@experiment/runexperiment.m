@@ -79,6 +79,9 @@ try
         % (see explanation in http://tech.groups.yahoo.com/group/psychtoolbox/message/11951 )
         [experimentdata.screenInfo.curWindow,experimentdata.screenInfo.screenRect] = PsychImaging('OpenWindow', curScreen, experimentdata.screenInfo.bckgnd,[],32, 2);
     end
+    Screen('BlendFunction', experimentdata.screenInfo.curWindow, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    %Screen('BlendFunction', experimentdata.screenInfo.curWindow, GL_ONE, GL_ZERO);
+
     
     writetolog(e,'Opened window');
     
@@ -220,7 +223,7 @@ try
         
         % STAGE 3- do the actual event
         % setup any triggers for later (e.g. for triggering EMG recordings, or TMS pulses)
-        [triggerSent,triggerTime,triggerOffTime] = setupTrigger(thistrial);
+        thistrial = setupTrigger(thistrial);
         
         % setup any beeps
         thistrial = setupBeeps(thistrial,experimentdata);
@@ -348,8 +351,7 @@ try
                 end
             end
             % send pulse at the appropriate time
-            [triggerSent,thistrial.frameInfo] = ...
-                checkTriggers(thistrial.frameInfo,triggerSent,triggerTime,triggerOffTime,thisFrameTime,thistrial.blockcounter,e);
+            thistrial = checkTriggers(e,thistrial,thisFrameTime,experimentdata);
             
             % beep if appropriate
             if any(~thistrial.beeped)
@@ -632,6 +634,9 @@ try
     if ~isempty(experimentdata.tactors)
         close(experimentdata.tactors);
     end
+    if ~isempty(experimentdata.serial)
+        close(experimentdata.serial);
+    end
     if ~isempty(experimentdata.sounds) || ~isempty(experimentdata.beeps)
         PsychPortAudio('Close');
     end
@@ -656,6 +661,9 @@ catch err
     closescreen;
     if ~isempty(experimentdata.tactors)
         close(experimentdata.tactors);
+    end
+    if ~isempty(experimentdata.serial)
+        close(experimentdata.serial);
     end
     % close the log file
     closelog(e);

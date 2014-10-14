@@ -56,6 +56,14 @@ tactorparams.required = [1 0,0,0,0];
 tactorparams.classname = 'tactors';
 tactorparams.classdescription = 'Define details of the tactor stimulation';
 
+serialparams.name = {'COMport','baudRate'};
+serialparams.type={'number','number'};
+serialparams.description = {'A number indicating a serial port to connect to  - can be found in Device manager in Windows','baud rate'};
+serialparams.default = {1,115200};
+serialparams.required = [1 0];
+serialparams.classname = 'serial';
+serialparams.classdescription = 'Define the parameters of the serial port to be used for sending triggers';
+
 beepsparams.name = {'frequency','duration'};
 beepsparams.type = {'number','number'};
 beepsparams.default = {500,0.15};
@@ -65,9 +73,9 @@ beepsparams.classdescription = 'Beeps throughout the trial';
 beepsparams.classname = 'beep';
 
 params.name = {'images','strings','sounds','beeps','symbols','monitorWidth','monitorHeight',...
-    'viewingDistance','xshift','framerate','vr','MCtrigger','incrementOnAbort','mouseTargets','targetPosition','boxes','labels','tactors'};
+    'viewingDistance','xshift','framerate','vr','MCtrigger','incrementOnAbort','mouseTargets','targetPosition','boxes','labels','tactors','serial'};
 params.type = {'cellarray','cellarray','cellarray',beepsparams,'cellarray','number','number',...
-    'number','number','number',vrparams,'number','boolean','matrix_n_4','matrix_n_2','matrix_n_4',labelparams,tactorparams};
+    'number','number','number',vrparams,'number','boolean','matrix_n_4','matrix_n_2','matrix_n_4',labelparams,tactorparams,serialparams};
 params.description = {'Cell array of the filenames of the images (which are in the stimuli directory)',...
     'Strings to replace the default (for feedback, etc). Each item should have fields name (name of string to replace) and value (the new string to use)',...
     'Cell array of the filenames of .wav sound files to play (which are in the stimuli directory). All files need to have the same sample frequency and number of channels.',...
@@ -85,10 +93,12 @@ params.description = {'Cell array of the filenames of the images (which are in t
     'details of target positions. Each row should be (x,y) or (x,y,z), depending on the recording device used. These values can be overridden using the defineTarget response.',...
     'details of boxes to show on the screen. Each row should be (x,y,width,height), in the range 0-1',...
     'list of labels (strings) that can be shown',...
-    'details of the tactor stimulation (vibration)'};
+    'details of the tactor stimulation (vibration)',...
+    'details of the serial port to be used for a trigger'};
+
 params.default = {[],[],[],[],[],70,30,...
-    68,0,NaN,[],[],0,[],[],NaN,[],[]};
-params.required = [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
+    68,0,NaN,[],[],0,[],[],NaN,[],[],[]};
+params.required = [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
 
 if nargout>1
     % If making documentation, add all clients, otherwise just the relevant ones
@@ -183,12 +193,8 @@ if ~isempty(experimentdata.tactors) && ~validating
     % connect to the tactor
     experimentdata.tactors = tactor(tactorData.COMport,1);
     % Setup the sequences
-    if ~iscell(experimentdata.tactorSequences)
-        tmpfield = experimentdata.tactorSequences;
-        experimentdata = rmfield(experimentdata,'tactorSequences');
-        experimentdata.tactorSequences{1} = tmpfield;
-    end
-    
+    experimentdata = makecellifnot(experimentdata,'tactorSequences');
+
     for k=1:numel(experimentdata.tactorSequences)
         clear seqParams;
         for m=1:numel(experimentdata.tactorSequences{k}.parameters)
@@ -199,6 +205,12 @@ if ~isempty(experimentdata.tactors) && ~validating
     setSinFreq(experimentdata.tactors,1,tactorData.sinFreq1);
     setSinFreq(experimentdata.tactors,2,tactorData.sinFreq2);
     setGain(experimentdata.tactors,tactorData.gain);
+end
+
+if ~isempty(experimentdata.serial) && ~validating
+    serialData = experimentdata.serial;
+    % connect to the serial port
+    experimentdata.serial = serialport(serialData.COMport,serialData.baudRate);
 end
 
 % load the sounds
@@ -245,12 +257,8 @@ if ~isempty(experimentdata.beeps)
         experimentdata.nrchannels = 1;
     end
    
-    if numel(experimentdata.beeps)==1
-        thebeep = experimentdata.beeps;
-        experimentdata = rmfield(experimentdata,'beeps');
-        experimentdata.beeps{1} = thebeep;
-    end
-
+    experimentdata = makecellifnot(experimentdata,'beeps');
+    
     if ~validating
         for k=1:numel(experimentdata.beeps)
             beepdata = MakeBeep(experimentdata.beeps{k}.frequency, experimentdata.beeps{k}.duration);
