@@ -145,6 +145,10 @@ if ~isempty(thistrial.trigger)
             if isempty(experimentdata.parallel)
                 error('Cannot have parallel triggers in trials without parallel in the setup section');
             end
+        elseif strcmp(thistrial.trigger{k}.type,'DAQ')
+            if isempty(experimentdata.MCtrigger)
+                error('Cannot have DAQ triggers in trials without setting MCtrigger in the setup section');
+            end
         else
             error(['Unknown trigger type ' thistrial.trigger{k}.type]);
         end

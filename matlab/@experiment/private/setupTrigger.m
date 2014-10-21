@@ -5,7 +5,11 @@ function thistrial = setupTrigger(thistrial)
 if ~isempty(thistrial.trigger)
     for k=1:numel(thistrial.trigger)
         if strcmp(thistrial.trigger{k}.type,'serial')
-            % Setting up serial trigger
+            % Nothing to do here for setting up serial trigger
+        elseif strcmp(thistrial.trigger{k}.type,'parallel')
+            % Nothing to do here for setting up parallel trigger
+        elseif strcmp(thistrial.trigger{k}.type,'DAQ')
+            % Nothing to do here for setting up DAQ trigger
         else
             error(['Unsupported trigger type: ' thistrial.trigger{k}.type]);
         end
