@@ -173,7 +173,6 @@ try
         started = 0;
         while started==0
             [started,keyCode] = hasStarted(thistrial.thisstarttrial,e,experimentdata);
-            
             if thistrial.showPosition
                 preStart(thistrial.thisstimulus,experimentdata,thistrial,0);
                 DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
@@ -184,18 +183,22 @@ try
                     Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
                 end
             end
-            if find(keyCode,1)==KbName('q') % q = quit
+            if any(keyCode) && any(find(keyCode,1)==[KbName('n') KbName('p') KbName('q')])  % n, p or q
                 if thistrial.showPosition || thistrial.sampleWhenNotRecording
                     stopRecording(e);
                 end
-                currentTrial = inf;
-                writetolog(e,'Pressed q, quitting');
+                % stop this trial, will be dealt with outside this loop
+                
+                % Wait for them to let go of the key
+                while KbCheck()
+                    %
+                end
                 break;
             end
         end
         % If the trial has recordingTime of 0 (i.e. just show something), then make sure they have left the key
         % before continuing
-        if thistrial.recordingTime==0
+        if thistrial.recordingTime==0 
             while hasStarted(thistrial.thisstarttrial,e,experimentdata)
                 %    ; % wait for them to release the button
             end
@@ -206,6 +209,7 @@ try
         
         if find(keyCode)==KbName('n') % n = skip to next event
             currentTrial = currentTrial + 1;
+            results.thistrial{currentTrial} = thistrial;
             writetolog(e,'Pressed n, skipping to next event');
             continue;
         elseif find(keyCode)==KbName('p') % p = go back to previous event
