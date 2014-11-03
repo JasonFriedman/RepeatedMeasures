@@ -78,7 +78,7 @@ beepsparams.default = {500,0.15};
 beepsparams.required = [1 1];
 beepsparams.description = {'beep frequency (in Hz). ','beep duration (in seconds)'};
 beepsparams.classdescription = 'Beeps throughout the trial';
-beepsparams.classname = 'beep';
+beepsparams.classname = 'beeps';
 
 params.name = {'images','strings','sounds','beeps','symbols','monitorWidth','monitorHeight',...
     'viewingDistance','xshift','framerate','vr','MCtrigger','incrementOnAbort','mouseTargets','targetPosition','boxes','labels','tactors','serial','parallel'};
