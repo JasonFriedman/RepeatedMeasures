@@ -15,6 +15,19 @@ end
 
  tofilter(1) = 0;
  tofilter(2) = 0;
+ 
+ if numel(m.displayRangeX)==1
+     displayRangeX = m.displayRangeX{1};
+ else
+     displayRangeX = m.displayRangeX{thistrial.trialnum};
+ end
+ 
+ if numel(m.displayRangeY)==1
+     displayRangeY = m.displayRangeY{1};
+ else
+     displayRangeY = m.displayRangeY{thistrial.trialnum};
+ end
+
 
 for k=1:get(m,'numchannels')   
     if thistrial.showPosition==2
@@ -32,23 +45,23 @@ for k=1:get(m,'numchannels')
     
     thisval = lastsample(k+1);
     
-    if m.displayRangeX(k,1) ~= m.displayRangeX(k,2)
-        lastposition(1) = lastposition(1) + (thisval - m.displayRangeX(k,1)) / (m.displayRangeX(k,2) - m.displayRangeX(k,1));
+    if displayRangeX(k,1) ~= displayRangeX(k,2)
+        lastposition(1) = lastposition(1) + (thisval - displayRangeX(k,1)) / (displayRangeX(k,2) - displayRangeX(k,1));
         tofilter(1) = 1;
     end
-    if m.displayRangeY(k,1) ~= m.displayRangeY(k,2)
-        lastposition(2) = lastposition(2) + (thisval - m.displayRangeY(k,1)) / (m.displayRangeY(k,2) - m.displayRangeY(k,1));
+    if displayRangeY(k,1) ~= displayRangeY(k,2)
+        lastposition(2) = lastposition(2) + (thisval - displayRangeY(k,1)) / (displayRangeY(k,2) - displayRangeY(k,1));
         tofilter(2) = 1;
     end
        
-    if m.displayRangeX(k,3) ~= 0
+    if displayRangeX(k,3) ~= 0
         if isfield(thistrial,'StimulusOnsetTime')
-            lastposition(1) = lastposition(1) + m.displayRangeX(k,3) * (GetSecs - thistrial.StimulusOnsetTime(1));
+            lastposition(1) = lastposition(1) + displayRangeX(k,3) * (GetSecs - thistrial.StimulusOnsetTime(1));
         end
     end
-    if m.displayRangeY(k,3) ~= 0
+    if displayRangeY(k,3) ~= 0
         if isfield(thistrial,'StimulusOnsetTime')
-            lastposition(2) = lastposition(2) + m.displayRangeY(k,3) * (GetSecs - thistrial.StimulusOnsetTime(1));
+            lastposition(2) = lastposition(2) + displayRangeY(k,3) * (GetSecs - thistrial.StimulusOnsetTime(1));
         end
     end
 
@@ -112,7 +125,6 @@ end
 if thistrial.showPosition==1
     lastposition(1) = lastposition(1) * experimentdata.screenInfo.screenRect(3);
     lastposition(2) = lastposition(2) * experimentdata.screenInfo.screenRect(4);
-    lastposition
     Screen('DrawDots', experimentdata.screenInfo.curWindow, lastposition, 6, m.showPositionColor,[],1);
 elseif thistrial.showPosition==2 % multiple dots
     for k=1:get(m,'numchannels')

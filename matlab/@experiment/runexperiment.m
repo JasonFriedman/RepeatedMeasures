@@ -108,6 +108,7 @@ try
         thistrial = readTrialParameters(e,thistrialprotocol,experimentdata);
         writetolog(e,'Read trial parameters');
         thistrialrecording = thistrial.recording;
+        thistrial.trialnum = currentTrial;
         
         % run the appropriate trial setup for this type of stimulus
         thistrial = setup(thistrial.thisstimulus,e,thistrial,experimentdata);
