@@ -1,6 +1,8 @@
 % MCDAQMEX - mex file for reading analog inputs from a MC DAQ card
 %
-% MCDAQMEX(0) - setup the card. Must be run before any other commands
+% MCDAQMEX(0,numChannelsTotal) - setup the card. Must be run before any
+% other commands. numChannelsTotal is the total number of input channels.
+% This usually determines whether the board will be single-sided or differential
 % MCDAQMEX(1,boardNum,channel,gain)
 % MCDAQMEX(2,boardNum,minChannel,maxChannel,gain)
 %

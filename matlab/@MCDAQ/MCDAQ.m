@@ -1,6 +1,6 @@
 % MCDAQ - a class to read or write to a Measuremtn computing DAQ card on Windows 32/64 bit (via the "Univeral Library")
 %
-% t = MCDAQ(dllpath,in_or_out,channels,range)
+% t = MCDAQ(dllpath,in_or_out,channels,range,numChannelsTotal)
 %
 % dllpath is the path to the file cbw32.dll (ignored for analog input)
 %
@@ -18,14 +18,20 @@
 %
 % range      = data range (see manual for card for relevant ranges, then see file UniversalLibraryConstants to find the appropriate number to pass)
 %              [this is ignored for digital input]
+%
+% numChannelsTotal = the total number of input channels.
+%                    This usually determines whether the board will be
+%                    single-sided or differential [this is ignored for
+%                    digital input]
 
-function t = MCDAQ(dllpath,in_or_out,channels,range)
+function t = MCDAQ(dllpath,in_or_out,channels,range,numChannelsTotal)
 
 t.memoryPtr = [];
 t.range = [];
 t.boardNum = [];
 t.bitNums = [];
 t.memoryPtr = [];
+t.numChannelsTotal = [];
 
 ULconstants = UniversalLibraryConstants;
 
@@ -41,8 +47,13 @@ if nargin<4
     t.range = [];
 end
 
+if nargin<5
+    numChannelsTotal = 8;
+end
+
 t.in_or_out = in_or_out;
 t.channels = channels;
+t.numChannelsTotal = numChannelsTotal;
 
 fprintf('MC Mode = %d (1=digital output, 2 = digital input, 3 = analog output, 4 = analog input)\n',in_or_out);
 
@@ -105,7 +116,7 @@ if in_or_out<=2
     
 elseif in_or_out == ULconstants.ANALOGIN
     % Call the mex file to initialize
-    MCDAQMex(0);
+    MCDAQMex(0,t.numChannelsTotal);
 else
     error('Not yet supported');
 end

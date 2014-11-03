@@ -20,17 +20,23 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
         
         switch((unsigned int) cmd) {
             case 0:
+            {
+                if (nrhs<2)
+                    mexErrMsgTxt("Must provide 2 arguements (0,numChannelTotal)");
+                int numChannelsTotal = (unsigned int) mxGetScalar(prhs[1]);
+
                 /* Declare UL Revision Level */
                 UDStat = cbDeclareRevision(&RevLevel);
                 // Initiate error handling
                 cbErrHandling (PRINTALL, DONTSTOP);
-                // Declare that we are using single (not differential) input
+                // Declare that we are using single or differential input
                 {int boardNum = 0;
-                cbSetConfig(BOARDINFO, boardNum, 0, BINUMADCHANS, 8);}
-                //cbSetNumAdChans(ANALOG_SE);
+                cbSetConfig(BOARDINFO, boardNum, 0, BINUMADCHANS, numChannelsTotal);}
+                
                 // Allocate some memory (we allocate 1000)
                 bufferHandle = cbWinBufAlloc(1000);
-                break;
+            }
+            break;
             case 1:
             {
                 if (nrhs<4)
