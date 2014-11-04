@@ -38,7 +38,9 @@ lastposition(1) = lastsample(1) * experimentdata.screenInfo.screenRect(3);
 lastposition(2) = lastsample(2) * experimentdata.screenInfo.screenRect(4);
 
 if strcmp(m.showPositionType,'dot')
-    Screen('DrawDots', experimentdata.screenInfo.curWindow, lastposition, m.showPositionSize, m.showPositionColor,[],1);
+    if any(thistrial.showPosition==[1 3]) || (thistrial.showPosition==2 && isa(thistrial.thisstimulus,'imagesstimulus') && thistrial.imageState == 1)
+        Screen('DrawDots', experimentdata.screenInfo.curWindow, lastposition, m.showPositionSize, m.showPositionColor,[],1);
+    end
 elseif strcmp(m.showPositionType,'ellipse')
     % left top right bottom (4xN matrix)
     rect = [lastposition(1) - m.showPositionSize(1)/2;
