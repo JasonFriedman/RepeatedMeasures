@@ -10,7 +10,8 @@ else
     lastsample = getxyz(e);
 end
 
-if ~isnan(lastsample(1)) 
+if ~isnan(lastsample(1))
+    lastsample = lastsample(1:2); % only consider x/y
     if isnan(thistrial.startMovementLocation(1)) && (isnan(r.startState) || thistrial.imageState==r.startState)
         thistrial.startMovementLocation = lastsample;
         %fprintf('Start movement location set to:\n');
