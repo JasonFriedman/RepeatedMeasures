@@ -56,6 +56,12 @@ protocolfields = fields(e.protocol);
 if numel(protocolfields)<2 || numel(protocolfields)>3 || ~isfield(e.protocol,'setup') || ~isfield(e.protocol,'trial')
     error('The protocol file must have 2 or 3 fields: setup and trial (and optionally common)');
 end
+fieldnames = {'setup','trial','common'};
+for k=1:numel(protocolfields)
+    if ~any(strcmp(protocolfields{k},fieldnames))
+        error('Unknown field in protocol file: %s',protocolfields{k});
+    end
+end
     
 % Check which recording devices are being used
 for k=1:length(clientdirs)
