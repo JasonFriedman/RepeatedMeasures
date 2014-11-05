@@ -5,9 +5,16 @@ function [lastposition,thistrial] = showPosition(m,thistrial,experimentdata,e,fr
 % get the current position
 lastsample = getsample(m);
 
+offsetX = get(m,'offsetX');
+offsetY = get(m,'offsetY');
+displayRangeX = get(m,'displayRangeX');
+displayRangeY = get(m,'displayRangeY');
+showPositionColor = get(m,'showPositionColor');
+
+
 if thistrial.showPosition<3
-    lastposition(1) = m.offsetX(1);
-    lastposition(2) = m.offsetY(1);
+    lastposition(1) = offsetX(1);
+    lastposition(2) = offsetY(1);
 else
     lastposition(1) = 0;
     lastposition(2) = 0;
@@ -16,27 +23,27 @@ end
  tofilter(1) = 0;
  tofilter(2) = 0;
  
- if numel(m.displayRangeX)==1
-     displayRangeX = m.displayRangeX{1};
+ if numel(displayRangeX)==1
+     displayRangeX = displayRangeX{1};
  else
-     displayRangeX = m.displayRangeX{thistrial.trialnum};
+     displayRangeX = displayRangeX{thistrial.trialnum};
  end
  
- if numel(m.displayRangeY)==1
-     displayRangeY = m.displayRangeY{1};
+ if numel(displayRangeY)==1
+     displayRangeY = displayRangeY{1};
  else
-     displayRangeY = m.displayRangeY{thistrial.trialnum};
+     displayRangeY = displayRangeY{thistrial.trialnum};
  end
 
 
 for k=1:get(m,'numchannels')   
     if thistrial.showPosition==2
-        if numel(m.offsetX)>1
-            lastposition(1) = m.offsetX(k);
-            lastposition(2) = m.offsetY(k);
+        if numel(offsetX)>1
+            lastposition(1) = offsetX(k);
+            lastposition(2) = offsetY(k);
         else
-            lastposition(1) = m.offsetX;
-            lastposition(2) = m.offsetY;
+            lastposition(1) = offsetX;
+            lastposition(2) = offsetY;
         end
     elseif thistrial.showPosition==4 || thistrial.showPosition==6
         lastposition(1) = 0;
@@ -125,15 +132,15 @@ end
 if thistrial.showPosition==1
     lastposition(1) = lastposition(1) * experimentdata.screenInfo.screenRect(3);
     lastposition(2) = lastposition(2) * experimentdata.screenInfo.screenRect(4);
-    Screen('DrawDots', experimentdata.screenInfo.curWindow, lastposition, 6, m.showPositionColor,[],1);
+    Screen('DrawDots', experimentdata.screenInfo.curWindow, lastposition, 6, showPositionColor,[],1);
 elseif thistrial.showPosition==2 % multiple dots
     for k=1:get(m,'numchannels')
         positions(1,k) = positions(1,k) .* experimentdata.screenInfo.screenRect(3);
         positions(2,k) = positions(2,k) * experimentdata.screenInfo.screenRect(4);
-        if size(m.showPositionColor,1)>1
-            thecolor = m.showPositionColor(k,:);
+        if size(showPositionColor,1)>1
+            thecolor = showPositionColor(k,:);
         else
-            thecolor = m.showPositionColor;
+            thecolor = showPositionColor;
         end
         Screen('DrawDots', experimentdata.screenInfo.curWindow, positions(:,k), 6, thecolor,[],1);
     end
@@ -145,7 +152,7 @@ elseif thistrial.showPosition==3 % draw the force as a circle (combined)
         circletop = 0.5 * experimentdata.screenInfo.screenRect(4) + halfradius;
         circlebottom = 0.5 * experimentdata.screenInfo.screenRect(4) - halfradius;
         rect = [circleleft circlebottom circleright circletop];
-        Screen('FrameOval', experimentdata.screenInfo.curWindow, m.showPositionColor, rect);
+        Screen('FrameOval', experimentdata.screenInfo.curWindow, showPositionColor, rect);
     end
 elseif thistrial.showPosition==4 % draw the force as a circle (one per sensor)
     for k=1:get(m,'numchannels')
@@ -156,10 +163,10 @@ elseif thistrial.showPosition==4 % draw the force as a circle (one per sensor)
             circletop = 0.5 * experimentdata.screenInfo.screenRect(4) + halfradius;
             circlebottom = 0.5 * experimentdata.screenInfo.screenRect(4) - halfradius;
             rect = [circleleft circlebottom circleright circletop];
-            if size(m.showPositionColor,1)>1
-                thecolor = m.showPositionColor(k,:);
+            if size(showPositionColor,1)>1
+                thecolor = showPositionColor(k,:);
             else
-                thecolor = m.showPositionColor;
+                thecolor = showPositionColor;
             end    
             Screen('FrameOval', experimentdata.screenInfo.curWindow, thecolor, rect);
         end
@@ -174,7 +181,7 @@ elseif thistrial.showPosition==5 % draw the force as a rectangle (combined)
         end
         width = 0.15 * experimentdata.screenInfo.screenRect(3);
         rect = [left top left+width top+height];
-        Screen('FillRect', experimentdata.screenInfo.curWindow, m.showPositionColor, rect);
+        Screen('FillRect', experimentdata.screenInfo.curWindow, showPositionColor, rect);
     end
 elseif thistrial.showPosition==6 % draw the force as a rectangle (one per sensor)
     for k=1:get(m,'numchannels')
@@ -191,10 +198,10 @@ elseif thistrial.showPosition==6 % draw the force as a rectangle (one per sensor
             end
             width = 0.15 * experimentdata.screenInfo.screenRect(3);
             rect = [left top left+width top+height];
-            if size(m.showPositionColor,1)>1
-                thecolor = m.showPositionColor(k,:);
+            if size(showPositionColor,1)>1
+                thecolor = showPositionColor(k,:);
             else
-                thecolor = m.showPositionColor;
+                thecolor = showPositionColor;
             end
             Screen('FillRect', experimentdata.screenInfo.curWindow, thecolor, rect);
         end

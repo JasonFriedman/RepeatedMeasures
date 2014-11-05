@@ -13,6 +13,9 @@ else
     lastsample = getxyz(e);
     lastsample(4) = 1;
 end
+if isfield(thistrial,'rotatedposition')
+    lastsample(1:2) = thistrial.rotatedposition;
+end
 
 [maxx,maxy] = getmaxxy(e);
 

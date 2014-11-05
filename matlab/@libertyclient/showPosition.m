@@ -4,18 +4,25 @@ function [lastposition,thistrial] = showPosition(m,thistrial,experimentdata,e,fr
 % get the current position
 lastsample = getsample(m);
 
-lastposition(1) = m.offsetX(1);
-lastposition(2) = m.offsetY(1);
+offsetX = get(m,'offsetX');
+offsetY = get(m,'offsetY');
+displayRangeX = get(m,'displayRangeX');
+displayRangeY = get(m,'displayRangeY');
+showPositionColor = get(m,'showPositionColor');
+showPositionType = get(m,'showPositionType');
+
+lastposition(1) = offsetX(1);
+lastposition(2) = offsetY(1);
 
 for k=1:m.numsensors
     
     if thistrial.showPosition>1
-        if numel(m.offsetX)>1
-            lastposition(1) = m.offsetX(k);
-            lastposition(2) = m.offsetY(k);
+        if numel(offsetX)>1
+            lastposition(1) = offsetX(k);
+            lastposition(2) = offsetY(k);
         else
-            lastposition(1) = m.offsetX;
-            lastposition(2) = m.offsetY;
+            lastposition(1) = offsetX;
+            lastposition(2) = offsetY;
         end
     end
     
@@ -40,22 +47,22 @@ for k=1:m.numsensors
     end
     
     for n=1:3
-        if m.displayRangeX(k,n*2) ~= m.displayRangeX(k,n*2-1)
-            lastposition(1) = lastposition(1) + (xyz(n) - m.displayRangeX(k,n*2-1)) / (m.displayRangeX(k,n*2) - m.displayRangeX(k,n*2-1));
+        if displayRangeX(k,n*2) ~= displayRangeX(k,n*2-1)
+            lastposition(1) = lastposition(1) + (xyz(n) - displayRangeX(k,n*2-1)) / (displayRangeX(k,n*2) - displayRangeX(k,n*2-1));
         end
-        if m.displayRangeY(k,n*2) ~= m.displayRangeY(k,n*2-1)
-            lastposition(2) = lastposition(2) + (xyz(n) - m.displayRangeY(k,n*2-1)) / (m.displayRangeY(k,n*2) - m.displayRangeY(k,n*2-1));
+        if displayRangeY(k,n*2) ~= displayRangeY(k,n*2-1)
+            lastposition(2) = lastposition(2) + (xyz(n) - displayRangeY(k,n*2-1)) / (displayRangeY(k,n*2) - displayRangeY(k,n*2-1));
         end
     end
     
-    if m.displayRangeX(k,7) ~= 0
+    if displayRangeX(k,7) ~= 0
         if isfield(thistrial,'StimulusOnsetTime')
-            lastposition(1) = lastposition(1) + m.displayRangeX(k,7) * (GetSecs - thistrial.StimulusOnsetTime(1));
+            lastposition(1) = lastposition(1) + displayRangeX(k,7) * (GetSecs - thistrial.StimulusOnsetTime(1));
         end
     end
-    if m.displayRangeY(k,7) ~= 0
+    if displayRangeY(k,7) ~= 0
         if isfield(thistrial,'StimulusOnsetTime')
-            lastposition(2) = lastposition(2) + m.displayRangeY(k,7) * (GetSecs - thistrial.StimulusOnsetTime(1));
+            lastposition(2) = lastposition(2) + displayRangeY(k,7) * (GetSecs - thistrial.StimulusOnsetTime(1));
         end
     end
     
@@ -65,22 +72,22 @@ for k=1:m.numsensors
     end
     if thistrial.showPosition==3
         fingertipdistance = 0.5;
-        fingertips(1,k) = positions(1,k) + fingertipdistance * attitudeMatrix(1,3) / (m.displayRangeX(k,2) - m.displayRangeX(k,1));
-        fingertips(2,k) = positions(2,k) + fingertipdistance * attitudeMatrix(2,3) / (m.displayRangeY(k,4) - m.displayRangeY(k,3));
+        fingertips(1,k) = positions(1,k) + fingertipdistance * attitudeMatrix(1,3) / (displayRangeX(k,2) - displayRangeX(k,1));
+        fingertips(2,k) = positions(2,k) + fingertipdistance * attitudeMatrix(2,3) / (displayRangeY(k,4) - displayRangeY(k,3));
     end
 
     
 end
 
-if strcmp(m.showPositionType,'dot')
+if strcmp(showPositionType,'dot')
     if thistrial.showPosition==1
         lastposition(1) = lastposition(1) * experimentdata.screenInfo.screenRect(3);
         lastposition(2) = lastposition(2) * experimentdata.screenInfo.screenRect(4);
-        Screen('DrawDots', experimentdata.screenInfo.curWindow, lastposition, 6, m.showPositionColor,[],1);
+        Screen('DrawDots', experimentdata.screenInfo.curWindow, lastposition, 6, showPositionColor,[],1);
     else
         positions(1,:) = positions(1,:) .* experimentdata.screenInfo.screenRect(3);
         positions(2,:) = positions(2,:) * experimentdata.screenInfo.screenRect(4);
-        Screen('DrawDots', experimentdata.screenInfo.curWindow, positions, 6, m.showPositionColor,[],1);
+        Screen('DrawDots', experimentdata.screenInfo.curWindow, positions, 6, showPositionColor,[],1);
     end
     
     if thistrial.showPosition==3
@@ -88,7 +95,7 @@ if strcmp(m.showPositionType,'dot')
         fingertips(2,:) = fingertips(2,:) * experimentdata.screenInfo.screenRect(4);
         Screen('DrawDots', experimentdata.screenInfo.curWindow, fingertips, 6, [255 0 0],[],1);
     end
-elseif strcmp(m.showPositionType,'rectangle')
+elseif strcmp(showPositionType,'rectangle')
     if thistrial.showPosition==1
         %lastposition(1) = lastposition(1) * experimentdata.screenInfo.screenRect(3);
         lastposition(2) = lastposition(2) * experimentdata.screenInfo.screenRect(4);
@@ -100,10 +107,10 @@ elseif strcmp(m.showPositionType,'rectangle')
         end
         width = 0.15 * experimentdata.screenInfo.screenRect(3);
         rect = [left top left+width top+height];
-        Screen('FillRect', experimentdata.screenInfo.curWindow, m.showPositionColor, rect);
+        Screen('FillRect', experimentdata.screenInfo.curWindow, showPositionColor, rect);
     end
 else
-    error(['Unknown showPositionType: ' m.showPositionType]);
+    error(['Unknown showPositionType: ' showPositionType]);
 end
 
 lastposition(3) = 0;
