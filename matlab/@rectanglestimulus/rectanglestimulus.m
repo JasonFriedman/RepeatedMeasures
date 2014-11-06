@@ -1,5 +1,5 @@
 % RECTANGLESTIMULUS - class representing "rectangle" stimulus
-% draw circles with the height / width specified in a file
+% draw rectangles with the height / width specified in a file / matrix
 
 function [v,params] = rectanglestimulus(inputParams,experimentdata)
 
