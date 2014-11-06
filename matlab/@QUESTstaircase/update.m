@@ -1,26 +1,33 @@
-% UPDATE - update the QUEST staircase
+% UPDATE - update the QUEST staircase. The stimulus must be a supported type
 
 function q = update(q,thistrial)
 
 if thistrial.questSuccess > -1
-    qn = str2double(thistrial.quest);
-    if strcmp(thistrial.stimulus,'VCRDM')
-        q.q{qn} = QuestUpdate(q.q{qn},log(thistrial.coherence),thistrial.questSuccess);
-    elseif strcmp(thistrial.stimulus,'images')
-        q.noiseVars{qn} = [q.noiseVars{qn} thistrial.noiseVar];
-        q.questSuccesses{qn} = [q.questSuccesses{qn} thistrial.questSuccess];
-        q.q{qn} = QuestUpdate(q.q{qn},thistrial.tTest,thistrial.questSuccess);
+    if isa(thistrial.thisstimulus,'VCRDMstimulus')
+        q.q = QuestUpdate(q.q,log(thistrial.coherence),thistrial.questSuccess);
+    elseif isa(thistrial.thisstimulus,'imagesstimulus')
+        q.tTests = [q.tTests thistrial.tTest];
+        q.questSuccesses = [q.questSuccesses thistrial.questSuccess];
+        q.q = QuestUpdate(q.q,thistrial.tTest,thistrial.questSuccess);
+    elseif isa(thistrial.thisstimulus,'rectanglestimulus')
+        q.tTests = [q.tTests thistrial.tTest];
+        q.questSuccesses = [q.questSuccesses thistrial.questSuccess];
+        q.q = QuestUpdate(q.q,thistrial.tTest,thistrial.questSuccess);
     else
-        error('Don''t know how to update quest for this type of stimuli');
+        thistrial.thisstimulus
+        error('Don''t know how to update quest for this type of stimuli:');
     end
     
     % Also update q_alltrials if appropriate
     if isfield(q,'q_alltrials')
-        if strcmp(thistrial.stimulus,'VCRDM')
-            q.q_alltrials = QuestUpdate(q.q_alltrials{1},log(thistrial.coherence),thistrial.questSuccess);
-        elseif strcmp(thistrial.stimulus,'images')
-            q.q_alltrials{qn} = QuestUpdate(q.q_alltrials{qn},thistrial.tTest,thistrial.questSuccess);
+    if isa(thistrial.thisstimulus,'VCRDMstimulus')
+            q.q_alltrials = QuestUpdate(q.q_alltrials,log(thistrial.coherence),thistrial.questSuccess);
+        elseif isa(thistrial.thisstimulus,'imagesstimulus')
+            q.q_alltrials = QuestUpdate(q.q_alltrials,thistrial.tTest,thistrial.questSuccess);
+        elseif isa(thistrial.thisstimulus,'rectanglestimulus')
+            q.q_alltrials = QuestUpdate(q.q_alltrials,thistrial.tTest,thistrial.questSuccess);
         else
+            thistrial.thisstimulus
             error('Don''t know how to update quest for this type of stimuli');
         end
     end

@@ -2,12 +2,12 @@
 
 function experimentdata = updateStaircase(e,experimentdata,thistrial)
 
-if isempty(e.staircases)
+if isempty(experimentdata.staircases)
     return;
 end
 
-staircases = fields(e.staircases);
-
-for k=1:length(staircases)
-    experimentdata.(staircases{k}) = update(experimentdata.(staircases{k}),thistrial);
+if isnan(thistrial.staircaseNum)
+    return;
 end
+
+experimentdata.staircases{thistrial.staircaseNum} = update(experimentdata.staircases{thistrial.staircaseNum},thistrial);

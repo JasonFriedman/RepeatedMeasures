@@ -12,6 +12,7 @@ e.log_fp = [];
 e.MCPresent = 0;
 e.MCtrigger = [];
 e.allclients = [];
+e.allstaircases = [];
 e.devices = [];
 e.staircases = [];
 e.quest = [];
@@ -35,6 +36,12 @@ if nargin==0
         thisclient = strrep(clientdirs(k).name,'@','');
         thisbase = strrep(thisclient,'client','');
         e.allclients{k} = thisbase;
+    end
+    % List all staircases
+    for k=1:length(staircasedirs)
+        thisstaircase = strrep(staircasedirs(k).name,'@','');
+        thisbase = strrep(thisstaircase,'staircase','');
+        e.allstaircases{k} = thisbase;
     end
     e = class(e,'experiment');
     return;

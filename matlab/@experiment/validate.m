@@ -4,7 +4,6 @@
 function validate(e)
 experimentdata = readResources(e,1);
 experimentdata.recordingStimuli = 0;
-experimentdata = prepareStaircase(e,experimentdata,e.protocol);
 
 % Use some fake values so that it can validate
 experimentdata.screenInfo.curWindow = [];

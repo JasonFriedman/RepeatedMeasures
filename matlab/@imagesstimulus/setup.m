@@ -30,9 +30,9 @@ for k=1:length(thistrial.starttiming)
         if length(size(thistrial.trialimages{k}))>2
             error('Cannot add noise to color images (only grayscale)');
         end
-        if isfield(thistrial,'quest') && str2double(thistrial.quest)
-            % Get the coherence to test from quest
-            tTest=QuestQuantile(experimentdata.q{str2double(thistrial.quest)});
+        if ~isnan(thistrial.staircaseNum)
+            % Get the coherence to test from staircase
+            tTest=getStaircaseValue(experimentdata.staircases{thistrial.staircaseNum});
             % increasing noise = harder
             noiseVar = 1 - tTest;
         elseif thistrial.addnoise(k)>0

@@ -1,6 +1,6 @@
 % SOCKETCLIENT - create an object for connection via a socket to recording device
 %
-% sc = socketclient(server,port,experiment,debug,noack)
+% sc = socketclient(inputParams,experiment,debug,noack)
 %
 % server is the server to connect to (for this machine, use 'localhost')
 % port is the TCP/IP port to connect on

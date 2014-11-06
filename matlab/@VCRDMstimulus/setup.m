@@ -10,9 +10,9 @@ function thistrial = setup(s,e,thistrial,experimentdata)
     dotInfo.numDotField = 1; %s.numFrames; % how many frames to show
     dotInfo.apXYD = [experimentdata.xshift 0 s.aperture*10]; %first number is shift in x, second shift in y (both from center)
                                                  %third number is apeture (50 =  5 degrees)
-    if isfield(thistrial,'quest') && str2double(thistrial.quest)
+    if ~isnan(thistrial.staircaseNum)
         % Get the coherence to test from quest
-        tTest=QuestQuantile(experimentdata.q{1});
+        tTest=getStaircaseValue(experimentdata.staircases{thistrial.staircaseNum});
         thistrial.coherence = exp(tTest);
         % FIX ME (make exp / log an option)
         if thistrial.coherence < 0
@@ -27,6 +27,7 @@ function thistrial = setup(s,e,thistrial,experimentdata)
         elseif ~isempty(s.percentAccurate)
             % Get the coherence from the psychophysical function
             % esimated by QUEST
+            q = get(experimentdata.staircases{thistrial.staircaseNum},'q');
             q.pThreshold = thistrial.percentAccurate/100;
             q = QuestRecompute(q{1});
             thistrial.coherence = exp(QuestMean(q{1}));

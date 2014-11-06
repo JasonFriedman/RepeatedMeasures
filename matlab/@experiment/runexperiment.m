@@ -54,7 +54,7 @@ codes = messagecodes;
 experimentdata.screenInfo.bckgnd = 0;
 
 % Prepare staircases if appropriate
-experimentdata = prepareStaircase(e,experimentdata,e.protocol);
+experimentdata = prepareStaircase(e,experimentdata,0);
 
 
 % Put everything inside a giant "try" so that we can close the screen if it crashes
@@ -562,7 +562,7 @@ try
             WaitSecs(2);
         end
         
-        experimentdata = updateStaircase(e,experimentdata);
+        experimentdata = updateStaircase(e,experimentdata,thistrial);
         
         DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
         

@@ -80,15 +80,16 @@ beepsparams.description = {'beep frequency (in Hz). ','beep duration (in seconds
 beepsparams.classdescription = 'Beeps throughout the trial';
 beepsparams.classname = 'beeps';
 
-params.name = {'images','strings','sounds','beeps','symbols','monitorWidth','monitorHeight',...
+params.name = {'images','strings','sounds','beeps','symbols','staircases','monitorWidth','monitorHeight',...
     'viewingDistance','xshift','framerate','vr','MCtrigger','incrementOnAbort','mouseTargets','targetPosition','boxes','labels','tactors','serial','parallel'};
-params.type = {'cellarray','cellarray','cellarray',beepsparams,'cellarray','number','number',...
+params.type = {'cellarray','cellarray','cellarray',beepsparams,'cellarray','cellarray','number','number',...
     'number','number','number',vrparams,'number','boolean','matrix_n_4','matrix_n_2','matrix_n_4',labelparams,tactorparams,serialparams,parallelparams};
 params.description = {'Cell array of the filenames of the images (which are in the stimuli directory)',...
     'Strings to replace the default (for feedback, etc). Each item should have fields name (name of string to replace) and value (the new string to use)',...
     'Cell array of the filenames of .wav sound files to play (which are in the stimuli directory). All files need to have the same sample frequency and number of channels.',...
     'Details of custom beeps to play back during the trials',...
     'A cell array of strings to display (e.g. {''<'',''>''})',...
+    'A cell array of staircases',...
     'The width of the monitor in cm',...
     'The height of the monitor in cm',...
     'The viewing distance in cm',...
@@ -105,9 +106,11 @@ params.description = {'Cell array of the filenames of the images (which are in t
     'details of the serial port to be used for a trigger',...
     'details of the parallel port to be used for a trigger'};
 
-params.default = {[],[],[],[],[],70,30,...
+params.default = {[],[],[],[],[],[],70,30,...
     68,0,NaN,[],[],0,[],[],NaN,[],[],[],[]};
-params.required = [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
+params.required = [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
+params.classdescription = 'General parameters for the entire expriment';
+params.classname = 'experimentdata';
 
 if nargout>1
     % If making documentation, add all clients, otherwise just the relevant ones
@@ -123,6 +126,19 @@ if nargout>1
             params.required(count) = 0;
         end
     end
+    % If making documentation, add all staircases, otherwise just the relevant ones
+    count2 = 0;
+    index = find(strcmp(params.name,'staircases'));
+    clear vals;
+    for k=1:numel(e.allstaircases)
+        if ~isempty(e.allstaircases{k})
+            count2 = count2 + 1;
+            cn = [e.allstaircases{k} 'staircase'];
+            eval(['[p,p] = ' cn '([]);']);
+            vals{count2} = p;
+        end
+    end
+    params.type{index} = vals;
 else
     if isempty(e.devices)
         error('There must be at least one recording device');
@@ -135,9 +151,17 @@ else
         params.default{numel(params.default)+1} = [];
         params.required(numel(params.required)+1) = 0;
     end
+    if ~isempty(e.staircases)
+        staircasefields = fields(e.staircases);
+        for k=1:numel(staircasefields)
+            params.name{numel(params.name)+1} = staircasefields{k};
+            params.type{numel(params.type)+1} = 'ignore';
+            params.description{numel(params.description)+1} = '';
+            params.default{numel(params.default)+1} = [];
+            params.required(numel(params.required)+1) = 0;
+        end
+    end
 end
-params.classdescription = 'General parameters for the entire expriment';
-params.classname = 'experimentdata';
 
 if nargout>1
     experimentdata = [];
@@ -203,7 +227,7 @@ if ~isempty(experimentdata.tactors) && ~validating
     experimentdata.tactors = tactor(tactorData.COMport,1);
     % Setup the sequences
     experimentdata = makecellifnot(experimentdata,'tactorSequences');
-
+    
     for k=1:numel(experimentdata.tactorSequences)
         clear seqParams;
         for m=1:numel(experimentdata.tactorSequences{k}.parameters)
@@ -227,6 +251,18 @@ if ~isempty(experimentdata.parallel) && ~validating
     % connect to the parallel port
     experimentdata.parallel = parallelport(parallelData.portname);
 end
+
+if ~isempty(experimentdata.staircases)
+    staircases = experimentdata.staircases;
+    experimentdata = rmfield(experimentdata,'staircases');
+ 
+    for k=1:numel(staircases)
+        thefields = fields(staircases{k});
+        eval(['experimentdata.staircases{k} = ' thefields{1} 'staircase(staircases{k}.' thefields{1} ',experimentdata,0);'])
+    end
+    
+end
+
 
 % load the sounds
 if ~isempty(experimentdata.sounds)
@@ -271,7 +307,7 @@ if ~isempty(experimentdata.beeps)
     if ~isfield(experimentdata,'nrchannels')
         experimentdata.nrchannels = 1;
     end
-   
+    
     experimentdata = makecellifnot(experimentdata,'beeps');
     
     if ~validating
