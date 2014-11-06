@@ -3,7 +3,7 @@
 
 function thistrial = setup(s,e,thistrial,experimentdata)
 
-videoFilename = ['stimuli/' s.filename '.avi'];
+videoFilename = [pwd '/stimuli/' s.filename '.avi'];
 % The -1 signifies to put the whole movie into RAM, without
 % this it did not seem to be always loading the whole
 % video.
