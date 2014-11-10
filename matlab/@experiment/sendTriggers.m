@@ -1,3 +1,6 @@
+% SENDTRIGGERS - send a trigger to the appropriate device
+%
+% sendTriggers(e,experimentdata,type,onoff,value)
 function sendTriggers(e,experimentdata,type,onoff,value)
 
 if strcmp(type,'serial')
@@ -6,7 +9,7 @@ elseif strcmp(type,'parallel')
     sendmessage(experimentdata.parallel,uint8(value));
 elseif strcmp(type,'DAQ')
     if onoff
-        sendTrigger(e.MCtrigger,[],uint8(customDataValue));
+        sendTrigger(e.MCtrigger,[],uint8(value));
     else
         sendTrigger(e.MCtrigger,0);
     end

@@ -13,8 +13,6 @@
 
 function sendTrigger(t,value,customDataValue)
 
-FIRSTPORTA = 10;
-
 if value==0
     DataValue=0;
 else
@@ -26,4 +24,4 @@ else
 end
 
 % Send all triggers at once
-calllib('mccFuncLib','cbDOut',t.boardNum,FIRSTPORTA,DataValue);
+calllib('mccFuncLib','cbDOut',t.boardNum,t.channels,DataValue);
