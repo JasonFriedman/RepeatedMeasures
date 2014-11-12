@@ -527,16 +527,16 @@ try
         if thistrial.recording || thistrial.sampleWhenNotRecording || thistrial.showPosition
             stopRecording(e);
         end
-        % Give feedback if recording has taken place
         if thistrial.recording
             dataSummary = getDataSummary(e);
-            if currentTrial>1
-                thistrial = feedback(thistrial.thisresponse,e,thistrial,results.thistrial{currentTrial-1},experimentdata,dataSummary);
-            else
-                thistrial = feedback(thistrial.thisresponse,e,thistrial,[],experimentdata,dataSummary);
-            end
         else
             dataSummary = NaN;
+        end
+        % Give feedback
+        if currentTrial>1
+            thistrial = feedback(thistrial.thisresponse,e,thistrial,results.thistrial{currentTrial-1},experimentdata,dataSummary);
+        else
+            thistrial = feedback(thistrial.thisresponse,e,thistrial,[],experimentdata,dataSummary);
         end
         
         DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);

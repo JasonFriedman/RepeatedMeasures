@@ -3,9 +3,11 @@
 
 function thistrial = feedback(r,e,thistrial,previoustrial,experimentdata,dataSummary)
 
-% Feedback will only shown when using the keyboard server
 if isfield(dataSummary,'kb_firstpressed')
     firstpressed = dataSummary.kb_firstpressed;
     RT = dataSummary.kb_RT;
     thistrial = feedbackCommon(r,e,thistrial,RT,firstpressed,r.keytopress,experimentdata);
+elseif isfield(thistrial,'kb_firstpressed')
+    firstpressed = thistrial.kb_firstpressed;
+    thistrial = feedbackCommon(r,e,thistrial,NaN,firstpressed,r.keytopress,experimentdata);
 end

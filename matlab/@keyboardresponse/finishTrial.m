@@ -21,6 +21,7 @@ else
 end
 if any(keypressed == r.keytopress)
     toFinish = 1;
+    thistrial.kb_firstpressed = keypressed;
 else
     toFinish = 0;
 end
