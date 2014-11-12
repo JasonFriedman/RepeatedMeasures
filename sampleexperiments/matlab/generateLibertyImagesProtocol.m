@@ -1,6 +1,6 @@
-% GENERATEQUESTIMAGESPROTOCOL - generate the protocol file for the QuestImages experiment
+% GENERATELIBERTYIMAGESPROTOCOL - generate the protocol file for the LibertyImages experiment
 %
-% generateQuestImagesProtocol
+% generateLibertyImagesProtocol
 
 function generateLibertyImagesProtocol
 
