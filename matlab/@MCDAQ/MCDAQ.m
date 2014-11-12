@@ -11,7 +11,7 @@
 %
 % channels   = which channels to read from / write to
 %              for digital input or output, it should be a number from cbw.h (in the section "Types of digital I/O")
-%              for digital output, default is FIRSTPORTA (10)
+%              for digital output, default is AUXPORT (1)
 %              for digital input, default is FIRSTPORTB  (11)
 %              for analog input, default is channel 0, can also specify a 1x2 array ([minChannel maxChannel])
 %                and all channels between minChannel and maxChannel inclusive will be sampled
@@ -97,7 +97,7 @@ if in_or_out<=2
     % Setup the port
     if in_or_out == ULconstants.DIGITALOUT % 1
         if isempty(t.channels)
-            t.channels = ULconstants.FIRSTPORTA;
+            t.channels = ULconstants.AUXPORT;
         end
         ptr = calllib('mccFuncLib','cbDConfigPort',t.boardNum,t.channels,ULconstants.DIGITALOUT);
     elseif in_or_out == ULconstants.DIGITALIN %2
