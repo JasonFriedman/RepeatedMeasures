@@ -6,7 +6,12 @@ function [thistrial,experimentdata,breakfromloop,s] = displayFrame(s,e,frame,thi
 screenInfo = experimentdata.screenInfo;
 % Show each frame N times (i.e. 4 = 15 Hz with a 60 Hz monitor)
 thistrial.lineframenum(frame) = ceil(frame/s.framesPerLine);
-thisframe = thistrial.lineArray(thistrial.lineframenum(frame),:)';
+if thistrial.lineframenum(frame)>size(thistrial.lineArray,1)
+    thisframe = thistrial.lineArray(end,:)';
+    warning('Ran out of frames for line stimulus, reusing the last frame. Either the program is running slow or not enough lines were provided!!!!!');
+else
+    thisframe = thistrial.lineArray(thistrial.lineframenum(frame),:)';
+end
 thisx = thisframe(1);
 thisy = thisframe(2);
 thisangle = thisframe(3);
