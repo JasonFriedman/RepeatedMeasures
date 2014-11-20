@@ -27,6 +27,6 @@ elseif thistrial.hitTarget == thistrial.targetNum
 else
     thistrial.successful = 0;
     thistrial.questSuccess = 0;
-    writetolog(e,['Wrong direction (correct = ' num2str(thistrial.targetNum)]);
+    writetolog(e,['Wrong direction (correct = ' num2str(thistrial.targetNum) ')']);
     thistrial.responseText = experimentdata.texts.WRONG;
 end
