@@ -11,6 +11,7 @@ Screen('Flip',experimentdata.screenInfo.curWindow,1);
 if ~all(thistrial.backgroundColor==0)
     Screen(screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
 end
-writetolog(e,'Showed image in showImage');
+thistrial.stimuliFrames = round(thistrial.recordingTime*experimentdata.screenInfo.monRefresh);
+writetolog(e,'Showed image in showImage setup');
 thistrial.recording = 0; % We do not record data in the 'showImage' trials
 % (use  'image' to record)
