@@ -5,9 +5,13 @@
 
 function [started,keyCode] = hasStarted(s,e,experimentdata)
 
-[x,y,buttons] = GetMouse;
-while(buttons(1))
+% Only check the mouse if the tablet is not being used
+devices = fields(get(e,'devices'));
+if ~any(strcmp(devices,'tablet'))
     [x,y,buttons] = GetMouse;
+    while(buttons(1))
+        [x,y,buttons] = GetMouse;
+    end
 end
 
 % wait for the keyboard to be released
