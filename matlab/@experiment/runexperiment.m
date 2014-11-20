@@ -132,6 +132,7 @@ try
         
         % Make any necessary changes to thistrial for the start
         thistrial = setup(thistrial.thisstarttrial,thistrial);
+        writetolog(e,'Ran starttrial setup');
         
         % Setup the recording devices, if appropriate
         if thistrial.recording
@@ -162,7 +163,6 @@ try
         % In all cases, the keyboard should be checked (value return in keyCode) to allow quitting the program between trials
         
         
-        writetolog(e,'Ran starttrial setup');
         % Do the actual waiting.
         % If we need to show the position, we need to turn on sampling (but not record yet)
         startedSamplingWithoutRecording = 0;
@@ -198,9 +198,19 @@ try
         end
         % If the trial has recordingTime of 0 (i.e. just show something), then make sure they have left the key
         % before continuing
-        if thistrial.recordingTime==0 
+        writetolog(e,'Start condition met');
+
+        if thistrial.recordingTime==0
+            alreadyshown = 0;
             while hasStarted(thistrial.thisstarttrial,e,experimentdata)
-                %    ; % wait for them to release the button
+                % wait for them to release the button
+                if ~alreadyshown
+                    writetolog(e,'Waiting for button / key to be release to start recordingTime==0 trial');
+                    alreadyshown = 1;
+                end
+            end
+            if alreadyshown
+                writetolog(e,'Button released');
             end
         end
         
@@ -605,6 +615,7 @@ try
         
         % any post-trial cleanup for the stimulus
         [thistrial,experimentdata] = postTrial(thistrial.thisstimulus,dataSummary,thistrial,experimentdata,e);
+        writetolog(e,'Ran post-trial');
         
         % Write screenshots to disk, if appropriate
         if experimentdata.recordingStimuli
