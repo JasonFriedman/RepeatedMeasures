@@ -638,6 +638,11 @@ try
     closescreen;
     if exist('experimentdata','var')
         results.experimentdata = experimentdata;
+        % If there are staircases, save them in a separate file
+        if isfield(experimentdata,'staircases')
+            staircases = experimentdata.staircases;
+            save([e.resultDir '/staircases.mat'],'staircases');
+        end
     end
     % Save the overall results struct
     if exist('results','var')
@@ -665,6 +670,11 @@ catch err
     % save current data
     if exist('experimentdata','var')
         results.experimentdata = experimentdata;
+        % If there are staircases, save them in a separate file
+        if isfield(experimentdata,'staircases')
+            staircases = experimentdata.staircases;
+            save([e.resultDir '/staircases.mat'],'staircases');
+        end
     end
     % Save the overall results struct
     resultfilename = [e.resultDir '/results.mat'];
