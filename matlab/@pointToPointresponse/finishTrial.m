@@ -15,8 +15,8 @@ else
 end
 if isfield(thistrial,'rotatedposition')
     lastsample(1:2) = thistrial.rotatedposition;
+    lastsample(2) = 1-lastsample(2);
 end
-
 [maxx,maxy] = getmaxxy(e);
 
 % movement stages:

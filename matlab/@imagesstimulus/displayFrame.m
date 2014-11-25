@@ -14,7 +14,7 @@ todraw = -1;
 if ~isempty(e) && ~isempty(s.stateTransitions)
     m = get(e,'devices');
     if isfield(m,'tablet')
-        lastsample = getsample(m.tablet);
+        lastsample = getsampleVisual(m.tablet);
     else
         lastsample = getxyz(e);
         lastsample(4) = 1;
@@ -26,6 +26,7 @@ if ~isempty(e) && ~isempty(s.stateTransitions)
                 sqrt(sum((lastsample(1:2).*[maxx maxy] - experimentdata.targetPosition(s.stateTransitions{m}.position,:).*[maxx maxy]).^2)) < (s.stateTransitions{m}.distanceAllowed * maxx)
             if s.stateTransitions{m}.penTouching==0 || (s.stateTransitions{m}.penTouching==1 && lastsample(4)>0) || (s.stateTransitions{m}.penTouching==2 && lastsample(4)==0) 
                 thistrial.imageState = s.stateTransitions{m}.newState;
+                fprintf('Transition to state %d\n',thistrial.imageState);
                 thistrial.stateSwitchTime = GetSecs;
                 break;
             end

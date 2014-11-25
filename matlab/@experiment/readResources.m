@@ -203,7 +203,7 @@ if ~isempty(experimentdata.images)
     for m=1:numimages
         [experimentdata.images{m},map,experimentdata.alpha{m}] = imread([imageDir imagenames{m}]);
         if ~isempty(map)
-            error('Cannot deal with images with colormap. ');
+            error(['Cannot deal with images with colormap: ' imageDir imagenames{m}]);
         end
         if ~isa(experimentdata.images{m},'uint8')
             error(['Requires 8 bit images. This file is not:' imageDir imagenames{m}]);
