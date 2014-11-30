@@ -647,7 +647,7 @@ try
     % Save the overall results struct
     if exist('results','var')
         resultfilename = [e.resultDir '/results.mat'];
-        save(resultfilename,'results');
+        save(resultfilename,'-v7.3','results');
         writetolog(e,sprintf('Saved result data to file %s',resultfilename));
     else
         results = [];
@@ -679,7 +679,7 @@ catch err
     % Save the overall results struct
     resultfilename = [e.resultDir '/results.mat'];
     if exist('results','var')
-        save(resultfilename,'results');
+        save(resultfilename,'-v7.3','results');
         writetolog(e,sprintf('Saved result data to file %s',resultfilename));
     else
         writetolog(e,sprintf('No variable results to write to file'));
