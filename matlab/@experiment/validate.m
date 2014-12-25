@@ -38,7 +38,7 @@ end
 unique_idx = accumarray(idx(:),(1:length(idx))',[],@(x) {x});
 if any(cellfun(@length,unique_idx)>1)
     for k=1:numel(unique_idx)
-        if numel(unique_idx{k})>0
+        if numel(unique_idx{k})>1
             fprintf('Filename %s is repeated %d times!\n',filenames{unique_idx{k}(1)},numel(unique_idx{k}));
         end
     end
