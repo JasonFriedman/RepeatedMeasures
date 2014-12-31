@@ -36,7 +36,7 @@ triggerParams.name = {'time','type','value','duration'};
 triggerParams.type = {'number','string','number','number'};
 triggerParams.default = {0,'serial',1,0.05};
 triggerParams.required = [1 1 0 0];
-triggerParams.description = {'Trigger time (in seconds)','Type of trigger, one of ''serial'' or ''parallel''','Value to send','Duration (in seconds)'};
+triggerParams.description = {'Trigger time (in seconds)','Type of trigger, one of ''serial'' or ''parallel'' or ''DAQ''','Value to send','Duration (in seconds)'};
 triggerParams.classdescription = 'Provide a trigger at the specified time';
 triggerParams.classname = 'trigger';
 
