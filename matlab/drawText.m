@@ -3,7 +3,11 @@
 % textsize = drawText(thistrial,screenInfo,font,fontsize,fontstyle,thetext,noflip,textsize)
 
 
-function textsize = drawText(thistrial,screenInfo,font,fontsize,fontstyle,thetext,noflip,textsize)
+function textsize = drawText(thistrial,screenInfo,font,fontsize,fontstyle,thetext,noflip,textsize,textColor)
+
+if nargin<9 || isempty(textColor);
+    textColor = [255 255 255];
+end
 
 Screen('TextFont',screenInfo.curWindow, font);
 Screen('TextSize',screenInfo.curWindow, fontsize);
@@ -16,7 +20,7 @@ end
 % draw the text in the center
 textwidth =Screen('DrawText', screenInfo.curWindow,...
     thetext,screenInfo.center(1)-textsize(3)/2, ...
-    screenInfo.center(2)-textsize(4)/2,[255 255 255]);
+    screenInfo.center(2)-textsize(4)/2,textColor);
 if nargin<7 || isempty(noflip) || noflip==0
     Screen('Flip',screenInfo.curWindow,1);
     % If the background is not white, then draw it
