@@ -20,3 +20,7 @@ end
 [v,parent] = readParameters(params,inputParams);
 
 v = class(v,'circlestimulus',stimulus(parent));
+
+if ~exist(['stimuli/' v.circlesFilename],'file')
+    error('The stimuli file %s does not exist',['stimuli/' v.circlesFilename]);
+end

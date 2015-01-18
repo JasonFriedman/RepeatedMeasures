@@ -23,6 +23,10 @@ end
 
 v = class(v,'rectanglestimulus',stimulus(parent));
 
+if ~exist(['stimuli/' v.rectanglesFilename],'file')
+    error('The stimuli file %s does not exist',['stimuli/' v.rectanglesFilename]);
+end
+
 if isempty(v.rectanglesFilename) && isempty(v.rectangles)
     error('Must specify in rectangles either rectanglesFilename or rectangles');
 end
