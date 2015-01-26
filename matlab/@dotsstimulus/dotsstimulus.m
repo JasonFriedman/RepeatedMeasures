@@ -25,6 +25,10 @@ end
 
 v = class(v,'dotsstimulus',stimulus(parent));
 
+if ~exist(['stimuli/' v.dotsFilename],'file')
+    error('The stimuli file %s does not exist',['stimuli/' v.dotsFilename]);
+end
+
 if v.type<3 && numel(v.size)>1
     error('If type is 0,1 or 2  the size must be 1');
 end

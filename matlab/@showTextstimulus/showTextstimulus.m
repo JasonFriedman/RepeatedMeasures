@@ -2,11 +2,11 @@
 
 function [v,params] = showTextstimulus(inputParams,experimentdata)
 
-params.name = {'text'};
-params.type = {'string'};
-params.description = {'The text to display'};
-params.required = 1;
-params.default = {[]};
+params.name = {'text','showBeforeStart','color'};
+params.type = {'string','boolean','matrix_1_3'};
+params.description = {'The text to display','Whether to show the text (also) before the trial starts','Text color (each element 0 to 255)'};
+params.required = [1 0 0];
+params.default = {'',1,[255 255 255]};
 params.classdescription = 'Show a string of text for the whole trial';
 params.classname = 'showTextstimulus';
 params.parentclassname = 'stimulus';

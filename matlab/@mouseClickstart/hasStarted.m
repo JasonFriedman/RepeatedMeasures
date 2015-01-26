@@ -4,7 +4,14 @@
 function [started,keyCode] = hasStarted(m,e,experimentdata)
 
 devices = get(e,'devices');
-lastsample = getsample(devices.mouse);
+if isfield(devices,'mouse')
+    lastsample = getsample(devices.mouse);
+else
+    [x,y,buttons] = GetMouse;
+    lastsample(1) = x ./ experimentdata.screenInfo.screenRect(3);
+    lastsample(2) = y ./ experimentdata.screenInfo.screenRect(4);
+    lastsample(3) = buttons(1);
+end
 
 started = 0;
 if numel(lastsample)>1

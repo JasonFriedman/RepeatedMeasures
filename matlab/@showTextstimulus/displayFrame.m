@@ -9,7 +9,7 @@ thetext = thisstimulus.text;
 if ~isempty(experimentdata.vr) && experimentdata.vr.stereomode>0
     for k=0:1
         Screen('SelectStereoDrawBuffer', experimentdata.screenInfo.curWindow, k);
-        drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,thetext,1);
+        drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,thetext,1,[],thisstimulus.color);
     end
 else
     % This is necessary because sometimes, randomly, the textsize jumps
