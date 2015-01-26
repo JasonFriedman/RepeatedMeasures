@@ -3,6 +3,9 @@
 % sendTriggers(e,experimentdata,type,onoff,value)
 function sendTriggers(e,experimentdata,type,onoff,value)
 
+codes = messagecodes;
+MarkEvent(e,codes.triggerSent,value);
+
 if strcmp(type,'serial')
     sendmessage(experimentdata.serial,uint8(value));
 elseif strcmp(type,'parallel')
