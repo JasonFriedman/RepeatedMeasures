@@ -7,7 +7,7 @@
 % maxsamplerate the maximum it will do (to avoid buffer overflows)
 %
 % e.g.
-% d = tabletserver(3009,150,43600,32799);
+% d = tabletserver(3009,150);
 % listen(d);
 
 function d = tabletserver(port,samplerate,debug)
