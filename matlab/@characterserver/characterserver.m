@@ -11,6 +11,10 @@
 
 function cs = characterserver(port,maxnumsamples,filename,debug)
 
+if isnumeric(filename)
+    filename = sprintf('file%d.csv',filename);
+end
+
 if nargin<3 || isempty(debug)
     debug = 0;
 end
