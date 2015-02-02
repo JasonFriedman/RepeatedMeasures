@@ -18,38 +18,37 @@ if ~isnan(lastsample(1))
         %thistrial.startMovementLocation
         %mod(GetSecs(),1000)
     end
-end
-
-if thistrial.movementStage==-1 && sqrt(sum((lastsample - thistrial.startMovementLocation).^2)) >= r.startDistance
-    thistrial.movementStage = 0;
-    %fprintf('Movement started! Last sample is \n');
-    %lastsample
-    %mod(GetSecs(),1000)
-end
-
-if thistrial.movementStage==0 && sqrt(sum((lastsample - thistrial.previouslocation).^2)) <= r.endDistance
-    thistrial.movementStage = 1;
-    thistrial.startedStopping = GetSecs();
-    %fprintf('Movement stopped, starting to wait\n');
-    %mod(GetSecs(),1000)
-end
-
-if thistrial.movementStage==1
-    if sqrt(sum((lastsample - thistrial.previouslocation).^2)) > r.endDistance
+    
+    if thistrial.movementStage==-1 && sqrt(sum((lastsample - thistrial.startMovementLocation).^2)) >= r.startDistance
         thistrial.movementStage = 0;
-     %   fprintf('Started moving again\n');
-    else
-        if GetSecs() - thistrial.startedStopping >= r.duration
-            thistrial.movementStage = 2;
-            toFinish = true;
-      %      fprintf('Movement finished\n');
+        %fprintf('Movement started! Last sample is \n');
+        %lastsample
+        %mod(GetSecs(),1000)
+    end
+    
+    if thistrial.movementStage==0 && sqrt(sum((lastsample - thistrial.previouslocation).^2)) <= r.endDistance
+        thistrial.movementStage = 1;
+        thistrial.startedStopping = GetSecs();
+        %fprintf('Movement stopped, starting to wait\n');
+        %mod(GetSecs(),1000)
+    end
+    
+    if thistrial.movementStage==1
+        if sqrt(sum((lastsample - thistrial.previouslocation).^2)) > r.endDistance
+            thistrial.movementStage = 0;
+            %   fprintf('Started moving again\n');
         else
-       %     fprintf('Still stopped, waiting for time to pass\n');
+            if GetSecs() - thistrial.startedStopping >= r.duration
+                thistrial.movementStage = 2;
+                toFinish = true;
+                %      fprintf('Movement finished\n');
+            else
+                %     fprintf('Still stopped, waiting for time to pass: %.2f\n',mod(GetSecs(),1000));
+            end
         end
     end
+    thistrial.previouslocation = lastsample;
 end
-
-thistrial.previouslocation = lastsample;
 
 [keyIsDown, secs, keycode] = KbCheck;
 if ~isempty(find(keycode,1)) && (find(keycode,1)==KbName('q') || find(keycode,1)==KbName('n'))
