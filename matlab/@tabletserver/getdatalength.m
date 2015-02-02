@@ -4,5 +4,5 @@
 
 function datalength = getdatalength(k,numberofmarkers)
 
-% each frame has 5+1 values (x,y,z,pressure) + timestamp ( + marker)
-datalength = 6;
+% each frame has 5+1 values (x,y,z,pressure) + timestamp + GetSecs ( + marker)
+datalength = 7;

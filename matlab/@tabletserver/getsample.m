@@ -8,11 +8,11 @@ function [data,framenumber] = getsample(k,nummarkers)
 pkt = WinTabMex(5);
 
 if isempty(pkt)
-    data = [];
+    data = [NaN NaN NaN NaN NaN GetSecs];
     framenumber = NaN;
 else
     % x y z position, the pressure, and the time
     framenumber = pkt(6);
-    data = [pkt(1:3)' pkt(9) framenumber];
+    data = [pkt(1:3)' pkt(9) framenumber GetSecs];
     
 end
