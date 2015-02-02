@@ -639,7 +639,7 @@ try
     if exist('experimentdata','var')
         results.experimentdata = experimentdata;
         % If there are staircases, save them in a separate file
-        if isfield(experimentdata,'staircases')
+        if isfield(experimentdata,'staircases') && ~isempty(experimentdata.staircases)
             staircases = experimentdata.staircases;
             save([e.resultDir '/staircases.mat'],'staircases');
         end
@@ -671,7 +671,7 @@ catch err
     if exist('experimentdata','var')
         results.experimentdata = experimentdata;
         % If there are staircases, save them in a separate file
-        if isfield(experimentdata,'staircases')
+        if isfield(experimentdata,'staircases') && ~isempty(experimentdata.staircases)
             staircases = experimentdata.staircases;
             save([e.resultDir '/staircases.mat'],'staircases');
         end
