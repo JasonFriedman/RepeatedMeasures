@@ -42,19 +42,25 @@ function fn = makeindividualpage(params,superclassparams)
 function maketable(fp,params,superclassparams)
 
 NY = 'NY';
+supersuperclassparams = [];
 
 if isempty(superclassparams) && isfield(params,'parentclassname')
     eval(['[v,superclassparams] = ' params.parentclassname ';']);
+    if ~isempty(superclassparams) && isfield(superclassparams,'parentclassname') && ~isempty(superclassparams.parentclassname)
+        eval(['[v2,supersuperclassparams] = ' superclassparams.parentclassname ';']);
+    end
 end
 
 fprintf(fp,'<TABLE border="1">\n');
 fprintf(fp,'<TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>\n');
     
 
-for j=1:2
+for j=1:3
     if j==1
+        p = supersuperclassparams;
+    elseif j==2
         p = superclassparams;
-    else
+    elseif j==3
         p = params;
     end
     if ~isempty(p)
@@ -102,8 +108,16 @@ for j=1:2
             end
             if isempty(p.default{k})
                 fprintf(fp,'<TD>[]</TD>');
-            elseif strcmp(p.type{k},'string') || strcmp(p.type{k},'boolean')
+            elseif strcmp(p.type{k},'string') 
                 fprintf(fp,'<TD>''%s''</TD>',p.default{k});
+            elseif strcmp(p.type{k},'boolean')
+                if isa(p.default{k},'char')
+                    fprintf(fp,'<TD>''%s''</TD>',p.default{k});
+                elseif p.default{k}
+                    fprintf(fp,'<TD>true</TD>');
+                else
+                    fprintf(fp,'<TD>false</TD>');
+                end
             elseif isnumeric(p.default{k}) && numel(p.default{k})>1
                 fprintf(fp,'<TD>[');
                 for n=1:numel(p.default{k})
@@ -133,7 +147,11 @@ for j=1:2
                 elseif iscell(p.default{k})
                     fprintf(fp,'<TD>{');
                     for m=1:numel(p.default{k})
-                        fprintf(fp,'%s',p.default{k}{m});
+                        if isnumeric(p.default{k}{m})
+                            fprintf(fp,'%.2f ',p.default{k}{m});
+                        else
+                            fprintf(fp,'%s',p.default{k}{m});
+                        end
                         if m<numel(p.default{k})
                             fprintf(fp,',');
                         end
