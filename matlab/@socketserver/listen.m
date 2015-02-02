@@ -44,12 +44,14 @@ while 1
     %    WaitSecs(0.9*((1/s.framerate) - (currenttime - lastsampletime) ));
     %end
     [data,framenumber] = getsample(s,nummarkers);
-    if (framenumber-lastframe) > 0.0001 % account for rounding errors
+    if (framenumber-lastframe) > 0.0001 || marker>0 % account for rounding errors
       sampletime(currentSample) = GetSecs;
       databuffer(currentSample,1:end-1) = data;
       databuffer(currentSample,end) = marker;
       marker=0;
-      lastframe = framenumber;
+      if ~isnan(framenumber)
+          lastframe = framenumber;
+      end
       % increment sample number if recording
       if maximumframes < inf
           currentSample = currentSample + 1;
