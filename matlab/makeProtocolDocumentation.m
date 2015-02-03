@@ -1,5 +1,4 @@
 % MAKEPROTOCOLDOCUMENTATION - make documentation for the protocol files
-% TODO - include staircase
 
 function makeProtocolDocumentation
 
@@ -119,33 +118,35 @@ for j=1:2
                     end
                 end
                 fprintf(fp,']</TD>');
-            else
-                if isstruct(p.default{k})
-                    f = fields(p.default{k});
-                    fprintf(fp,'<TD>');
-                    for m=1:numel(f)
-                        fprintf(fp,'%s: ',f{m});
-                        if round(p.default{k}.(f{m}))==p.default{k}.(f{m})
-                            fprintf(fp,'%d</BR>',p.default{k}.(f{m}));
-                        else
-                            printf(fp,'%.2f</BR>',p.default{k}.(f{m}));
-                        end
+            elseif isstruct(p.default{k})
+                f = fields(p.default{k});
+                fprintf(fp,'<TD>');
+                for m=1:numel(f)
+                    fprintf(fp,'%s: ',f{m});
+                    if round(p.default{k}.(f{m}))==p.default{k}.(f{m})
+                        fprintf(fp,'%d</BR>',p.default{k}.(f{m}));
+                    else
+                        printf(fp,'%.2f</BR>',p.default{k}.(f{m}));
                     end
-                    fprintf(fp,'</TD>');
-                elseif iscell(p.default{k})
-                    fprintf(fp,'<TD>{');
-                    for m=1:numel(p.default{k})
-                        fprintf(fp,'%s',p.default{k}{m});
-                        if m<numel(p.default{k})
-                            fprintf(fp,',');
-                        end
-                    end
-                    fprintf(fp,'}</TD>');
-                elseif round(p.default{k})==p.default{k}
-                    fprintf(fp,'<TD>%d</TD>',p.default{k});
-                else
-                    fprintf(fp,'<TD>%.2f</TD>',p.default{k});
                 end
+                fprintf(fp,'</TD>');
+            elseif iscell(p.default{k})
+                fprintf(fp,'<TD>{');
+                for m=1:numel(p.default{k})
+                    if isnumeric(p.default{k}{m})
+                        fprintf(fp,'%.2f ',p.default{k}{m});
+                    else
+                        fprintf(fp,'%s ',p.default{k}{m});
+                    end
+                    if m<numel(p.default{k})
+                        fprintf(fp,',');
+                    end
+                end
+                fprintf(fp,'}</TD>');
+            elseif round(p.default{k})==p.default{k}
+                fprintf(fp,'<TD>%d</TD>',p.default{k});
+            else
+                fprintf(fp,'<TD>%.2f</TD>',p.default{k});
             end
             fprintf(fp,'<TD>%s</TD></TR>\n',p.description{k});
         end

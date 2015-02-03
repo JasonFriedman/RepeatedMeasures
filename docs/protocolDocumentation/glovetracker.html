@@ -4,7 +4,16 @@
 This connects to both a glove and tracker (fastrak / liberty) server (or emulator).<BR><BR>
 <TABLE border="1">
 <TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
-<TR><TD>glove</TD><TD>Yes</TD><TD></TD><TD>[]</TD><TD>Parameters for a glove (i.e., host and port). Use "emulator" to use an emalated glove (see gloveemulator documentation for more details)</TD></TR>
-<TR><TD>tracker</TD><TD>Yes</TD><TD></TD><TD>[]</TD><TD>Parameters for a tracker (fastrak or liberty), use "emulator" to use an emulated tracker (see trackereumator documentation) or "fixed" for a fixed hand orientation (see fixedtracker documentation)</TD></TR>
+<TR><TD>glove</TD><TD>Yes</TD><TD>One of:<BR>
+<A HREF="socketclient_glove.html">glove</A><BR>
+<A HREF="gloveemulator.html">gloveemulator</A><BR>
+<A HREF="fixedglove.html">fixedglove</A><BR>
+</TD><TD>fixedglove</TD><TD>Parameters for a glove (i.e., host and port). Use "emulator" to use an emalated glove (see gloveemulator documentation for more details)</TD></TR>
+<TR><TD>tracker</TD><TD>Yes</TD><TD>One of:<BR>
+<A HREF="socketclient_fastrak.html">fastrak</A><BR>
+<A HREF="socketclient_liberty.html">liberty</A><BR>
+<A HREF="trackeremulator.html">trackeremulator</A><BR>
+<A HREF="fixedtracker.html">fixedtracker</A><BR>
+</TD><TD>fixedtracker</TD><TD>Parameters for a tracker (fastrak or liberty), use "emulator" to use an emulated tracker (see trackereumator documentation) or "fixed" for a fixed hand orientation (see fixedtracker documentation)</TD></TR>
 <TR><TD>noVHT</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>Set to 1 if you do not have or want to use the Virtualhand toolkit (limited functionality)</TD></TR>
 </TABLE></BODY></HTML>

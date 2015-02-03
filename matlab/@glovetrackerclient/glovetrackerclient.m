@@ -17,13 +17,22 @@
 
 function [gfc,params] = glovetrackerclient(inputParams,e,debug)
 
+[~,gloveParams] = gloveclient;
+[~,gloveEmulatorParams] = gloveemulatorclient;
+[~,fixedGloveParams] = fixedgloveclient;
+
+[~,fastrakParams] = fastrakclient;
+[~,libertyParams] = libertyclient;
+[~,trackerEmulatorParams] = trackeremulatorclient;
+[~,fixedTrackerParams] = fixedtrackerclient;
+
 params.name = {'glove','tracker','noVHT'};
-params.type = {'ignore','ignore','number'};
+params.type = {{gloveParams,gloveEmulatorParams,fixedGloveParams},{fastrakParams,libertyParams,trackerEmulatorParams,fixedTrackerParams},'number'};
 params.description = {'Parameters for a glove (i.e., host and port). Use "emulator" to use an emalated glove (see gloveemulator documentation for more details)',...
     'Parameters for a tracker (fastrak or liberty), use "emulator" to use an emulated tracker (see trackereumator documentation) or "fixed" for a fixed hand orientation (see fixedtracker documentation)',...
     'Set to 1 if you do not have or want to use the Virtualhand toolkit (limited functionality)'};
 params.required = [1 1 0];
-params.default = {[],[],0};
+params.default = {fixedGloveParams,fixedTrackerParams,0};
 params.classdescription = 'This connects to both a glove and tracker (fastrak / liberty) server (or emulator).';
 params.classname = 'glovetracker';
 

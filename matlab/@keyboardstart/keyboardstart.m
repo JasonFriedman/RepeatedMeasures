@@ -3,10 +3,10 @@
 function [k,params] = keyboardstart(inputParams,experimentdata)
 
 params.name = {'keytopress'};
-params.type = {'ignore'};
+params.type = {'string'};
 params.description = {'Key to press to start the trial (default space)'};
 params.required = 0;
-params.default = {KbName('space')};
+params.default = {'space'};
 params.classdescription = 'The trial is started by pressing a key';
 params.classname = 'keyboardstart';
 params.parentclassname = 'start';
@@ -20,8 +20,6 @@ end
 
 k.Q = KbName('q');
 
-if isfield(inputParams,'keytopress')
-    k.keytopress = KbName(inputParams.keytopress);
-end
+k.keytopress = KbName(k.keytopress);
 
 k = class(k,'keyboardstart',start(parent));
