@@ -4,20 +4,20 @@
 Virtual reality (rendered glove)<BR><BR>
 <TABLE border="1">
 <TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
-<TR><TD>stimuliOnTime</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>Time for the hand to appear (0 = from the start)</TD></TR>
-<TR><TD>stimuliOffTime</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>Inf</TD><TD>Time for the hand to disappear (inf = never)</TD></TR>
-<TR><TD>showFlipped</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>whether to flip the screen horizontally (for viewing in a mirror</TD></TR>
-<TR><TD>basejointangles</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>whether this trial defines base joint angles (for a later angleshift)</TD></TR>
-<TR><TD>target</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="target.html">struct</A></TD><TD>[]</TD><TD>details of the targets to display</TD></TR>
-<TR><TD>calibrate</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="calibrate.html">struct</A></TD><TD>[]</TD><TD>initial parameters for the calibration</TD></TR>
-<TR><TD>angleshift</TD><TD>N</TD><TD>loadArray</TD><TD>[]</TD><TD>filename of the angleshift</TD></TR>
-<TR><TD>positionshift</TD><TD>N</TD><TD>loadArray</TD><TD>[]</TD><TD>filename of the positionshift</TD></TR>
-<TR><TD>orientationshift</TD><TD>N</TD><TD>loadArray</TD><TD>[]</TD><TD>filename of the orientationshift</TD></TR>
-<TR><TD>timeshift</TD><TD>N</TD><TD>loadArray</TD><TD>[]</TD><TD>filename of the timeshift</TD></TR>
-<TR><TD>cameralocation</TD><TD>N</TD><TD><A title="A 1 by 3 matrix (see description for how to fill it)">1 by 3 matrix</A></TD><TD>[]</TD><TD>camera location (x,y,z), if not specified the value from setup.vr is used</TD></TR>
-<TR><TD>center</TD><TD>N</TD><TD><A title="A 1 by 3 matrix (see description for how to fill it)">1 by 3 matrix</A></TD><TD>[]</TD><TD>center of scene (x,y,z), if not specified the value from setup.vr is used</TD></TR>
-<TR><TD>up</TD><TD>N</TD><TD><A title="A 1 by 3 matrix (see description for how to fill it)">1 by 3 matrix</A></TD><TD>[]</TD><TD>up direction (x,y,z), if not specified the value from setup.vr is used</TD></TR>
-<TR><TD>frustum</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="frustum.html">struct</A></TD><TD>[]</TD><TD>Viewing transformation, if not specified the value from setup.vr is used</TD></TR>
-<TR><TD>showPositionType</TD><TD>N</TD><TD>string</TD><TD>'hand'</TD><TD>If showPosition is being used (must be set for this trial separately), what type of position to show. Can be either 'hand' to show the hand, or 'fingertips' to show only the fingertips</TD></TR>
-<TR><TD>showPositionFingers</TD><TD>N</TD><TD><A title="A 1 by 5 matrix (see description for how to fill it)">1 by 5 matrix</A></TD><TD>[1,1,1,1,1]</TD><TD>If showPositionType is 'fingertips', then which fingertips to show (set to 1 to show the fingertip, 0 to not show that fingertip)</TD></TR>
+<TR><TD>stimuliOnTime</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>Time for the hand to appear (0 = from the start)</TD></TR>
+<TR><TD>stimuliOffTime</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>Inf</TD><TD>Time for the hand to disappear (inf = never)</TD></TR>
+<TR><TD>showFlipped</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>whether to flip the screen horizontally (for viewing in a mirror</TD></TR>
+<TR><TD>basejointangles</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>whether this trial defines base joint angles (for a later angleshift)</TD></TR>
+<TR><TD>target</TD><TD>No</TD><TD><A title="follow link to see details of the struct" HREF="target.html">struct</A></TD><TD>[]</TD><TD>details of the targets to display</TD></TR>
+<TR><TD>calibrate</TD><TD>No</TD><TD><A title="follow link to see details of the struct" HREF="calibrate.html">struct</A></TD><TD>[]</TD><TD>initial parameters for the calibration</TD></TR>
+<TR><TD>angleshift</TD><TD>No</TD><TD>loadArray</TD><TD>[]</TD><TD>filename of the angleshift</TD></TR>
+<TR><TD>positionshift</TD><TD>No</TD><TD>loadArray</TD><TD>[]</TD><TD>filename of the positionshift</TD></TR>
+<TR><TD>orientationshift</TD><TD>No</TD><TD>loadArray</TD><TD>[]</TD><TD>filename of the orientationshift</TD></TR>
+<TR><TD>timeshift</TD><TD>No</TD><TD>loadArray</TD><TD>[]</TD><TD>filename of the timeshift</TD></TR>
+<TR><TD>cameralocation</TD><TD>No</TD><TD><A title="A 1 by 3 matrix (see description for how to fill it)">1 by 3 matrix</A></TD><TD>[]</TD><TD>camera location (x,y,z), if not specified the value from setup.vr is used</TD></TR>
+<TR><TD>center</TD><TD>No</TD><TD><A title="A 1 by 3 matrix (see description for how to fill it)">1 by 3 matrix</A></TD><TD>[]</TD><TD>center of scene (x,y,z), if not specified the value from setup.vr is used</TD></TR>
+<TR><TD>up</TD><TD>No</TD><TD><A title="A 1 by 3 matrix (see description for how to fill it)">1 by 3 matrix</A></TD><TD>[]</TD><TD>up direction (x,y,z), if not specified the value from setup.vr is used</TD></TR>
+<TR><TD>frustum</TD><TD>No</TD><TD><A title="follow link to see details of the struct" HREF="frustum.html">struct</A></TD><TD>[]</TD><TD>Viewing transformation, if not specified the value from setup.vr is used</TD></TR>
+<TR><TD>showPositionType</TD><TD>No</TD><TD>string</TD><TD>'hand'</TD><TD>If showPosition is being used (must be set for this trial separately), what type of position to show. Can be either 'hand' to show the hand, or 'fingertips' to show only the fingertips</TD></TR>
+<TR><TD>showPositionFingers</TD><TD>No</TD><TD><A title="A 1 by 5 matrix (see description for how to fill it)">1 by 5 matrix</A></TD><TD>[1,1,1,1,1]</TD><TD>If showPositionType is 'fingertips', then which fingertips to show (set to 1 to show the fingertip, 0 to not show that fingertip)</TD></TR>
 </TABLE></BODY></HTML>

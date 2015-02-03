@@ -4,9 +4,9 @@
 Define details of the tactor stimulation<BR><BR>
 <TABLE border="1">
 <TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
-<TR><TD>COMport</TD><TD>Y</TD><TD>string</TD><TD>''</TD><TD>Either a number (indicating a serial port to connect to  - can be found in Device manager), or a string, indicating a bluetooth identifier (can be found using instrhwinfo('Bluetooth'))</TD></TR>
-<TR><TD>sequences</TD><TD>N</TD><TD><A title="follow link to see details of the struct" HREF="tactorSequences.html">struct</A></TD><TD>[]</TD><TD>description of the tactor sequences that can be played back later</TD></TR>
-<TR><TD>sinFreq1</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>250</TD><TD>Frequency of the first sine wave (sine wave(s) to use can be defined in sequences)</TD></TR>
-<TR><TD>sinFreq2</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>240</TD><TD>Frequency of the second sine wave (sine wave(s) to use can be defined in sequences)</TD></TR>
-<TR><TD>gain</TD><TD>N</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>3</TD><TD>Gain level of the amplifiers (0,1,2 or 3)</TD></TR>
+<TR><TD>COMport</TD><TD>Yes</TD><TD>string</TD><TD>''</TD><TD>Either a number (indicating a serial port to connect to  - can be found in Device manager), or a string, indicating a bluetooth identifier (can be found using instrhwinfo('Bluetooth'))</TD></TR>
+<TR><TD>sequences</TD><TD>No</TD><TD><A title="follow link to see details of the struct" HREF="tactorSequences.html">struct</A></TD><TD>[]</TD><TD>description of the tactor sequences that can be played back later</TD></TR>
+<TR><TD>sinFreq1</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>250</TD><TD>Frequency of the first sine wave (sine wave(s) to use can be defined in sequences)</TD></TR>
+<TR><TD>sinFreq2</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>240</TD><TD>Frequency of the second sine wave (sine wave(s) to use can be defined in sequences)</TD></TR>
+<TR><TD>gain</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>3</TD><TD>Gain level of the amplifiers (0,1,2 or 3)</TD></TR>
 </TABLE></BODY></HTML>

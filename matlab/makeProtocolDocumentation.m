@@ -41,26 +41,20 @@ function fn = makeindividualpage(params,superclassparams)
 
 function maketable(fp,params,superclassparams)
 
-NY = 'NY';
-supersuperclassparams = [];
+requiredStrings = {'No','Yes','Zero or more','One or more'};
 
 if isempty(superclassparams) && isfield(params,'parentclassname')
     eval(['[v,superclassparams] = ' params.parentclassname ';']);
-    if ~isempty(superclassparams) && isfield(superclassparams,'parentclassname') && ~isempty(superclassparams.parentclassname)
-        eval(['[v2,supersuperclassparams] = ' superclassparams.parentclassname ';']);
-    end
 end
 
 fprintf(fp,'<TABLE border="1">\n');
 fprintf(fp,'<TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>\n');
     
 
-for j=1:3
+for j=1:2
     if j==1
-        p = supersuperclassparams;
-    elseif j==2
         p = superclassparams;
-    elseif j==3
+    else
         p = params;
     end
     if ~isempty(p)
@@ -70,7 +64,7 @@ for j=1:3
             if iscell(required_tmp)
                 required_tmp = required_tmp{1};
             end
-            fprintf(fp,'<TD>%s</TD>',NY(required_tmp+1));
+            fprintf(fp,'<TD>%s</TD>',requiredStrings{required_tmp+1});
             if isstruct(p.type{k})
                 fn = makeindividualpage(p.type{k},[]);
                 fprintf(fp,'<TD><A title="follow link to see details of the struct" HREF="%s">struct</A></TD>',fn);
@@ -108,16 +102,10 @@ for j=1:3
             end
             if isempty(p.default{k})
                 fprintf(fp,'<TD>[]</TD>');
-            elseif strcmp(p.type{k},'string') 
+            elseif iscell(p.type{k})
+                fprintf(fp,'<TD>%s</TD>',p.default{k}.classname);
+            elseif strcmp(p.type{k},'string') || strcmp(p.type{k},'boolean')
                 fprintf(fp,'<TD>''%s''</TD>',p.default{k});
-            elseif strcmp(p.type{k},'boolean')
-                if isa(p.default{k},'char')
-                    fprintf(fp,'<TD>''%s''</TD>',p.default{k});
-                elseif p.default{k}
-                    fprintf(fp,'<TD>true</TD>');
-                else
-                    fprintf(fp,'<TD>false</TD>');
-                end
             elseif isnumeric(p.default{k}) && numel(p.default{k})>1
                 fprintf(fp,'<TD>[');
                 for n=1:numel(p.default{k})
@@ -147,11 +135,7 @@ for j=1:3
                 elseif iscell(p.default{k})
                     fprintf(fp,'<TD>{');
                     for m=1:numel(p.default{k})
-                        if isnumeric(p.default{k}{m})
-                            fprintf(fp,'%.2f ',p.default{k}{m});
-                        else
-                            fprintf(fp,'%s',p.default{k}{m});
-                        end
+                        fprintf(fp,'%s',p.default{k}{m});
                         if m<numel(p.default{k})
                             fprintf(fp,',');
                         end
