@@ -108,7 +108,7 @@ params.description = {'Cell array of the filenames of the images (which are in t
 
 params.default = {[],[],[],[],[],[],70,30,...
     68,0,NaN,[],[],0,[],[],NaN,[],[],[],[]};
-params.required = [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
+params.required = [0 0 0 2 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
 params.classdescription = 'General parameters for the entire expriment';
 params.classname = 'experimentdata';
 
