@@ -88,6 +88,9 @@ codes.FORCESENSORS_getParameters = 101;
 % Set the hemisphere (0 = FRONT (forward), 1 = BACK (rear), 2 = TOP (upper), 3 = BOTTOM (lower),4 = LEFT, and 5 =  RIGHT)
 codes.TRAKSTAR_SetHemisphere = 120;
 
+codes.GLOVE_getRawData = 130;
+
+
 %% Mark event codes [ Not that these are separate from the above codes, so they can overlap]
 
 % First frame displayed

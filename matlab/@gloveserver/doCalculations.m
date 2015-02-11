@@ -12,4 +12,5 @@ function dataSummary = doCalculations(g,data)
 dataSummary.dummy = 1;
 
 dataSummary.meanjointangles = mean(data);
+data(:,1) = data(:,1) - data(1,1); % subtract the first time to make the numbers smaller
 dataSummary.toSave = data;

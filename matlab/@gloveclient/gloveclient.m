@@ -12,11 +12,11 @@
 
 function [gc,params] = gloveclient(inputParams,experiment,debug)
 
-params.name = {};
-params.type = {};
-params.description = {};
-params.required = [];
-params.default = {};
+params.name = {'getRawData'};
+params.type = {'boolean'};
+params.description = {'Whether to get raw data from the glove - an integer between 0 and 255 (otherwise receive calibrated joint angles)'};
+params.required = [0];
+params.default = {false};
 params.classdescription = 'Connect to the cyberglove server to collect glove data';
 params.classname = 'glove';
 params.parentclassname = 'socketclient';
