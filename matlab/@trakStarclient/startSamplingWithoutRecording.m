@@ -10,4 +10,4 @@ codes = messagecodes;
 
 m.parameters = tc.numsensors;
 m.command = codes.startwithoutrecord;
-sendmessage(lc,m,'startWithoutRecord');
+sendmessage(tc,m,'startWithoutRecord');
