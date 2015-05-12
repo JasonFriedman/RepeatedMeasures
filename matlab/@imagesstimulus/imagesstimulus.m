@@ -6,7 +6,7 @@ stateTransitions.name = {'currentState','position','distanceAllowed','penTouchin
 stateTransitions.type = {'number','number','number','number','number','number'};
 stateTransitions.description = {'The state the program is currently in','The position needed to trigger the change (index of the positions in targetPosition)',...
     'the maximum distance from the position that will trigger the change','whether the pen must be touching (If not using a tablet set to 0, for a tablet 0 = doesn''t matter, 1 = must touch, 2 = must not touch)',...
-    'the minimum amount of time that has elasped since arriving in this state','the state to move to if all the conditions are satisfied'};
+    'the minimum amount of time that has elasped since arriving in this state (in seconds)','the state to move to if all the conditions are satisfied'};
 stateTransitions.required = [1 1 1 0 0 1];
 stateTransitions.default = {1,1,1,0,0,1};
 stateTransitions.classdescription = 'Describes of how to transition from state to state. The current state corresponds to the image that will be shown (i.e. row from stimuli)';

@@ -23,7 +23,8 @@ end
 % -1: has not started
 % 0 : has touched start point
 % 1: has crossed mid line
-% 2: has reached finish point
+% 2: has reached finish point (but potentially waiting)
+% 3: has reached finish point and finished waiting
 % (then it returns to -1)
 
 % lastsample(4) is the pressure (must be greater than 0)
@@ -47,11 +48,22 @@ if ~isempty(lastsample)
     elseif thistrial.movementStage == 1
         if sqrt(sum((lastsample(1:2).*[maxx maxy] - experimentdata.targetPosition(r.end,:).*[maxx maxy]).^2)) <= (r.endDistance * maxx)
             thistrial.movementStage = 2;
+            thistrial.reachedStage2 = GetSecs;
         end
     end
 end
 
 if thistrial.movementStage == 2
+    fprintf('In stage 2, GetSecs = %.2f vs thistrial.reachedStage2 %.2f vs r.endtime %.2f \n',GetSecs,thistrial.reachedStage2,r.endtime);
+    if sqrt(sum((lastsample(1:2).*[maxx maxy] - experimentdata.targetPosition(r.end,:).*[maxx maxy]).^2)) > (r.endDistance * maxx)
+        thistrial.movementStage = 1;
+    elseif r.endtime <= (GetSecs-thistrial.reachedStage2)
+        thistrial.movementStage = 3;
+    end
+    % Otherwise wait in stage2 until enough time has passed
+end
+
+if thistrial.movementStage == 3
     thistrial.completedMovements = thistrial.completedMovements + 1;
     fprintf('Completed %d of %d repetitions\n',thistrial.completedMovements,r.repetitions);
     if r.beep
