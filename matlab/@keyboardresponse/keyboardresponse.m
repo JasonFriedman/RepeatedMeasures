@@ -25,6 +25,6 @@ else
         keytopress(m) = KbName(r.keytopress{m});
     end
 end
-r.keytopress = keytopress(m);
+r.keytopress = keytopress;
 
 r = class(r,'keyboardresponse',response(parent));

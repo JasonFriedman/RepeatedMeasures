@@ -5,8 +5,8 @@ function [started,keyCode] = hasStarted(b,e,experimentdata)
 devices = get(e,'devices');
 if get(e,'MCPresent')
     started = readButton(get(e,'MCtrigger'));
-elseif isfield(devices,'buttonbox')
-    started = readButton(devices.buttonbox);
+elseif isfield(devices,'DAQ')
+    started = readButton(devices.DAQ);
 else
     error('No button / DAQ devices are connected');
 end

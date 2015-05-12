@@ -25,7 +25,11 @@ if nargin<5
     numChannelsTotal = 8;
 end
 
+runstring = sprintf('matlab -nojvm -r "d = forcesensorsserver(3016,6000,[%d %d ],0, %s ,%d,%d,1);listen(d)" &',...
+    firstsensor,firstsensor+numsensors-1,parameters,sampleContinuously,numChannelsTotal);
+
+runstring
+
 % for range, 4 = +- 1V, 0 = +- 5V
-system(sprintf('matlab -nojvm -r "d = forcesensorsserver(3016,6000,[%d %d ],0, %s ,%d,%d,1);listen(d)" &',...
-    firstsensor,firstsensor+numsensors-1,parameters,sampleContinuously,numChannelsTotal));
+system(runstring);
 

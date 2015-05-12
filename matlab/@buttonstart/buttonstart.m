@@ -7,17 +7,13 @@ params.type = {};
 params.description = {};
 params.required = [];
 params.default = {};
-params.classdescription = 'The trial starts when a button is pressed, using a button box connected to a DAQ card. To use this, setup.MCtrigger should be set to 1 (for input)';
+params.classdescription = 'The trial starts when a button is pressed, using a button box connected to a DAQ card. To use this, setup.MCtrigger should be set to 1 (for input), or there should be a DAQ device defined as a response device';
 params.classname = 'buttonstart';
 params.parentclassname = 'start';
 
 if nargout>1
     b = [];
     return;
-end
-
-if isempty(experimentdata.MCtrigger)
-    error('Cannot use button start without setting setup.MCtrigger');
 end
 
 [b,parent] = readParameters(params,inputParams);

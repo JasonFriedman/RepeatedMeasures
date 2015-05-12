@@ -10,4 +10,8 @@ sendmessage(t,m,'getsample');
 
 result = receivemessage(t);
 
-pressed = result(3);
+if isempty(result)
+    pressed = 0;
+else
+    pressed = result(3);
+end
