@@ -8,7 +8,6 @@ showPositionRotationAngle = m.showPositionRotationAngle(min([numel(m.showPositio
 showPositionRotationCenter = m.showPositionRotationCenter{min([numel(m.showPositionRotationCenter) thistrial.trialnum])};
 
 if thistrial.showPosition==3
-    
     k=1; % only need one row (because only one mouse)
     if numel(m.offsetX)==1
         lastposition(1) = m.offsetX;
@@ -21,19 +20,19 @@ if thistrial.showPosition==3
         lastposition(2) = m.offsetY(thistrial.trialnum);
     end
     for n=1:2
-        if displayRangeX(k,n*2) ~= displayRangeX(k,n*2-1)
+        if numel(displayRangeX)>0 && displayRangeX(k,n*2) ~= displayRangeX(k,n*2-1)
             lastposition(1) = lastposition(1) + (lastsample(n) - displayRangeX(k,n*2-1)) / (displayRangeX(k,n*2) - displayRangeX(k,n*2-1));
         end
-        if displayRangeY(k,n*2) ~= displayRangeY(k,n*2-1)
+        if numel(displayRangeY)>0 && displayRangeY(k,n*2) ~= displayRangeY(k,n*2-1)
             lastposition(2) = lastposition(2) + (lastsample(n) - displayRangeY(k,n*2-1)) / (displayRangeY(k,n*2) - displayRangeY(k,n*2-1));
         end
     end
-    if displayRangeX(k,5) ~= 0
+    if numel(displayRangeX)>0 && displayRangeX(k,5) ~= 0
         if isfield(thistrial,'StimulusOnsetTime')
             lastposition(1) = lastposition(1) + displayRangeX(k,5) * (GetSecs - thistrial.StimulusOnsetTime(1));
         end
     end
-    if displayRangeY(k,5) ~= 0
+    if numel(displayRangeY)>0 && displayRangeY(k,5) ~= 0
         if isfield(thistrial,'StimulusOnsetTime')
             lastposition(2) = lastposition(2) + displayRangeY(k,5) * (GetSecs - thistrial.StimulusOnsetTime(1));
         end

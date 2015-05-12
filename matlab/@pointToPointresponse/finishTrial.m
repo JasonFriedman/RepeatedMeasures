@@ -8,7 +8,7 @@ toFinish = false;
 
 m = get(e,'devices');
 if isfield(m,'tablet')
-    lastsample = getsample(m.tablet);
+    lastsample = getsampleVisual(m.tablet,thistrial);
 else
     lastsample = getxyz(e);
     lastsample(4) = 1;
