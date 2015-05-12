@@ -54,7 +54,6 @@ if ~isempty(lastsample)
 end
 
 if thistrial.movementStage == 2
-    fprintf('In stage 2, GetSecs = %.2f vs thistrial.reachedStage2 %.2f vs r.endtime %.2f \n',GetSecs,thistrial.reachedStage2,r.endtime);
     if sqrt(sum((lastsample(1:2).*[maxx maxy] - experimentdata.targetPosition(r.end,:).*[maxx maxy]).^2)) > (r.endDistance * maxx)
         thistrial.movementStage = 1;
     elseif r.endtime <= (GetSecs-thistrial.reachedStage2)
