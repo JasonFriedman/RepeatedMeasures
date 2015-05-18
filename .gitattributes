@@ -20,4 +20,6 @@
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
-*.html   diff
+*.html   text
+
+* -crlf
