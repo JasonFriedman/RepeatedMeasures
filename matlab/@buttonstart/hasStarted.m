@@ -1,6 +1,6 @@
 % HASSTARTED - check if the button has been pressed to start the trial
 
-function [started,keyCode] = hasStarted(b,e,experimentdata)
+function [started,keyCode] = hasStarted(b,e,experimentdata,thistrial)
 
 devices = get(e,'devices');
 if get(e,'MCPresent')

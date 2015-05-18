@@ -3,7 +3,7 @@
 % This version does not wait, unless a mouse button or keyboard is pressed
 % (i.e. the response from the previous trial)
 
-function [started,keyCode] = hasStarted(s,e,experimentdata)
+function [started,keyCode] = hasStarted(s,e,experimentdata,thistrial)
 
 % Only check the mouse if the tablet is not being used
 devices = fields(get(e,'devices'));

@@ -1,7 +1,7 @@
 % HASSTARTED - determine whether the trial has started
 % Do not call directly, will be called by runexperiment
 
-function [started,keyCode] = hasStarted(k,e,experimentdata)
+function [started,keyCode] = hasStarted(k,e,experimentdata,thistrial)
 
 started = 0;
 

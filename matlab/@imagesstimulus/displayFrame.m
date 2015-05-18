@@ -5,6 +5,9 @@ function [thistrial,experimentdata,breakfromloop,s] = displayFrame(s,e,frame,thi
 
 breakfromloop = 0;
 
+codes = messagecodes;
+
+
 % This is redrawing the image every
 % frame. As it is using textures, it should be able
 % keep up with the frame rate
@@ -26,7 +29,8 @@ if ~isempty(e) && ~isempty(s.stateTransitions)
                 sqrt(sum((lastsample(1:2).*[maxx maxy] - experimentdata.targetPosition(s.stateTransitions{m}.position,:).*[maxx maxy]).^2)) < (s.stateTransitions{m}.distanceAllowed * maxx)
             if s.stateTransitions{m}.penTouching==0 || (s.stateTransitions{m}.penTouching==1 && lastsample(4)>0) || (s.stateTransitions{m}.penTouching==2 && lastsample(4)==0) 
                 thistrial.imageState = s.stateTransitions{m}.newState;
-                fprintf('Transition to state %d\n',thistrial.imageState);
+                writetolog(e,sprintf('Transition to state %d',thistrial.imageState));
+                markEvent(e,codes.imageState+thistrial.imageState);
                 thistrial.stateSwitchTime = GetSecs;
                 break;
             end

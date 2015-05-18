@@ -172,7 +172,7 @@ try
         end
         started = 0;
         while started==0
-            [started,keyCode] = hasStarted(thistrial.thisstarttrial,e,experimentdata);
+            [started,keyCode] = hasStarted(thistrial.thisstarttrial,e,experimentdata,thistrial);
             if thistrial.showPosition
                 preStart(thistrial.thisstimulus,experimentdata,thistrial,0);
                 DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
@@ -202,7 +202,7 @@ try
 
         if thistrial.recordingTime==0
             alreadyshown = 0;
-            while hasStarted(thistrial.thisstarttrial,e,experimentdata)
+            while hasStarted(thistrial.thisstarttrial,e,experimentdata,thistrial)
                 % wait for them to release the button
                 if ~alreadyshown
                     writetolog(e,'Waiting for button / key to be release to start recordingTime==0 trial');
@@ -292,7 +292,7 @@ try
                 % In the button press cases, they should be still pressing
                 % the button, otherwise abort and repeat the trial
                 % (because the stimuli has not yet been shown)
-                if ~stillAtStart(thistrial.thisstarttrial,e,experimentdata)
+                if ~stillAtStart(thistrial.thisstarttrial,e,experimentdata,thistrial)
                     responseText = experimentdata.texts.TOO_EARLY;
                     drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText);
                     writetolog(e,sprintf('Wrote text %s',responseText));
@@ -411,7 +411,7 @@ try
             % Check if they have started moving already
             if thistrial.checkMoving && thisFrameTime >= thistrial.checkMoving
                 % If they are still pressing the button, abort
-                if stillPressing(thistrial.thisstarttrial,e,experimentdata)
+                if stillPressing(thistrial.thisstarttrial,e,experimentdata,thistrial)
                     DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
                     responseText = experimentdata.texts.TOO_LATE;
                     drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText);
@@ -432,7 +432,7 @@ try
             end
             
             if thistrial.checkMovingAfter && thisFrameTime <= thistrial.checkMovingAfter
-                if ~stillPressing(thistrial.thisstarttrial,e,experimentdata)
+                if ~stillPressing(thistrial.thisstarttrial,e,experimentdata,thistrial)
                     DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
                     responseText = experimentdata.texts.TOO_EARLY;
                     drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText);
@@ -513,7 +513,7 @@ try
             if thistrial.needToStopAudio
                 PsychPortAudio('Stop',experimentdata.pahandle);
             end
-            while stillPressing(thistrial.thisstarttrial,e,experimentdata)
+            while stillPressing(thistrial.thisstarttrial,e,experimentdata,thistrial)
                 %    ; % wait for them to release the button
             end
             if thistrial.recording || thistrial.sampleWhenNotRecording || thistrial.showPosition

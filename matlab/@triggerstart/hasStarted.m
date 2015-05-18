@@ -1,7 +1,7 @@
 % HASSTARTED - has the trial started?
 % Do not call directly, will be called by runexperiment
 
-function [started,keyCode] = hasStarted(m,e,experimentdata)
+function [started,keyCode] = hasStarted(m,e,experimentdata,thistrial)
 
 devices = get(e,'devices');
 if isfield(devices,'DAQ')

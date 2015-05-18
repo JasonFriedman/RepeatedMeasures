@@ -108,8 +108,9 @@ codes.tactored = 2000;
 % Stimulus on
 codes.stimulusOn = 10;
 % trigger marked in file will be 20 + value sent (i.e., high = 21, low = 20)
-codes.triggerSent = 20; 
-
+codes.triggerSent = 20;
+% Image state changed, value marked in file will be 100 + imageState
+codes.imageState = 100;
 
 % codes for video recording (copied from recordVideoProtocol.h)
 

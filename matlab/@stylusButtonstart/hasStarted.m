@@ -1,7 +1,7 @@
 % HASSTARTED - check if the button on the stylus has been pressed (when using a WACOM tablet)
 % Do not call directly, will be called by runexperiment
 
-function [started,keyCode] = hasStarted(s,e,experimentdata)
+function [started,keyCode] = hasStarted(s,e,experimentdata,thistrial)
 
 devices = get(e,'devices');
 
