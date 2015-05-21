@@ -222,7 +222,7 @@ while 1
         end
     if ~isnan(filename(1))
         % Write to disk
-        dlmwrite(filename,thisdata,'precision',8);
+        dlmwrite(filename,thisdata,'precision',10);
         success = mssend(sock,1);
         if isdebug(s)
             fprintf('Return a value to indicate end of savefile, result %d\n',success);
