@@ -73,7 +73,7 @@ handleError(ts,calllib(ts.libstring, 'SetSystemParameter',...
 
 % Set to metric
 handleError(ts,calllib(ts.libstring, 'SetSystemParameter',...
-    enuminfo.SYSTEM_PARAMETER_TYPE.METRIC, boolean(1), 4));
+    enuminfo.SYSTEM_PARAMETER_TYPE.METRIC, logical(1), 4));
 
 % Set recording type (doubles for positions and angle, include time and quality)
 % We set this even for sensors that are not connected so that the output
