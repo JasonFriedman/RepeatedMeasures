@@ -19,6 +19,21 @@ else
         keypressed = -1;
     end
 end
+
+% If the trial was started with a keypress, need to make sure they released
+% the key at sometime
+if isa(thistrial.thisstarttrial,'keyboardstart') && ...
+        (~isfield(thistrial,'releasedKey') || ~thistrial.releasedKey)
+    % If thistrial.releasedKey is 1, it has been released
+    % It has been released so OK to end (later)
+    if numel(keypressed)==0 || keypressed(1)<=0
+        thistrial.releasedKey = 1;
+    else
+        thistrial.releasedKey = 0;
+    end
+    % Set the key pressed to empty
+    keypressed = -1;
+end
 if any(keypressed == r.keytopress)
     toFinish = 1;
     thistrial.kb_firstpressed = keypressed;
