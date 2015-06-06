@@ -18,7 +18,7 @@ end
 
 [r,parent] = readParameters(params,inputParams);
 
-if ~iscell(inputParams.keytopress)
+if ~isfield(inputParams,'keytopress') || ~iscell(inputParams.keytopress)
     keytopress = KbName(r.keytopress);
 else
     for m=1:numel(r.keytopress)
