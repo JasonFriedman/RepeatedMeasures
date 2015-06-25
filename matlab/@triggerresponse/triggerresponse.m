@@ -12,7 +12,7 @@ params.required = [1 1 0];
 params.default = {'DAQ',1,1};
 params.classdescription = 'The trial ends when the an external trigger is received';
 params.classname = 'triggerresponse';
-params.parentclassanme = 'response';
+params.parentclassname = 'response';
 
 if nargout>1
     r = [];

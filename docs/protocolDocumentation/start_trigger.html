@@ -1,0 +1,10 @@
+<HTML>
+<HEAD><TITLE>trigger</TITLE></HEAD>
+<BODY><H1>trigger</H1>
+The trial starts when the an external trigger is received<BR><BR>
+<TABLE border="1">
+<TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
+<TR><TD>type</TD><TD>Yes</TD><TD>string</TD><TD>'DAQ'</TD><TD>Type of trigger to wait for. Currently the only option is 'DAQ'. There must either be a DAQ device defined, or setup.MCtrigger=1</TD></TR>
+<TR><TD>channel</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>channel to wait for a trigger on (first channel = 1)</TD></TR>
+<TR><TD>up</TD><TD>No</TD><TD><A title="True or false">boolean</A></TD><TD>''</TD><TD>whether the trigger is a high value (1) or a low value (0)</TD></TR>
+</TABLE></BODY></HTML>

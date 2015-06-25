@@ -9,7 +9,7 @@ params.required = 0;
 params.default = {[]};
 params.classdescription = 'The trial starts when the mouse button is clicked, optionally in a (possibly invisible) box';
 params.classname = 'mouseClickstart';
-params.parentclassanme = 'start';
+params.parentclassname = 'start';
 
 if nargout>1
     m = [];

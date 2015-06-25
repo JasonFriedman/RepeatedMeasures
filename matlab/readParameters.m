@@ -11,6 +11,17 @@ if ~isfield(params,'classdescription')
     error('All classes must have a field params.classdescription with a description of what the class does.');
 end
 
+if strcmp(params.classname,'mouseInBoxstart')
+    keyboard;
+end
+
+thefields = fields(params);
+for k=1:numel(thefields)
+    if ~any(strcmp({'name','type','description','required','default','classname','classdescription','parentclassname'},thefields{k}))
+        error(['Unknown field ' thefields{k} ' in ' params.classname]);
+    end
+end
+
 % get the parameters for the parent class
 if isfield(params,'parentclassname')
     eval(['[v_tmp,paramsParent] = ' params.parentclassname '();']);

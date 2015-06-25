@@ -9,7 +9,7 @@ params.required = [1 1];
 params.default = {1,1};
 params.classdescription = 'This response is moving past a certain location';
 params.classname = 'movementThresholdresponse';
-params.parentclassanem = 'response';
+params.parentclassname = 'response';
 
 if nargout>1
     r = [];

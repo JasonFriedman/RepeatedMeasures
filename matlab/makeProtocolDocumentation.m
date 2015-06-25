@@ -40,6 +40,13 @@ function fn = makeindividualpage(params,superclassparams)
 
 function maketable(fp,params,superclassparams)
 
+thefields = fields(params);
+for k=1:numel(thefields)
+    if ~any(strcmp({'name','type','description','required','default','classname','classdescription','parentclassname'},thefields{k}))
+        error(['Unknown field ' thefields{k} ' in ' params.classname]);
+    end
+end
+
 requiredStrings = {'No','Yes','Zero or more','One or more'};
 
 if isempty(superclassparams) && isfield(params,'parentclassname')

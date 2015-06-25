@@ -9,7 +9,7 @@ params.required = 1;
 params.default = {1};
 params.classdescription = 'The trial starts when the mouse enters (or is already in) a (potentially invisible) box';
 params.classname = 'mouseInBoxstart';
-params.parentclassanme = 'start';
+params.parentclassname = 'start';
 
 if nargout>1
     m = [];
