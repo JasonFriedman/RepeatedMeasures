@@ -34,11 +34,11 @@ end
 framerate = 30;
 
 if isEmulated
-    experimentDescription.setup.glovetracker.glove.emulator = struct();
-    experimentDescription.setup.glovetracker.tracker.emulator = struct();
+    experimentDescription.setup.glovetracker.glove.gloveemulator = struct();
+    experimentDescription.setup.glovetracker.tracker.trackeremulator = struct();
 else
-    experimentDescription.setup.glovetracker.glove.server = 'localhost';
-    experimentDescription.setup.glovetracker.glove.port = 3011;
+    experimentDescription.setup.glovetracker.glove.glove.server = 'localhost';
+    experimentDescription.setup.glovetracker.glove.glove.port = 3011;
     experimentDescription.setup.glovetracker.tracker.fastrak.server = 'localhost';
     experimentDescription.setup.glovetracker.tracker.fastrak.port = 3015;
     experimentDescription.setup.glovetracker.tracker.fastrak.numReceivers = 1;

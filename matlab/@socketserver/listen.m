@@ -159,7 +159,7 @@ while 1
       maximumtime = received.parameters{3};
       maximumframes = max([1 ceil(maximumtime * s.framerate)]);
       if isempty(maximumframes) || isempty(nummarkers)
-          error('Something is wrong - can''t allocate an empty array');
+          error('Something is wrong - can''t allocate an empty array (framerate = %d, maximumtime = %d, nummarkers = %d',framerate,maximumtime,nummarkers);
       end
       
       datalength = getdatalength(s,nummarkers);

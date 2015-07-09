@@ -43,12 +43,14 @@ end
 
 gfc = readParameters(params,inputParams);
 
-if isfield(inputParams.glove,'emulator')
-    gfc.glove = gloveemulatorclient(inputParams.glove.emulator,e,debug);
-elseif isfield(inputParams.glove,'fixed')
-    gfc.glove = fixedgloveclient(inputParams.glove.fixed,e,debug);
+if isfield(inputParams.glove,'gloveemulator')
+    gfc.glove = gloveemulatorclient(inputParams.glove.gloveemulator,e,debug);
+elseif isfield(inputParams.glove,'fixedglove')
+    gfc.glove = fixedgloveclient(inputParams.glove.fixedglove,e,debug);
+elseif isfield(inputParams.glove,'glove')
+    gfc.glove = gloveclient(inputParams.glove.glove,e,debug);
 else
-    gfc.glove = gloveclient(inputParams.glove,e,debug);
+    error('Unknown glove type');
 end
 if isfield(inputParams.tracker,'fastrak')
     gfc.tracker = fastrakclient(inputParams.tracker.fastrak,e,debug);
@@ -56,11 +58,11 @@ if isfield(inputParams.tracker,'fastrak')
 elseif isfield(inputParams.tracker,'liberty')
     gfc.tracker = libertyclient(inputParams.tracker.liberty,e,debug);
     gfc.trackerType = 'liberty';
-elseif isfield(inputParams.tracker,'emulator')
-    gfc.tracker = trackeremulatorclient(inputParams.tracker.emulator,e,debug);
+elseif isfield(inputParams.tracker,'trackeremulator')
+    gfc.tracker = trackeremulatorclient(inputParams.tracker.trackeremulator,e,debug);
     gfc.trackerType = 'emulator';
-elseif isfield(inputParams.tracker,'fixed')
-    gfc.tracker = fixedtrackerclient(inputParams.tracker.fixed,e,debug);
+elseif isfield(inputParams.tracker,'fixedtracker')
+    gfc.tracker = fixedtrackerclient(inputParams.tracker.fixedtracker,e,debug);
     gfc.trackerType = 'fixed';
 else
     error('Unknown tracker type');

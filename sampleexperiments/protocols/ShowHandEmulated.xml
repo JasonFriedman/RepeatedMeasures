@@ -3,12 +3,12 @@
    <setup>
       <glovetracker>
          <glove>
-            <emulator>
-            </emulator>
+            <gloveemulator>
+            </gloveemulator>
          </glove>
          <tracker>
-            <emulator>
-            </emulator>
+            <trackeremulator>
+            </trackeremulator>
          </tracker>
       </glovetracker>
       <framerate>

@@ -3,12 +3,14 @@
    <setup>
       <glovetracker>
          <glove>
-            <server>
-               localhost
-            </server>
-            <port>
-               3011
-            </port>
+            <glove>
+               <server>
+                  localhost
+               </server>
+               <port>
+                  3011
+               </port>
+            </glove>
          </glove>
          <tracker>
             <fastrak>
