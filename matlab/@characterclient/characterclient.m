@@ -25,8 +25,9 @@ params.description = {'Location of the server (e.g. ''localhost'' or an IP addre
     'Port to connect to the server on'};
 params.required = [1 1];
 params.default = {'localhost',0};
-params.classdescription = 'The is the superclass for all the socket clients, which connect to the servers which sample the devices';
-params.classname = 'socketclient';
+params.classdescription = 'The is a client to connect to a character server (over TCP/IP)';
+params.classname = 'character';
+params.parentclassname = 'socketclient';
 
 if nargout>1
     cc = [];

@@ -661,8 +661,8 @@ try
     if ~isempty(experimentdata.sounds) || ~isempty(experimentdata.beeps)
         PsychPortAudio('Close');
     end
-    % close the log file
-    closelog(e);
+    % close the devices + log file
+    closedevices(e);
 catch err
     fprintf('Caught an error\n');
     fprintf('Error caught on line %d in %s: \n %s \n',err.stack(1).line,err.stack(1).file,err.message);
@@ -691,6 +691,6 @@ catch err
     if ~isempty(experimentdata.serial)
         close(experimentdata.serial);
     end
-    % close the log file
-    closelog(e);
+    % close the devices + log file
+    closedevices(e);
 end

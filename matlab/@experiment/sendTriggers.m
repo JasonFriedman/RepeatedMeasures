@@ -4,10 +4,13 @@
 function sendTriggers(e,experimentdata,type,onoff,value)
 
 codes = messagecodes;
-MarkEvent(e,codes.triggerSent,value);
+markEvent(e,codes.triggerSent+value);
 
 if strcmp(type,'serial')
     sendmessage(experimentdata.serial,uint8(value));
+elseif strcmp(type,'serialportserver')
+    devices = get(e,'devices');
+    sendTrigger(devices.serialport,uint8(value));        
 elseif strcmp(type,'parallel')
     sendmessage(experimentdata.parallel,uint8(value));
 elseif strcmp(type,'DAQ')
