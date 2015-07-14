@@ -61,6 +61,10 @@ end
 
 handles.currenttime = 0;
 handles.playstate = 0;
+handles.xrot = 90;
+handles.yrot = 0;
+handles.zrot = 0;
+
 
 % Update handles structure
 guidata(hObject, handles);
@@ -363,9 +367,9 @@ function xrotSlider_Callback(hObject, ~, handles)
 % hObject    handle to xrotSlider (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-handles.xrotSlider = round(get(hObject,'Value'));
-set(handles.xrotText,'String',sprintf('xrot: %d',handles.xrotSlider));
-handles.orientations = [handles.xrotSlider handles.yrotSlider handles.zrotSlider];
+handles.xrot = round(get(hObject,'Value'));
+set(handles.xrotText,'String',sprintf('xrot: %d',handles.xrot));
+handles.orientations = [handles.xrot handles.yrot handles.zrot];
 guidata(hObject, handles);
 plotgraph(handles);
 
@@ -386,9 +390,9 @@ function yrotSlider_Callback(hObject, ~, handles)
 % hObject    handle to yrotSlider (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-handles.yrotSlider = round(get(hObject,'Value'));
-set(handles.yrotText,'String',sprintf('yrot: %d',handles.yrotSlider));
-handles.orientations = [handles.xrotSlider handles.yrotSlider handles.zrotSlider];
+handles.yrot = round(get(hObject,'Value'));
+set(handles.yrotText,'String',sprintf('yrot: %d',handles.yrot));
+handles.orientations = [handles.xrot handles.yrot handles.zrot];
 guidata(hObject, handles);
 plotgraph(handles);
 
@@ -407,9 +411,9 @@ function zrotSlider_Callback(hObject, ~, handles)
 % hObject    handle to zrotSlider (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-handles.zrotSlider = round(get(hObject,'Value'));
-set(handles.zrotText,'String',sprintf('zrot: %d',handles.zrotSlider));
-handles.orientations = [handles.xrotSlider handles.yrotSlider handles.zrotSlider];
+handles.zrot = round(get(hObject,'Value'));
+set(handles.zrotText,'String',sprintf('zrot: %d',handles.zrot));
+handles.orientations = [handles.xrot handles.yrot handles.zrot];
 guidata(hObject, handles);
 plotgraph(handles);
 
