@@ -22,6 +22,8 @@ elseif tex<0
         Screen(screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
     end
     breakfromloop = 1;
+    % Close the video to free the memory / resources
+    Screen('CloseMovie',thistrial.moviePtr);
 else
     % Draw the new texture immediately to screen:
     Screen('DrawTexture', experimentdata.screenInfo.curWindow, tex);
