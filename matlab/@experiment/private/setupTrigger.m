@@ -10,6 +10,8 @@ if ~isempty(thistrial.trigger)
             % Nothing to do here for setting up parallel trigger
         elseif strcmp(thistrial.trigger{k}.type,'DAQ')
             % Nothing to do here for setting up DAQ trigger
+        elseif strcmp(thistrial.trigger{k}.type,'serialportserver')
+            % Nothing to do here for setting up serialport server trigger
         else
             error(['Unsupported trigger type: ' thistrial.trigger{k}.type]);
         end

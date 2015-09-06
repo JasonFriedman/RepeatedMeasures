@@ -150,6 +150,11 @@ if ~isempty(thistrial.trigger)
             if isempty(experimentdata.MCtrigger)
                 error('Cannot have DAQ triggers in trials without setting MCtrigger in the setup section');
             end
+        elseif strcmp(thistrial.trigger{k}.type,'serialportserver')
+            devices = get(e,'devices');
+            if ~isfield(devices,'serialport')
+                error('Cannot have serial port triggers in trials without defining the serial port client / server');
+            end
         else
             error(['Unknown trigger type ' thistrial.trigger{k}.type]);
         end
