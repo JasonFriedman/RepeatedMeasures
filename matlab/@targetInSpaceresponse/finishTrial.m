@@ -5,15 +5,32 @@ function [toFinish,thistrial,experimentdata] = finishTrial(r,thistrial,experimen
 
 lastposition = getxyz(e);
 toFinish = 0;
+waiting = 0;
 
 for k=1:numel(r.targets)
     thisdistance = sqrt(sum((lastposition - experimentdata.targetPosition(r.targets(k),:)).^2));
     if thisdistance < r.threshold
-        thistrial.pressedLocation = r.targets(k);
-        thistrial.pressedTime = GetSecs;
-        toFinish = 1;
+        if r.endtime==0 
+            thistrial.pressedLocation = r.targets(k);
+            thistrial.pressedTime = GetSecs;
+            toFinish = 1;
+        else
+            if isnan(thistrial.pressedTime)
+                thistrial.pressedTime = GetSecs;
+                thistrial.pressedLocation = r.targets(k);
+                waiting=1;
+            elseif r.targets(k)==thistrial.pressedLocation && GetSecs - thistrial.pressedTime >= r.endtime
+                toFinish = 1;
+            elseif r.targets(k)==thistrial.pressedLocation && GetSecs - thistrial.pressedTime < r.endtime
+                waiting = 1;
+            end
+        end
         break;
     end
+end
+if toFinish==0 && waiting==0
+    thistrial.pressedLocation = NaN;
+    thistrial.pressedTime = NaN;
 end
 
 [keyIsDown, secs, keycode] = KbCheck;

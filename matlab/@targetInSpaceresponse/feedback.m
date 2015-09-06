@@ -10,14 +10,7 @@ if r.checkGoingForward && isfield(dataSummary,'goingforwardratio') && all(dataSu
     thistrial.playsound = 1;
     thistrial.questSuccess = -1;
 else
-    hitTarget = -1;
-    for k=1:numel(r.targets)
-        thisdistance = sqrt(sum((dataSummary.meanfinalposition - experimentdata.targetPosition(r.targets(k),:)).^2));
-        if thisdistance < r.threshold
-            hitTarget = r.targets(k);
-            break;
-        end
-    end
+    hitTarget = thistrial.pressedLocation;
     
     if hitTarget == thistrial.targetNum
         thistrial.successful=1;
@@ -52,7 +45,7 @@ else
     
     % If we are giving feedback on arrival time
     if isfield(thistrial,'arrivalFeedback')
-        arrivaltime = thistrial.pressedTime - frameInfo{currentTrial}.startFrame(1);
+        arrivaltime = thistrial.pressedTime - thistrial.frameInfo.startFrame(1);
         if arrivaltime > str2double(thistrial.arrivalFeedback.cutofftime)
             thistrial.successful = -3;
             thistrial.questSuccess = -1;

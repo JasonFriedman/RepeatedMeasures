@@ -16,6 +16,9 @@ if isfield(thistrial,'rotatedposition')
 end
 
 started = 0;
+if size(experimentdata.targetPosition,1)<m.target
+    error('Not enough targets defined: %d are defined, need to be at least %d',size(experimentdata.targetPosition,1),m.target);
+end
 distance = sqrt(sum((lastposition - experimentdata.targetPosition(m.target,:)).^2));
 if distance < m.threshold
     started = 1;
