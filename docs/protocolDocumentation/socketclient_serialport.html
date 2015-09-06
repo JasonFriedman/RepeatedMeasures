@@ -1,0 +1,19 @@
+<HTML>
+<HEAD><TITLE>serialport</TITLE></HEAD>
+<BODY><H1>serialport</H1>
+Connect to a serial port and sample from it<BR><BR>
+<TABLE border="1">
+<TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
+<TR><TD>server</TD><TD>Yes</TD><TD>string</TD><TD>'localhost'</TD><TD>Location of the server (e.g. 'localhost' or an IP address) </TD></TR>
+<TR><TD>port</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>Port to connect to the server on</TD></TR>
+<TR><TD>showPositionType</TD><TD>No</TD><TD>string</TD><TD>'dot'</TD><TD>If showing position, how to show the current position (either 'dot','ellipse' or 'rectangle'). Note that if showPosition=1, it will always be shown. If showPosition=2 and imagestimulus is used,it will only be shown when in state 1</TD></TR>
+<TR><TD>showPositionColor</TD><TD>No</TD><TD><A title="A n by 3 matrix (see description for how to fill it)">n by 3 matrix</A></TD><TD>[192,192,192]</TD><TD>If showing position, the color of the feedback (each number between 0 and 255)</TD></TR>
+<TR><TD>showPositionSize</TD><TD>No</TD><TD><A title="A matrix (see description for how to fill it)">matrix</A></TD><TD>6</TD><TD>If showing position and showPositionType is a dot, the size of the dot (in pixels). If type is a rectangle, then a 1x2 array (width and height)</TD></TR>
+<TR><TD>showPositionRotationCenter</TD><TD>No</TD><TD>cellarray</TD><TD>{0.50 0.50 }</TD><TD>If showing position, the center of rotation (if showPositionRotationAngle is not zero)</TD></TR>
+<TR><TD>showPositionRotationAngle</TD><TD>No</TD><TD><A title="A n by 1 matrix (see description for how to fill it)">n by 1 matrix</A></TD><TD>NaN</TD><TD>If showing position, the angle to rotate about the center of rotation (in radians)</TD></TR>
+<TR><TD>displayRangeX</TD><TD>No</TD><TD>cellarray</TD><TD>{0.00 0.00 0.00 0.00 0.00 }</TD><TD>Range of values to show when using showPosition=3 as the dot position on the x axis. The ith row corresponds to the ith sensor. Use the first two values to show the x values, next two for y. e.g. [-1 1 0 0 0] to show x values of -1 to 1 as the dot x position. Use the last value to show time, e.g. [0 0 0 0 1] will move across the screen in 1 s. This should be a cell array with either a single cell for all trials, or a cell for each trial.</TD></TR>
+<TR><TD>displayRangeY</TD><TD>No</TD><TD>cellarray</TD><TD>{0.00 0.00 0.00 0.00 0.00 }</TD><TD>Range of values to show when using showPosition=3 as the dot position on the y axis. The ith row corresponds to the ith sensor. Use the first two values to show the x values, next two for y, e.g. [0 0 -10 10 0] to show y values of -0.5 to 0.5 as the dot y position. Use the last value to show time, e.g. [0 0 0 0 1] will move up the screen in 1 s. This should be a cell array with either a single cell for all trials, or a cell for each trial.</TD></TR>
+<TR><TD>offsetX</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0.50</TD><TD>x offset when using showPosition.  This can either be a single number (same for every trial), or an Nx1 matrix (one for each trial).</TD></TR>
+<TR><TD>offsetY</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0.50</TD><TD>y offset when using showPosition.  This can either be a single number (same for every trial), or an Nx1 matrix (one for each trial).</TD></TR>
+<TR><TD>protocol</TD><TD>Yes</TD><TD>string</TD><TD>'Arduino'</TD><TD>Type of server to connect to (currently 'Arduino' is the only option)</TD></TR>
+</TABLE></BODY></HTML>
