@@ -13,7 +13,7 @@ else
     MCtrigger = get(e,'MCtrigger');
     lastsample = getdata(MCtrigger);
     % convert to bits
-    lastsample = bitget(lastsample,1:8);
+    lastsample = bitget(lastsample,1:m.numChannels);
 end
 
 toFinish = 0;
@@ -22,5 +22,19 @@ if numel(lastsample)>0
         toFinish = lastsample(m.channel);
     else
         toFinish = ~lastsample(m.channel);
+    end
+end
+
+if ~toFinish
+    if m.up
+        triggersReceived = find(lastsample(1:m.numChannels),1);
+        val = double(lastsample(1:m.numChannels));
+    else
+        triggersReceived = find(lastsample(1:m.numChannels)==0,1);
+        val = double(~lastsample(1:m.numChannels));
+    end
+    if ~isempty(triggersReceived)
+        codes = messagecodes;
+        markEvent(e,codes.triggerReceived + val * (2.^(0:m.numChannels-1))');
     end
 end

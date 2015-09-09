@@ -112,6 +112,8 @@ codes.stimulusOn = 10;
 codes.triggerSent = 20;
 % Image state changed, value marked in file will be 100 + imageState
 codes.imageState = 100;
+% Triggers received, marked in file will be 1000 + value
+codes.triggerReceived = 1000;
 
 % codes for video recording (copied from recordVideoProtocol.h)
 
