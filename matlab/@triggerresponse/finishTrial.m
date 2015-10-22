@@ -38,3 +38,9 @@ if ~toFinish
         markEvent(e,codes.triggerReceived + val * (2.^(0:m.numChannels-1))');
     end
 end
+
+% Also allow trial to end if n or q is pressed
+[keyIsDown, secs, keycode] = KbCheck;
+if ~isempty(find(keycode,1)) && (find(keycode,1)==KbName('q') || find(keycode,1)==KbName('n'))
+    toFinish = true;
+end
