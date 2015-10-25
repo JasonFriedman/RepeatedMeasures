@@ -16,23 +16,6 @@ end
 
 lastsample(2) = 1 - lastsample(2); % make y the usual way around
 
-showPositionColor = get(tc,'showPositionColor');
-
-if size(showPositionColor,1)==2
-    if lastsample(4) > 0
-        therow = 1;
-    else
-        therow = 2;
-    end
-else
-    therow = 1;
-end
-
-showPositionColor = get(tc,'showPositionColor');
-showPositionColor = showPositionColor(therow,:);
-
-tc = set(tc,'showPositionColor',showPositionColor);
-
 [lastposition,thistrial] = showPositionCommon(tc,lastsample,thistrial,experimentdata,e,frame);
 
 % If movementonset=1, then movement onset requires a movement in the last frame of greater than 0.005

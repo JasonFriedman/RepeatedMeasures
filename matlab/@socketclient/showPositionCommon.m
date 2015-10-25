@@ -9,22 +9,35 @@ function [lastposition,thistrial] = showPositionCommon(m,lastsample,thistrial,ex
 
 lastposition(1) = lastsample(1) * experimentdata.screenInfo.screenRect(3);
 lastposition(2) = lastsample(2) * experimentdata.screenInfo.screenRect(4);
-% This is only relevant for the tablet, but should not effect the mouse
-% It is to show a different colour when the pen is touching (row 1) or not (row 2)
 
-if size(m.showPositionColor,1)==2
-    if lastsample(4) > 0
-        therow = 1;
-    else
-        therow = 2;
+if iscell(m.showPositionColor)
+    thisShowPositionColor = m.showPositionColor{thistrial.trialnum};
+    if size(thisShowPositionColor,1)>2
+        thisShowPositionColor = thisShowPositionColor(frame,:);
     end
-else
     therow = 1;
+else
+    thisShowPositionColor = m.showPositionColor;
+
+    % This is only relevant for the tablet, but should not effect the mouse
+    % It is to show a different colour when the pen is touching (row 1) or not (row 2)
+
+    if size(thisShowPositionColor,1)==2
+        if lastsample(4) > 0
+            therow = 1;
+        else
+            therow = 2;
+        end
+    else
+        therow = 1;
+    end
+
 end
+
 
 if strcmp(m.showPositionType,'dot')
     if any(thistrial.showPosition==[1 3]) || (thistrial.showPosition==2 && isa(thistrial.thisstimulus,'imagesstimulus') && thistrial.imageState == 1)
-        Screen('DrawDots', experimentdata.screenInfo.curWindow, lastposition, m.showPositionSize, m.showPositionColor,[],1);
+        Screen('DrawDots', experimentdata.screenInfo.curWindow, lastposition, m.showPositionSize, thisShowPositionColor,[],1);
     end
 elseif strcmp(m.showPositionType,'ellipse')
     % left top right bottom (4xN matrix)
@@ -32,7 +45,7 @@ elseif strcmp(m.showPositionType,'ellipse')
         lastposition(2) - m.showPositionSize(2)/2;
         lastposition(1) + m.showPositionSize(1)/2;
         lastposition(2) + m.showPositionSize(2)/2];
-    Screen('FillOval', experimentdata.screenInfo.curWindow, m.showPositionColor, rect);
+    Screen('FillOval', experimentdata.screenInfo.curWindow, thisShowPositionColor, rect);
 elseif strcmp(m.showPositionType,'rectangle')
     left = 0.55 * experimentdata.screenInfo.screenRect(3);
     top = lastposition(2);
@@ -42,7 +55,7 @@ elseif strcmp(m.showPositionType,'rectangle')
     end
     width = 0.15 * experimentdata.screenInfo.screenRect(3);
     rect = [left top left+width top+height];
-    Screen('FillRect', experimentdata.screenInfo.curWindow, m.showPositionColor(therow,:), rect);
+    Screen('FillRect', experimentdata.screenInfo.curWindow, thisShowPositionColor(therow,:), rect);
 else
     error(['Unknown showPositionType: ' m.showPositionType]);
 end
