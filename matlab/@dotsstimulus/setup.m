@@ -16,4 +16,4 @@ end
 thistrial.dotArray(:,1) = thistrial.dotArray(:,1) * experimentdata.screenInfo.screenRect(3);
 thistrial.dotArray(:,2) = thistrial.dotArray(:,2) * experimentdata.screenInfo.screenRect(4);
 
-thistrial.stimuliFrames = length(thistrial.dotArray)* 4;
+thistrial.stimuliFrames = length(thistrial.dotArray)* s.framesPerDot;
