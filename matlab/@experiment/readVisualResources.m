@@ -39,3 +39,11 @@ if ~isempty(experimentdata.labels)
         experimentdata.labels{k}.location(2) = experimentdata.labels{k}.location(2) * experimentdata.screenInfo.screenRect(4);
     end
 end
+
+% Put images into textures
+if ~isempty(experimentdata.screenInfo.curWindow) && ~isempty(experimentdata.images)
+    for k=1:numel(experimentdata.images)
+        % Create a texture from the image (for faster viewing later)
+        experimentdata.textures(k) = Screen('MakeTexture',experimentdata.screenInfo.curWindow,experimentdata.images{k});
+    end
+end

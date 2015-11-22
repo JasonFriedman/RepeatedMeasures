@@ -5,7 +5,7 @@
 
 function [lastposition,thistrial] = showPosition(m,thistrial,experimentdata,e,frame)
 % get the current position
-lastsample = getsample(m);
+lastsample = getxyz(m);
 lastsample(2) = 1 - lastsample(2); % make y the usual way around
 
 [lastposition,thistrial] = showPositionCommon(m,lastsample,thistrial,experimentdata,e,frame);

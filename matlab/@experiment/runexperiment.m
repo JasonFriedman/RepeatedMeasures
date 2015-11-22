@@ -634,6 +634,9 @@ try
             continue;
         end
     end
+    if isfield(experimentdata,'textures')
+        Screen('Close',experimentdata.textures);
+    end
     % Set the screen back to normal
     closescreen;
     if exist('experimentdata','var')
@@ -683,6 +686,9 @@ catch err
         writetolog(e,sprintf('Saved result data to file %s',resultfilename));
     else
         writetolog(e,sprintf('No variable results to write to file'));
+    end
+    if isfield(experimentdata,'textures')
+        Screen('Close',experimentdata.textures);
     end
     closescreen;
     if ~isempty(experimentdata.tactors)
