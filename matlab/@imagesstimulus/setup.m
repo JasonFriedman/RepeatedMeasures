@@ -84,7 +84,13 @@ for k=1:length(thistrial.starttiming)
 end
 
 for p=1:length(thistrial.trialimages)
-    thistrial.textures(p) = Screen('MakeTexture',experimentdata.screenInfo.curWindow,thistrial.trialimages{p});
+    if ~isempty(thistrial.trialalpha{p}) && size(thistrial.trialimages{p},3)==3
+        tmp = thistrial.trialimages{p};
+        tmp(:,:,4) = thistrial.trialalpha{p};
+        thistrial.textures(p) = Screen('MakeTexture',experimentdata.screenInfo.curWindow,tmp);
+    else
+        thistrial.textures(p) = Screen('MakeTexture',experimentdata.screenInfo.curWindow,thistrial.trialimages{p});
+    end
 end
 
 thistrial.stimuliFrames = round((thistrial.recordingTime - thistrial.waitTimeBefore)*experimentdata.screenInfo.monRefresh);
