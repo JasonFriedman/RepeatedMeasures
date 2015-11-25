@@ -13,10 +13,6 @@ if ~isfield(params,'classdescription')
     error('All classes must have a field params.classdescription with a description of what the class does.');
 end
 
-if strcmp(params.classname,'mouseInBoxstart')
-    keyboard;
-end
-
 thefields = fields(params);
 for k=1:numel(thefields)
     if ~any(strcmp({'name','type','description','required','default','classname','classdescription','parentclassname'},thefields{k}))
