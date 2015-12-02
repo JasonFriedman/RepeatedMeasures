@@ -92,6 +92,8 @@ codes.GLOVE_getRawData = 130;
 
 codes.SERIALPORT_sendTrigger = 140;
 
+codes.DAQ_sendTrigger = 150;
+
 %% Mark event codes [ Not that these are separate from the above codes, so they can overlap]
 
 % First frame displayed

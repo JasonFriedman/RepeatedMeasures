@@ -20,6 +20,10 @@ switch(command)
         changedValues{1}
     case {f.codes.FORCESENSORS_getParameters}
         returnValue = f.parameters;
+    case {f.codes.DAQ_sendTrigger}
+        t = get(f,'t');        
+        sendTrigger(t,[],parameters);
+        %fprintf('Sent trigger: %d\n',parameters);
     otherwise
         error(['Unknown command ' command]);
 end

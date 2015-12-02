@@ -12,6 +12,7 @@ ULconstants.FIRSTPORTB = 11;
 % not from cbw.h
 ULconstants.ANALOGOUT = 3;
 ULconstants.ANALOGIN = 4;
+ULconstants.ANALOGINDIGITALOUT = 5;
 
 
 % Selectable A/D Ranges codes

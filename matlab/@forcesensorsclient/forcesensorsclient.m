@@ -13,8 +13,6 @@
 % function called "writetolog",e.g. writetolog(experiment,'Message');
 % If debug=1, then the client will print more messages
 %
-% Note that this should be run with DAQserver (there is no forcesensorsserver)
-%
 % This class requires that "MSocket" be in the path. The program is
 % available from http://code.google.com/p/msocket/downloads/list
 

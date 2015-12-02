@@ -14,10 +14,25 @@ elseif strcmp(type,'serialportserver')
 elseif strcmp(type,'parallel')
     sendmessage(experimentdata.parallel,uint8(value));
 elseif strcmp(type,'DAQ')
-    if onoff
-        sendTrigger(e.MCtrigger,[],uint8(value));
+    devices = get(e,'devices');
+    if isfield(devices,'forcesensors') 
+        if onoff
+            sendTrigger(devices.forcesensors,uint8(value));
+        else
+            sendTrigger(devices.forcesensors,0);
+        end
+    elseif isfield(devices,'DAQ')
+        if onoff
+            sendTrigger(devices.DAQ,uint8(value));
+        else
+            sendTrigger(devices.DAQ,0);
+        end
     else
-        sendTrigger(e.MCtrigger,0);
+        if onoff
+            sendTrigger(e.MCtrigger,[],uint8(value));
+        else
+            sendTrigger(e.MCtrigger,0);
+        end
     end
 else
     error(['Unsupported trigger type: ' type]);

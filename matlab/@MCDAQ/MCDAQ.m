@@ -8,6 +8,7 @@
 %            = 2 -> digial input
 %            = 3 -> analog output (not yet implemented)
 %            = 4 -> analog input
+%            = 5 -> analog input AND digital output
 %
 % channels   = which channels to read from / write to
 %              for digital input or output, it should be a number from cbw.h (in the section "Types of digital I/O")
@@ -15,6 +16,9 @@
 %              for digital input, default is FIRSTPORTB  (11)
 %              for analog input, default is channel 0, can also specify a 1x2 array ([minChannel maxChannel])
 %                and all channels between minChannel and maxChannel inclusive will be sampled
+%              for analog input AND digital output, a cell array should be
+%              specified - with the first cell for analog input, the second
+%              for digital output (as described above)
 %
 % range      = data range (see manual for card for relevant ranges, then see file UniversalLibraryConstants to find the appropriate number to pass)
 %              [this is ignored for digital input]
@@ -55,7 +59,7 @@ t.in_or_out = in_or_out;
 t.channels = channels;
 t.numChannelsTotal = numChannelsTotal;
 
-fprintf('MC Mode = %d (1=digital output, 2 = digital input, 3 = analog output, 4 = analog input)\n',in_or_out);
+fprintf('MC Mode = %d (1=digital output, 2 = digital input, 3 = analog output, 4 = analog input, 5 = analog input + digital output)\n',in_or_out);
 
 if in_or_out == ULconstants.ANALOGIN
     t.range = range;
@@ -117,6 +121,9 @@ if in_or_out<=2
 elseif in_or_out == ULconstants.ANALOGIN
     % Call the mex file to initialize
     MCDAQMex(0,t.numChannelsTotal);
+elseif in_or_out == ULconstants.ANALOGINDIGITALOUT
+    MCDAQMex(0,t.numChannelsTotal,t.channels{2});
+    fprintf('Initialized DAQ for analog input + digital output\n');
 else
     error('Not yet supported');
 end

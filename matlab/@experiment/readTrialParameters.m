@@ -147,8 +147,9 @@ if ~isempty(thistrial.trigger)
                 error('Cannot have parallel triggers in trials without parallel in the setup section');
             end
         elseif strcmp(thistrial.trigger{k}.type,'DAQ')
-            if isempty(experimentdata.MCtrigger)
-                error('Cannot have DAQ triggers in trials without setting MCtrigger in the setup section');
+            devices = get(e,'devices');
+            if isempty(experimentdata.MCtrigger) && ~isfield(devices,'forcesensors') && ~isfield(devices,'DAQ')
+                error('Cannot have DAQ triggers in trials without setting MCtrigger in the setup section or having a forcesensors or DAQ client / server');
             end
         elseif strcmp(thistrial.trigger{k}.type,'serialportserver')
             devices = get(e,'devices');
