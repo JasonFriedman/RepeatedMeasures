@@ -295,7 +295,7 @@ try
                 if ~stillAtStart(thistrial.thisstarttrial,e,experimentdata,thistrial)
                     responseText = experimentdata.texts.TOO_EARLY;
                     drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText);
-                    writetolog(e,sprintf('Wrote text %s',responseText));
+                    writetolog(e,sprintf('Wrote text when not still at start %s',responseText));
                     if thistrial.recording || thistrial.sampleWhenNotRecording || thistrial.showPosition
                         stopRecording(e);
                     end
@@ -415,7 +415,7 @@ try
                     DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
                     responseText = experimentdata.texts.TOO_LATE;
                     drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText);
-                    writetolog(e,sprintf('Wrote text %s',responseText));
+                    writetolog(e,sprintf('Wrote text in checkMoving %s',responseText));
                     if ispc
                         wavplay(experimentdata.annoyingBeep,experimentdata.annoyingBeepf);
                     else
@@ -436,7 +436,7 @@ try
                     DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
                     responseText = experimentdata.texts.TOO_EARLY;
                     drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText);
-                    writetolog(e,sprintf('Wrote text %s',responseText));
+                    writetolog(e,sprintf('Wrote text in checkMovingAfter %s',responseText));
                     if ispc
                         wavplay(experimentdata.annoyingBeep,experimentdata.annoyingBeepf);
                     else

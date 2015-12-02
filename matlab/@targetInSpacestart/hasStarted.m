@@ -25,6 +25,7 @@ end
 distance = sqrt(sum((lastposition - experimentdata.targetPosition(m.target,:)).^2));
 if distance < m.threshold && (~m.touching || pressure>0)
     started = 1;
+    writetolog(e,['started=1, x=' num2str(lastposition(1))]);
 end
 
 % check the keyboard also

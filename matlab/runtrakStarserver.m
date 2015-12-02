@@ -1,4 +1,4 @@
-% RUNTRAKSTARSERVER - run a trakStar server on port 3018 in another matlab
+% RUNTRAKSTARSERVER - run a trakStar server on port 3019 in another matlab
 % runtrakStarserver(numsensors,samplerate,dllpath)
 
 function runtrakStarserver(numsensors,samplerate,dllpath)

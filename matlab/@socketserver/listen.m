@@ -158,11 +158,12 @@ while 1
       nummarkers = received.parameters{2};
       maximumtime = received.parameters{3};
       maximumframes = max([1 ceil(maximumtime * s.framerate)]);
-      if isempty(maximumframes) || isempty(nummarkers)
+      datalength = getdatalength(s,nummarkers);
+      
+      if isempty(maximumframes) || isempty(nummarkers) || isempty(datalength)
           error('Something is wrong - can''t allocate an empty array (framerate = %d, maximumtime = %d, nummarkers = %d',framerate,maximumtime,nummarkers);
       end
       
-      datalength = getdatalength(s,nummarkers);
       databuffer = zeros(maximumframes,datalength);
       sampletime = zeros(maximumframes,1);
       
