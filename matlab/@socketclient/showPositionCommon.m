@@ -11,7 +11,7 @@ lastposition(1) = lastsample(1) * experimentdata.screenInfo.screenRect(3);
 lastposition(2) = lastsample(2) * experimentdata.screenInfo.screenRect(4);
 
 if iscell(m.showPositionColor)
-    thisShowPositionColor = m.showPositionColor{thistrial.trialnum};
+    thisShowPositionColor = m.showPositionColor{min([numel(m.showPositionColor) thistrial.trialnum])};
     if size(thisShowPositionColor,1)>2
         if frame > size(thisShowPositionColor,1)
             frame = size(thisShowPositionColor,1);
