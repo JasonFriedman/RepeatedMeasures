@@ -8,45 +8,53 @@ showPositionRotationAngle = m.showPositionRotationAngle(min([numel(m.showPositio
 showPositionRotationCenter = m.showPositionRotationCenter{min([numel(m.showPositionRotationCenter) thistrial.trialnum])};
 
 if thistrial.showPosition==3
-    if numel(m.offsetX)==1
-        lastposition(1) = m.offsetX;
-    else
-        lastposition(1) = m.offsetX(thistrial.trialnum);
-    end
-    if numel(m.offsetY)==1
-        lastposition(2) = m.offsetY;
-    else
-        lastposition(2) = m.offsetY(thistrial.trialnum);
-    end
     sensors = size(displayRangeX,1);
-    dims = numel(lastsample)/sensors;
-    for k=1:sensors
-        for n=1:dims
-            if numel(displayRangeX)>0 && displayRangeX(k,n*2) ~= displayRangeX(k,n*2-1)
-                lastposition(1) = lastposition(1) + (lastsample((k-1)*dims+n) - displayRangeX(k,n*2-1)) / (displayRangeX(k,n*2) - displayRangeX(k,n*2-1));
+    dims = size(lastsample,2)/sensors;
+    numpositions = size(displayRangeX,2) / (2*dims+1);
+
+    for p=1:numpositions
+        if size(m.offsetX,1)==1
+            lastposition(p,1) = m.offsetX(1,p);
+        else
+            lastposition(p,1) = m.offsetX(thistrial.trialnum,p);
+        end
+        if size(m.offsetY,1)==1
+            lastposition(p,2) = m.offsetY(1,p);
+        else
+            lastposition(p,2) = m.offsetY(thistrial.trialnum,p);
+        end
+        offset = (p-1)*(2*dims+1);
+        
+        for k=1:sensors
+            for n=1:dims
+                if numel(displayRangeX)>0 && displayRangeX(k,offset+n*2) ~= displayRangeX(k,offset+n*2-1)
+                    lastposition(p,1) = lastposition(p,1) + (lastsample((k-1)*dims+n) - displayRangeX(k,offset+n*2-1)) / (displayRangeX(k,offset+n*2) - displayRangeX(k,offset+n*2-1));
+                end
+                if numel(displayRangeY)>0 && displayRangeY(k,offset+n*2) ~= displayRangeY(k,offset+n*2-1)
+                    lastposition(p,2) = lastposition(p,2) + (lastsample((k-1)*dims+n) - displayRangeY(k,offset+n*2-1)) / (displayRangeY(k,offset+n*2) - displayRangeY(k,offset+n*2-1));
+                end
             end
-            if numel(displayRangeY)>0 && displayRangeY(k,n*2) ~= displayRangeY(k,n*2-1)
-                lastposition(2) = lastposition(2) + (lastsample((k-1)*dims+n) - displayRangeY(k,n*2-1)) / (displayRangeY(k,n*2) - displayRangeY(k,n*2-1));
+            if numel(displayRangeX)>0 && displayRangeX(k,offset+2*dims+1) ~= 0
+                if isfield(thistrial,'StimulusOnsetTime')
+                    lastposition(p,1) = lastposition(p,1) + displayRangeX(k,offset+2*dims+1) * (GetSecs - thistrial.StimulusOnsetTime(1));
+                end
+            end
+            if numel(displayRangeY)>0 && displayRangeY(k,offset+2*dims+1) ~= 0
+                if isfield(thistrial,'StimulusOnsetTime')
+                    lastposition(p,2) = lastposition(p,2) + displayRangeY(k,offset+2*dims+1) * (GetSecs - thistrial.StimulusOnsetTime(1));
+                end
             end
         end
-        if numel(displayRangeX)>0 && displayRangeX(k,end) ~= 0
-            if isfield(thistrial,'StimulusOnsetTime')
-                lastposition(1) = lastposition(1) + displayRangeX(k,end) * (GetSecs - thistrial.StimulusOnsetTime(1));
-            end
-        end
-        if numel(displayRangeY)>0 && displayRangeY(k,end) ~= 0
-            if isfield(thistrial,'StimulusOnsetTime')
-                lastposition(2) = lastposition(2) + displayRangeY(k,end) * (GetSecs - thistrial.StimulusOnsetTime(1));
-            end
-        end
+        
     end
-    lastsample(1) = lastposition(1);
-    lastsample(2) = lastposition(2);
+    lastsample = lastposition;
 end
 
 if ~isnan(showPositionRotationAngle) && showPositionRotationAngle~=0
-    rotatedposition(1) = (lastsample(1) - showPositionRotationCenter(1)) * cos(showPositionRotationAngle) - (lastsample(2) - showPositionRotationCenter(2)) * sin(showPositionRotationAngle) + showPositionRotationCenter(1);
-    rotatedposition(2) = (lastsample(1) - showPositionRotationCenter(1)) * sin(showPositionRotationAngle) + (lastsample(2) - showPositionRotationCenter(2)) * cos(showPositionRotationAngle) + showPositionRotationCenter(2);
-    lastsample(1:2) = rotatedposition;
+    for p=1:size(lastsample,1)
+        rotatedposition(p,1) = (lastsample(p,1) - showPositionRotationCenter(p,1)) * cos(showPositionRotationAngle(p)) - (lastsample(p,2) - showPositionRotationCenter(p,2)) * sin(showPositionRotationAngle(p)) + showPositionRotationCenter(p,1);
+        rotatedposition(p,2) = (lastsample(p,1) - showPositionRotationCenter(p,1)) * sin(showPositionRotationAngle(p)) + (lastsample(p,2) - showPositionRotationCenter(p,2)) * cos(showPositionRotationAngle(p)) + showPositionRotationCenter(p,2);
+        lastsample(p,1:2) = rotatedposition(p,1:2);
+    end
     thistrial.rotatedposition = rotatedposition;
 end

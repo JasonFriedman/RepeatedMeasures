@@ -168,7 +168,7 @@ if nargout>1
     return;
 end
 
-% find the parent directory of MatlabExperiment
+% find the parent directory of RepeatedMeasures
 thisfile = which('experiment');
 pathstr = fileparts(thisfile);
 % allow for either slash type
