@@ -1,0 +1,10 @@
+<HTML>
+<HEAD><TITLE>checkMovingForward</TITLE></HEAD>
+<BODY><H1>checkMovingForward</H1>
+Check whether the subject is still moving in a certain direction at a given time<BR><BR>
+<TABLE border="1">
+<TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
+<TR><TD>time</TD><TD>Yes</TD><TD><A title="A matrix (see description for how to fill it)">matrix</A></TD><TD>0.20</TD><TD>Time after start of movement to check they are moving forward. This can have multiple values</TD></TR>
+<TR><TD>direction</TD><TD>Yes</TD><TD><A title="A 1 by n matrix (see description for how to fill it)">1 by n matrix</A></TD><TD>[0,1,0]</TD><TD>direction they need to move in. This should be a unit vector (i.e. magnitude=1)</TD></TR>
+<TR><TD>minchangeframe</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>5</TD><TD>change in position (in the given direction) they need to be greater than between frames</TD></TR>
+</TABLE></BODY></HTML>

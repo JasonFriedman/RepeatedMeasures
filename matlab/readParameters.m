@@ -9,6 +9,14 @@ if (numel(params.name) ~= numel(params.type) || ...
     error(['The number of elements must be the same in all fields of params in ' params.classname]);
 end
 
+if iscell(params.required)
+    error(['Field required in ' params.classname ' should be a vector, not a cell array']);
+end
+
+if ~iscell(params.name) || ~iscell(params.type) || ~iscell(params.default) || ~iscell(params.description)
+    error(['The fields name, type, default and description in ' params.classname ' should all be cell arrays']);
+end
+
 if ~isfield(params,'classdescription')
     error('All classes must have a field params.classdescription with a description of what the class does.');
 end

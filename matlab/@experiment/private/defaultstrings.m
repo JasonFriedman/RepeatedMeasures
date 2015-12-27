@@ -15,3 +15,4 @@ texts.WRONG = 'Incorrect';
 texts.NEITHER_TARGET = '????????';
 texts.MISSED_TARGET = 'Missed the target!';
 texts.DID_NOT_SEE_FINGER_ENOUGH = 'Did not see the finger enough!!!';
+texts.NOT_MOVING_FORWARD = 'Not moving forward';

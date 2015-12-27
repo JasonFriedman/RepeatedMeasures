@@ -299,11 +299,7 @@ try
                     if thistrial.recording || thistrial.sampleWhenNotRecording || thistrial.showPosition
                         stopRecording(e);
                     end
-                    if ispc
-                        wavplay(experimentdata.annoyingBeep,experimentdata.annoyingBeepf);
-                    else
-                        audioplayer(experimentdata.annoyingBeep,experimentdata.annoyingBeepf);
-                    end
+                    playAnnoyingBeep(experimentdata);
                     WaitSecs(2);
                     DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,1);
                     aborted=1;
@@ -416,11 +412,7 @@ try
                     responseText = experimentdata.texts.TOO_LATE;
                     drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText);
                     writetolog(e,sprintf('Wrote text in checkMoving %s',responseText));
-                    if ispc
-                        wavplay(experimentdata.annoyingBeep,experimentdata.annoyingBeepf);
-                    else
-                        audioplayer(experimentdata.annoyingBeep,experimentdata.annoyingBeepf);
-                    end
+                    playAnnoyingBeep(experimentdata);
                     WaitSecs(1);
                     DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,1);
                     abortTrial = 1;
@@ -437,11 +429,7 @@ try
                     responseText = experimentdata.texts.TOO_EARLY;
                     drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText);
                     writetolog(e,sprintf('Wrote text in checkMovingAfter %s',responseText));
-                    if ispc
-                        wavplay(experimentdata.annoyingBeep,experimentdata.annoyingBeepf);
-                    else
-                        audioplayer(experimentdata.annoyingBeep,experimentdata.annoyingBeepf);
-                    end
+                    playAnnoyingBeep(experimentdata);
                     WaitSecs(1);
                     DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,1);
                     abortTrial = 1;
@@ -491,6 +479,24 @@ try
                 % If the background is not white, then draw it
                 if ~all(thistrial.backgroundColor==0)
                     Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
+                end
+            end
+            if ~isempty(thistrial.checkMovingForward) && thisFrameTime >= thistrial.checkMovingForward.time(1) 
+                if ~isempty(lastposition)
+                    [toAbort,thistrial] = checkMovingForward(e,thistrial,experimentdata,lastposition);
+                else
+                    [toAbort,thistrial] = checkMovingForward(e,thistrial,experimentdata);
+                end
+                if toAbort
+                    DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
+                    responseText = experimentdata.texts.NOT_MOVING_FORWARD;
+                    drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText);
+                    writetolog(e,sprintf('Wrote text in checkMovingForward %s',responseText));
+                    playAnnoyingBeep(experimentdata);
+                    WaitSecs(1);
+                    DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,1);
+                    abortTrial = 1;
+                    break;
                 end
             end
             % check if the trial should be ended
@@ -564,11 +570,7 @@ try
             writetolog(e,sprintf('Wrote text %s',thistrial.responseText));
         end
         if thistrial.playsound && thistrial.auditoryFeedback
-            if ispc
-                wavplay(experimentdata.annoyingBeep,experimentdata.annoyingBeepf);
-            else
-                audioplayer(experimentdata.annoyingBeep,experimentdata.annoyingBeepf);
-            end
+            playAnnoyingBeep(experimentdata);
             WaitSecs(2);
         end
         
@@ -700,3 +702,4 @@ catch err
     % close the devices + log file
     closedevices(e);
 end
+
