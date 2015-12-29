@@ -171,7 +171,7 @@ try
             startedSamplingWithoutRecording = 1;
         end
         started = 0;
-        while started==0
+        while started~=1
             [started,keyCode] = hasStarted(thistrial.thisstarttrial,e,experimentdata,thistrial);
             if thistrial.showPosition
                 preStart(thistrial.thisstimulus,experimentdata,thistrial,0);
@@ -202,7 +202,7 @@ try
 
         if thistrial.recordingTime==0
             alreadyshown = 0;
-            while hasStarted(thistrial.thisstarttrial,e,experimentdata,thistrial)
+            while hasStarted(thistrial.thisstarttrial,e,experimentdata,thistrial)==1
                 % wait for them to release the button
                 if ~alreadyshown
                     writetolog(e,'Waiting for button / key to be release to start recordingTime==0 trial');
@@ -407,7 +407,7 @@ try
             % Check if they have started moving already
             if thistrial.checkMoving && thisFrameTime >= thistrial.checkMoving
                 % If they are still pressing the button, abort
-                if stillPressing(thistrial.thisstarttrial,e,experimentdata,thistrial)
+                if stillPressing(thistrial.thisstarttrial,e,experimentdata,thistrial)==1
                     DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
                     responseText = experimentdata.texts.TOO_LATE;
                     drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText);
@@ -424,7 +424,7 @@ try
             end
             
             if thistrial.checkMovingAfter && thisFrameTime <= thistrial.checkMovingAfter
-                if ~stillPressing(thistrial.thisstarttrial,e,experimentdata,thistrial)
+                if stillPressing(thistrial.thisstarttrial,e,experimentdata,thistrial)==0
                     DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
                     responseText = experimentdata.texts.TOO_EARLY;
                     drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText);
@@ -514,16 +514,19 @@ try
             % Stop recording
             if thistrial.recording || thistrial.sampleWhenNotRecording || thistrial.showPosition
                 stopRecording(e);
+                % Start sampling again without recording to make sure they
+                % are not still pressing
                 thistrial = startSamplingWithoutRecording(e,thistrial,experimentdata);
             end
             if thistrial.needToStopAudio
                 PsychPortAudio('Stop',experimentdata.pahandle);
             end
-            while stillPressing(thistrial.thisstarttrial,e,experimentdata,thistrial)
+            while stillPressing(thistrial.thisstarttrial,e,experimentdata,thistrial)==1
                 %    ; % wait for them to release the button
             end
             if thistrial.recording || thistrial.sampleWhenNotRecording || thistrial.showPosition
                 stopRecording(e);
+                finishRecordingTrial(e);    
             end
             if experimentdata.incrementOnAbort
                 results.thistrial{currentTrial} = thistrial;
@@ -531,8 +534,7 @@ try
                 writetolog(e,'Trial aborted, skipping to next trial');
             else
                 writetolog(e,'Trial aborted, repeating trial');
-            end
-                
+            end            
             continue;
         end
         % Clear the screen
@@ -542,6 +544,7 @@ try
         % Save the file later (after feedback) because it can be slow
         if thistrial.recording || thistrial.sampleWhenNotRecording || thistrial.showPosition
             stopRecording(e);
+            finishRecordingTrial(e);
         end
         if thistrial.recording
             dataSummary = getDataSummary(e);

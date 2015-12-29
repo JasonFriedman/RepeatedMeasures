@@ -80,6 +80,8 @@ codes.MINIBIRD_birdRS232WakeUp = 80;
 
 % Attach to the Wacom tablet
 codes.TABLET_attachTablet = 90;
+% Close the interface
+codes.TABLET_closeInterface = 91;
 
 % Force sensors
 codes.FORCESENSORS_setParameters = 100;

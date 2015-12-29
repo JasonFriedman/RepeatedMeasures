@@ -23,7 +23,10 @@ if size(experimentdata.targetPosition,1)<m.target
     error('Not enough targets defined: %d are defined, need to be at least %d',size(experimentdata.targetPosition,1),m.target);
 end
 distance = sqrt(sum((lastposition - experimentdata.targetPosition(m.target,:)).^2));
-if distance < m.threshold && (~m.touching || pressure>0)
+if isnan(lastposition(1))
+    started = 1;
+    writetolog(e,'Can''t yet decide if has started, returning NaN');
+elseif distance < m.threshold && (~m.touching || pressure>0)
     started = 1;
     writetolog(e,['started=1, x=' num2str(lastposition(1))]);
 end
