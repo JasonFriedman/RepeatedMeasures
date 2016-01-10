@@ -7,8 +7,4 @@ This client connects to a DAQ server to sample force sensors.<BR><BR>
 <TR><TD>numchannels</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>[]</TD><TD>Number of DAQ channels to sample</TD></TR>
 <TR><TD>gains</TD><TD>Yes</TD><TD><A title="A matrix (see description for how to fill it)">matrix</A></TD><TD>1</TD><TD>Gains (one per channel), usually in N / V</TD></TR>
 <TR><TD>offsets</TD><TD>Yes</TD><TD><A title="A matrix (see description for how to fill it)">matrix</A></TD><TD>0</TD><TD>Offsets (one per channel), usually in N</TD></TR>
-<TR><TD>filterType</TD><TD>No</TD><TD>string</TD><TD>[]</TD><TD>Filter to apply if showing position (current only option is 'butter' for Butterworth filter). Note that filtering is only for onscreen display, and the saved data is not filtered. Use of a filter requires the signal processing toolkit. An empty string means no filtering.</TD></TR>
-<TR><TD>filterOrder</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>4</TD><TD>If using a filter, which order to use</TD></TR>
-<TR><TD>filterCutoff</TD><TD>No</TD><TD><A title="A matrix (see description for how to fill it)">matrix</A></TD><TD>8</TD><TD>If using a filter, the cutoff frequency for a lowpass filter (in Hz). If 2 numbers are specified, a bandpass filter will be created.</TD></TR>
-<TR><TD>samplerate</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>150</TD><TD>Sample rate (in Hz), only needed if using a filter</TD></TR>
 </TABLE></BODY></HTML>
