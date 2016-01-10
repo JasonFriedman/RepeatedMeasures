@@ -15,8 +15,8 @@ else
     % This is necessary because sometimes, randomly, the textsize jumps
     % (don't know why this is!!!). This forces it to be the same within the trial
     if ~isfield(thistrial,'textsize')
-        thistrial.textsize = drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,thetext,1);
+        thistrial.textsize = drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,thetext,1,[],thisstimulus.color);
     else
-        drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,thetext,1,thistrial.textsize);
+        drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,thetext,1,thistrial.textsize,thisstimulus.color);
     end
 end
