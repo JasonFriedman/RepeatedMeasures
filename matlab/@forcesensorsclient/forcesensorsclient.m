@@ -18,13 +18,12 @@
 
 function [fc,params] = forcesensorsclient(inputParams,experiment,debug)
 
-params.name = {'gains','offsets','filterType','filterOrder','filterCutoff','samplerate'};
-params.type = {'matrix','matrix','string','number','matrix','number'};
-params.description = {'Gains (one per channel), usually in N / V','Offsets (one per channel), usually in N',...
-'Filter to apply if showing position (current only option is ''butter'' for Butterworth filter). Note that filtering is only for onscreen display, and the saved data is not filtered. Use of a filter requires the signal processing toolkit. An empty string means no filtering.',...
-'If using a filter, which order to use','If using a filter, the cutoff frequency for a lowpass filter (in Hz). If 2 numbers are specified, a bandpass filter will be created.','Sample rate (in Hz), only needed if using a filter'};
-params.required = [1 1  0 0 0 0];
-params.default = {1,0,'',4,8,150};
+params.name = {'gains','offsets'};
+params.type = {'matrix','matrix'};
+params.description = {'Gains (one per channel), usually in N / V',...
+    'Offsets (one per channel), usually in N'};
+params.required = [1 1];
+params.default = {1,0};
 params.classdescription = 'This client connects to a DAQ server to sample force sensors.';
 params.classname = 'forcesensors';
 params.parentclassname = 'DAQclient';
