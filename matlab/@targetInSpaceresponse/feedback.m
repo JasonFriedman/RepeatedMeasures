@@ -27,8 +27,11 @@ else
         thistrial.successful = -3;
         writetolog(e,'Did not hit any target');
         thistrial.playsound = 1;
-        % We always want feedback in this case
-        thistrial.textFeedback = 1;
+        % We always want feedback in this case (unless textFeedback is set
+        % to -1)
+        if thistrial.textFeedback~=-1
+            thistrial.textFeedback = 1;
+        end
         thistrial.responseText = experimentdata.texts.NEITHER_TARGET;
     end
     

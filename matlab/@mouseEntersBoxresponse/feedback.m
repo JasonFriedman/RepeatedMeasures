@@ -11,7 +11,9 @@ if hitTarget == 0
     thistrial.questSuccess = -1;
     writetolog(e,'Hit screen but no target');
     thistrial.responseText = experimentdata.texts.MISSED_TARGET;
-    thistrial.textFeedback = 1; % We always display this feedback
+    if thistrial.textFeedback~=-1
+        thistrial.textFeedback = 1; % We always display this feedback (unless textFeedback is -1)
+    end
     thistrial.playsound = 1;
 elseif isnan(thistrial.targetNum(1))
     % there is no correct target specified

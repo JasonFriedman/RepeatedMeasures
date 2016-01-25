@@ -26,7 +26,9 @@ elseif isfield(thistrial,'pressedLocation')
         thistrial.questSuccess = -1;
         writetolog(e,'Hit screen but no target');
         thistrial.responseText = experimentdata.texts.MISSED_TARGET;
-        thistrial.textFeedback = 1; % We always to display this feedback
+        if thistrial.textFeedback ~=-1
+            thistrial.textFeedback = 1; % We always to display this feedback (if textFeedback doesn't equal -1)
+        end
         thistrial.playsound = 1;
     elseif hitTarget == thistrial.targetNum
         thistrial.successful=1;
