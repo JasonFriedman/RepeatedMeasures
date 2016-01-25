@@ -2,6 +2,8 @@
 % Will return [NaN NaN NaN] if no devices can give xyz data
 %
 % getxyz(e)
+% 
+% If justfirst = 1, then only return the first sensor (default 0)
 
 function xyz = getxyz(e)
 
