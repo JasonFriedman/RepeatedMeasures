@@ -1,6 +1,8 @@
 % DRAWBACKGROUND - draw the background (made up of what is in boxes and labels)
 
-function DrawBackground(screenInfo,thistrial,boxes,labels,toflip)
+function DrawBackground(experimentdata,thistrial,boxes,labels,toflip)
+
+screenInfo = experimentdata.screenInfo;
 
 if ~isnan(boxes(1)) || (~isempty(labels) && ~isempty(labels(1)))
     if ~isnan(boxes(1)) && isfield(thistrial,'boxes') && ~isempty(thistrial.boxes)
@@ -15,6 +17,9 @@ if ~isnan(boxes(1)) || (~isempty(labels) && ~isempty(labels(1)))
         if ~all(thistrial.backgroundColor==0)
             Screen(screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
         end
+        if ~isempty(thistrial.backgroundImage)
+            Screen('DrawTexture',screenInfo.curWindow,thistrial.backgroundImage);
+        end
     end
 else
     if toflip
@@ -24,6 +29,9 @@ else
         % If the background is not white, then draw it
         if ~all(thistrial.backgroundColor==0)
             Screen(screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
+        end
+        if ~isempty(thistrial.backgroundImage)
+            Screen('DrawTexture',screenInfo.curWindow,experimentdata.textures(thistrial.backgroundImage));
         end
     end
 end

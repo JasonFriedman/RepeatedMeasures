@@ -155,7 +155,7 @@ try
         % amount of  time until a key is pressed (e.g. showText or showImage)
         
         preStart(thistrial.thisstimulus,experimentdata,thistrial,1);
-        DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,1);
+        DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,1);
         writetolog(e,'Ran prestart');
         
         % STAGE 2 - wait for start of trial (determined by starttrial)
@@ -175,13 +175,17 @@ try
             [started,keyCode] = hasStarted(thistrial.thisstarttrial,e,experimentdata,thistrial);
             if thistrial.showPosition
                 preStart(thistrial.thisstimulus,experimentdata,thistrial,0);
-                DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
+                DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,0);
                 [lastposition,thistrial, experimentdata] = showPosition(e,thistrial,experimentdata,-1);
                 Screen('Flip',experimentdata.screenInfo.curWindow,1);
                 % If the background is not white, then draw it
                 if ~all(thistrial.backgroundColor==0)
                     Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
                 end
+                if ~isempty(thistrial.backgroundImage)
+                    Screen('DrawTexture',experimentdata.screenInfo.curWindow,experimentdata.textures(thistrial.backgroundImage));
+                end
+
             end
             if any(keyCode) && any(find(keyCode,1)==[KbName('n') KbName('p') KbName('q')])  % n, p or q
                 if thistrial.showPosition || thistrial.sampleWhenNotRecording
@@ -245,18 +249,21 @@ try
         
         % setup any tactor stimulations
         thistrial = setupTactors(thistrial);
+        
+        DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,0);
 
-        
-        DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
-        
         % Show the position (e.g. mouse, cursor) if appropriate
         if thistrial.showPosition
+            preStart(thistrial.thisstimulus,experimentdata,thistrial,0);
             [lastposition,thistrial, experimentdata] = showPosition(e,thistrial,experimentdata,-1);
         end
         Screen('Flip',experimentdata.screenInfo.curWindow,1);
         % If the background is not white, then draw it
         if ~all(thistrial.backgroundColor==0)
             Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
+        end
+        if ~isempty(thistrial.backgroundImage)
+            Screen('DrawTexture',experimentdata.screenInfo.curWindow,experimentdata.textures(thistrial.backgroundImage));
         end
 
       
@@ -277,7 +284,7 @@ try
             if thistrial.drawFixation
                 drawFixation(experimentdata);
             end
-            DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
+            DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,0);
             if thistrial.showPosition
                 [lastposition,thistrial] = showPosition(e,thistrial,experimentdata,-1);
             end
@@ -285,6 +292,9 @@ try
             % If the background is not white, then draw it
             if ~all(thistrial.backgroundColor==0)
                 Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
+            end
+            if ~isempty(thistrial.backgroundImage)
+                    Screen('DrawTexture',experimentdata.screenInfo.curWindow,experimentdata.textures(thistrial.backgroundImage));
             end
             aborted=0;
             startFixation = GetSecs;
@@ -301,7 +311,7 @@ try
                     end
                     playAnnoyingBeep(experimentdata);
                     WaitSecs(2);
-                    DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,1);
+                    DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,1);
                     aborted=1;
                     thistrial.aborted=1;
                     break;
@@ -309,7 +319,7 @@ try
                 if thistrial.drawFixation
                     drawFixation(experimentdata);
                 end
-                DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
+                DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,0);
                 if thistrial.showPosition
                     [lastposition,thistrial] = showPosition(e,thistrial,experimentdata,-1);
                 end
@@ -317,6 +327,9 @@ try
                 % If the background is not white, then draw it
                 if ~all(thistrial.backgroundColor==0)
                     Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
+                end
+                if ~isempty(thistrial.backgroundImage)
+                    Screen('DrawTexture',experimentdata.screenInfo.curWindow,experimentdata.textures(thistrial.backgroundImage));
                 end
             end
             if aborted
@@ -408,13 +421,13 @@ try
             if thistrial.checkMoving && thisFrameTime >= thistrial.checkMoving
                 % If they are still pressing the button, abort
                 if stillPressing(thistrial.thisstarttrial,e,experimentdata,thistrial)==1
-                    DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
+                    DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,0);
                     responseText = experimentdata.texts.TOO_LATE;
                     drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText);
                     writetolog(e,sprintf('Wrote text in checkMoving %s',responseText));
                     playAnnoyingBeep(experimentdata);
                     WaitSecs(1);
-                    DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,1);
+                    DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,1);
                     abortTrial = 1;
                     break;
                 else
@@ -425,13 +438,13 @@ try
             
             if thistrial.checkMovingAfter && thisFrameTime <= thistrial.checkMovingAfter
                 if stillPressing(thistrial.thisstarttrial,e,experimentdata,thistrial)==0
-                    DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
+                    DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,0);
                     responseText = experimentdata.texts.TOO_EARLY;
                     drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText);
                     writetolog(e,sprintf('Wrote text in checkMovingAfter %s',responseText));
                     playAnnoyingBeep(experimentdata);
                     WaitSecs(1);
-                    DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,1);
+                    DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,1);
                     abortTrial = 1;
                     break;
                 end
@@ -440,7 +453,7 @@ try
             
             if frame <= thistrial.stimuliFrames
                 % Present a frame
-                DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
+                DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,0);
                 % run the appropriate trial. This files (e.g. frame.m) should be in e.g. @videostimulus
                 % If the file is absent, the default from @stimulus will be used (which does nothing)
                 [thistrial,experimentdata,breakfromloop,thistrial.thisstimulus] = displayFrame(thistrial.thisstimulus,e,frame,thistrial,experimentdata);
@@ -469,9 +482,12 @@ try
                 if ~all(thistrial.backgroundColor==0)
                     Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
                 end
+                if ~isempty(thistrial.backgroundImage)
+                    Screen('DrawTexture',experimentdata.screenInfo.curWindow,experimentdata.textures(thistrial.backgroundImage));
+                end
             else
                 % Pass time until the end of the trial (so there will be the right number of frames)
-                DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
+                DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,0);
                 if thistrial.showPosition
                     [lastposition,thistrial] = showPosition(e,thistrial,experimentdata,frame);
                 end
@@ -479,6 +495,9 @@ try
                 % If the background is not white, then draw it
                 if ~all(thistrial.backgroundColor==0)
                     Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
+                end
+                if ~isempty(thistrial.backgroundImage)
+                    Screen('DrawTexture',experimentdata.screenInfo.curWindow,experimentdata.textures(thistrial.backgroundImage));
                 end
             end
             if ~isempty(thistrial.checkMovingForward) && thisFrameTime >= thistrial.checkMovingForward.time(1) 
@@ -488,29 +507,29 @@ try
                     [toAbort,thistrial] = checkMovingForward(e,thistrial,experimentdata);
                 end
                 if toAbort
-                    DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
+                    DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,0);
                     responseText = experimentdata.texts.NOT_MOVING_FORWARD;
                     drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText);
                     writetolog(e,sprintf('Wrote text in checkMovingForward %s',responseText));
                     playAnnoyingBeep(experimentdata);
                     WaitSecs(1);
-                    DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,1);
+                    DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,1);
                     abortTrial = 1;
                     break;
                 end
             end
             % check if the trial should be ended
             if ~isempty(lastposition)
-                [tofinish,thistrial,experimentdata] = finishTrial(thistrial.thisresponse,thistrial,experimentdata,e,lastposition);
+                [tofinish,thistrial,experimentdata] = finishTrial(thistrial.thisresponse,thistrial,experimentdata,e,lastposition,frame);
             else
-                [tofinish,thistrial,experimentdata] = finishTrial(thistrial.thisresponse,thistrial,experimentdata,e);
+                [tofinish,thistrial,experimentdata] = finishTrial(thistrial.thisresponse,thistrial,experimentdata,e,[],frame);
             end
             if tofinish
                 break;
             end
         end
         if abortTrial
-            DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,1);
+            DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,1);
             % Stop recording
             if thistrial.recording || thistrial.sampleWhenNotRecording || thistrial.showPosition
                 stopRecording(e);
@@ -538,7 +557,7 @@ try
             continue;
         end
         % Clear the screen
-        DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,1);
+        DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,0);
         
         % Stop recording
         % Save the file later (after feedback) because it can be slow
@@ -558,7 +577,7 @@ try
             thistrial = feedback(thistrial.thisresponse,e,thistrial,[],experimentdata,dataSummary);
         end
         
-        DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
+        DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,0);
         
         if thistrial.textFeedback==1 && isfield(thistrial,'responseText')
             if ~thistrial.textFeedbackShowBackground
@@ -579,7 +598,7 @@ try
         
         experimentdata = updateStaircase(e,experimentdata,thistrial);
         
-        DrawBackground(experimentdata.screenInfo,thistrial,experimentdata.boxes,experimentdata.labels,0);
+        DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,0);
         
         % Save the file
         if isfield(thistrial,'filename') && thistrial.recording

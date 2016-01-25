@@ -19,7 +19,7 @@ else
     error('Unknown dot type %d',s.type);
 end
 %Screen('DrawingFinished',screenInfo.curWindow,thistrial.dontclear);
-Screen('BlendFunction', screenInfo.curWindow, GL_ONE, GL_ZERO);
+%Screen('BlendFunction', screenInfo.curWindow, GL_ONE, GL_ZERO);
 % If recording screen shots (for testing), record every 4th
 if experimentdata.recordingStimuli && mod(frame,4)==0
     %GetImage call. Alter the rect argument to change the location of the screen shot

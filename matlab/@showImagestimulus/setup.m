@@ -9,7 +9,7 @@ Screen('DrawTexture',experimentdata.screenInfo.curWindow,thistrial.textureIndex)
 Screen('Flip',experimentdata.screenInfo.curWindow,1);
 % If the background is not white, then draw it
 if ~all(thistrial.backgroundColor==0)
-    Screen(screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
+    Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
 end
 thistrial.stimuliFrames = round(thistrial.recordingTime*experimentdata.screenInfo.monRefresh);
 writetolog(e,'Showed image in showImage setup');
