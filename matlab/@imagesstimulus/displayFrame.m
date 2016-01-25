@@ -17,7 +17,7 @@ todraw = -1;
 if ~isempty(e) && ~isempty(s.stateTransitions)
     m = get(e,'devices');
     if isfield(m,'tablet')
-        lastsample = getsampleVisual(m.tablet,thistrial);
+        lastsample = getsampleVisual(m.tablet,thistrial,frame);
     else
         lastsample = getxyz(e);
         lastsample(4) = 1;

@@ -3,12 +3,12 @@
 % This method should be overloaded by a child class if you want an
 % ability to finish a trial early (say if a target has been reached)
 
-function [toFinish,thistrial,experimentdata] = finishTrial(r,thistrial,experimentdata,e,lastposition)
+function [toFinish,thistrial,experimentdata] = finishTrial(r,thistrial,experimentdata,e,lastposition,frame)
 toFinish = false;
 
 m = get(e,'devices');
 if isfield(m,'tablet')
-    lastsample = getsampleVisual(m.tablet,thistrial);
+    lastsample = getsampleVisual(m.tablet,thistrial,frame);
 else
     lastsample = getxyz(e);
     lastsample(4) = 1;

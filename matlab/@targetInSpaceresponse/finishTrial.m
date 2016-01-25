@@ -1,14 +1,19 @@
 % FINISHTRIAL - whether this trial should be finished at this time
 % This should not be run directly, it is called by runexperiment.m
 
-function [toFinish,thistrial,experimentdata] = finishTrial(r,thistrial,experimentdata,e,lastposition)
+function [toFinish,thistrial,experimentdata] = finishTrial(r,thistrial,experimentdata,e,lastposition,frame)
 
 lastposition = getxyz(e);
 toFinish = 0;
 waiting = 0;
 
 for k=1:numel(r.targets)
-    thisdistance = sqrt(sum((lastposition - experimentdata.targetPosition(r.targets(k),:)).^2));
+    if isnan(r.dimensionsToUse)
+        thisdistance = sqrt(sum((lastposition - experimentdata.targetPosition(r.targets(k),:)).^2));
+    else
+        thisdistance = sqrt(sum((lastposition(r.dimensionsToUse) - experimentdata.targetPosition(r.targets(k),:)).^2));
+    end
+    
     if thisdistance < r.threshold
         if r.endtime==0 
             thistrial.pressedLocation = r.targets(k);

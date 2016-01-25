@@ -1,11 +1,12 @@
 % CALCULATELASTPOSITION - calculate the last position, based on the recorded position and viewing parameters
 
-function [lastsample,thistrial] = calculateLastPosition(m,lastsample,thistrial)
+function [lastsample,thistrial] = calculateLastPosition(m,lastsample,thistrial,frame)
 
 displayRangeX = m.displayRangeX{min([numel(m.displayRangeX) thistrial.trialnum])};
 displayRangeY = m.displayRangeY{min([numel(m.displayRangeY) thistrial.trialnum])};
-showPositionRotationAngle = m.showPositionRotationAngle(min([numel(m.showPositionRotationAngle) thistrial.trialnum]));
+showPositionRotationAngle = m.showPositionRotationAngle{min([numel(m.showPositionRotationAngle) thistrial.trialnum])};
 showPositionRotationCenter = m.showPositionRotationCenter{min([numel(m.showPositionRotationCenter) thistrial.trialnum])};
+startRotationFrame = m.startRotationFrame(min([numel(m.startRotationFrame) thistrial.trialnum]));
 
 if thistrial.showPosition==3
     sensors = size(displayRangeX,1);
@@ -50,7 +51,7 @@ if thistrial.showPosition==3
     lastsample = lastposition;
 end
 
-if ~isnan(showPositionRotationAngle) && showPositionRotationAngle~=0
+if ~isnan(showPositionRotationAngle(1)) && any(showPositionRotationAngle~=0) && frame >=startRotationFrame 
     for p=1:size(lastsample,1)
         rotatedposition(p,1) = (lastsample(p,1) - showPositionRotationCenter(p,1)) * cos(showPositionRotationAngle(p)) - (lastsample(p,2) - showPositionRotationCenter(p,2)) * sin(showPositionRotationAngle(p)) + showPositionRotationCenter(p,1);
         rotatedposition(p,2) = (lastsample(p,1) - showPositionRotationCenter(p,1)) * sin(showPositionRotationAngle(p)) + (lastsample(p,2) - showPositionRotationCenter(p,2)) * cos(showPositionRotationAngle(p)) + showPositionRotationCenter(p,2);

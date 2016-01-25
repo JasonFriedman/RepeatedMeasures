@@ -5,7 +5,7 @@
 
 function [lastposition,thistrial] = showPositionCommon(m,lastsample,thistrial,experimentdata,e,frame)
 
-[lastsample,thistrial] = calculateLastPosition(m,lastsample,thistrial);
+[lastsample,thistrial] = calculateLastPosition(m,lastsample,thistrial,frame);
 
 lastposition(:,1) = lastsample(:,1) * experimentdata.screenInfo.screenRect(3);
 lastposition(:,2) = lastsample(:,2) * experimentdata.screenInfo.screenRect(4);

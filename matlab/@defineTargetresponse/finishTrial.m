@@ -3,7 +3,7 @@
 %
 % For defineTargetResponse, the trial ends when the space bar is released (after being pressed)
 
-function [toFinish,thistrial,experimentdata] = finishTrial(r,thistrial,experimentdata,e,lastposition)
+function [toFinish,thistrial,experimentdata] = finishTrial(r,thistrial,experimentdata,e,lastposition,frame)
 
 toFinish = 0;
 

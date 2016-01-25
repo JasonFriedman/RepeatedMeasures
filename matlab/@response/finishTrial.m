@@ -3,7 +3,7 @@
 % This method should be overloaded by a child class if you want an
 % ability to finish a trial early (say if a target has been reached)
 
-function [toFinish,thistrial,experimentdata] = finishTrial(r,thistrial,experimentdata,e,lastposition)
+function [toFinish,thistrial,experimentdata] = finishTrial(r,thistrial,experimentdata,e,lastposition,frame)
 toFinish = false;
 [keyIsDown, secs, keycode] = KbCheck;
 if ~isempty(find(keycode,1)) && (find(keycode,1)==KbName('q') || find(keycode,1)==KbName('n'))

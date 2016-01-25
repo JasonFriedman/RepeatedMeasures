@@ -3,7 +3,7 @@
 % This method should be overloaded by a child class if you want an
 % ability to finish a trial early (say if a target has been reached)
 
-function [toFinish,thistrial,experimentdata] = finishTrial(r,thistrial,experimentdata,e,lastposition)
+function [toFinish,thistrial,experimentdata] = finishTrial(r,thistrial,experimentdata,e,lastposition,frame)
 devices = get(e,'devices');
 if isfield(devices,'keyboard')
     data = getsample(devices.keyboard);

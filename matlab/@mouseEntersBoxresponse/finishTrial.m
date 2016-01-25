@@ -1,7 +1,7 @@
 % FINISHTRIAL - whether this trial should be finished at this time
 % This should not be run directly, it is called by runexperiment.m
 
-function [toFinish,thistrial,experimentdata] = finishTrial(r,thistrial,experimentdata,e,lastposition)
+function [toFinish,thistrial,experimentdata] = finishTrial(r,thistrial,experimentdata,e,lastposition,frame)
 
 if nargin<5
     m = get(e,'devices');
