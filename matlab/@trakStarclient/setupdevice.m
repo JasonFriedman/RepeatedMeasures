@@ -15,3 +15,5 @@ pause(20);
 % Set the hemisphere
 sethemisphere(tc);
 pause(0.5);
+setrange(tc);
+pause(0.5);

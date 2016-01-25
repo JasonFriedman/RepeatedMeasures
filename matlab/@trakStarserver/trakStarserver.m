@@ -12,7 +12,7 @@ function ts = trakStarserver(port,samplerate,no_of_receivers,dllpath,debug)
 
 ts.numsensors = no_of_receivers;
 ts.codes = messagecodes;
-ts.samplerate = samplerate / 3;
+ts.samplerate = samplerate;
 ts.libstring = [];
 
 if nargin<5 || isempty(debug)

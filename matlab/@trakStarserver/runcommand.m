@@ -22,6 +22,10 @@ switch(command)
                 int32(parameters), 4));
         end
         thename = 'SetHemisphere';
+    case {codes.TRAKSTAR_SetRange}
+        handleError(ts,calllib(ts.libstring, 'SetSystemParameter',enuminfo.SYSTEM_PARAMETER_TYPE.MAXIMUM_RANGE,...
+            double(parameters), 8));
+        thename = 'SetRange';
     otherwise
         error(['Unknown command ' command]);
 end

@@ -13,11 +13,11 @@
 
 function [tc,params] = trakStarclient(inputParams,experiment,debug)
 
-params.name = {'numsensors','hemisphere'};
-params.type = {'number','string'};
-params.description = {'Number of trakStar receivers present','Hemisphere to use, should be one of: FRONT,BACK,TOP,BOTTOM,LEFT or RIGHT'};
-params.required = [1 0];
-params.default = {[],'FRONT'};
+params.name = {'numsensors','hemisphere','range'};
+params.type = {'number','string','number'};
+params.description = {'Number of trakStar receivers present','Hemisphere to use, should be one of: FRONT,BACK,TOP,BOTTOM,LEFT or RIGHT','Tracking range in inches. can be 36,72 or 144'};
+params.required = [1 0 0];
+params.default = {[],'FRONT',36};
 params.classdescription = 'Connect to a trakStar server to record trakStar 6D data';
 params.classname = 'trakStar';
 params.parentclassname = 'socketclient';
