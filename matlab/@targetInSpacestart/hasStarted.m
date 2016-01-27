@@ -14,16 +14,19 @@ else
     pressure = 1; % only relevant for tablet
 end
 
-if isfield(thistrial,'rotatedposition')
-    lastposition(1:2) = thistrial.rotatedposition;
-    lastposition(2) = 1-lastposition(2);
-end
+% if isfield(thistrial,'rotatedposition') && ~isempty(thistrial.rotatedposition)
+%     clear lastposition;
+%     lastposition(:,1:2) = thistrial.rotatedposition;
+%     lastposition(:,2) = 1-lastposition(:,2);
+%     % Use the first sensor
+%     lastposition = lastposition(1,:);
+% end
 
 started = 0;
 if size(experimentdata.targetPosition,1)<m.target
     error('Not enough targets defined: %d are defined, need to be at least %d',size(experimentdata.targetPosition,1),m.target);
 end
-if isnan(m.dimensionsToUse)
+if isnan(m.dimensionsToUse(1))
     distance = sqrt(sum((lastposition - experimentdata.targetPosition(m.target,:)).^2));
 else
     distance = sqrt(sum((lastposition(m.dimensionsToUse) - experimentdata.targetPosition(m.target,:)).^2));
