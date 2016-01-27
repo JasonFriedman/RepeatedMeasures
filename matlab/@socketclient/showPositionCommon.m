@@ -10,6 +10,8 @@ function [lastposition,thistrial] = showPositionCommon(m,lastsample,thistrial,ex
 lastposition(:,1) = lastsample(:,1) * experimentdata.screenInfo.screenRect(3);
 lastposition(:,2) = lastsample(:,2) * experimentdata.screenInfo.screenRect(4);
 
+thistrial.lastposition = lastposition;
+
 if iscell(m.showPositionColor)
     thisShowPositionColor = m.showPositionColor{min([numel(m.showPositionColor) thistrial.trialnum])};
     if size(thisShowPositionColor,1)>2
