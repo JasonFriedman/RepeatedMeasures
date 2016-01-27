@@ -5,8 +5,9 @@ Describes of how to transition from state to state. The current state correspond
 <TABLE border="1">
 <TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
 <TR><TD>currentState</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>The state the program is currently in</TD></TR>
-<TR><TD>position</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>The position needed to trigger the change (index of the positions in targetPosition)</TD></TR>
-<TR><TD>distanceAllowed</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>the maximum distance from the position that will trigger the change</TD></TR>
+<TR><TD>position</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>The position needed to trigger the change, (index of the positions in targetPosition)</TD></TR>
+<TR><TD>distanceAllowed</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>the maximum distance from the position that will trigger the change (i.e. distance must be less than this)</TD></TR>
+<TR><TD>minimumDistance</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>the minimum distance from the position that will trigger the change (i.e. distance must be greater than this)</TD></TR>
 <TR><TD>penTouching</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>whether the pen must be touching (If not using a tablet set to 0, for a tablet 0 = doesn't matter, 1 = must touch, 2 = must not touch)</TD></TR>
 <TR><TD>timeElapsed</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>the minimum amount of time that has elasped since arriving in this state (in seconds)</TD></TR>
 <TR><TD>newState</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>the state to move to if all the conditions are satisfied</TD></TR>

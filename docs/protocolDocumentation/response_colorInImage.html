@@ -1,0 +1,12 @@
+<HTML>
+<HEAD><TITLE>colorInImage</TITLE></HEAD>
+<BODY><H1>colorInImage</H1>
+The target(s) are defined by a color in an image<BR><BR>
+<TABLE border="1">
+<TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
+<TR><TD>imageNum</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>Image number to use (from those defined in setup)</TD></TR>
+<TR><TD>color</TD><TD>Yes</TD><TD><A title="A 1 by 3 matrix (see description for how to fill it)">1 by 3 matrix</A></TD><TD>[0,0,0]</TD><TD>color in the image that signfies the target</TD></TR>
+<TR><TD>endtime</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>The amount of time you need to be at the target for (in seconds)</TD></TR>
+<TR><TD>points</TD><TD>No</TD><TD><A title="A n by 6 matrix (see description for how to fill it)">n by 6 matrix</A></TD><TD>[]</TD><TD>Points to earn for this trial (based on position at the end of the trial). Should be a n*6 matrix. Each row includes (1) image number, (2-4) RGB color (5) number of points (6) tolerance of RGB color (city-block distance)</TD></TR>
+<TR><TD>showPositionFeedback</TD><TD>No</TD><TD><A title="A n by 2 matrix (see description for how to fill it)">n by 2 matrix</A></TD><TD>[]</TD><TD>Show position feedback at certain frames in trial. Each row has 2 columns: (1) image number, (2) frame number. Can only use one of points or showPositionFeedback</TD></TR>
+</TABLE></BODY></HTML>
