@@ -439,11 +439,15 @@ try
             if thistrial.checkMovingAfter && thisFrameTime <= thistrial.checkMovingAfter
                 if stillPressing(thistrial.thisstarttrial,e,experimentdata,thistrial)==0
                     DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,0);
-                    responseText = experimentdata.texts.TOO_EARLY;
-                    drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText);
-                    writetolog(e,sprintf('Wrote text in checkMovingAfter %s',responseText));
-                    playAnnoyingBeep(experimentdata);
-                    WaitSecs(1);
+                    if thistrial.textFeedback~=-1
+                        responseText = experimentdata.texts.TOO_EARLY;
+                        drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText);
+                        writetolog(e,sprintf('Wrote text in checkMovingAfter %s',responseText));
+                    end
+                    if thistrial.auditoryFeedback
+                        playAnnoyingBeep(experimentdata);
+                        WaitSecs(1);
+                    end
                     DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,1);
                     abortTrial = 1;
                     break;
