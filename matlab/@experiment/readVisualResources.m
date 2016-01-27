@@ -43,13 +43,15 @@ end
 % Put images into textures
 if ~isempty(experimentdata.screenInfo.curWindow) && ~isempty(experimentdata.images)
     for k=1:numel(experimentdata.images)
+        tmp = experimentdata.images{k};
         % Create a texture from the image (for faster viewing later)
         if ~isempty(experimentdata.alpha{k})
-            tmp = experimentdata.images{k};
             tmp(:,:,4) = experimentdata.alpha{k};
-            experimentdata.textures(k) = Screen('MakeTexture',experimentdata.screenInfo.curWindow,tmp);
+            experimentdata.textures(k) = Screen('MakeTexture',experimentdata.screenInfo.curWindow,tmp);            
         else
             experimentdata.textures(k) = Screen('MakeTexture',experimentdata.screenInfo.curWindow,experimentdata.images{k});
         end
+        tmpsize = size(tmp);
+        experimentdata.imagesize(k,:) = tmpsize(1:2);
     end
 end

@@ -26,7 +26,8 @@ if ~isempty(e) && ~isempty(s.stateTransitions)
     for m=1:numel(s.stateTransitions)
         if thistrial.imageState==s.stateTransitions{m}.currentState && ...
                 (GetSecs - thistrial.stateSwitchTime) >= s.stateTransitions{m}.timeElapsed && ...
-                sqrt(sum((lastsample(1:2).*[maxx maxy] - experimentdata.targetPosition(s.stateTransitions{m}.position,:).*[maxx maxy]).^2)) < (s.stateTransitions{m}.distanceAllowed * maxx)
+                sqrt(sum((lastsample(s.dimensionsToUse) - experimentdata.targetPosition(s.stateTransitions{m}.position,:)).^2)) < (s.stateTransitions{m}.distanceAllowed) && ...
+                sqrt(sum((lastsample(s.dimensionsToUse) - experimentdata.targetPosition(s.stateTransitions{m}.position,:)).^2)) > (s.stateTransitions{m}.minimumDistance)
             if s.stateTransitions{m}.penTouching==0 || (s.stateTransitions{m}.penTouching==1 && lastsample(4)>0) || (s.stateTransitions{m}.penTouching==2 && lastsample(4)==0) 
                 thistrial.imageState = s.stateTransitions{m}.newState;
                 writetolog(e,sprintf('Transition to state %d',thistrial.imageState));
