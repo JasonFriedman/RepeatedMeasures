@@ -35,7 +35,7 @@ params.description = {'Location of the server (e.g. ''localhost'' or an IP addre
     'x offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).',...
     'y offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).'};
 params.required = [1 1 0 0 0 0 0 0 0 0 0 0];
-params.default = {'localhost',0,'dot',[192 192 192],6,{[0.5 0.5]},NaN,-inf,{[0 0 0 0 0]},{[0 0 0 0 0]},0.5,0.5};
+params.default = {'localhost',0,'dot',[192 192 192],6,{[0.5 0.5]},{NaN},-inf,{[0 0 0 0 0]},{[0 0 0 0 0]},0.5,0.5};
 params.classdescription = 'This is the superclass for all the socket clients, which connect to the servers which sample the devices';
 params.classname = 'socketclient';
 

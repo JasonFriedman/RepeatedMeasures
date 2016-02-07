@@ -16,7 +16,7 @@ end
 
 lastsample(2) = 1 - lastsample(2); % make y the usual way around
 
-[lastposition,thistrial] = showPositionCommon(tc,lastsample,thistrial,experimentdata,e,frame);
+[lastposition,thistrial] = showPositionCommon(tc,lastsample(1:2),thistrial,experimentdata,e,frame);
 
 % If movementonset=1, then movement onset requires a movement in the last frame of greater than 0.005
 % If movementonset=2, then pressure>0 is sufficient
