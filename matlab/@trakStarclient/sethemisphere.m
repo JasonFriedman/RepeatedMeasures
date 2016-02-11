@@ -6,7 +6,7 @@ function sethemisphere(tc)
 
 codes = messagecodes;
 
-hemisphere = find(strcmp(tc.hemisphere,{'FRONT','BACK','TOP','BOTTOM','LEFT','RIGHT'}));
+hemisphere = find(strcmp(tc.hemisphere,{'FRONT','BACK','TOP','BOTTOM','LEFT','RIGHT'}))-1;
 if isempty(hemisphere)
     error('Hemisphere must be a string, one of FRONT, BACK, TOP, BOTTOM, LEFT, RIGHT');
 end
