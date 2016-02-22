@@ -46,6 +46,9 @@ AssertOpenGL;
 % make key names same on windows and OSX
 KbName('UnifyKeyNames');
 
+% Set text encoding to UTF-8 so that unicode will work (e.g. Hebrew)
+Screen('Preference', 'TextEncodingLocale', 'UTF-8');
+
 % Call GetSecs to make sure mex file is loaded
 GetSecs;
 

@@ -80,12 +80,20 @@ beepsparams.description = {'beep frequency (in Hz). ','beep duration (in seconds
 beepsparams.classdescription = 'Beeps throughout the trial';
 beepsparams.classname = 'beeps';
 
+stringsparams.name = {'name','value'};
+stringsparams.type = {'string','string'};
+stringsparams.default = {'',''};
+stringsparams.required = [1 1];
+stringsparams.description = {'Name of string to change (see list in file defaultstrings)','New value for that string'};
+stringsparams.classdescription = 'Replacement strings to be shown, mostly as feedback';
+stringsparams.classname = 'strings';
+
 params.name = {'images','strings','sounds','beeps','symbols','staircases','monitorWidth','monitorHeight',...
     'viewingDistance','xshift','framerate','vr','MCtrigger','incrementOnAbort','mouseTargets','targetPosition','boxes','labels','tactors','serial','parallel'};
-params.type = {'cellarray','cellarray','cellarray',beepsparams,'cellarray','cellarray','number','number',...
+params.type = {'cellarray',stringsparams,'cellarray',beepsparams,'cellarray','cellarray','number','number',...
     'number','number','number',vrparams,'number','boolean','matrix_n_4','matrix_n_2','matrix_n_4',labelparams,tactorparams,serialparams,parallelparams};
 params.description = {'Cell array of the filenames of the images (which are in the stimuli directory)',...
-    'Strings to replace the default (for feedback, etc). Each item should have fields name (name of string to replace) and value (the new string to use)',...
+    'Strings to replace the default (for feedback, etc).',...
     'Cell array of the filenames of .wav sound files to play (which are in the stimuli directory). All files need to have the same sample frequency and number of channels.',...
     'Details of custom beeps to play back during the trials',...
     'A cell array of strings to display (e.g. {''<'',''>''})',...
@@ -323,7 +331,14 @@ end
 
 if ~isempty(experimentdata.strings)
     str = experimentdata.strings;
-    for m=1:length(str.name)
-        experimentdata.texts.(str{m}.name) = str{m}.value;
+    if ~iscell(str)
+        str = {str};
+    end
+    for m=1:numel(str)
+        if isempty(str2num(str{m}.value))
+            experimentdata.texts.(str{m}.name) = str{m}.value;
+        else
+            experimentdata.texts.(str{m}.name) = uint8(str2num(str{m}.value));
+        end
     end
 end
