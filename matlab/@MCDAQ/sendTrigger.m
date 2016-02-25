@@ -24,7 +24,7 @@ else
 end
 
 % Send all triggers at once
-if t.in_or_out==4 % digital out
+if t.in_or_out==1 % digital out
     calllib('mccFuncLib','cbDOut',t.boardNum,t.channels,DataValue);
 elseif t.in_or_out==5 % analog in + digital out
     %fprintf('Sending trigger %d on channel %d',DataValue,t.channels{2});
