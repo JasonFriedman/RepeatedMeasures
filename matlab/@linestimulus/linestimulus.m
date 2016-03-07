@@ -11,8 +11,8 @@ params.description = {'A file containing 6 elements per row - the x,y of the cen
 'number of frames to show each line for','The color of the line (RGB, 1x3 matrix, from 0 to 255)'};
 params.required = [0 0 0 0];
 params.default = {[],[],4,[255 0 0]};
-params.classdescription = 'A rectangle to be drawn in each frame';
-params.classname = 'rectanglestimulus';
+params.classdescription = 'A line to be drawn in each frame';
+params.classname = 'linestimulus';
 params.parentclassname = 'stimulus';
 
 if nargout>1
