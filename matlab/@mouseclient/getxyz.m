@@ -5,4 +5,9 @@
 function xyz = getxyz(tc)
 
 lastsample = getsample(tc);
-xyz = lastsample(1:2);
+
+if isempty(lastsample)
+    xyz = [NaN NaN];
+else
+    xyz = lastsample(1:2);
+end

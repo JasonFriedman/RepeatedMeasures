@@ -7,7 +7,7 @@
 % maxsamplerate the maximum it will do (to avoid buffer overflows)
 %
 % e.g.
-% d = mouseserver(3002,6000);
+% d = mouseserver(3003,6000);
 % listen(d);
 
 function d = mouseserver(port,samplerate,debug)
