@@ -8,7 +8,7 @@ showPositionRotationAngle = m.showPositionRotationAngle{min([numel(m.showPositio
 showPositionRotationCenter = m.showPositionRotationCenter{min([numel(m.showPositionRotationCenter) thistrial.trialnum])};
 startRotationFrame = m.startRotationFrame(min([size(m.startRotationFrame,1) thistrial.trialnum]),:);
 
-if thistrial.showPosition==3
+if any(thistrial.showPosition==[3 4])
     sensors = size(displayRangeX,1);
     dims = size(lastsample,2)/sensors;
     numpositions = size(displayRangeX,2) / (2*dims+1);

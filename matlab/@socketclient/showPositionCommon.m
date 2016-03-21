@@ -1,7 +1,8 @@
 % SHOWPOSITIONCOMMON - show the position for various devices (including mouse + tablet)
 % If showPosition (set per trial) =1 -> show the actual position of the device
-%                                 =2 -> do nothing (for compatibility with liberty / force sensors)
+%                                 =2 -> if using image stimuli, only show position if in state 1
 %                                 =3 -> calculate position based on displayRangeX / displayRangeY / offsetX / offsetY
+%                                 =4 -> same as 3, but only before the trial starts
 
 function [lastposition,thistrial] = showPositionCommon(m,lastsample,thistrial,experimentdata,e,frame)
 
@@ -42,7 +43,9 @@ for p=1:size(lastposition,1)
     color = thisShowPositionColor(:,(p-1)*3+(1:3));
     
     if strcmp(m.showPositionType,'dot')
-        if any(thistrial.showPosition==[1 3]) || (thistrial.showPosition==2 && isa(thistrial.thisstimulus,'imagesstimulus') && thistrial.imageState == 1)
+        if any(thistrial.showPosition==[1 3]) || ...
+                (thistrial.showPosition==2 && isa(thistrial.thisstimulus,'imagesstimulus') && thistrial.imageState == 1) || ...
+                (thistrial.showPosition==4 && frame<1)
             Screen('DrawDots', experimentdata.screenInfo.curWindow, lastposition(p,:), m.showPositionSize(p), color,[],1);
         end
     elseif strcmp(m.showPositionType,'ellipse')
