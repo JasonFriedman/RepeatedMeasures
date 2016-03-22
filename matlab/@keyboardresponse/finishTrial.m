@@ -34,7 +34,7 @@ if isa(thistrial.thisstarttrial,'keyboardstart') && ...
     % Set the key pressed to empty
     keypressed = -1;
 end
-if ~isempty(keypressed) && any(keypressed == [r.keytopress KbName('q') KbName('n')])
+if ~isempty(keypressed) && any(keypressed(1) == [r.keytopress KbName('q') KbName('n')])
     toFinish = 1;
     thistrial.kb_firstpressed = keypressed;
 else
