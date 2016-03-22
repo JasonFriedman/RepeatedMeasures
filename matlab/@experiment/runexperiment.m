@@ -142,16 +142,14 @@ try
             e = setupRecording(e,[e.resultDir '/' thistrial.filename],thistrial.recordingTime + 5,experimentdata.screenInfo.curWindow);
         end
         
-        % If the background is not white, then draw it
+        % Draw the background
         if ~isempty(experimentdata.vr) && experimentdata.vr.stereomode>0
             for k=[1 0]
                 Screen('SelectStereoDrawBuffer', experimentdata.screenInfo.curWindow, k);
                 Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
             end
         else
-            if ~all(thistrial.backgroundColor==0)
-                Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
-            end
+            Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
         end
         
         % Run any actions before the trial starts. This is used for stimuli that just show something for an infinite
