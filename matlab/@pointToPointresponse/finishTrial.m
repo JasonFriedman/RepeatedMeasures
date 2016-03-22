@@ -8,10 +8,13 @@ toFinish = false;
 
 m = get(e,'devices');
 if isfield(m,'tablet')
+    data = getsample(m.tablet);
+    % lastsample(4) is the pressure (must be greater than 0)
+    pressure = data(4);
     lastsample = getsampleVisual(m.tablet,thistrial,frame);
 else
     lastsample = getxyz(e);
-    lastsample(4) = 1;
+    pressure = 1; % i.e. ignore
 end
 if isfield(thistrial,'rotatedposition')
     lastsample(1:2) = thistrial.rotatedposition;
@@ -27,10 +30,9 @@ end
 % 3: has reached finish point and finished waiting
 % (then it returns to -1)
 
-% lastsample(4) is the pressure (must be greater than 0)
 if ~isempty(lastsample)
     % If not touching, restart the trial
-    if lastsample(4)==0
+    if pressure==0
         thistrial.movementStage = -1;
     elseif thistrial.movementStage == -1;
         if sqrt(sum((lastsample(1:2).*[maxx maxy] - experimentdata.targetPosition(r.start,:).*[maxx maxy]).^2)) <= (r.startDistance * maxx)
