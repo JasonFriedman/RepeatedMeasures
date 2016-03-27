@@ -44,7 +44,7 @@ end
 
 if ~isempty(v.stateTransitions) && ~iscell(v.stateTransitions)
     tmp = v.stateTransitions;
-    v = rmfield(v,'stateTransitions');
+    v.stateTransitions = [];
     v.stateTransitions{1} = tmp;
 end
 
