@@ -7,7 +7,8 @@ function [lastposition,thistrial] = showPosition(tc,thistrial,experimentdata,e,f
 % get the current position
 lastsample = getsample(tc);
 % i.e. pressure > 0 or always showing
-if all(lastsample==0) || (lastsample(4)==0 && tc.showPositionOnlyWhenTouching)    lastposition = [NaN NaN];
+if all(lastsample==0) || (lastsample(4)==0 && tc.showPositionOnlyWhenTouching)    
+    lastposition = [NaN NaN];
     return;
 end
 
