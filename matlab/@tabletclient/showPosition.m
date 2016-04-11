@@ -27,3 +27,4 @@ end
 
 thistrial.lastx = lastposition(1);
 thistrial.lasty = lastposition(2);
+thistrial.pressure = lastsample(4);

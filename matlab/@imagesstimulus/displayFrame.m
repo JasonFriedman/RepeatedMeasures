@@ -17,10 +17,13 @@ todraw = -1;
 if ~isempty(e) && ~isempty(s.stateTransitions)
     m = get(e,'devices');
     if isfield(m,'tablet')
+        data = getsample(m.tablet);
+        % lastsample(4) is the pressure (must be greater than 0)
+        pressure = data(4);
         lastsample = getsampleVisual(m.tablet,thistrial,frame);
     else
         lastsample = getxyz(e);
-        lastsample(4) = 1;
+        pressure = 1;  % i.e. ignore
     end
     [maxx,maxy] = getmaxxy(e);
     for m=1:numel(s.stateTransitions)
@@ -28,7 +31,7 @@ if ~isempty(e) && ~isempty(s.stateTransitions)
                 (GetSecs - thistrial.stateSwitchTime) >= s.stateTransitions{m}.timeElapsed && ...
                 sqrt(sum((lastsample(s.dimensionsToUse) - experimentdata.targetPosition(s.stateTransitions{m}.position,:)).^2)) < (s.stateTransitions{m}.distanceAllowed) && ...
                 sqrt(sum((lastsample(s.dimensionsToUse) - experimentdata.targetPosition(s.stateTransitions{m}.position,:)).^2)) > (s.stateTransitions{m}.minimumDistance)
-            if s.stateTransitions{m}.penTouching==0 || (s.stateTransitions{m}.penTouching==1 && lastsample(4)>0) || (s.stateTransitions{m}.penTouching==2 && lastsample(4)==0) 
+            if s.stateTransitions{m}.penTouching==0 || (s.stateTransitions{m}.penTouching==1 && pressure>0) || (s.stateTransitions{m}.penTouching==2 && pressure==0) 
                 thistrial.imageState = s.stateTransitions{m}.newState;
                 writetolog(e,sprintf('Transition to state %d',thistrial.imageState));
                 markEvent(e,codes.imageState+thistrial.imageState);

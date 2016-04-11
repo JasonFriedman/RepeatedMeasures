@@ -454,7 +454,8 @@ try
                     break;
                 end
             end
-                 
+            
+            thistrial.pressure = 1; % set default tablet pressure to 1
             
             if frame <= thistrial.stimuliFrames
                 % Present a frame
