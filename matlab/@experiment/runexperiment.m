@@ -173,11 +173,13 @@ try
         end
         started = 0;
         while started~=1
+            thistrial.lastposition = [];
+            thistrial.lastpositionVisual = [];
             [started,keyCode] = hasStarted(thistrial.thisstarttrial,e,experimentdata,thistrial);
             if thistrial.showPosition
                 preStart(thistrial.thisstimulus,experimentdata,thistrial,0);
                 DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,0);
-                [lastposition,thistrial, experimentdata] = showPosition(e,thistrial,experimentdata,-1);
+                [thistrial.lastposition,thistrial, experimentdata] = showPosition(e,thistrial,experimentdata,-1);
                 Screen('Flip',experimentdata.screenInfo.curWindow,1);
                 % If the background is not white, then draw it
                 if ~all(thistrial.backgroundColor==0)
@@ -256,7 +258,7 @@ try
         % Show the position (e.g. mouse, cursor) if appropriate
         if thistrial.showPosition
             preStart(thistrial.thisstimulus,experimentdata,thistrial,0);
-            [lastposition,thistrial, experimentdata] = showPosition(e,thistrial,experimentdata,-1);
+            [thistrial.lastposition,thistrial, experimentdata] = showPosition(e,thistrial,experimentdata,-1);
         end
         Screen('Flip',experimentdata.screenInfo.curWindow,1);
         % If the background is not white, then draw it
@@ -287,7 +289,7 @@ try
             end
             DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,0);
             if thistrial.showPosition
-                [lastposition,thistrial] = showPosition(e,thistrial,experimentdata,-1);
+                [thistrial.lastposition,thistrial] = showPosition(e,thistrial,experimentdata,-1);
             end
             Screen('Flip',experimentdata.screenInfo.curWindow,1);
             % If the background is not white, then draw it
@@ -300,6 +302,8 @@ try
             aborted=0;
             startFixation = GetSecs;
             while(GetSecs<startFixation+thistrial.waitTimeBefore)
+                thistrial.lastposition = [];
+                thistrial.lastpositionVisual = [];
                 % In the button press cases, they should be still pressing
                 % the button, otherwise abort and repeat the trial
                 % (because the stimuli has not yet been shown)
@@ -322,7 +326,7 @@ try
                 end
                 DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,0);
                 if thistrial.showPosition
-                    [lastposition,thistrial] = showPosition(e,thistrial,experimentdata,-1);
+                    [thistrial.lastposition,thistrial] = showPosition(e,thistrial,experimentdata,-1);
                 end
                 Screen('Flip',experimentdata.screenInfo.curWindow,1);
                 % If the background is not white, then draw it
@@ -361,7 +365,8 @@ try
         abortTrial=0;
         for frame = 1:min(thistrial.numFrames,10^8)
             thistrial.frameInfo.startFrame(frame) = GetSecs;
-            lastposition = [];
+            thistrial.lastposition = [];
+            thistrial.lastpositionVisual = [];
             if frame>1
                 thisFrameTime = thistrial.frameInfo.startFrame(frame) - thistrial.frameInfo.startFrame(1);
             else
@@ -464,7 +469,7 @@ try
                 % If the file is absent, the default from @stimulus will be used (which does nothing)
                 [thistrial,experimentdata,breakfromloop,thistrial.thisstimulus] = displayFrame(thistrial.thisstimulus,e,frame,thistrial,experimentdata);
                 if thistrial.showPosition
-                    [lastposition,thistrial,experimentdata] = showPosition(e,thistrial,experimentdata,frame);
+                    [thistrial.lastposition,thistrial,experimentdata] = showPosition(e,thistrial,experimentdata,frame);
                 end
                 
                 if breakfromloop
@@ -495,7 +500,7 @@ try
                 % Pass time until the end of the trial (so there will be the right number of frames)
                 DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,0);
                 if thistrial.showPosition
-                    [lastposition,thistrial] = showPosition(e,thistrial,experimentdata,frame);
+                    [thistrial.lastposition,thistrial] = showPosition(e,thistrial,experimentdata,frame);
                 end
                 Screen('Flip',experimentdata.screenInfo.curWindow,0,0);
                 % If the background is not white, then draw it
@@ -507,8 +512,8 @@ try
                 end
             end
             if ~isempty(thistrial.checkMovingForward) && thisFrameTime >= thistrial.checkMovingForward.time(1) 
-                if ~isempty(lastposition)
-                    [toAbort,thistrial] = checkMovingForward(e,thistrial,experimentdata,lastposition);
+                if ~isempty(thistrial.lastposition)
+                    [toAbort,thistrial] = checkMovingForward(e,thistrial,experimentdata,thistrial.lastposition);
                 else
                     [toAbort,thistrial] = checkMovingForward(e,thistrial,experimentdata);
                 end
@@ -525,8 +530,8 @@ try
                 end
             end
             % check if the trial should be ended
-            if ~isempty(lastposition)
-                [tofinish,thistrial,experimentdata] = finishTrial(thistrial.thisresponse,thistrial,experimentdata,e,lastposition,frame);
+            if ~isempty(thistrial.lastposition)
+                [tofinish,thistrial,experimentdata] = finishTrial(thistrial.thisresponse,thistrial,experimentdata,e,thistrial.lastposition,frame);
             else
                 [tofinish,thistrial,experimentdata] = finishTrial(thistrial.thisresponse,thistrial,experimentdata,e,[],frame);
             end

@@ -5,10 +5,8 @@ function [started,keyCode] = hasStarted(m,e,experimentdata,thistrial)
 
 d = get(e,'devices');
 if isfield(d,'tablet')
-    lastposition = getsampleVisual(d.tablet,thistrial,-1);
+    [lastposition,~,pressure] = getsampleVisual(d.tablet,thistrial,-1);
     lastposition = lastposition(1:2);
-    tmp = getsample(d.tablet);
-    pressure = tmp(4);
 else
     lastposition = getxyz(e);
     pressure = 1; % only relevant for tablet
@@ -32,7 +30,7 @@ else
     distance = sqrt(sum((lastposition(m.dimensionsToUse) - experimentdata.targetPosition(m.target,:)).^2));
 end
 if isnan(lastposition(1))
-    started = 1;
+    started = NaN;
     writetolog(e,'Can''t yet decide if has started, returning NaN');
 elseif distance < m.threshold && (~m.touching || pressure>0)
     started = 1;

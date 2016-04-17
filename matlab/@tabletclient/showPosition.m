@@ -3,18 +3,30 @@
 %                                 =2 -> do nothing (for compatibility with liberty / force sensors)
 %                                 =3 -> calculate position based on displayRangeX / displayRangeY / offsetX / offsetY
 
-function [lastposition,thistrial] = showPosition(tc,thistrial,experimentdata,e,frame)
-% get the current position
-lastsample = getsample(tc);
+function [lastpositionVisual,thistrial] = showPosition(tc,thistrial,experimentdata,e,frame)
+
+if isfield(thistrial,'lastpositionVisual') && ~isempty(thistrial.lastpositionVisual)
+    lastpositionVisual = thistrial.lastpositionVisual;
+elseif isfield(thistrial,'lastposition') && ~isempty(thistrial.lastposition)
+   lastpositionVisual(:,1) = thistrial.lastposition(:,1) * experimentdata.screenInfo.screenRect(3);
+   lastpositionVisual(:,2) = (1-thistrial.lastposition(:,2)) * experimentdata.screenInfo.screenRect(4);
+   thistrial.lastpositionVisual = lastpositionVisual;
+else 
+   [lastposition,thistrial] = getsampleVisual(tc,thistrial,frame);
+
+   lastpositionVisual(:,1) = lastposition(:,1) * experimentdata.screenInfo.screenRect(3);
+   lastpositionVisual(:,2) = (1-lastposition(:,2)) * experimentdata.screenInfo.screenRect(4);
+   thistrial.lastposition = lastposition;
+   thistrial.lastpositionVisual = lastpositionVisual;
+end
 % i.e. pressure > 0 or always showing
-if all(lastsample==0) || (lastsample(4)==0 && tc.showPositionOnlyWhenTouching)    
-    lastposition = [NaN NaN];
+if thistrial.pressure==0 && tc.showPositionOnlyWhenTouching    
+    thistrial.lastposition = [NaN NaN];
+    lastpositionVisual = thistrial.lastposition;
     return;
 end
 
-lastsample(2) = 1 - lastsample(2); % make y the usual way around
-
-[lastposition,thistrial] = showPositionCommon(tc,lastsample(1:2),thistrial,experimentdata,e,frame);
+thistrial = showPositionCommon(tc,lastpositionVisual,thistrial,experimentdata,e,frame);
 
 % If movementonset=1, then movement onset requires a movement in the last frame of greater than 0.005
 % If movementonset=2, then pressure>0 is sufficient
@@ -25,6 +37,5 @@ if ~isempty(thistrial.movementonset) && thistrial.movementonset.type<0
     end
 end
 
-thistrial.lastx = lastposition(1);
-thistrial.lasty = lastposition(2);
-thistrial.pressure = lastsample(4);
+thistrial.lastx = thistrial.lastposition(1);
+thistrial.lasty = thistrial.lastposition(2);
