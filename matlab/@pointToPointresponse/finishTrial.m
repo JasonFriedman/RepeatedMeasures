@@ -6,21 +6,18 @@
 function [toFinish,thistrial,experimentdata] = finishTrial(r,thistrial,experimentdata,e,lastposition,frame)
 
 toFinish = false;
-[maxx,maxy] = getmaxxy(e);
 
 if isfield(thistrial,'rotatedposition')
-    lastsample(1:2) = thistrial.rotatedposition;
-    lastsample(2) = 1-lastsample(2);
-    lastposition = lastsample(1:2) .* [maxx maxy];
+    lastposition(1:2) = thistrial.rotatedposition;
+    lastposition(2) = 1-lastsample(2);
 elseif isempty(lastposition)
     m = get(e,'devices');
     if isfield(m,'tablet')
-        [lastsample,~,pressure] = getsampleVisual(m.tablet,thistrial,frame);
+        [lastposition,~,pressure] = getsampleVisual(m.tablet,thistrial,frame);
     else
-        lastsample = getxyz(e);
+        lastposition = getxyz(e);
         pressure = 1; % i.e. ignore
     end
-    lastposition = lastsample(1:2) .* [maxx maxy];
 else
     pressure = thistrial.pressure;
 end
@@ -38,20 +35,20 @@ if ~isempty(lastposition)
     if pressure==0
         thistrial.movementStage = -1;
     elseif thistrial.movementStage == -1;
-        if sqrt(sum((lastposition - experimentdata.targetPosition(r.start,:).*[maxx maxy]).^2)) <= (r.startDistance * maxx)
+        if sqrt(sum((lastposition - experimentdata.targetPosition(r.start,:)).^2)) <= (r.startDistance)
             thistrial.movementStage = 0;
         end
     elseif thistrial.movementStage == 0
-        startendvector = experimentdata.targetPosition(r.end,:).*[maxx maxy] - experimentdata.targetPosition(r.start,:) .* [maxx maxy];
+        startendvector = experimentdata.targetPosition(r.end,:) - experimentdata.targetPosition(r.start,:);
         startenddistance = sqrt(sum(startendvector.^2));
-        startcurrentpoint = lastposition - experimentdata.targetPosition(r.start,:).*[maxx maxy];
+        startcurrentpoint = lastposition - experimentdata.targetPosition(r.start,:);
         startenddirection = startendvector ./ sqrt(sum(startendvector.^2));
         projection_along_startend = dot(startcurrentpoint,startenddirection);
         if projection_along_startend > 0.5*startenddistance
             thistrial.movementStage = 1;
         end
     elseif thistrial.movementStage == 1
-        if sqrt(sum((lastposition - experimentdata.targetPosition(r.end,:).*[maxx maxy]).^2)) <= (r.endDistance * maxx)
+        if sqrt(sum((lastposition - experimentdata.targetPosition(r.end,:)).^2)) <= (r.endDistance)
             thistrial.movementStage = 2;
             thistrial.reachedStage2 = GetSecs;
         end
@@ -59,7 +56,7 @@ if ~isempty(lastposition)
 end
 
 if thistrial.movementStage == 2
-    if sqrt(sum((lastposition - experimentdata.targetPosition(r.end,:).*[maxx maxy]).^2)) > (r.endDistance * maxx)
+    if sqrt(sum((lastposition - experimentdata.targetPosition(r.end,:)).^2)) > (r.endDistance)
         thistrial.movementStage = 1;
     elseif r.endtime <= (GetSecs-thistrial.reachedStage2)
         thistrial.movementStage = 3;

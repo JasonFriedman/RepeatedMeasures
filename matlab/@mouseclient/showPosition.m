@@ -5,7 +5,13 @@
 
 function [lastposition,thistrial] = showPosition(m,thistrial,experimentdata,e,frame)
 % get the current position
-lastsample = getxyz(m);
-lastsample(2) = 1 - lastsample(2); % make y the usual way around
+lastposition = getxyz(m);
+lastposition(2) = 1 - lastposition(2); % make y the usual way around
+thistrial.lastpositoin = lastposition;
 
-[lastposition,thistrial] = showPositionCommon(m,lastsample,thistrial,experimentdata,e,frame);
+lastpositionVisual(:,1) = lastposition(:,1) * experimentdata.screenInfo.screenRect(3);
+lastpositionVisual(:,2) = lastposition(:,2) * experimentdata.screenInfo.screenRect(4);
+
+thistrial.lastpositionVisual = lastpositionVisual;
+
+thistrial = showPositionCommon(m,lastpositionVisual,thistrial,experimentdata,e,frame);

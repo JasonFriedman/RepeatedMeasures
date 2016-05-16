@@ -7,7 +7,6 @@ breakfromloop = 0;
 
 codes = messagecodes;
 
-
 % This is redrawing the image every
 % frame. As it is using textures, it should be able
 % keep up with the frame rate
@@ -17,20 +16,16 @@ todraw = -1;
 if ~isempty(e) && ~isempty(s.stateTransitions)
     m = get(e,'devices');
     if isfield(m,'tablet')
-        data = getsample(m.tablet);
-        % lastsample(4) is the pressure (must be greater than 0)
-        pressure = data(4);
-        lastsample = getsampleVisual(m.tablet,thistrial,frame);
+        [thistrial.lastposition,~,pressure] = getsampleVisual(m.tablet,thistrial,frame);
     else
-        lastsample = getxyz(e);
+        thistrial.lastposition = getxyz(e);
         pressure = 1;  % i.e. ignore
     end
-    [maxx,maxy] = getmaxxy(e);
     for m=1:numel(s.stateTransitions)
         if thistrial.imageState==s.stateTransitions{m}.currentState && ...
                 (GetSecs - thistrial.stateSwitchTime) >= s.stateTransitions{m}.timeElapsed && ...
-                sqrt(sum((lastsample(s.dimensionsToUse) - experimentdata.targetPosition(s.stateTransitions{m}.position,:)).^2)) < (s.stateTransitions{m}.distanceAllowed) && ...
-                sqrt(sum((lastsample(s.dimensionsToUse) - experimentdata.targetPosition(s.stateTransitions{m}.position,:)).^2)) > (s.stateTransitions{m}.minimumDistance)
+                sqrt(sum((thistrial.lastposition(s.dimensionsToUse) - experimentdata.targetPosition(s.stateTransitions{m}.position,:)).^2)) < (s.stateTransitions{m}.distanceAllowed) && ...
+                sqrt(sum((thistrial.lastposition(s.dimensionsToUse) - experimentdata.targetPosition(s.stateTransitions{m}.position,:)).^2)) > (s.stateTransitions{m}.minimumDistance)
             if s.stateTransitions{m}.penTouching==0 || (s.stateTransitions{m}.penTouching==1 && pressure>0) || (s.stateTransitions{m}.penTouching==2 && pressure==0) 
                 thistrial.imageState = s.stateTransitions{m}.newState;
                 writetolog(e,sprintf('Transition to state %d',thistrial.imageState));
