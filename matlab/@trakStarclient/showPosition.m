@@ -8,7 +8,7 @@ function [lastposition,thistrial] = showPosition(tc,thistrial,experimentdata,e,f
 lastposition = getxyz(tc);
 thistrial.lastposition = lastposition;
 
-[lastsampleVisual,thistrial] = calculateLastPosition(m,lastsample,thistrial,frame);
+[lastsampleVisual,thistrial] = calculateLastPosition(m,lastposition,thistrial,frame);
 
 lastpositionVisual(:,1) = lastsampleVisual(:,1) * experimentdata.screenInfo.screenRect(3);
 lastpositionVisual(:,2) = lastsampleVisual(:,2) * experimentdata.screenInfo.screenRect(4);

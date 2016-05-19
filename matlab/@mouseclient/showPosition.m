@@ -7,10 +7,12 @@ function [lastposition,thistrial] = showPosition(m,thistrial,experimentdata,e,fr
 % get the current position
 lastposition = getxyz(m);
 lastposition(2) = 1 - lastposition(2); % make y the usual way around
-thistrial.lastpositoin = lastposition;
+thistrial.lastposition = lastposition;
 
-lastpositionVisual(:,1) = lastposition(:,1) * experimentdata.screenInfo.screenRect(3);
-lastpositionVisual(:,2) = lastposition(:,2) * experimentdata.screenInfo.screenRect(4);
+[lastsampleVisual,thistrial] = calculateLastPosition(m,lastposition,thistrial,frame);
+
+lastpositionVisual(:,1) = lastsampleVisual(:,1) * experimentdata.screenInfo.screenRect(3);
+lastpositionVisual(:,2) = lastsampleVisual(:,2) * experimentdata.screenInfo.screenRect(4);
 
 thistrial.lastpositionVisual = lastpositionVisual;
 
