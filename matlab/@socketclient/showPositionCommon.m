@@ -41,7 +41,7 @@ for p=1:size(lastpositionVisual,1)
         if any(thistrial.showPosition==[1 3]) || ...
                 (thistrial.showPosition==2 && isa(thistrial.thisstimulus,'imagesstimulus') && thistrial.imageState == 1) || ...
                 (thistrial.showPosition==4 && frame<1)
-            Screen('DrawDots', experimentdata.screenInfo.curWindow, lastpositionVisual(p,:), m.showPositionSize(p), color,[],1);
+            Screen('DrawDots', experimentdata.screenInfo.curWindow, lastpositionVisual(p,:), m.showPositionSize(p), color(therow,:),[],1);
         end
     elseif strcmp(m.showPositionType,'ellipse')
         % left top right bottom (4xN matrix)
@@ -49,7 +49,7 @@ for p=1:size(lastpositionVisual,1)
             lastpositionVisual(p,2) - m.showPositionSize(p,2)/2;
             lastpositionVisual(p,1) + m.showPositionSize(p,1)/2;
             lastpositionVisual(p,2) + m.showPositionSize(p,2)/2];
-        Screen('FillOval', experimentdata.screenInfo.curWindow, color, rect);
+        Screen('FillOval', experimentdata.screenInfo.curWindow, color(therow,:), rect);
     elseif strcmp(m.showPositionType,'rectangle')
         left = 0.55 * experimentdata.screenInfo.screenRect(3);
         top = lastpositionVisual(p,2);
