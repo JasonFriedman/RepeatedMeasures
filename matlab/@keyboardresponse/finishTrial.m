@@ -13,7 +13,7 @@ if isfield(devices,'keyboard')
         keypressed = [];
     end
 else
-    [keyIsDown, secs, keyCode] = KbCheck;
+    [keyIsDown, secs, keyCode] = KbCheck(-1);
     keypressed = find(keyCode);
     if isempty(keypressed)
         keypressed = -1;

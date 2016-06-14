@@ -6,4 +6,4 @@
 function [started,keyCode] = wait(s,e,experimentdata,thistrial)
 
 started = 1;
-[keyIsDown, secs, keyCode ] = KbCheck;
+[keyIsDown, secs, keyCode ] = KbCheck(-1);

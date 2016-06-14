@@ -6,7 +6,7 @@ function [started,keyCode] = hasStarted(k,e,experimentdata,thistrial)
 started = 0;
 
 % Wait for keyboard input to start event
-[keyisdown,secs, keyCode ] = KbCheck;
+[keyisdown,secs, keyCode ] = KbCheck(-1);
 if keyisdown && (keyCode(k.keytopress) || keyCode(k.Q))
     %writetolog(e,sprintf('In keyboardstart, pressed key %d',find(keyCode)));
     started = 1;

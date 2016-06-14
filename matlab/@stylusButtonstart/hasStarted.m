@@ -17,4 +17,4 @@ started = 0;
 if ~isempty(buttons) && (bitget(buttons,2) || bitget(buttons,3))
     started = 1;
 end
-[keyIsDown, secs, keyCode ] = KbCheck;
+[keyIsDown, secs, keyCode ] = KbCheck(-1);

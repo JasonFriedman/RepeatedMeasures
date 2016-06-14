@@ -7,7 +7,7 @@ function [toFinish,thistrial,experimentdata] = finishTrial(r,thistrial,experimen
 
 toFinish = 0;
 
-[keyIsDown, secs, keyCode] = KbCheck;
+[keyIsDown, secs, keyCode] = KbCheck(-1);
 
 if isfield(thistrial,'pressedKey') && isempty(find(keyCode,1))
     toFinish=1;

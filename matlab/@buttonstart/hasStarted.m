@@ -10,4 +10,4 @@ elseif isfield(devices,'DAQ')
 else
     error('No button / DAQ devices are connected');
 end
-[keyIsDown, secs, keyCode ] = KbCheck;
+[keyIsDown, secs, keyCode ] = KbCheck(-1);

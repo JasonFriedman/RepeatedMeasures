@@ -45,7 +45,7 @@ for m=0:stereo
 end
 % If this is a calibration trial, check if a relevant key has been pressed
 if ~isempty(s.calibrate)
-    [keycode, keycode,keycode] = KbCheck;
+    [keycode, keycode,keycode] = kbCheck(-1);
     if ~isempty(find(keycode, 1))
         thistranslation = s.calibrate.translatedelta;
         thisscale = s.calibrate.scaledelta;
@@ -109,7 +109,7 @@ if ~isempty(s.calibrate)
         end
     end
 else
-    [keycode, keycode,keycode] = KbCheck;
+    [keycode, keycode,keycode] = kbCheck(-1);
     if keycode(KbName('q'))==1
         breakfromloop = 1;
     end

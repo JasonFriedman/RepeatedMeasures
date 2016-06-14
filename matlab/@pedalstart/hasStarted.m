@@ -16,4 +16,4 @@ end
 
 started = ~notpressed;
 
-[keyIsDown, secs, keyCode ] = KbCheck;
+[keyIsDown, secs, keyCode ] = KbCheck(-1);

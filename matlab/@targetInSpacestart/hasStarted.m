@@ -38,4 +38,4 @@ elseif distance < m.threshold && (~m.touching || pressure>0)
 end
 
 % check the keyboard also
-[keyisdown,secs, keyCode ] = KbCheck;
+[keyisdown,secs, keyCode ] = KbCheck(-1);

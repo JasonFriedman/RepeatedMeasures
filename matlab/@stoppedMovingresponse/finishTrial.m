@@ -50,7 +50,7 @@ if ~isnan(lastsample(1))
     thistrial.previouslocation = lastsample;
 end
 
-[keyIsDown, secs, keycode] = KbCheck;
+[keyIsDown, secs, keycode] = KbCheck(-1);
 if ~isempty(find(keycode,1)) && (find(keycode,1)==KbName('q') || find(keycode,1)==KbName('n'))
     toFinish = true;
 end

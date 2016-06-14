@@ -16,6 +16,6 @@ if s.basejointangles
 end
 
 % Wait for them to let go of a keyboard if they pressed it to end the trial
-while(KbCheck)
+while(KbCheck(-1))
     % do nothing
 end

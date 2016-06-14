@@ -197,7 +197,7 @@ try
                 % stop this trial, will be dealt with outside this loop
                 
                 % Wait for them to let go of the key
-                while KbCheck()
+                while KbCheck(-1)
                     %
                 end
                 break;
@@ -662,7 +662,7 @@ try
         currentTrial = currentTrial+1;
         
         % If they are pressing the 'q' key, then quit
-        [keyCode,keyCode,keyCode] = KbCheck;
+        [keyCode,keyCode,keyCode] = KbCheck(-1);
         if find(keyCode,1)==KbName('q') % q = quit
             currentTrial = inf;
             writetolog(e,'Pressed q, quitting');
