@@ -4,11 +4,14 @@ function uid = root(tree)
 % 
 % tree   - XMLTree object
 % uid    - UID of the root element of tree
-%_______________________________________________________________________
+%__________________________________________________________________________
 %
 % Return the uid of the root element of the tree.
-%_______________________________________________________________________
-% @(#)root.m                   Guillaume Flandin               02/04/17
+%__________________________________________________________________________
+% Copyright (C) 2002-2008  http://www.artefact.tk/
+
+% Guillaume Flandin
+% $Id: root.m 4460 2011-09-05 14:52:16Z guillaume $
 
 % Actually root is necessarily the element whos UID is 1, by
 % construction. However, xml_parser should return a tree with a ROOT
@@ -26,8 +29,8 @@ uid = 1;
 
 % Look for the first element in the XML Tree
 for i=1:length(tree)
-	if strcmp(get(tree,i,'type'),'element')
-		uid = i;
-		break
-	end
+    if strcmp(get(tree,i,'type'),'element')
+        uid = i;
+        break
+    end
 end

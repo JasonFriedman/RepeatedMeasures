@@ -23,7 +23,10 @@ disp('>> t = xmltree(''example.xml'')')
 try,
 	t = xmltree('example.xml')
 catch,
-	disp('Please first launch xmldemo1')
+	disp(' ')
+	disp('Please launch xmldemo1 first')
+	disp(' ')
+	return;
 end
 
 disp(' ')

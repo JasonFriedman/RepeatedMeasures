@@ -6,18 +6,22 @@ function tree = set(tree,uid, parameter, value)
 % uid       - array (or cell) of uid's
 % parameter - property name
 % value     - property value
-%_______________________________________________________________________
+%__________________________________________________________________________
 %
 % Set object properties given its uid and pairs parameter/value
 % The tree parameter must be in input AND in output
-%_______________________________________________________________________
-% @(#)set.m                   Guillaume Flandin                02/03/27
+%__________________________________________________________________________
+% Copyright (C) 2002-2011  http://www.artefact.tk/
 
-error(nargchk(4,4,nargin));
+% Guillaume Flandin
+% $Id: set.m 4460 2011-09-05 14:52:16Z guillaume $
+
+
+%error(nargchk(4,4,nargin));
 
 if iscell(uid), uid = [uid{:}]; else uid = uid(:); end
 
 for i=1:length(uid)
-	tree.tree{uid(i)} = builtin('subsasgn', tree.tree{uid(i)}, struct('type','.','subs',parameter), value);
-	%tree.tree{uid(i)} = setfield(tree.tree{uid(i)},parameter,value);
+    tree.tree{uid(i)} = builtin('subsasgn', tree.tree{uid(i)}, struct('type','.','subs',parameter), value);
+    %tree.tree{uid(i)} = setfield(tree.tree{uid(i)},parameter,value);
 end
