@@ -239,6 +239,7 @@ bool readSingleSample(float currentData[]) {
     // For the G4, the size of the buffer is always 112, regardless of the number of sensors
     DWORD i= 0;
     LPG4_HUBDATA pHubFrame;
+	int iHub=0;
     
     while (i < dwSize ) {
         //mexPrintf("i=%d, dwSize=%d\n",i,dwSize);
@@ -251,20 +252,22 @@ bool readSingleSample(float currentData[]) {
         UINT nSensMask = 1;
         
         currentData[0] =  (float) nFrameNum;
+		int j;
         
-        for (int j=0; j<G4_MAX_SENSORS_PER_HUB; j++) {
+        for (j=0; j<G4_MAX_SENSORS_PER_HUB; j++) {
             //mexPrintf("Sensor %d: %d\n",j,((nSensMask << j) & nSensorMap) != 0);
             
             if (((nSensMask << j) & nSensorMap) != 0) {
                 G4_SENSORDATA * pSD = &(pHubFrame->sd[j]);
-                currentData[j*6+1] = pSD->pos[0];
-                currentData[j*6+2] = pSD->pos[1];
-                currentData[j*6+3] = pSD->pos[2];
-                currentData[j*6+4] = pSD->ori[0];
-                currentData[j*6+5] = pSD->ori[1];
-                currentData[j*6+6] = pSD->ori[2];
+                currentData[iHub+j*6+1] = pSD->pos[0];
+                currentData[iHub+j*6+2] = pSD->pos[1];
+                currentData[iHub+j*6+3] = pSD->pos[2];
+                currentData[iHub+j*6+4] = pSD->ori[0];
+                currentData[iHub+j*6+5] = pSD->ori[1];
+                currentData[iHub+j*6+6] = pSD->ori[2];
             }
         }
+		iHub=iHub+j*6;
     }
 	return true;
 }
@@ -290,6 +293,7 @@ bool readSampleContinuous(float currentData[],int numMarkers) {
     // For the G4, the size of the buffer is always 112, regardless of the number of sensors
     DWORD i= 0;
     LPG4_HUBDATA pHubFrame;
+	int iHub=0;
 
     while (i < dwSize ) {
         //mexPrintf("i=%d, dwSize=%d\n",i,dwSize);
@@ -302,20 +306,21 @@ bool readSampleContinuous(float currentData[],int numMarkers) {
         UINT nSensMask = 1;
         
         currentData[0] =  (float) nFrameNum;
-        
-        for (int j=0; j<G4_MAX_SENSORS_PER_HUB; j++) {
+		int j;
+        for (j=0; j<G4_MAX_SENSORS_PER_HUB; j++) {
             //mexPrintf("Sensor %d: %d\n",j,((nSensMask << j) & nSensorMap) != 0);
             
             if (((nSensMask << j) & nSensorMap) != 0) {
                 G4_SENSORDATA * pSD = &(pHubFrame->sd[j]);
-                currentData[j*6+1] = pSD->pos[0];
-                currentData[j*6+2] = pSD->pos[1];
-                currentData[j*6+3] = pSD->pos[2];
-                currentData[j*6+4] = pSD->ori[0];
-                currentData[j*6+5] = pSD->ori[1];
-                currentData[j*6+6] = pSD->ori[2];
+                currentData[iHub+j*6+1] = pSD->pos[0];
+                currentData[iHub+j*6+2] = pSD->pos[1];
+                currentData[iHub+j*6+3] = pSD->pos[2];
+                currentData[iHub+j*6+4] = pSD->ori[0];
+                currentData[iHub+j*6+5] = pSD->ori[1];
+                currentData[iHub+j*6+6] = pSD->ori[2];
             }
         }
+		iHub=iHub+j*6;
     }
 
 	return true;
