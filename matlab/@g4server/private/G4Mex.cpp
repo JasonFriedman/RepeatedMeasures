@@ -11,9 +11,9 @@
 using namespace std ;
 
 CPDIg4		g_pdiDev;
-CPDImdat    g_pdiMDat;
+//CPDImdat    g_pdiMDat;
 CPDIser		g_pdiSer;
-DWORD		g_dwFrameSize;
+//DWORD		g_dwFrameSize;
 BOOL		g_bCnxReady;
 DWORD		g_dwStationMap;
 DWORD		g_dwLastHostFrameCount;
@@ -29,11 +29,13 @@ bool ConnectToSystem();
 bool SetupDevice();
 void Disconnect();
 bool readSingleSample(float currentData[]);
-bool readSampleContinuous(float currentData[],int numMarkers);
+bool readSampleContinuous(float currentData[]);
+bool ParseG4NativeFrame(PBYTE pBuf, DWORD dwSize, float currentData[]);
 bool StartContinuousSampling();
 bool StopContinuousSampling();
 int GetFrameRate();
 void UpdateStationMap();
+
 
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 {
@@ -120,7 +122,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 		plhs[0] = arrayOutput;
 		outArray = mxGetPr(plhs[0]);
 
-		bool success = readSampleContinuous(currentData,numMarkers);
+		bool success = readSampleContinuous(currentData);
 
 		if (success) {
 			for (int k=0;k<numMarkers*6+1;k++)
@@ -165,14 +167,16 @@ bool InitializeSystem()
 
 	g_pdiDev.Trace(true, 7);
 
-	g_pdiMDat.Empty();
-	g_pdiMDat.Append( PDI_MODATA_POS );
-	g_pdiMDat.Append( PDI_MODATA_ORI );
-	g_pdiMDat.Append( PDI_MODATA_FRAMECOUNT );
-	g_dwFrameSize = 8+12+12+4;
+	//g_pdiMDat.Empty();
+	//g_pdiMDat.Append( PDI_MODATA_POS );
+	//g_pdiMDat.Append( PDI_MODATA_ORI );
+	//g_pdiMDat.Append( PDI_MODATA_FRAMECOUNT );
+	//g_dwFrameSize = 8+12+12+4;
 
 	g_bCnxReady = FALSE;
-	g_dwStationMap = 0;
+	g_dwStationMap =0;
+//	g_dwStationMap = 5;
+//	SetStationMap();
 
 	return retVal;
 }
@@ -217,114 +221,136 @@ bool SetupDevice()
 
 void UpdateStationMap() {
     g_pdiDev.GetStationMap( g_dwStationMap );
-    mexPrintf("GetStationMap\n");
+    mexPrintf("GetStationMap %x \n",g_dwStationMap );
 }
 
 
 bool readSingleSample(float currentData[]) {
 
+
 	PBYTE pBuf;
 	DWORD dwSize;
-	int sampleSize = 6;
-    
-    if (g_dwStationMap==0)
-        UpdateStationMap();
+	
 
-	if (!(g_pdiDev.ReadSinglePnoBufG4(pBuf, dwSize)))
-	{
+	if (g_dwStationMap==0) 	{
+		UpdateStationMap();
+	}
+
+	if (!(g_pdiDev.ReadSinglePnoBufG4(pBuf, dwSize))) {
 		mexPrintf("Error in reading a frame\n");
-		return false;
+		return false;	
 	}
-        
-    // For the G4, the size of the buffer is always 112, regardless of the number of sensors
-    DWORD i= 0;
-    LPG4_HUBDATA pHubFrame;
-	int iHub=0;
-    
-    while (i < dwSize ) {
-        //mexPrintf("i=%d, dwSize=%d\n",i,dwSize);
-        pHubFrame = (LPG4_HUBDATA)(&pBuf[i]);
-        i += sizeof(G4_HUBDATA);
-        UINT nHubID = pHubFrame->nHubID;
-        UINT nFrameNum =  pHubFrame->nFrameCount;
-        UINT nSensorMap = pHubFrame->dwSensorMap;
-        UINT nDigIO = pHubFrame->dwDigIO;
-        UINT nSensMask = 1;
-        
-        currentData[0] =  (float) nFrameNum;
-		int j;
-        
-        for (j=0; j<G4_MAX_SENSORS_PER_HUB; j++) {
-            //mexPrintf("Sensor %d: %d\n",j,((nSensMask << j) & nSensorMap) != 0);
-            
-            if (((nSensMask << j) & nSensorMap) != 0) {
-                G4_SENSORDATA * pSD = &(pHubFrame->sd[j]);
-                currentData[iHub+j*6+1] = pSD->pos[0];
-                currentData[iHub+j*6+2] = pSD->pos[1];
-                currentData[iHub+j*6+3] = pSD->pos[2];
-                currentData[iHub+j*6+4] = pSD->ori[0];
-                currentData[iHub+j*6+5] = pSD->ori[1];
-                currentData[iHub+j*6+6] = pSD->ori[2];
-            }
-        }
-		iHub=iHub+j*6;
-    }
-	return true;
-}
+	else 	{
+		bool err=ParseG4NativeFrame( pBuf, dwSize,currentData );
+		return err;
 
-bool readSampleContinuous(float currentData[],int numMarkers) {
+	}
+
+}
+ 
+
+bool readSampleContinuous(float currentData[]) {
 
 	PBYTE pBuf;
 	DWORD dwSize;
-	int sampleSize;
+	DWORD dwFC;
 
-	if (!(g_pdiDev.LastPnoPtr(pBuf, dwSize)))
+/*	
+	if (!(g_pdiDev.LastHostFrameCount( dwFC ))) {
+		mexPrintf("Error in reading frame count during continuous recording type1\n");
+	    return false;
+	}
+	else {
+		if (dwFC == g_dwLastHostFrameCount) {
+			// no new frames since last peek
+			mexPrintf("No new data available type1\n");
+			return false;
+		}
+		else {
+			if (!(g_pdiDev.LastPnoPtr( pBuf, dwSize ))) {
+				mexPrintf("Error in reading a frame during continuous recording\n");
+				return false;
+			}
+			else 	{
+				g_dwLastHostFrameCount = dwFC;
+				bool err=ParseG4NativeFrame( pBuf, dwSize,currentData );
+				return err;
+			}
+		}
+	}  
+*/	
+
+  		if (!(g_pdiDev.LastPnoPtr( pBuf, dwSize ))) {
+				mexPrintf("Error in reading a frame during continuous recording\n");
+				return false;
+			}
+			else 	{
+				bool err=ParseG4NativeFrame( pBuf, dwSize,currentData );
+				return err;
+			}
+
+			
+}
+
+
+/////////////////////////////////////////////////////////////////////
+
+bool ParseG4NativeFrame( PBYTE pBuf, DWORD dwSize, float currentData[] )
+{
+	if ((!pBuf) || (!dwSize))
 	{
-		mexPrintf("Error in reading a frame during continuous recording\n");
-		return false;
+			mexPrintf("No data available\n");
+		    return false;
 	}
+	else
+	{
+		DWORD i = 0;
+		LPG4_HUBDATA	pHubFrame;
+		int iHub = 0;
 
-	// no data ready
-	if (dwSize==0) {
-		mexPrintf("No data available\n");
-		return false;
+		while (i < dwSize)
+		{
+			pHubFrame = (LPG4_HUBDATA)(&pBuf[i]);
+
+			i += sizeof(G4_HUBDATA);
+
+			UINT	nHubID = pHubFrame->nHubID;
+			UINT	nFrameNum = pHubFrame->nFrameCount;
+			UINT	nSensorMap = pHubFrame->dwSensorMap;
+			UINT	nDigIO = pHubFrame->dwDigIO;
+			UINT	nSensMask = 1;
+
+			currentData[0] = (float)nFrameNum;
+
+			if (nHubID==0)
+				iHub=0;
+			else
+				iHub=18;
+
+
+			for (int j = 0; j < G4_MAX_SENSORS_PER_HUB; j++)
+			{
+
+				if (((nSensMask << j) & nSensorMap) != 0) {
+					G4_SENSORDATA * pSD = &(pHubFrame->sd[j]);
+					currentData[iHub + j * 6 + 1] = pSD->pos[0];
+					currentData[iHub + j * 6 + 2] = pSD->pos[1];
+					currentData[iHub + j * 6 + 3] = pSD->pos[2];
+					currentData[iHub + j * 6 + 4] = pSD->ori[0];
+					currentData[iHub + j * 6 + 5] = pSD->ori[1];
+					currentData[iHub + j * 6 + 6] = pSD->ori[2];
+
+				}
+			} // end while dwsize
+		
+		}
+
+
 	}
-    
-    // For the G4, the size of the buffer is always 112, regardless of the number of sensors
-    DWORD i= 0;
-    LPG4_HUBDATA pHubFrame;
-	int iHub=0;
-
-    while (i < dwSize ) {
-        //mexPrintf("i=%d, dwSize=%d\n",i,dwSize);
-        pHubFrame = (LPG4_HUBDATA)(&pBuf[i]);
-        i += sizeof(G4_HUBDATA);
-        UINT nHubID = pHubFrame->nHubID;
-        UINT nFrameNum =  pHubFrame->nFrameCount;
-        UINT nSensorMap = pHubFrame->dwSensorMap;
-        UINT nDigIO = pHubFrame->dwDigIO;
-        UINT nSensMask = 1;
-        
-        currentData[0] =  (float) nFrameNum;
-		int j;
-        for (j=0; j<G4_MAX_SENSORS_PER_HUB; j++) {
-            //mexPrintf("Sensor %d: %d\n",j,((nSensMask << j) & nSensorMap) != 0);
-            
-            if (((nSensMask << j) & nSensorMap) != 0) {
-                G4_SENSORDATA * pSD = &(pHubFrame->sd[j]);
-                currentData[iHub+j*6+1] = pSD->pos[0];
-                currentData[iHub+j*6+2] = pSD->pos[1];
-                currentData[iHub+j*6+3] = pSD->pos[2];
-                currentData[iHub+j*6+4] = pSD->ori[0];
-                currentData[iHub+j*6+5] = pSD->ori[1];
-                currentData[iHub+j*6+6] = pSD->ori[2];
-            }
-        }
-		iHub=iHub+j*6;
-    }
 
 	return true;
 }
+
 
 void Disconnect()
 {
@@ -341,16 +367,20 @@ void Disconnect()
 
 bool StartContinuousSampling() {
 
-    if (g_dwStationMap==0)
+  //  if (g_dwStationMap==0)
         UpdateStationMap();
     
+	g_pdiDev.ResetPnoPtr();
     g_pdiDev.ResetHostFrameCount();
     g_dwLastHostFrameCount = 0;
     
 	if (!(g_pdiDev.StartContPnoG4(0))) {
+
 		mexPrintf("Error in starting continuous sampling\n");
 		return false;
 	}
+
+//	Sleep(500);  
 	return true;
 
 }
@@ -361,6 +391,8 @@ bool StopContinuousSampling() {
 		mexPrintf("Error in stopping continuous sampling\n");
 		return false;
 	}
+
+//  Sleep(500);  
 	return true;
 
 }
