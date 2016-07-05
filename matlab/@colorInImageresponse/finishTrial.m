@@ -5,12 +5,12 @@ function [toFinish,thistrial,experimentdata] = finishTrial(r,thistrial,experimen
 
 toFinish = 0;
 
-lastposition = round(thistrial.lastposition);
+lastposition = round(thistrial.lastpositionVisual);
 
 if ~isempty(thistrial.showPositionFeedback)
     for k=1:size(thistrial.showPositionFeedback)
         if isnan(thistrial.showPositionFeedback(k,3)) && frame >= thistrial.showPositionFeedback(k,2)
-            thistrial.showPositionFeedback(k,3:4) = lastposition;
+            thistrial.showPositionFeedback(k,3:4) = lastpositionVisual;
         end
     end
 end
@@ -20,7 +20,7 @@ imageNum = r.imageNum;
 % Rect is left,top,right,bottom
 pixelColor=squeeze(double(Screen('GetImage',experimentdata.textures(imageNum), [lastposition(1) lastposition(2) lastposition(1)+1 lastposition(2)+1],[], 0, 3)))';
 
-if all(pixelColor == r.color)
+if sum(abs(pixelColor - r.color)) <= r.distance
     if r.endtime==0
         thistrial.pressedLocation = 1;
         thistrial.pressedTime = GetSecs;
