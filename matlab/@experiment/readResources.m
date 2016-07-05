@@ -195,7 +195,7 @@ if ~exist(soundDir,'dir')
     soundDir = [parentDir 'sounds/'];
 end
 % Read in annoying beep
-[experimentdata.annoyingBeep,experimentdata.annoyingBeepf] = wavread([soundDir 'Buzz.wav']);
+[experimentdata.annoyingBeep,experimentdata.annoyingBeepf] = audioread([soundDir 'Buzz.wav']);
 
 % Default texts
 experimentdata.texts = defaultstrings;
@@ -283,7 +283,7 @@ if ~isempty(experimentdata.sounds)
         if ~exist(wavFilename,'file')
             error('No wav file %s found',wavFilename);
         end
-        [wavedata, freq] = wavread(wavFilename);
+        [wavedata, freq] = audioread(wavFilename);
         wavedata = wavedata';
         nrchannels = size(wavedata,1); % Number of rows == number of channels.
         
