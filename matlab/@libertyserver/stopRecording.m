@@ -5,7 +5,7 @@ function ls = stopRecording(ls)
 
 if ls.sampleContinuously
     if usingUSB(ls)
-        LibertyMex(2);
+        LibertyMex(4);
     else
         IOPort('Write',ls.s,['P' char(13)]);
         if isdebug(ls)
