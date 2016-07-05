@@ -1,7 +1,7 @@
 % HASSTARTED - check if a pedal has been pressed (using a joystick)
 % Do not call directly, will be called by runexperiment
 
-function [started,keyCode] = hasStarted(p,e,experimentdata,thistrial)
+function [started,keyCode,thistrial] = hasStarted(p,e,experimentdata,thistrial)
 
 notpressed = 1;
 if p.joystickType==1

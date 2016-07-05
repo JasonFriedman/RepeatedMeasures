@@ -3,7 +3,6 @@
 % This method should be overloaded by a child class to wait for anything
 % meaningful (this version does not wait for anything)
 
-function [started,keyCode] = wait(s,e,experimentdata,thistrial)
 
 started = 1;
 [keyIsDown, secs, keyCode ] = KbCheck(-1);

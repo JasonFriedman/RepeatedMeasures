@@ -172,10 +172,10 @@ try
             startedSamplingWithoutRecording = 1;
         end
         started = 0;
+        thistrial.lastposition = [];
+        thistrial.lastpositionVisual = [];
         while started~=1
-            thistrial.lastposition = [];
-            thistrial.lastpositionVisual = [];
-            [started,keyCode] = hasStarted(thistrial.thisstarttrial,e,experimentdata,thistrial);
+            [started,keyCode,thistrial] = hasStarted(thistrial.thisstarttrial,e,experimentdata,thistrial);
             if thistrial.showPosition
                 preStart(thistrial.thisstimulus,experimentdata,thistrial,0);
                 DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,0);
