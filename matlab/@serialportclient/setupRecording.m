@@ -8,6 +8,6 @@ function sc = setupRecording(sc,filename,maxtime,curWindow)
 
 codes = messagecodes;
 
-m.parameters = {filename,1,maxtime};
+m.parameters = {filename,sc.numvalues,maxtime};
 m.command = codes.setuprecording;
 sendmessage(sc,m,'setupRecording');

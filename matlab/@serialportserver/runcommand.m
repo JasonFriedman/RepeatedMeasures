@@ -15,6 +15,9 @@ returnValue = NaN;
 codes = messagecodes;
 
 switch(command)
+    case {codes.SERIALPORT_setNumberCharacters}
+        changedParameters = {'numCharacters'};
+        changedValues = {parameters};
     case {codes.SERIALPORT_sendTrigger}
         % 0-9 are sent as is (but as characters)
         % 10-16 are sent as the letter a-g

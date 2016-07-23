@@ -4,5 +4,5 @@
 
 function datalength = getdatalength(k,numberofmarkers)
 
-% each frame has 2 values data + marker 
-datalength = 3;
+% each frame has n values data + marker 
+datalength = numberofmarkers + 1;

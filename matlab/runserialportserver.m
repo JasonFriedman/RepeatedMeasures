@@ -15,4 +15,4 @@ if nargin<3 || isempty(samplerate)
     samplerate = 1000;
 end
 
-system(sprintf('matlab -nojvm -nosplash -r "l = serialportserver(3019,%d,%d,%d,1);listen(l);" &',samplerate,COMport,baudRate));
+system(sprintf('matlab -nojvm -nosplash -r "l = serialportserver(3020,%d,%d,%d,1);listen(l);" &',samplerate,COMport,baudRate));

@@ -94,8 +94,11 @@ codes.TRAKSTAR_SetRange = 121;
 codes.GLOVE_getRawData = 130;
 
 codes.SERIALPORT_sendTrigger = 140;
+codes.SERIALPORT_setNumberCharacters = 141;
 
 codes.DAQ_sendTrigger = 150;
+
+
 
 %% Mark event codes [ Not that these are separate from the above codes, so they can overlap]
 

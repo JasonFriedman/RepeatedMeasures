@@ -20,6 +20,7 @@ s.codes = messagecodes;
 s.COMport = COMport;
 s.baudRate = baudRate;
 s.protocol = 'Arduino';
+s.numCharacters = 14; % Will be updated by the client in setupdevice
 s.s = [];
 
 s = class(s,'serialportserver',socketserver(port,samplerate,debug));
