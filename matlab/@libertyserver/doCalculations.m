@@ -8,9 +8,10 @@
 function dataSummary = doCalculations(l,data)
 
 i=1;
-markerpos = data(:,i*3-1:i*3+1);
-thisgoingforward = length(find(diff(markerpos(:,2))>0)) / size(data,1);
+dataSummary.markerpos = data(:,i*3-1:i*3+1);
+dataSummary.time = data(:,end-1);
+thisgoingforward = length(find(diff(dataSummary.markerpos(:,2))>0)) / size(data,1);
 
 dataSummary.goingforwardratio = thisgoingforward;
-dataSummary.meanposition = nanmean(markerpos);
-dataSummary.meanfinalposition = markerpos(end,:);
+dataSummary.meanposition = nanmean(dataSummary.markerpos);
+dataSummary.meanfinalposition = dataSummary.markerpos(end,:);
