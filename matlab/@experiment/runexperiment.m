@@ -205,6 +205,7 @@ try
         end
         % If the trial has recordingTime of 0 (i.e. just show something), then make sure they have left the key
         % before continuing
+        thistrial.starttime = GetSecs;
         writetolog(e,'Start condition met');
 
         if thistrial.recordingTime==0
@@ -442,24 +443,6 @@ try
                 end
             end
             
-            if thistrial.checkMovingAfter && thisFrameTime <= thistrial.checkMovingAfter
-                if stillPressing(thistrial.thisstarttrial,e,experimentdata,thistrial)==0
-                    DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,0);
-                    if thistrial.textFeedback~=-1
-                        responseText = experimentdata.texts.TOO_EARLY;
-                        drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText);
-                        writetolog(e,sprintf('Wrote text in checkMovingAfter %s',responseText));
-                    end
-                    if thistrial.auditoryFeedback
-                        playAnnoyingBeep(experimentdata);
-                        WaitSecs(1);
-                    end
-                    DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,1);
-                    abortTrial = 1;
-                    break;
-                end
-            end
-            
             thistrial.pressure = 1; % set default tablet pressure to 1
             
             if frame <= thistrial.stimuliFrames
@@ -511,6 +494,23 @@ try
                     Screen('DrawTexture',experimentdata.screenInfo.curWindow,experimentdata.textures(thistrial.backgroundImage));
                 end
             end
+            if thistrial.checkMovingAfter && thisFrameTime <= thistrial.checkMovingAfter
+                if stillPressing(thistrial.thisstarttrial,e,experimentdata,thistrial)==0
+                    DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,0);
+                    if thistrial.textFeedback~=-1
+                        responseText = experimentdata.texts.TOO_EARLY;
+                        drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText);
+                        writetolog(e,sprintf('Wrote text in checkMovingAfter %s',responseText));
+                    end
+                    if thistrial.auditoryFeedback
+                        playAnnoyingBeep(experimentdata);
+                        WaitSecs(1);
+                    end
+                    DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,1);
+                    abortTrial = 1;
+                    break;
+                end
+            end
             if ~isempty(thistrial.checkMovingForward) && thisFrameTime >= thistrial.checkMovingForward.time(1) 
                 if ~isempty(thistrial.lastposition)
                     [toAbort,thistrial] = checkMovingForward(e,thistrial,experimentdata,thistrial.lastposition);
@@ -536,6 +536,7 @@ try
                 [tofinish,thistrial,experimentdata] = finishTrial(thistrial.thisresponse,thistrial,experimentdata,e,[],frame);
             end
             if tofinish
+                thistrial.finishtime = GetSecs;
                 break;
             end
         end
@@ -598,7 +599,7 @@ try
                     Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
                 end
             end
-            drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,thistrial.responseText);
+            drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,thistrial.responseText,[],[],thistrial.textFeedbackColor);
             WaitSecs(1);
             writetolog(e,sprintf('Wrote text %s',thistrial.responseText));
         end
