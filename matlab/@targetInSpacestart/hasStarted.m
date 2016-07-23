@@ -5,8 +5,10 @@ function [started,keyCode,thistrial] = hasStarted(m,e,experimentdata,thistrial)
 
 d = get(e,'devices');
 if isfield(d,'tablet')
-    [lastposition,~,pressure] = getsampleVisual(d.tablet,thistrial,-1);
+    [lastposition,thistrial,pressure] = getsampleVisual(d.tablet,thistrial,-1);
     lastposition = lastposition(1:2);
+    thistrial.lastpositionVisual(:,1) = lastposition(:,1) * experimentdata.screenInfo.screenRect(3);
+    thistrial.lastpositionVisual(:,2) = (1-lastposition(:,2)) * experimentdata.screenInfo.screenRect(4);
 else
     lastposition = getxyz(e);
     pressure = 1; % only relevant for tablet

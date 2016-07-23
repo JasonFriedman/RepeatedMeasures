@@ -37,5 +37,7 @@ if ~isempty(thistrial.movementonset) && thistrial.movementonset.type<0
     end
 end
 
-thistrial.lastx = thistrial.lastposition(1);
-thistrial.lasty = thistrial.lastposition(2);
+if ~isempty(thistrial.lastposition)
+    thistrial.lastx = thistrial.lastposition(1);
+    thistrial.lasty = thistrial.lastposition(2);
+end
