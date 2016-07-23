@@ -3,6 +3,66 @@
 
 function thistrial = feedback(r,e,thistrial,previoustrial,experimentdata,dataSummary)
 
+if ~isempty(r.showBackground)
+     Screen('DrawTexture',experimentdata.screenInfo.curWindow,experimentdata.textures(r.showBackground));
+end
+
+%if isfield(thistrial,'finishtime')
+%    trialduration = thistrial.finishtime - thistrial.starttime;
+%end
+
+if (~isempty(r.showPathFeedback) && r.showPathFeedback) || ~isempty(r.durationFeedback)
+    % Use the first device to calculate in screen coordinates
+    devices = get(e,'devices');
+    devicelist = fields(devices);
+    d = devices.(devicelist{1});
+    if ~isa(d,'libertyclient')
+        error('showPath feedback currently only works with liberty client');
+    end
+    xyz = dataSummary.markerpos(:,1:3);
+end
+
+% Show duration feedback if necessary
+if ~isempty(r.durationFeedback) && r.durationFeedback(1)>=0 && r.durationFeedback(2)<inf
+    % Start at the end, go backwards until the first time it is in the start target
+    startsample = NaN;
+    for k=size(xyz,1):-1:1
+        lastposition = calculateLastPosition(d,xyz(k,:),thistrial,inf);
+        lastposition(1) = round(lastposition(1) *  experimentdata.screenInfo.screenRect(3));
+        lastposition(2) = round(lastposition(2) *  experimentdata.screenInfo.screenRect(4));
+        pixelColor=squeeze(double(Screen('GetImage',experimentdata.textures(r.startImageNum), [lastposition(1) lastposition(2) lastposition(1)+1 lastposition(2)+1],[], 0, 3)))';
+        if sum(abs(pixelColor - r.colorStart)) <= r.distance
+            startsample = k;
+            break;
+        end
+    end
+    % Start at the beginning and go forwards until the first time it is in the end target
+    endsample = NaN;
+    for k=1:size(xyz,1)
+        lastposition = calculateLastPosition(d,xyz(k,:),thistrial,inf);
+        lastposition(1) = round(lastposition(1) *  experimentdata.screenInfo.screenRect(3));
+        lastposition(2) = round(lastposition(2) *  experimentdata.screenInfo.screenRect(4));
+        pixelColor=squeeze(double(Screen('GetImage',experimentdata.textures(r.imageNum), [lastposition(1) lastposition(2) lastposition(1)+1 lastposition(2)+1],[], 0, 3)))';
+        if sum(abs(pixelColor - r.color)) <= r.distance
+            endsample = k;
+            break;
+        end
+    end
+    thistrial.duration = dataSummary.time(endsample) - dataSummary.time(startsample);
+    if thistrial.duration<r.durationFeedback(1)
+        writetolog(e,'Duration too fast');
+        thistrial.responseText = 'Too fast!';
+        thistrial.textFeedback=1;
+        return;
+    elseif thistrial.duration>r.durationFeedback(2)
+        writetolog(e,'Duration too slow');
+        thistrial.responseText = 'Too slow!';
+        thistrial.textFeedback=1;
+        return
+    end
+    % Otherwise, no feedback
+end
+
 if ~isempty(r.points)
     lastposition = round(thistrial.lastposition);
     points = 0;
@@ -37,4 +97,23 @@ elseif ~isempty(thistrial.showPositionFeedback)
     end
     Screen('Flip',experimentdata.screenInfo.curWindow,1);
     WaitSecs(1);
+elseif ~isempty(r.showPathFeedback) && r.showPathFeedback
+    % Need to convert to screen coordinates (every 5th dot)
+    count=0;
+    for k=1:5:size(xyz,1)
+        count = count+1;
+        [dots(:,count),thistrial] = calculateLastPosition(d,xyz(k,:),thistrial,inf);
+    end
+    
+    dots(1,:) = dots(1,:) * experimentdata.screenInfo.screenRect(3);
+    dots(2,:) = dots(2,:) * experimentdata.screenInfo.screenRect(4);
+
+    thesize = 4;
+    thecolor = [110 110 100];
+    thetype = 2;
+        
+    Screen('DrawDots', experimentdata.screenInfo.curWindow, dots, thesize , thecolor,[],thetype);
+    Screen('Flip',experimentdata.screenInfo.curWindow,1);
+    WaitSecs(2);
 end
+
