@@ -57,7 +57,7 @@ if any(thistrial.showPosition==[3 4])
     lastsample = lastposition;
 end
 
-if ~isnan(showPositionRotationAngle(1)) && any(showPositionRotationAngle~=0) && any(frame >=startRotationFrame)
+if ~isempty(showPositionRotationAngle) && ~isnan(showPositionRotationAngle(1)) && any(showPositionRotationAngle~=0) && any(frame >=startRotationFrame)
     for p=1:size(lastsample,1)
         if frame > startRotationFrame(p)
             rotatedposition(p,1) = (lastsample(p,1) - showPositionRotationCenter(p,1)) * cos(showPositionRotationAngle(p)) - (lastsample(p,2) - showPositionRotationCenter(p,2)) * sin(showPositionRotationAngle(p)) + showPositionRotationCenter(p,1);
