@@ -98,6 +98,9 @@ codes.SERIALPORT_setNumberCharacters = 141;
 
 codes.DAQ_sendTrigger = 150;
 
+codes.REDAMBER_getSensorStates = 160;
+codes.REDAMBER_addresses = 161;
+
 
 
 %% Mark event codes [ Not that these are separate from the above codes, so they can overlap]

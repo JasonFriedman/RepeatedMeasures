@@ -161,7 +161,7 @@ while 1
       datalength = getdatalength(s,nummarkers);
       
       if isempty(maximumframes) || isempty(nummarkers) || isempty(datalength)
-          error('Something is wrong - can''t allocate an empty array (framerate = %d, maximumtime = %d, nummarkers = %d',framerate,maximumtime,nummarkers);
+          error('Something is wrong - can''t allocate an empty array (framerate = %d, maximumtime = %d, nummarkers = %d',s.framerate,maximumtime,nummarkers);
       end
       
       databuffer = zeros(maximumframes,datalength);
