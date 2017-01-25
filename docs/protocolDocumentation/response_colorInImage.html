@@ -5,8 +5,14 @@ The target(s) are defined by a color in an image<BR><BR>
 <TABLE border="1">
 <TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
 <TR><TD>imageNum</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>Image number to use (from those defined in setup)</TD></TR>
-<TR><TD>color</TD><TD>Yes</TD><TD><A title="A 1 by 3 matrix (see description for how to fill it)">1 by 3 matrix</A></TD><TD>[0,0,0]</TD><TD>color in the image that signfies the target</TD></TR>
-<TR><TD>endtime</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>The amount of time you need to be at the target for (in seconds)</TD></TR>
+<TR><TD>startImageNum</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>Image number for when the movement has started, for use with timing feedback</TD></TR>
+<TR><TD>color</TD><TD>No</TD><TD><A title="A 1 by 3 matrix (see description for how to fill it)">1 by 3 matrix</A></TD><TD>[0,0,0]</TD><TD>color in the image that signfies the target</TD></TR>
+<TR><TD>colorStart</TD><TD>No</TD><TD><A title="A 1 by 3 matrix (see description for how to fill it)">1 by 3 matrix</A></TD><TD>0</TD><TD>color in the image that signfies the start point, for use with timing feedback</TD></TR>
+<TR><TD>endtime</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>[0,0,0]</TD><TD>The amount of time you need to be at the target for (in seconds)</TD></TR>
 <TR><TD>points</TD><TD>No</TD><TD><A title="A n by 6 matrix (see description for how to fill it)">n by 6 matrix</A></TD><TD>[]</TD><TD>Points to earn for this trial (based on position at the end of the trial). Should be a n*6 matrix. Each row includes (1) image number, (2-4) RGB color (5) number of points (6) tolerance of RGB color (city-block distance)</TD></TR>
 <TR><TD>showPositionFeedback</TD><TD>No</TD><TD><A title="A n by 2 matrix (see description for how to fill it)">n by 2 matrix</A></TD><TD>[]</TD><TD>Show position feedback at certain frames in trial. Each row has 2 columns: (1) image number, (2) frame number. Can only use one of points or showPositionFeedback</TD></TR>
+<TR><TD>showPathFeedback</TD><TD>No</TD><TD>string</TD><TD>[]</TD><TD>Show feedback on the path taken at the end of the trial. This should either be 1, or an image, or empty. If it is an image, the color of the image will specify the color of the feedback</TD></TR>
+<TR><TD>showBackground</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>[]</TD><TD>Whether to show backgroud during the feedback presentation. Either an image number, or empty</TD></TR>
+<TR><TD>distance</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>allowable cityblock distance from the color</TD></TR>
+<TR><TD>durationFeedback</TD><TD>No</TD><TD><A title="A 1 by 2 matrix (see description for how to fill it)">1 by 2 matrix</A></TD><TD>[]</TD><TD>Whether to provide feedback about the duration. If so, it should be a 1x2 matrix (1st is minimum time, 2nd is maximum time)</TD></TR>
 </TABLE></BODY></HTML>

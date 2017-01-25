@@ -1,7 +1,7 @@
 <HTML>
-<HEAD><TITLE>serialport</TITLE></HEAD>
-<BODY><H1>serialport</H1>
-Connect to a serial port and sample from it<BR><BR>
+<HEAD><TITLE>redamber</TITLE></HEAD>
+<BODY><H1>redamber</H1>
+Connect to a redamber server to record orientation + acceleration data<BR><BR>
 <TABLE border="1">
 <TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
 <TR><TD>server</TD><TD>Yes</TD><TD>string</TD><TD>'localhost'</TD><TD>Location of the server (e.g. 'localhost' or an IP address) </TD></TR>
@@ -16,7 +16,5 @@ Connect to a serial port and sample from it<BR><BR>
 <TR><TD>displayRangeY</TD><TD>No</TD><TD>cellarray</TD><TD>{0.00 0.00 0.00 0.00 0.00 }</TD><TD>Range of values to show when using showPosition=3 as the dot position on the y axis. The ith row corresponds to the ith sensor. Use the first two values to show the x values, next two for y, e.g. [0 0 -10 10 0] to show y values of -0.5 to 0.5 as the dot y position. Use the last value to show time, e.g. [0 0 0 0 1] will move up the screen in 1 s. If the time (last) value is set to -inf, only show before trial starts. If set to inf, only show during (and not before) trial. This should be a cell array with either a single cell for all trials, or a cell for each trial. To show multiple points, use an M*(N*P) matrix (M sensors, N=2*dims+1, P dots)</TD></TR>
 <TR><TD>offsetX</TD><TD>No</TD><TD><A title="A matrix (see description for how to fill it)">matrix</A></TD><TD>0.50</TD><TD>x offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).</TD></TR>
 <TR><TD>offsetY</TD><TD>No</TD><TD><A title="A matrix (see description for how to fill it)">matrix</A></TD><TD>0.50</TD><TD>y offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).</TD></TR>
-<TR><TD>protocol</TD><TD>Yes</TD><TD>string</TD><TD>'Arduino'</TD><TD>Type of server to connect to (currently 'Arduino' is the only option). For Arduino, the character s is sent on the serial port, and a comma separated list is expected in return</TD></TR>
-<TR><TD>numcharacters</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>16</TD><TD>Number of characeters in total per sample</TD></TR>
-<TR><TD>numvalues</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>2</TD><TD>Number of values per sample</TD></TR>
+<TR><TD>addresses</TD><TD>Yes</TD><TD>cellarray</TD><TD>[]</TD><TD>cell array with the hardware addresses of the sensors (gems) to be used</TD></TR>
 </TABLE></BODY></HTML>
