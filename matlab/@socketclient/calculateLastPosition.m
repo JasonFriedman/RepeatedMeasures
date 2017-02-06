@@ -12,6 +12,9 @@ if any(thistrial.showPosition==[3 4])
     sensors = size(displayRangeX,1);
     dims = size(lastsample,2)/sensors;
     numpositions = size(displayRangeX,2) / (2*dims+1);
+    if numpositions ~= round(numpositions)
+        error('Size of displayRangeX is incorrect. It should have a width of 2*number of dimensions + 1');
+    end
 
     for p=1:numpositions
         if size(m.offsetX,1)==1
