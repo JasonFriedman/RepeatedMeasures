@@ -69,6 +69,9 @@ for p=1:size(lastpositionVisual,1)
         imagerectangle(1,3) = imagerectangle(1,1) + thissize(1) - 1;
         imagerectangle(1,4) = imagerectangle(1,2) + thissize(2) - 1;
         Screen('DrawTexture',experimentdata.screenInfo.curWindow,experimentdata.textures(imageNum),[],imagerectangle);
+    % Run a function which will provide the feedback
+    elseif m.showPositionType(1)=='@'
+        eval(['thistrial = ' m.showPositionType(2:end) '(experimentdata,thistrial,lastpositionVisual,e,frame);']);
     else
         error(['Unknown showPositionType: ' m.showPositionType]);
     end
