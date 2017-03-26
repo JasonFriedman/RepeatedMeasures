@@ -75,14 +75,22 @@ if iscell(sc.showPositionColor)
         end
     end
 end
-if ~any(strcmp(sc.showPositionType,{'dot','ellipse','rectangle','image'}))
-    if sc.showPositionType(1)=='@'
-        % Check that the function exists
-        if exist(sc.showPositionType(2:end))~=2
-            error(['Cannot find function for showPosition ' sc.showPositionType(2:end)]);
+if iscell(sc.showPositionType)
+    spt = sc.showPositionType;
+else
+    spt{1} = sc.showPositionType;
+end
+
+for k=1:numel(spt)
+    if ~any(strcmp(spt{k},{'dot','ellipse','rectangle','image'}))
+        if sc.showPositionType(1)=='@'
+            % Check that the function exists
+            if exist(spt{k}(2:end))~=2
+                error(['Cannot find function for showPosition ' spt(2:end)]);
+            end
+        else
+            error(['Unknown showPositionType: ' spt{k}]);
         end
-    else
-        error(['Unknown showPositionType: ' sc.showPositionType]);
     end
 end
 
