@@ -21,12 +21,27 @@ if ~isempty(e) && ~isempty(s.stateTransitions)
         thistrial.lastposition = getxyz(e);
         pressure = 1;  % i.e. ignore
     end
+    pixelColor = NaN;
     for m=1:numel(s.stateTransitions)
+        if s.stateTransitions{m}.positionType>0 && isnan(pixelColor)
+            if isempty(thistrial.lastpositionVisual)
+                [lastpositionVisual,thistrial] = calculateLastPosition(e,thistrial.lastposition,thistrial,frame);
+                thistrial.lastpositionVisual(1) = lastpositionVisual(1) * experimentdata.screenInfo.screenRect(3);
+                thistrial.lastpositionVisual(2) = lastpositionVisual(2) * experimentdata.screenInfo.screenRect(4);
+            end
+            lastposition = round(thistrial.lastpositionVisual);
+            pixelColor=squeeze(double(Screen('GetImage',experimentdata.textures(s.stateTransitions{m}.positionType), [lastposition(1) lastposition(2) lastposition(1)+1 lastposition(2)+1],[], 0, 3)))';
+        end
+
         if thistrial.imageState==s.stateTransitions{m}.currentState && ...
                 (GetSecs - thistrial.stateSwitchTime) >= s.stateTransitions{m}.timeElapsed && ...
-                sqrt(sum((thistrial.lastposition(s.dimensionsToUse) - experimentdata.targetPosition(s.stateTransitions{m}.position,:)).^2)) < (s.stateTransitions{m}.distanceAllowed) && ...
-                sqrt(sum((thistrial.lastposition(s.dimensionsToUse) - experimentdata.targetPosition(s.stateTransitions{m}.position,:)).^2)) > (s.stateTransitions{m}.minimumDistance)
-            if s.stateTransitions{m}.penTouching==0 || (s.stateTransitions{m}.penTouching==1 && pressure>0) || (s.stateTransitions{m}.penTouching==2 && pressure==0) 
+                (((s.stateTransitions{m}.positionType==0 && (...
+                    sqrt(sum((thistrial.lastposition(s.dimensionsToUse) - experimentdata.targetPosition(s.stateTransitions{m}.position,:)).^2)) < (s.stateTransitions{m}.distanceAllowed) && ...
+                    sqrt(sum((thistrial.lastposition(s.dimensionsToUse) - experimentdata.targetPosition(s.stateTransitions{m}.position,:)).^2)) > (s.stateTransitions{m}.minimumDistance))) ...
+                ) || (s.stateTransitions{m}.positionType>0 && (...
+                    sum(abs(pixelColor - s.stateTransitions{m}.position)) <= s.stateTransitions{m}.colorDistance) ...
+                    ))
+            if s.stateTransitions{m}.penTouching==0 || (s.stateTransitions{m}.penTouching==1 && pressure>0) || (s.stateTransitions{m}.penTouching==2 && pressure==0)
                 thistrial.imageState = s.stateTransitions{m}.newState;
                 writetolog(e,sprintf('Transition to state %d',thistrial.imageState));
                 markEvent(e,codes.imageState+thistrial.imageState);

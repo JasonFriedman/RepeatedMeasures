@@ -3,6 +3,7 @@
 %                                 =2 -> if using image stimuli, only show position if in state 1
 %                                 =3 -> calculate position based on displayRangeX / displayRangeY / offsetX / offsetY
 %                                 =4 -> same as 3, but only before the trial starts
+%                                 =5 -> same as 3, but if using image stimuli, only show position if in state 1
 %
 % Note that lastpositionVisual is the position on the screen (not in device coordinates)
 
@@ -39,7 +40,7 @@ for p=1:size(lastpositionVisual,1)
     
     if strcmp(m.showPositionType,'dot')
         if any(thistrial.showPosition==[1 3]) || ...
-                (thistrial.showPosition==2 && isa(thistrial.thisstimulus,'imagesstimulus') && thistrial.imageState == 1) || ...
+                (any(thistrial.showPosition==[2 5]) && isa(thistrial.thisstimulus,'imagesstimulus') && thistrial.imageState == 1) || ...
                 (thistrial.showPosition==4 && frame<1)
             Screen('DrawDots', experimentdata.screenInfo.curWindow, lastpositionVisual(p,:), m.showPositionSize(p), color(therow,:),[],1);
         end
