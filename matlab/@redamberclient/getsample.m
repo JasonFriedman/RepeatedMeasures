@@ -6,7 +6,7 @@ function data = getsample(rc)
 
 codes = messagecodes;
 
-m.parameters = [];
+m.parameters{1} = rc.numsensors;
 m.command = codes.getsample;
 sendmessage(rc,m,'getsample');
 [data,success] = receivemessage(rc);
