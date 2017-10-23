@@ -5,7 +5,7 @@ function [thistrial,experimentdata,breakfromloop,thisstimulus] = displayFrame(th
 breakfromloop = 0;
 
 if thisstimulus.calibrationType==1
-    thetext = 'Zeroing force sensors . . .';
+    thetext = experimentdata.texts.ZEROING; %'Zeroing . . .';
 elseif thisstimulus.calibrationType==2
     thetext = sprintf('sensor %d = %.3f kg',thisstimulus.calibrationSensor,thisstimulus.calibrationWeight);
 end

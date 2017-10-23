@@ -3,7 +3,7 @@
 function preStart(s,experimentdata,thistrial,firsttime)
 
 if s.calibrationType==1
-    thetext = 'Zeroing force sensors . . .';
+    thetext = experimentdata.texts.ZEROING; %'Zeroing . . .';
 elseif s.calibrationType==2
     thetext = sprintf('sensor %d = %.3f kg',s.calibrationSensor,s.calibrationWeight);
 end
