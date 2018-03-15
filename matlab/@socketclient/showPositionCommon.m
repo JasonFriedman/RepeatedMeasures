@@ -63,12 +63,13 @@ for p=1:size(lastpositionVisual,1)
         Screen('FillRect', experimentdata.screenInfo.curWindow, color(therow,:), rect);
     elseif strcmp(m.showPositionType,'image')
         imageNum = thisShowPositionColor(1);
-        thissize = size(experimentdata.images{imageNum});
+        %fprintf('Image size: ')
+        thissize = size(experimentdata.images{imageNum}); % (rows,cols)
         % left top right bottom
-        imagerectangle(1,1) = lastpositionVisual(1) - ceil(thissize(1)/2);
-        imagerectangle(1,2) = lastpositionVisual(2) - floor(thissize(2)/2);
-        imagerectangle(1,3) = imagerectangle(1,1) + thissize(1) - 1;
-        imagerectangle(1,4) = imagerectangle(1,2) + thissize(2) - 1;
+        imagerectangle(1,1) = lastpositionVisual(1) - ceil(thissize(2)/2);
+        imagerectangle(1,2) = lastpositionVisual(2) - floor(thissize(1)/2);
+        imagerectangle(1,3) = imagerectangle(1,1) + thissize(2) - 1;
+        imagerectangle(1,4) = imagerectangle(1,2) + thissize(1) - 1;
         Screen('DrawTexture',experimentdata.screenInfo.curWindow,experimentdata.textures(imageNum),[],imagerectangle);
     % Run a function which will provide the feedback
     elseif m.showPositionType(1)=='@'
