@@ -11,6 +11,9 @@ function [returnValue,changedParameters,changedValues] = runcommand(d,command,pa
 changedParameters = [];
 changedValues = [];
 returnValue = NaN;
+
+codes = messagecodes;
+
 switch(command)
     case {codes.DAQ_sendTrigger}
         sendTrigger(d.t,[],parameters{1});
