@@ -13,7 +13,7 @@ if ~isempty(thistrial.beep)
     else
         % Otherwise, use PsychPortAudio to beep (can then set the frequency / duration)
         % Setup beeps for psychtoolbox
-        PsychPortAudio('UseSchedule',experimentdata.pahandle,2); % 2 = Reset schedule
+        PsychPortAudio('UseSchedule',experimentdata.pahandle,2,256); % 2 = Reset schedule
         for k=1:numel(thistrial.beep)
             % Add the beep
             if k==1
