@@ -1,0 +1,44 @@
+2822.074181390311: Connected to bluetera
+2826.420076961808: Opened window
+2826.428963370091: Trial 1
+2826.434477416769: Read stimulus
+2826.437084869289: Read target type
+2826.440481379565: Read starttrial
+2826.440681813517: Read trial parameters
+2826.442023573930: Setup stimulus
+2826.443211386581: Ran starttrial setup
+2826.452582579392: Setup recording on bluetera
+2826.497404319955: Ran prestart
+2828.832089777506: Start condition met
+2828.901391023698: Started recording on bluetera
+2828.908903372724: Marked event in bluetera with number 5
+2833.965057479869: Marked event in bluetera with number 6
+2833.984051313506: Stopped recording on bluetera
+2833.985930985519: Finished recording trial on bluetera
+2835.036153877733: Wrote text  
+2835.130834771185: Saved file on bluetera
+2835.137716839954: Saved dot/frame data to file results/recordBluetera//trialinfo_trial1.mat
+2835.140799115676: Checked recording on bluetera
+2835.142292107129: Ran post-trial
+2835.144153063923: Trial 2
+2835.147954064402: Read stimulus
+2835.149252960929: Read target type
+2835.150583552583: Read starttrial
+2835.150871827318: Read trial parameters
+2835.151616210036: Setup stimulus
+2835.152695957392: Ran starttrial setup
+2835.154115295405: Setup recording on bluetera
+2835.164095940247: Ran prestart
+2836.934499754287: Start condition met
+2836.947539129899: Started recording on bluetera
+2836.948693436271: Marked event in bluetera with number 5
+2841.931849739738: Marked event in bluetera with number 6
+2841.947598897855: Stopped recording on bluetera
+2841.947879626130: Finished recording trial on bluetera
+2842.980483045823: Wrote text  
+2843.021864204790: Saved file on bluetera
+2843.026191344393: Saved dot/frame data to file results/recordBluetera//trialinfo_trial2.mat
+2843.026485354436: Checked recording on bluetera
+2843.026672808478: Ran post-trial
+2843.768445960713: Saved result data to file results/recordBluetera//results.mat
+2843.774862865747: Closed bluetera
