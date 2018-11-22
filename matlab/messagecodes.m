@@ -101,6 +101,11 @@ codes.DAQ_sendTrigger = 150;
 codes.REDAMBER_getSensorStates = 160;
 codes.REDAMBER_addresses = 161;
 
+codes.ATI_setSampleRate = 170;
+codes.ATI_setupRecordings = 171;
+
+codes.BLUETERA_getSensorStates = 180;
+codes.BLUETERA_addresses = 181;
 
 
 %% Mark event codes [ Not that these are separate from the above codes, so they can overlap]
