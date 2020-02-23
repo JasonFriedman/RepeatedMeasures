@@ -154,14 +154,14 @@ while 1
           end
           fclose(fp);
       end
-    
+      
       nummarkers = received.parameters{2};
       maximumtime = received.parameters{3};
       maximumframes = max([1 ceil(maximumtime * s.framerate)]);
       datalength = getdatalength(s,nummarkers);
       
       if isempty(maximumframes) || isempty(nummarkers) || isempty(datalength)
-          error('Something is wrong - can''t allocate an empty array (framerate = %d, maximumtime = %d, nummarkers = %d',s.framerate,maximumtime,nummarkers);
+          error('Something is wrong - can''t allocate an empty array (framerate = %d, maximumtime = %d, nummarkers = %d)',s.framerate,maximumtime,nummarkers);
       end
       
       databuffer = zeros(maximumframes,datalength);

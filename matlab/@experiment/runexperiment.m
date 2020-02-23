@@ -631,6 +631,8 @@ try
         elseif isstruct(dataSummary) && isfield(dataSummary,'kb_RT')
             thistrial.RT = dataSummary.kb_RT;
             experimentdata.RTs(currentTrial) = dataSummary.kb_RT;
+        elseif isstruct(dataSummary) && isfield(dataSummary,'filename')
+            experimentdata.filename{currentTrial} = dataSummary.filename;
         end
         if isfield(thistrial,'percentCoherent')
             experimentdata.percentCoherents(currentTrial) = str2double(thistrial.percentCoherent);
