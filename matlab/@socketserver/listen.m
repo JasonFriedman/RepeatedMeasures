@@ -10,6 +10,7 @@ filename = '';
 databuffer = [];
 currentSample = 0;
 lastframe = 0;
+maximumframes = inf;
 dataSummary = []; % This can record a "summary" of the data,
                   % e.g. final position, average position, etc
                   % (it is calculated by the subclass) 

@@ -107,6 +107,12 @@ codes.ATI_setupRecordings = 171;
 codes.BLUETERA_getSensorStates = 180;
 codes.BLUETERA_addresses = 181;
 
+codes.GOPRO_setuprecording = 190;
+codes.GOPRO_savefile = 191;
+codes.GOPRO_startrecording = 192;
+codes.GOPRO_stoprecording = 193;
+
+
 
 %% Mark event codes [ Not that these are separate from the above codes, so they can overlap]
 

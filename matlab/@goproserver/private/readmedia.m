@@ -1,8 +1,15 @@
 % Read all the media off the sd card of the go pro
 
-function files = readmedia(latest)
+function [files,dirname,filename] = readmedia(latest)
 
-data = webread('http://10.5.5.9:8080/gp/gpMediaList');
+try
+    data = webread('http://10.5.5.9:8080/gp/gpMediaList');
+catch 
+    % If the camera is busy, it won't provide this data. Try to wait for
+    % a few seconds
+    pause(3);
+    data = webread('http://10.5.5.9:8080/gp/gpMediaList');
+end
 
 count = 0;
 for m=1:numel(data.media)
@@ -32,8 +39,9 @@ files.modifiedTime = datetime(files.modified,'ConvertFrom','posixtime');
 if nargin==1 && latest==1
     % just return the filename of the latest
     [~,ind] = max(files.created);
-    fn = [files.dirnames{ind} '/' files.filenames{ind}];
-    files = fn;
+    dirname = files.dirnames{ind};
+    filename = files.filenames{ind};
+    files = [dirname '/' filename];    
 end
 
 

@@ -4,7 +4,7 @@ function gopro(command)
 
 commands = {'Trigger',            'Stop',               'VideoMode',       'PhotoMode',        'MultiShot',...
     '4K','4K 4:3','2.7K','2.7K 4:3','1440p','1080p','960p','720p',...
-    '240fps','120fps','100fps','90fps','80fps','60fps','50fps','48fps','30fps','25fps',...
+    '240fps','120fps','100fps','90fps','80fps','60fps','50fps','48fps','30fps','24fps',...
     'Wide','SuperView','Linear',...
     '4:3','16:9'};
 
@@ -25,7 +25,7 @@ end
 commandnum = find(strcmp(command,commands));
 
 if isempty(commandnum)
-    error(['Unknown command ' command']);
+    error(['Unknown command ' command]);
 end
 
 data = webread(['http://10.5.5.9/gp/gpControl/' calls{commandnum}]);
