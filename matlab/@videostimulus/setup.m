@@ -13,6 +13,6 @@ if thistrial.moviePtr==-1
     error(['Could not load file ' videoFilename]);
 end
 Screen('SetMovieTimeIndex', thistrial.moviePtr, 0);
-thistrial.stimuliFrames = thistrial.video_frames;
-fprintf('There are %d frames in the video\n',thistrial.stimuliFrames);
+thistrial.stimuliFrames = thistrial.video_frames+1; % extra frame to close the video and release the memory
+fprintf('There are %d frames in the video\n',thistrial.stimuliFrames-1);
 
