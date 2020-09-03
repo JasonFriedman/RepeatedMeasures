@@ -8,7 +8,7 @@ if nargin<1 || isempty(numsensors)
 end
 
 if nargin<2 || isempty(samplerate)
-    samplerate = 200;
+    samplerate = 240;
 end
 
 if nargin<3 || isempty(dllpath)
