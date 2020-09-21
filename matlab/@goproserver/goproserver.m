@@ -75,6 +75,7 @@ gs.resolution = resolution;
 gs.fps = fps;
 gs.view = view;
 gs.lastFilename = []; % for later use
+gs.recording = 0; % for later use - only stop recording if it has started
 
 if nargin<2 || isempty(debug)
     debug = 0;

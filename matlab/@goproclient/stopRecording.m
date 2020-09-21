@@ -1,11 +1,11 @@
 % STOPRECRODING - stop recording from the device
 % 
-% stopRecording(dc)
+% stopRecording(gc)
 
-function stopRecording(dc)
+function stopRecording(gc)
 
 codes = messagecodes;
 
 m.parameters = [];
 m.command = codes.GOPRO_stoprecording;
-sendmessage(dc,m,'GOPRO_stoprecording');
+sendmessage(gc,m,'GOPRO_stoprecording');

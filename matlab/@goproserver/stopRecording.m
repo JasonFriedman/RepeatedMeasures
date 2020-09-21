@@ -2,5 +2,9 @@
 
 function gs = stopRecording(gs)
 
-gopro('Stop');
-fprintf('Stopped recording with Gopro\n');
+% Only stop if it has started 
+if gs.recording
+    gopro('Stop');
+    fprintf('Stopped recording with Gopro\n');
+end
+

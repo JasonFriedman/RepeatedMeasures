@@ -1,6 +1,6 @@
 % RUNCOMMAND - run a command received on the socket
 %
-% returnValue = runcommand(ls,command,parameters)
+% returnValue = runcommand(gs,command,parameters)
 %
 % parameters should be empty if there are no parameters
 % If appopriate, the function will return a value in returnValue,
@@ -20,9 +20,13 @@ switch(command)
         
     case {codes.GOPRO_startrecording}
         startRecording(gs);
+        changedParameters{1} = 'recording';
+        changedValues{1} = 1;
         
     case {codes.GOPRO_stoprecording}
         stopRecording(gs);
+        changedParameters{1} = 'recording';
+        changedValues{1} = 0;
 
     case {codes.GOPRO_savefile}
         savefile(gs);
