@@ -12,5 +12,9 @@ fprintf('Set fps to %s\n',gs.fps);
 gopro(gs.view);
 fprintf('Set view to %s\n',gs.view);
 
+gopro(gs.direction);
+fprintf('Set direction to %s\n',gs.view);
+
+
 
 

@@ -30,12 +30,13 @@
 % listen(ts);
 %
 
-function gs = goproserver(port,debug,downloadfiles,resolution,fps,view)
+function gs = goproserver(port,debug,downloadfiles,resolution,fps,view,direction)
 
 % Valid values
 resolutions = {'4K','4K 4:3','2.7K','2.7K 4:3','1440p','1080p','960p','720p'};
 fpss = {'240fps','120fps','100fps','90fps','80fps','60fps','50fps','48fps','30fps','24fps'};
 views = {'Wide','SuperView','Linear'};
+directions = {'Up','Down','GyroBased'};
     
 if nargin<3 || isempty(downloadfiles)
     downloadfiles = 1;
@@ -45,12 +46,16 @@ if nargin<4 || isempty(resolution)
     resolution = '1080p';
 end
 
-if nargin<4 || isempty(fps)
+if nargin<5 || isempty(fps)
     fps = '24fps';
 end
 
-if nargin<4 || isempty(view)
+if nargin<6 || isempty(view)
     view = 'Linear';
+end
+
+if nargin<7 || isempty(direction)
+    direction = 'GyroBased';
 end
 
 % Make sure the values are valid
@@ -69,11 +74,18 @@ if ~any(strcmp(view,views))
     error('Gopro view must be one of the listed views');
 end
 
+if ~any(strcmp(direction,directions))
+    directions
+    error('Gopro direction must be one of the listed directions');
+end
+
+
 gs.codes = messagecodes;
 gs.downloadfiles = downloadfiles;
 gs.resolution = resolution;
 gs.fps = fps;
 gs.view = view;
+gs.direction = direction;
 gs.lastFilename = []; % for later use
 gs.recording = 0; % for later use - only stop recording if it has started
 

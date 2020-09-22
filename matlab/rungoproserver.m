@@ -17,12 +17,13 @@
 % fps (frames per second) is one of
 % '240fps','120fps','100fps','90fps','80fps','60fps','50fps','48fps','30fps','24fps' (default 24 fps)
 % view is one of 'Wide','SuperView','Linear' (default 'Linear')
+% direction is one of 'Up','Down' or 'GyroBased' (default GyroBased)
 %
 % Note that not all combinations are available, so you should test first on
 % the gopro whether it is supported
 
 
-function rungoproserver(downloadfiles,resolution,fps,view)
+function rungoproserver(downloadfiles,resolution,fps,view,direction)
 
 if nargin<1 || isempty(downloadfiles)
     downloadfiles = 1;
@@ -36,8 +37,11 @@ end
 if nargin<4 || isempty(view)
     view = '[]';
 end
+if nargin<5 || isempty(direction)
+    direction='[]';
+end
 
 port = 3030;
 todebug = 1;
 
-system(sprintf('matlab -nojvm -nosplash -r "gs = goproserver(%d,%d,%d,''%s'',''%s'',''%s'');listen(gs);" &',port,todebug,downloadfiles,resolution,fps,view));
+system(sprintf('matlab -nojvm -nosplash -r "gs = goproserver(%d,%d,%d,''%s'',''%s'',''%s'',''%s'');listen(gs);" &',port,todebug,downloadfiles,resolution,fps,view,direction));
