@@ -31,4 +31,3 @@ if isempty(commandnum)
 end
 
 data = webread(['http://10.5.5.9/gp/gpControl/' calls{commandnum}]);
-['http://10.5.5.9/gp/gpControl/' calls{commandnum}]
