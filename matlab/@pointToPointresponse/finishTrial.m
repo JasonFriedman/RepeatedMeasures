@@ -34,7 +34,7 @@ if ~isempty(lastposition)
     % If not touching, restart the trial
     if pressure==0
         thistrial.movementStage = -1;
-    elseif thistrial.movementStage == -1;
+    elseif thistrial.movementStage == -1
         if sqrt(sum((lastposition - experimentdata.targetPosition(r.start,:)).^2)) <= (r.startDistance)
             thistrial.movementStage = 0;
         end

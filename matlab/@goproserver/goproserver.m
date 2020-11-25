@@ -61,24 +61,23 @@ end
 % Make sure the values are valid
 if ~any(strcmp(resolution,resolutions))
     resolutions
-    error('Gopro resolution must be one of the listed resolutions');
+    error(['Gopro resolution ' resolution ' must be one of the listed resolutions']);
 end
 
 if ~any(strcmp(fps,fpss))
     fpss
-    error('Gopro fps must be one of the listed fps values');
+    error(['Gopro fps ' fps ' must be one of the listed fps values']);
 end
 
 if ~any(strcmp(view,views))
     views
-    error('Gopro view must be one of the listed views');
+    error(['Gopro view ' view 'must be one of the listed views']);
 end
 
 if ~any(strcmp(direction,directions))
     directions
-    error('Gopro direction must be one of the listed directions');
+    error(['Gopro direction ' direction ' must be one of the listed directions']);
 end
-
 
 gs.codes = messagecodes;
 gs.downloadfiles = downloadfiles;

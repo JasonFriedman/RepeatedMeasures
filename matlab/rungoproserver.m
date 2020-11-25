@@ -29,16 +29,16 @@ if nargin<1 || isempty(downloadfiles)
     downloadfiles = 1;
 end
 if nargin<2 || isempty(resolution)
-    resolution = '[]';
+    resolution = '';
 end
 if nargin<3 || isempty(fps)
-    fps = '[]';
+    fps = '';
 end
 if nargin<4 || isempty(view)
-    view = '[]';
+    view = '';
 end
 if nargin<5 || isempty(direction)
-    direction='[]';
+    direction= '';
 end
 
 port = 3030;
