@@ -103,6 +103,7 @@ codes.REDAMBER_addresses = 161;
 
 codes.ATI_setSampleRate = 170;
 codes.ATI_setupRecordings = 171;
+codes.ATI_bias = 172;
 
 codes.BLUETERA_getSensorStates = 180;
 codes.BLUETERA_addresses = 181;

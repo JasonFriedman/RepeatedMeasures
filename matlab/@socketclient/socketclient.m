@@ -123,7 +123,7 @@ if sc.debug~=-1
     sc.sock = msconnect(sc.server,sc.port);
     
     if sc.sock==-1
-        error('Could not connect to server!!!');
+        error(['Could not connect to server ' sc.server ' on port ' num2str(sc.port) ' !!!']);
     end
     
     if ~noack

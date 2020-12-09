@@ -10,3 +10,8 @@ elseif thisstimulus.calibrationType==2
     thetext = sprintf('sensor %d = %.3f kg',thisstimulus.calibrationSensor,thisstimulus.calibrationWeight);
 end
 drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,thetext,1);
+
+if isfield(experimentdata,'ATIforcesensors') && frame==1 % Do the actual zeroing
+    devices = get(e,'devices');
+    biasSensors(devices.ATIforcesensors);
+end

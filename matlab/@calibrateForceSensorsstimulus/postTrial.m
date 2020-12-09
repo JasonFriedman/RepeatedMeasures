@@ -2,6 +2,12 @@
 
 function [thistrial,experimentdata] = postTrial(s,dataSummary,thistrial,experimentdata,e)
 
+devices = get(e,'devices');
+
+if isfield(devices,'ATIforcesensors')
+    return;
+end
+
 forcedata = dataSummary.toSave(:,2:end-1);
 
 meanforcedata = mean(forcedata);

@@ -2,15 +2,17 @@
 %
 % d = ATIforcesensorsserver(port,maxsamplerate,channels,IPaddress,debug)
 %
-% If channels is a cell array, this indicates that you can also send digital outputs (e.g. triggers)
-% The first value should be the same as channels described above, and the second the channels for the digital output, 
-% where 1 = AUXPORT1, etc. e.g. {[1 3],1}
-%
 % The server will sample as fast as possible, so specify in
 % maxsamplerate the maximum it will do (to avoid buffer overflows)
 %
 % d = ATIforcesensorsserver(3011,200,3,'192.168.137.175',1);
 % listen(d);
+%
+% NOTE: To use this server, you need to put the directory
+% "wirelessftsensor" in this directory. It can be downloaded from the ATI
+% website
+% (https://www.ati-ia.com/Library/software/wireless_ft/WNetJavaDemoSource.zip)
+% only this directory from the zip file is needed
 
 function d = ATIforcesensorsserver(port,samplerate,channels,IPaddress,debug)
 
@@ -22,8 +24,14 @@ d.channels = channels;
 d.IPaddress = IPaddress;
 d.codes = messagecodes;
 
+% These will be set when reading the calibration data
+d.counts_per_N = 1;
+d.counts_per_Nm = 1;
+
+% add this directory to the java class path
+[thedir,~,~] = fileparts(which('ATIforcesensorsserver'));
+javaaddpath(thedir);
 % Try to connect to the device
-javaaddpath('.');
 import wirelessftsensor.*;
 d.v = javaObject('wirelessftsensor.WirelessFTSensor',IPaddress);
 

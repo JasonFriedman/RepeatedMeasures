@@ -6,8 +6,12 @@ function thistrial = setup(s,e,thistrial,experimentdata)
 thistrial.stimuliFrames = round((thistrial.recordingTime - thistrial.waitTimeBefore)*experimentdata.screenInfo.monRefresh);
 
 devices = get(e,'devices');
-if ~isfield(devices,'forcesensors')
+if ~isfield(devices,'forcesensors') && ~isfield(devices,'ATIforcesensors')
     error('calibrateForceSensors only works when recording from force sensors');
+end
+
+if isfield(devices,'ATIforcesensors')
+    return;
 end
 
 codes = messagecodes;

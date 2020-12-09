@@ -4,7 +4,7 @@ function [v,params] = calibrateForceSensorsstimulus(inputParams,experimentdata)
 
 params.name = {'calibrationType','calibrationSensor','calibrationWeight'};
 params.type = {'number','matrix','number'};
-params.description = {'1 = zero force sensors, 2 = calibrate with known weight','Sensors to calibrate','weight in kg (only applicable when calibrationType=1)'};
+params.description = {'1 = zero force sensors (only option for ATI sensors), 2 = calibrate with known weight','Sensors to calibrate (ignored for ATI)','weight in kg (only applicable when calibrationType=1)'};
 params.required = [1 1 0];
 params.default = {1,1,0};
 params.classdescription = 'Calibrate force sensors';
