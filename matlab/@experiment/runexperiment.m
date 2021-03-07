@@ -485,7 +485,7 @@ try
                 if thistrial.showPosition
                     [thistrial.lastposition,thistrial] = showPosition(e,thistrial,experimentdata,frame);
                 end
-                Screen('Flip',experimentdata.screenInfo.curWindow,0,0);
+                Screen('Flip',experimentdata.screenInfo.curWindow,0,thistrial.dontclear);
                 % If the background is not white, then draw it
                 if ~all(thistrial.backgroundColor==0)
                     Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);

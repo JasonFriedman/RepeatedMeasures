@@ -6,4 +6,6 @@ function [thistrial,experimentdata,breakfromloop,s] = displayFrame(s,e,frame,thi
 
 breakfromloop = 0;
 
-Screen('DrawTexture',experimentdata.screenInfo.curWindow,thistrial.textureIndex);
+if frame<=1 || ~thistrial.dontclear
+    Screen('DrawTexture',experimentdata.screenInfo.curWindow,thistrial.textureIndex);
+end
