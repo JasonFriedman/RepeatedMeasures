@@ -6,6 +6,6 @@ The trial ends when the an external trigger is received<BR><BR>
 <TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
 <TR><TD>type</TD><TD>Yes</TD><TD>string</TD><TD>'DAQ'</TD><TD>Type of trigger to wait for. Currently the only option is 'DAQ'. There must either be a DAQ device defined, or setup.MCtrigger=1</TD></TR>
 <TR><TD>channel</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>channel to wait for a trigger on (first channel = 1). Triggers on other channels will be marked but will not stop the trial.</TD></TR>
-<TR><TD>up</TD><TD>No</TD><TD><A title="True or false">boolean</A></TD><TD>''</TD><TD>whether the trigger is a high value (1) or a low value (0)</TD></TR>
+<TR><TD>up</TD><TD>No</TD><TD><A title="True or false">boolean</A></TD><TD>true</TD><TD>whether the trigger is a high value (1) or a low value (0)</TD></TR>
 <TR><TD>numChannels</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>8</TD><TD>Number of channels to look at (mainly important for making other channels). The trigger channel must be <= number of channels</TD></TR>
 </TABLE></BODY></HTML>

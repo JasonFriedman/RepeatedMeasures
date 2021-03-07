@@ -5,7 +5,7 @@ function makeProtocolDocumentation
 if ~exist('docs','dir')
     mkdir('docs');
 end
-if ~exist('docs/protocolDocumentation/','dir');
+if ~exist('docs/protocolDocumentation/','dir')
     mkdir('docs/protocolDocumentation/');
 end
 
@@ -110,8 +110,14 @@ for j=1:2
                 fprintf(fp,'<TD>[]</TD>');
             elseif iscell(p.type{k})
                 fprintf(fp,'<TD>%s</TD>',p.default{k}.classname);
-            elseif strcmp(p.type{k},'string') || strcmp(p.type{k},'boolean')
+            elseif strcmp(p.type{k},'string')
                 fprintf(fp,'<TD>''%s''</TD>',p.default{k});
+            elseif strcmp(p.type{k},'boolean')
+                if p.default{k}==0
+                    fprintf(fp,'<TD>false</TD>');
+                else
+                    fprintf(fp,'<TD>true</TD>');
+                end
             elseif isnumeric(p.default{k}) && numel(p.default{k})>1
                 fprintf(fp,'<TD>[');
                 for n=1:numel(p.default{k})
