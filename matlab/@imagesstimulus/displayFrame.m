@@ -51,11 +51,14 @@ if ~isempty(e) && ~isempty(s.stateTransitions)
         end     
     end
     todraw = thistrial.imageState;
-    if isempty(thistrial.imagerectangle)
-        Screen('DrawTexture',experimentdata.screenInfo.curWindow,thistrial.textures(todraw));
-    else
-        Screen('DrawTexture',experimentdata.screenInfo.curWindow,thistrial.textures(todraw),[],thistrial.imagerectangle(todraw,:));
+    if ~thistrial.dontclear || ( isfield(thistrial,'lastTexture') && thistrial.lastTexture ~= todraw)
+        if isempty(thistrial.imagerectangle)
+            Screen('DrawTexture',experimentdata.screenInfo.curWindow,thistrial.textures(todraw));
+        else
+            Screen('DrawTexture',experimentdata.screenInfo.curWindow,thistrial.textures(todraw),[],thistrial.imagerectangle(todraw,:));
+        end
     end
+    thistrial.lastTexture = todraw;
 else
      for k=1:length(thistrial.starttiming)
         if thistrial.starttiming(k)>=0
@@ -87,11 +90,15 @@ else
         %[frame thisstart thisend]
         if frame >= thisstart && frame <= thisend
             todraw = k;
-            if isempty(thistrial.imagerectangle)
-                Screen('DrawTexture',experimentdata.screenInfo.curWindow,thistrial.textures(todraw));
-            else
-                Screen('DrawTexture',experimentdata.screenInfo.curWindow,thistrial.textures(todraw),[],thistrial.imagerectangle(todraw,:));
+            
+            if ~thistrial.dontclear || frame==1 || ( isfield(thistrial,'lastTexture') && thistrial.lastTexture ~= todraw)
+                if isempty(thistrial.imagerectangle)
+                    Screen('DrawTexture',experimentdata.screenInfo.curWindow,thistrial.textures(todraw));
+                else
+                    Screen('DrawTexture',experimentdata.screenInfo.curWindow,thistrial.textures(todraw),[],thistrial.imagerectangle(todraw,:));
+                end
             end
+            thistrial.lastTexture = todraw;
         end
     end
 end
