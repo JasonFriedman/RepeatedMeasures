@@ -15,21 +15,26 @@ count = 0;
 for m=1:numel(data.media)
     for k=1:numel(data.media(m).fs)
         count = count+1;
+        if iscell(data.media(m).fs)
+            thisfs = data.media(m).fs{k};
+        else
+            thisfs = data.media(m).fs(k);
+        end
         files.dirnames{count,1} = data.media(m).d;
-        files.filenames{count,1} = data.media(m).fs{k}.n;
-        files.created(count,1) = str2double(data.media(m).fs{k}.cre);
-        files.modified(count,1) = str2double(data.media(m).fs{k}.mod);
-        if isfield(data.media(m).fs{k},'glrv')
-            files.glrv(count,1) = str2double(data.media(m).fs{k}.glrv);
+        files.filenames{count,1} = thisfs.n;
+        files.created(count,1) = str2double(thisfs.cre);
+        files.modified(count,1) = str2double(thisfs.mod);
+        if isfield(thisfs,'glrv')
+            files.glrv(count,1) = str2double(thisfs.glrv);
         else
             files.glrv(count,1) = NaN;
         end
-        if isfield(data.media(m).fs{k},'ls')
-            files.ls(count,1) = str2double(data.media(m).fs{k}.ls);
+        if isfield(thisfs,'ls')
+            files.ls(count,1) = str2double(thisfs.ls);
         else
             files.ls(count,1) = NaN;
         end
-        files.s(count,1) = str2double(data.media(m).fs{k}.s);
+        files.s(count,1) = str2double(thisfs.s);
     end
 end
 
