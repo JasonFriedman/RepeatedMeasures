@@ -42,14 +42,28 @@ for p=1:size(lastpositionVisual,1)
         if any(thistrial.showPosition==[1 3]) || ...
                 (any(thistrial.showPosition==[2 5]) && isa(thistrial.thisstimulus,'imagesstimulus') && thistrial.imageState == 1) || ...
                 (thistrial.showPosition==4 && frame<1)
-            Screen('DrawDots', experimentdata.screenInfo.curWindow, lastpositionVisual(p,:), m.showPositionSize(p), color(therow,:),[],1);
+            if isfield(thistrial,'oldDots')
+               if ~isnan(lastpositionVisual(p,1))
+                   thistrial.oldDots{p} = [thistrial.oldDots{p} lastpositionVisual(p,:)'];
+                   Screen('DrawDots', experimentdata.screenInfo.curWindow, thistrial.oldDots{p}, m.showPositionSize(p), color(therow,:),[],1);
+               end
+            else
+                Screen('DrawDots', experimentdata.screenInfo.curWindow, lastpositionVisual(p,:), m.showPositionSize(p), color(therow,:),[],1);
+            end
         end
     elseif strcmp(m.showPositionType,'line')
         if any(thistrial.showPosition==[1 3]) || ...
                 (any(thistrial.showPosition==[2 5]) && isa(thistrial.thisstimulus,'imagesstimulus') && thistrial.imageState == 1) || ...
                 (thistrial.showPosition==4 && frame<1)
             if isfield(thistrial,'lastpoint')
-                Screen('DrawLines', experimentdata.screenInfo.curWindow, [thistrial.lastpoint(p,:)' lastpositionVisual(p,:)'], m.showPositionSize(p), color(therow,:), []);
+                if isfield(thistrial,'oldDots')
+                    if ~isnan(lastpositionVisual(p,1))
+                        thistrial.oldDots{p} = [thistrial.oldDots{p} thistrial.lastpoint(p,:)' lastpositionVisual(p,:)'];
+                        Screen('DrawLines', experimentdata.screenInfo.curWindow, thistrial.oldDots{p}, m.showPositionSize(p), color(therow,:), []);
+                    end
+                else
+                    Screen('DrawLines', experimentdata.screenInfo.curWindow, [thistrial.lastpoint(p,:)' lastpositionVisual(p,:)'], m.showPositionSize(p), color(therow,:), []);
+                end
             end
             % Need to draw a dot as well, because otherwise there will be no feedback if not moving
             Screen('DrawDots', experimentdata.screenInfo.curWindow, lastpositionVisual(p,:), m.showPositionSize(p), color(therow,:),[],1);

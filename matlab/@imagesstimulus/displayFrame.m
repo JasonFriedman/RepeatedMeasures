@@ -21,6 +21,15 @@ if ~isempty(e) && ~isempty(s.stateTransitions)
         thistrial.lastposition = getxyz(e);
         pressure = 1;  % i.e. ignore
     end
+    if thistrial.dontclear
+        if ~isfield(thistrial,'oldDots')
+            % If the feedback is not being cleared, we need to store all
+            % values in the trial to show (in case we switch stimuli)
+            for k=1:size(thistrial.lastposition,1)
+                thistrial.oldDots{k} = [];
+            end
+        end
+    end
     pixelColor = NaN;
     for m=1:numel(s.stateTransitions)
         if s.stateTransitions{m}.positionType>0 && isnan(pixelColor)
@@ -51,7 +60,7 @@ if ~isempty(e) && ~isempty(s.stateTransitions)
         end     
     end
     todraw = thistrial.imageState;
-    if ~thistrial.dontclear || ( isfield(thistrial,'lastTexture') && thistrial.lastTexture ~= todraw)
+    if ~thistrial.dontclear || frame==1 || ( isfield(thistrial,'lastTexture') && thistrial.lastTexture ~= todraw)
         if isempty(thistrial.imagerectangle)
             Screen('DrawTexture',experimentdata.screenInfo.curWindow,thistrial.textures(todraw));
         else
