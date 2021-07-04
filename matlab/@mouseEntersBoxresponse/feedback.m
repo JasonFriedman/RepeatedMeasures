@@ -3,6 +3,11 @@
 
 function thistrial = feedback(r,e,thistrial,previoustrial,experimentdata,dataSummary)
 
+% If this trial was not recorded, then can't provide feedback
+if isnan(dataSummary)
+    return
+end
+
 hitTarget = whichTargetHit(r,dataSummary.lastlocation,experimentdata);
 
 % Hit the screen, but not a target

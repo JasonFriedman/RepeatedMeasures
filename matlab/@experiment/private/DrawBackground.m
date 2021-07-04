@@ -5,7 +5,7 @@ function DrawBackground(experimentdata,thistrial,boxes,labels,toflip)
 screenInfo = experimentdata.screenInfo;
 
 if ~isnan(boxes(1)) || (~isempty(labels) && ~isempty(labels(1)))
-    if ~isnan(boxes(1)) && isfield(thistrial,'boxes') && ~isempty(thistrial.boxes)
+    if ~isnan(boxes(1)) && isfield(thistrial,'boxes') && ~isempty(thistrial.boxes) && ~isnan(thistrial.boxes(1))
         DrawBoxes(boxes(thistrial.boxes,:),screenInfo);
     end
     if ~isempty(labels) && ~isempty(labels(1))
