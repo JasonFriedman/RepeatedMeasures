@@ -5,7 +5,7 @@
 
 function textsize = drawText(thistrial,screenInfo,font,fontsize,fontstyle,thetext,noflip,textsize,textColor,swapDirection)
 
-if nargin<9 || isempty(textColor);
+if nargin<9 || isempty(textColor)
     textColor = [255 255 255];
 end
 

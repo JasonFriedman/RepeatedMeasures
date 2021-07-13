@@ -36,7 +36,7 @@ if isnan(lastposition(1))
     writetolog(e,'Can''t yet decide if has started, returning NaN');
 elseif distance < m.threshold && (~m.touching || pressure>0)
     started = 1;
-    writetolog(e,['started=1, x=' num2str(lastposition(1))]);
+    %writetolog(e,['started=1, x=' num2str(lastposition(1))]);
 end
 
 % check the keyboard also
