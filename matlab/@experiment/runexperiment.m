@@ -430,7 +430,7 @@ try
                 if stillPressing(thistrial.thisstarttrial,e,experimentdata,thistrial)==1
                     DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,0);
                     responseText = experimentdata.texts.TOO_LATE;
-                    drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText);
+                    drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText,[],[],thistrial.textFeedbackColor);
                     writetolog(e,sprintf('Wrote text in checkMoving %s',responseText));
                     playAnnoyingBeep(experimentdata);
                     WaitSecs(1);
@@ -499,7 +499,7 @@ try
                     DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,0);
                     if thistrial.textFeedback~=-1
                         responseText = experimentdata.texts.TOO_EARLY;
-                        drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText);
+                        drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText,[],[],thistrial.textFeedbackColor);
                         writetolog(e,sprintf('Wrote text in checkMovingAfter %s',responseText));
                     end
                     if thistrial.auditoryFeedback
@@ -520,7 +520,7 @@ try
                 if toAbort
                     DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,0);
                     responseText = experimentdata.texts.NOT_MOVING_FORWARD;
-                    drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText);
+                    drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,responseText,[],[],thistrial.textFeedbackColor);
                     writetolog(e,sprintf('Wrote text in checkMovingForward %s',responseText));
                     playAnnoyingBeep(experimentdata);
                     WaitSecs(1);
