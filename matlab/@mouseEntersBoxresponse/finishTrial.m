@@ -9,9 +9,11 @@ if nargin<5
     lastposition(1) = lastsample(1) * experimentdata.screenInfo.screenRect(3);
     lastposition(2) = (1-lastsample(2)) * experimentdata.screenInfo.screenRect(4);
 else
-    % convert to pixels - for nonmouse devices
-    lastposition(1) = lastposition(1) * experimentdata.screenInfo.screenRect(3);
-    lastposition(2) = (1-lastposition(2)) * experimentdata.screenInfo.screenRect(4);
+    if numel(lastposition)>0
+        % convert to pixels - for nonmouse devices
+        lastposition(1) = lastposition(1) * experimentdata.screenInfo.screenRect(3);
+        lastposition(2) = (1-lastposition(2)) * experimentdata.screenInfo.screenRect(4);
+    end
 end
 
 hitTarget = whichTargetHit(r,lastposition,experimentdata);

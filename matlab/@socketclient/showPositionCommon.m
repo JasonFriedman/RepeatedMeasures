@@ -57,7 +57,7 @@ for p=1:size(lastpositionVisual,1)
                 (thistrial.showPosition==4 && frame<1)
             if isfield(thistrial,'lastpoint')
                 if isfield(thistrial,'oldDots')
-                    if ~isnan(lastpositionVisual(p,1))
+                    if ~isnan(lastpositionVisual(p,1)) && ~isnan(thistrial.lastpoint(p,1))
                         thistrial.oldDots{p} = [thistrial.oldDots{p} thistrial.lastpoint(p,:)' lastpositionVisual(p,:)'];
                         Screen('DrawLines', experimentdata.screenInfo.curWindow, thistrial.oldDots{p}, m.showPositionSize(p), color(therow,:), []);
                     end

@@ -17,6 +17,7 @@ if ~isempty(e) && ~isempty(s.stateTransitions)
     m = get(e,'devices');
     if isfield(m,'tablet')
         [thistrial.lastposition,~,pressure] = getsampleVisual(m.tablet,thistrial,frame);
+        thistrial.pressure = pressure;
     else
         thistrial.lastposition = getxyz(e);
         pressure = 1;  % i.e. ignore

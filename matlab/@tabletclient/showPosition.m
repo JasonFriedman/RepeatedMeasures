@@ -19,9 +19,10 @@ else
    thistrial.lastposition = lastposition;
    thistrial.lastpositionVisual = lastpositionVisual;
 end
-% i.e. pressure > 0 or always showing
-if thistrial.pressure==0 && tc.showPositionOnlyWhenTouching    
+% i.e. pressure > 1 (or not NaN) or always showing (pressure is set to 1 as 'default', it shouldn't happen in practice) 
+if frame==1 || (~(thistrial.pressure>1) && tc.showPositionOnlyWhenTouching)
     thistrial.lastposition = [NaN NaN];
+    thistrial.lastpoint = [NaN NaN];
     lastpositionVisual = thistrial.lastposition;
     return;
 end
