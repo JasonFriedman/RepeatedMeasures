@@ -1,7 +1,7 @@
 % FEEDBACK - Provide feedback for reaching target on the screen
 % This should not be run directly, it is called by runexperiment.m
 
-function thistrial = feedback(r,e,thistrial,previoustrial,experimentdata,dataSummary)
+function thistrial = feedback(r,e,thistrial,previoustrial,experimentdata,dataSummary,results)
 
 if ~isempty(r.showBackground)
      Screen('DrawTexture',experimentdata.screenInfo.curWindow,experimentdata.textures(r.showBackground));

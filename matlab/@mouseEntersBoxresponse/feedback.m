@@ -1,7 +1,7 @@
 % FEEDBACK - Provide feedback for moving mouse into target on the screen
 % This should not be run directly, it is called by runexperiment.m
 
-function thistrial = feedback(r,e,thistrial,previoustrial,experimentdata,dataSummary)
+function thistrial = feedback(r,e,thistrial,previoustrial,experimentdata,dataSummary,results)
 
 % If this trial was not recorded, then can't provide feedback
 if isnan(dataSummary)

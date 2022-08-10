@@ -584,14 +584,21 @@ try
         end
         % Give feedback
         if currentTrial>1
-            thistrial = feedback(thistrial.thisresponse,e,thistrial,results.thistrial{currentTrial-1},experimentdata,dataSummary);
+            thistrial = feedback(thistrial.thisresponse,e,thistrial,results.thistrial{currentTrial-1},experimentdata,dataSummary,results);
         else
             thistrial = feedback(thistrial.thisresponse,e,thistrial,[],experimentdata,dataSummary);
         end
         
         DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,0);
         
-        if thistrial.textFeedback==1 && isfield(thistrial,'responseText')
+        if thistrial.textFeedback==1 && isfield(thistrial,'imageFeedback') && ~isempty(thistrial.imageFeedback)
+            feedbackTexture = Screen('MakeTexture',experimentdata.screenInfo.curWindow,...
+                experimentdata.images{thistrial.imageFeedback});
+            Screen('DrawTexture',experimentdata.screenInfo.curWindow,feedbackTexture);
+            Screen('Flip',experimentdata.screenInfo.curWindow,1);
+            WaitSecs(1);
+            writetolog(e,sprintf('Show image %d as feedback',thistrial.imageFeedback));
+        elseif thistrial.textFeedback==1 && isfield(thistrial,'responseText')
             if ~thistrial.textFeedbackShowBackground
                 Screen('Flip',experimentdata.screenInfo.curWindow,0,0);
                 % If the background is not white, then draw it
@@ -654,6 +661,11 @@ try
         % any post-trial cleanup for the stimulus
         [thistrial,experimentdata] = postTrial(thistrial.thisstimulus,dataSummary,thistrial,experimentdata,e);
         writetolog(e,'Ran post-trial');
+        % close feedback images if there were used
+        if exist('feedbackTexture','var')
+             Screen('Close',feedbackTexture);
+             clear feedbackTexture;
+        end
         
         % Write screenshots to disk, if appropriate
         if experimentdata.recordingStimuli

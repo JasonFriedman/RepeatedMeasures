@@ -1,6 +1,6 @@
 % FEEDBACK - Provide feedback - show the data
 
-function thistrial = feedback(r,e,thistrial,previoustrial,experimentdata,dataSummary)
+function thistrial = feedback(r,e,thistrial,previoustrial,experimentdata,dataSummary,results)
 
     % Draw the background
     Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);

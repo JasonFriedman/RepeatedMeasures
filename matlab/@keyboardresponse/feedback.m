@@ -1,7 +1,7 @@
 % FEEDBACK - Provide feedback for keyboard
 % This should not be run directly, it is called by runexperiment.m
 
-function thistrial = feedback(r,e,thistrial,previoustrial,experimentdata,dataSummary)
+function thistrial = feedback(r,e,thistrial,previoustrial,experimentdata,dataSummary,results)
 
 if isfield(dataSummary,'kb_firstpressed')
     firstpressed = dataSummary.kb_firstpressed;

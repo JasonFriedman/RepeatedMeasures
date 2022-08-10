@@ -56,6 +56,13 @@ if ~isempty(e) && ~isempty(s.stateTransitions)
                 writetolog(e,sprintf('Transition to state %d',thistrial.imageState));
                 markEvent(e,codes.imageState+thistrial.imageState);
                 thistrial.stateSwitchTime = GetSecs;
+                if isfield(thistrial,'stateSwitchHistoryState')
+                    thistrial.stateSwitchHistoryState = [thistrial.stateSwitchHistoryState thistrial.imageState];
+                    thistrial.stateSwitchHistoryTime =  [thistrial.stateSwitchHistoryTime  thistrial.stateSwitchTime];
+                else
+                    thistrial.stateSwitchHistoryState = thistrial.imageState;
+                    thistrial.stateSwitchHistoryTime = thistrial.stateSwitchTime;
+                end                
                 break;
             end
         end     

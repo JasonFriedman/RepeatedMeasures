@@ -1,7 +1,7 @@
 % FEEDBACK - provide feedback in movement threshold trials
 % This should not be run directly, it is called by runexperiment.m
 
-function thistrial = feedback(r,e,thistrial,previoustrial,experimentdata,dataSummary)
+function thistrial = feedback(r,e,thistrial,previoustrial,experimentdata,dataSummary,results)
 if thistrial.targetNum > 0
     thresholdAxis = r.thresholdAxis;
     thresholdAmount = r.thresholdAmount;

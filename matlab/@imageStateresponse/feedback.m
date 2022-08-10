@@ -3,3 +3,7 @@
 % This method should be overloaded by a child class if feedback is desired 
 
 function thistrial = feedback(r,e,thistrial,previoustrial,experimentdata,dataSummary,results)
+
+if ~isempty(r.feedbackFunction)
+    eval(['thistrial = ' r.feedbackFunction '(r,e,thistrial,previoustrial,experimentdata,dataSummary,results)']);
+end
