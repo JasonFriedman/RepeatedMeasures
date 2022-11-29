@@ -5,4 +5,5 @@ The target is a state (using images stimuli)<BR><BR>
 <TABLE border="1">
 <TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
 <TR><TD>state</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>The number of the state (using images stimuli) the program needs to be in to finish the trial</TD></TR>
+<TR><TD>feedbackFunction</TD><TD>No</TD><TD>string</TD><TD>[]</TD><TD>The name of a user-supplied function that will provide feedback for this image. The function will receive the input:thistrial = feedback(r,e,thistrial,previoustrial,experimentdata,dataSummary,results) and can change thistrial as needed. Leave blank (default) if not using</TD></TR>
 </TABLE></BODY></HTML>
