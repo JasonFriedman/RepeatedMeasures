@@ -14,7 +14,9 @@ params.description = {'Whether the feedback is to be shown in the following tria
     'How close to the target the marker needs to be to hit it',...
     'The amount of time you need to be at the target for (in seconds)',...
     ['Dimensions to use to compare the target position , e.g. to just use x and y and not z, set to [1 2]. Default (NaN) is to use all dimensions. The number of '... 
-    'dimensions should match the number of dimensions of the targets as defined in targetPosition']};
+    'dimensions should match the number of dimensions of the targets as defined in targetPosition. Alternatively, it can be set to how much to multiply the values with each ' ...
+    'row referring to one output dimension, e.g. if there are two xyz sensors, then [0.5 0 0 0.5 0 0;0 0.5 0 0 0.5 0]' ...
+    'would generate an average of sensor 1 and 2. In this case, the number of rows should match the dimensions of the targets.']};
 params.required = [0 0 1 0 0 0];
 params.default = {0,0,[],3,0, NaN};
 params.classdescription = 'The target(s) are locations in space';
@@ -27,5 +29,9 @@ if nargout>1
 end
 
 [r,parent] = readParameters(params,inputParams);
+
+if any(r.targets-round(r.targets))
+    error('Targets must be indices (integers) describing which targets from the list, not the target locations');
+end
 
 r = class(r,'targetInSpaceresponse',response(parent));

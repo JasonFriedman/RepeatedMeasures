@@ -11,7 +11,14 @@ for k=1:numel(r.targets)
     if isnan(r.dimensionsToUse)
         thisdistance = sqrt(sum((lastposition - experimentdata.targetPosition(r.targets(k),:)).^2));
     else
-        thisdistance = sqrt(sum((lastposition(r.dimensionsToUse) - experimentdata.targetPosition(r.targets(k),:)).^2));
+        if size(r.dimensionsToUse,1)>1
+            calculated = sum(r.dimensionsToUse .* lastposition,2)';
+        else
+            calculated = lastposition(r.dimensionsToUse);
+        end
+        %lastposition
+        %[calculated experimentdata.targetPosition(r.targets(k),:)]
+        thisdistance = sqrt(sum((calculated - experimentdata.targetPosition(r.targets(k),:)).^2));
     end
     
     if thisdistance < r.threshold
