@@ -1,0 +1,15 @@
+<HTML>
+<HEAD><TITLE>DRT</TITLE></HEAD>
+<BODY><H1>DRT</H1>
+Perform Detection Response Task (DRT)<BR><BR>
+<TABLE border="1">
+<TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
+<TR><TD>beepNumber</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>Beep number to play (defined in the setup section)</TD></TR>
+<TR><TD>toneMaxDuration</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>Maximum time to play the tone (in seconds)</TD></TR>
+<TR><TD>trialEndNoResponse</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>2.50</TD><TD>When to time out when there is no response (from start of tone), in seconds</TD></TR>
+<TR><TD>minTimeBetween</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>3</TD><TD>Minimum time following end of previous trial before start of next trial (seconds)</TD></TR>
+<TR><TD>maxTimeBetween</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>5</TD><TD>Maximum time following end of previous trial before start of next trial (in seconds)</TD></TR>
+<TR><TD>starttime</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>When to start the DRT, relative to the start of the trial, in seconds</TD></TR>
+<TR><TD>endtime</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>Inf</TD><TD>When to end the DRT, relative to the start of the trial, in seconds (set to inf for the end of the trial)</TD></TR>
+<TR><TD>keyToPress</TD><TD>Yes</TD><TD>string</TD><TD>'b'</TD><TD>key to press on keyboard to respond</TD></TR>
+</TABLE></BODY></HTML>
