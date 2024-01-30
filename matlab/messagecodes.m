@@ -125,6 +125,12 @@ codes.lastFrame = 6;
 codes.beeped = 7;
 % Sound file played
 codes.soundPlayed = 8;
+% DRT beep started
+codes.DRTstart = 60;
+% DRT beep stopped (timeout)
+codes.DRTtimeout = 61;
+% DRT beep stopped (button press)
+codes.DRTpressed = 62;
 % Target on: value in file will be 1000 + target number
 codes.targetOn = 1000;
 % Sent a tactor stimuli: value in file will be 2000 + sequence number

@@ -113,6 +113,11 @@ try
         thistrialrecording = thistrial.recording;
         thistrial.trialnum = currentTrial;
         
+        % setup the DRT if it is used
+        if ~isempty(thistrial.DRT)
+           thistrial = setupDRT(thistrial,experimentdata);
+        end
+        
         % run the appropriate trial setup for this type of stimulus
         thistrial = setup(thistrial.thisstimulus,e,thistrial,experimentdata);
         writetolog(e,'Setup stimulus');
@@ -424,6 +429,48 @@ try
                 end
             end
             
+            if ~isempty(thistrial.DRT)
+                [keyIsDown, ~, keyCode] = KbCheck(-1);
+                if thistrial.DRT.state==2
+                    % do nothing, finished for this trial
+                elseif thistrial.DRT.state==0 && thisFrameTime > thistrial.DRT.nextDRTonset(end)
+                    % play the beep
+                    PsychPortAudio('Start',experimentdata.pahandle,0,0,0);
+                    writetolog(e,sprintf('Started DRT beep at %.3f',thisFrameTime));
+                    markEvent(e,codes.DRTstart);
+                    thistrial.needToStopAudio = 1;
+                    thistrial.DRT.state = 1;
+                elseif thistrial.DRT.state==1 && keyIsDown && strcmp(KbName(keyCode),thistrial.DRT.keyToPress)
+                    PsychPortAudio('Stop',experimentdata.pahandle,0,0);
+                    writetolog(e,sprintf('Stopped DRT beep at %.3f',thisFrameTime));
+                    markEvent(e,codes.DRTpressed);
+                    thistrial.DRT.state = 0;
+                    % Set the time for the next trial
+                    offset = (thistrial.DRT.maxTimeBetween - thistrial.DRT.minTimeBetween) * rand + ...
+                        thistrial.DRT.minTimeBetween;
+                    nextonset = thisFrameTime + offset;
+                    if nextonset > thistrial.DRT.endtime
+                        thistrial.DRT.state = 2;
+                    else
+                        thistrial.DRT.nextDRTonset(end+1) = nextonset;
+                    end
+                elseif thistrial.DRT.state==1 && thisFrameTime > thistrial.DRT.nextDRTonset(end) + thistrial.DRT.toneMaxDuration
+                    PsychPortAudio('Stop',experimentdata.pahandle,0,0);
+                    writetolog(e,sprintf('Stopped DRT beep on timeout at %.3f',thisFrameTime));
+                    markEvent(e,codes.DRTtimeout);
+                    thistrial.DRT.state = 0;
+                    % As this was a timeout, finish the trial, then set the
+                    % time for the next trial
+                    offset = (thistrial.DRT.maxTimeBetween - thistrial.DRT.minTimeBetween) * rand + ...
+                        thistrial.DRT.minTimeBetween + thistrial.DRT.trialEndNoResponse;
+                    nextonset = thistrial.DRT.nextDRTonset(end) + offset;
+                    if nextonset > thistrial.DRT.endtime
+                        thistrial.DRT.state = 2;
+                    else
+                        thistrial.DRT.nextDRTonset(end+1) = nextonset;
+                    end
+                end
+            end
             % Check if they have started moving already
             if thistrial.checkMoving && thisFrameTime >= thistrial.checkMoving
                 % If they are still pressing the button, abort
@@ -540,6 +587,9 @@ try
                 break;
             end
         end
+        if thistrial.needToStopAudio
+            PsychPortAudio('Stop',experimentdata.pahandle);
+        end
         if abortTrial
             DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,1);
             % Stop recording
@@ -548,9 +598,6 @@ try
                 % Start sampling again without recording to make sure they
                 % are not still pressing
                 thistrial = startSamplingWithoutRecording(e,thistrial,experimentdata);
-            end
-            if thistrial.needToStopAudio
-                PsychPortAudio('Stop',experimentdata.pahandle);
             end
             while stillPressing(thistrial.thisstarttrial,e,experimentdata,thistrial)==1
                 %    ; % wait for them to release the button
