@@ -19,6 +19,8 @@ if ~isfield(thistrial,'pressedKey') && ~isempty(find(keyCode,1)) && find(keyCode
     end
     experimentdata.targetPosition(r.targetNum,:) = getxyz(e);
     % Don't finish the trial yet, rather when the key is released
-    thistrial.pressedKey = 1;
+    if ~all(experimentdata.targetPosition(r.targetNum,:)==0)
+        thistrial.pressedKey = 1;
+    end
 end
 
