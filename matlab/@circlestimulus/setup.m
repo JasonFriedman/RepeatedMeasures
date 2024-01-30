@@ -3,6 +3,10 @@
 
 function thistrial = setup(s,e,thistrial,experimentdata)
 
-thistrial.circleArray = load(['stimuli/' s.circlesFilename]);
+if ~isempty(s.circlesFilename)
+    thistrial.circleArray = load(['stimuli/' s.circlesFilename]);
+else
+    thistrial.circleArray = s.circleLocations;
+end
 
 thistrial.stimuliFrames = length(thistrial.circleArray)* s.framesPerCircle;

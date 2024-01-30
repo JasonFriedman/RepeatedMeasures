@@ -5,16 +5,28 @@ function [thistrial,experimentdata,breakfromloop,s] = displayFrame(s,e,frame,thi
 
 screenInfo = experimentdata.screenInfo;
 % Show each frame N times (i.e. 4 = 15 Hz with a 60 Hz monitor)
-thisradius = thistrial.circleArray(ceil(frame/s.framesPerCircle),:)';
-halfradius = 0.5 * thisradius * experimentdata.screenInfo.screenRect(3);
+thisradius = thistrial.circleArray(ceil(frame/s.framesPerCircle),1)';
+radius = thisradius * experimentdata.screenInfo.screenRect(3);
 
-if halfradius > 0
-    circleleft = 0.5 * experimentdata.screenInfo.screenRect(3) - halfradius;
-    circleright = 0.5 * experimentdata.screenInfo.screenRect(3) + halfradius;
-    circletop = 0.5 * experimentdata.screenInfo.screenRect(4) + halfradius;
-    circlebottom = 0.5 * experimentdata.screenInfo.screenRect(4) - halfradius;
-    rect = [circleleft circlebottom circleright circletop];
-    Screen('FrameOval', experimentdata.screenInfo.curWindow, s.color, rect);
+if size(thistrial.circleArray,2) == 1 % just radii
+    thiscenter = [0.5 * experimentdata.screenInfo.screenRect(3) 0.5 * experimentdata.screenInfo.screenRect(4)];
+else
+    thiscenter = thistrial.circleArray(ceil(frame/s.framesPerCircle),2:3);
+    thiscenter = [thiscenter(1) * experimentdata.screenInfo.screenRect(3) ...
+                  thiscenter(2) * experimentdata.screenInfo.screenRect(4)];
+end
+
+if radius > 0
+    circleleft = thiscenter(1) - radius;
+    circleright = thiscenter(1) + radius;
+    circletop = thiscenter(2) - radius;
+    circlebottom = thiscenter(2) + radius;
+    rect = [circleleft circletop circleright circlebottom];
+    if s.filled
+        Screen('FillOval', experimentdata.screenInfo.curWindow, s.color, rect);
+    else
+        Screen('FrameOval', experimentdata.screenInfo.curWindow, s.color, rect);
+    end
 end
 
 % If recording screen shots (for testing), record every 4th
