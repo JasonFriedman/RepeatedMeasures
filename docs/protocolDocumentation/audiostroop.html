@@ -1,0 +1,16 @@
+<HTML>
+<HEAD><TITLE>audiostroop</TITLE></HEAD>
+<BODY><H1>audiostroop</H1>
+Perform audio stroop (as a dual task)<BR><BR>
+<TABLE border="1">
+<TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
+<TR><TD>type</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>Type of stroop - 1 = beeps, 2 = audio files</TD></TR>
+<TR><TD>numbers</TD><TD>No</TD><TD><A title="A 1 by n matrix (see description for how to fill it)">1 by n matrix</A></TD><TD>[1,2]</TD><TD>If beeps - then which beep numbers to play (defined in the setup section), if type is audiofiles then which files to play</TD></TR>
+<TR><TD>toneDuration</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0.80</TD><TD>Duration of the tone (in seconds), only relevant for tones</TD></TR>
+<TR><TD>trialEndNoResponse</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>2.50</TD><TD>When to time out when there is no response (from start of tone), in seconds</TD></TR>
+<TR><TD>minTimeBetween</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>3</TD><TD>Minimum time following end of previous trial before start of next trial (in seconds)</TD></TR>
+<TR><TD>maxTimeBetween</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>5</TD><TD>Maximum time following end of previous trial before start of next trial (in seconds)</TD></TR>
+<TR><TD>starttime</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>When to start the audio stroop, relative to the start of the trial, in seconds</TD></TR>
+<TR><TD>endtime</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>Inf</TD><TD>When to end the audio stroop, relative to the start of the trial, in seconds (set to inf for the end of the trial)</TD></TR>
+<TR><TD>keysToPress</TD><TD>Yes</TD><TD>string</TD><TD>'bn'</TD><TD>keys to press on keyboard to respond</TD></TR>
+</TABLE></BODY></HTML>
