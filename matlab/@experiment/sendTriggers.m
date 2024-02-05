@@ -34,6 +34,13 @@ elseif strcmp(type,'DAQ')
             sendTrigger(e.MCtrigger,0);
         end
     end
+elseif strcmp(type,'arduino')
+    devices = get(e,'devices');
+    if onoff
+        sendTrigger(devices.arduino,uint8(value));
+    else
+        sendTrigger(devices.arduino,0);
+    end
 else
     error(['Unsupported trigger type: ' type]);
 end

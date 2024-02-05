@@ -98,6 +98,8 @@ codes.SERIALPORT_setNumberCharacters = 141;
 
 codes.DAQ_sendTrigger = 150;
 
+codes.ARDUINO_sendTrigger = 155;
+
 codes.REDAMBER_getSensorStates = 160;
 codes.REDAMBER_addresses = 161;
 

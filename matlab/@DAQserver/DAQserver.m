@@ -1,5 +1,5 @@
 % DAQSERVER - create an DAQ server to listen for connections and sample
-% the DAQ card.
+% the DAQ card (for a Measurement Computing DAQ)
 %
 % d = DAQserver(port,maxsamplerate,channels,dllpath,sampletype,range,numChannelsTotal,debug)
 %

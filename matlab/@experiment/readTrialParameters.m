@@ -202,6 +202,11 @@ if ~isempty(thistrial.trigger)
             if ~isfield(devices,'serialport')
                 error('Cannot have serial port triggers in trials without defining the serial port client / server');
             end
+        elseif strcmp(thistrial.trigger{k}.type,'arduino')
+            devices = get(e,'devices');
+            if ~isfield(devices,'arduino')
+                error('Cannot have arduino triggers in trials without defining the arduino client / server');
+            end
         else
             error(['Unknown trigger type ' thistrial.trigger{k}.type]);
         end
