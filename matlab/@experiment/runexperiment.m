@@ -118,6 +118,11 @@ try
            thistrial = setupDRT(thistrial,experimentdata);
         end
         
+        % setup the audio stroop if it is used
+        if ~isempty(thistrial.audioStroop)
+           thistrial = setupAudioStroop(thistrial,experimentdata);
+        end
+
         % run the appropriate trial setup for this type of stimulus
         thistrial = setup(thistrial.thisstimulus,e,thistrial,experimentdata);
         writetolog(e,'Setup stimulus');
@@ -471,6 +476,59 @@ try
                     end
                 end
             end
+            
+            if ~isempty(thistrial.audioStroop)
+                [keyIsDown, ~, keyCode] = KbCheck(-1);
+                if thistrial.audioStroop.state==2
+                    % do nothing, finished for this trial
+                elseif thistrial.audioStroop.state==0 && thisFrameTime > thistrial.audioStroop.nextaudioStrooponset(end)
+                    % play the beep
+                    nextNumber = ceil(rand*thistrial.audioStroop.numStimuli);
+                    if thistrial.audioStroop.type==1
+                        PsychPortAudio('FillBuffer', experimentdata.pahandle, experimentdata.beepbuffer{thistrial.audioStroop.numbers(nextNumber)});
+                    else
+                        PsychPortAudio('FillBuffer',experimentdata.pahandle,experimentdata.audioBuffer(thistrial.audioStroop.numbers(nextNumber)));
+                    end
+                    PsychPortAudio('Start',experimentdata.pahandle,1,0,0);
+                    writetolog(e,sprintf('Started audioStroop sound %d at %.3f',nextNumber,thisFrameTime));
+                    markEvent(e,codes.(['audioStroopstart' num2str(nextNumber)]));
+                    thistrial.needToStopAudio = 1;
+                    thistrial.audioStroop.state = 1;
+                elseif thistrial.audioStroop.state==1 && keyIsDown && any(strfind(thistrial.audioStroop.keysToPress,KbName(keyCode)))
+                    writetolog(e,sprintf('audioStroop pedal pressed at %.3f',thisFrameTime));
+                    PsychPortAudio('Stop',experimentdata.pahandle,0,0);
+                    if strcmp(thistrial.audioStroop.keysToPress(1),KbName(keyCode))
+                        markEvent(e,codes.audioStroop1pressed);
+                    elseif strcmp(thistrial.audioStroop.keysToPress(2),KbName(keyCode))
+                        markEvent(e,codes.audioStroop2pressed);                    
+                    end
+                    thistrial.audioStroop.state = 0;
+                    % Set the time for the next trial
+                    offset = (thistrial.audioStroop.maxTimeBetween - thistrial.audioStroop.minTimeBetween) * rand + ...
+                        thistrial.audioStroop.minTimeBetween;
+                    nextonset = thisFrameTime + offset;
+                    if nextonset > thistrial.audioStroop.endtime
+                        thistrial.audioStroop.state = 2;
+                    else
+                        thistrial.audioStroop.nextaudioStrooponset(end+1) = nextonset;
+                    end
+                elseif thistrial.audioStroop.state==1 && thisFrameTime > thistrial.audioStroop.nextaudioStrooponset(end) + thistrial.audioStroop.trialEndNoResponse
+                    writetolog(e,sprintf('audioStroop timeout at %.3f',thisFrameTime));
+                    PsychPortAudio('Stop',experimentdata.pahandle,0,0);
+                    markEvent(e,codes.audioStrooptimeout);
+                    thistrial.audioStroop.state = 0;
+                    % As this was a timeout, finish the trial, then set the
+                    % time for the next trial
+                    offset = (thistrial.audioStroop.maxTimeBetween - thistrial.audioStroop.minTimeBetween) * rand + ...
+                        thistrial.audioStroop.minTimeBetween + thistrial.audioStroop.trialEndNoResponse;
+                    nextonset = thistrial.audioStroop.nextaudioStrooponset(end) + offset;
+                    if nextonset > thistrial.audioStroop.endtime
+                        thistrial.audioStroop.state = 2;
+                    else
+                        thistrial.audioStroop.nextaudioStrooponset(end+1) = nextonset;
+                    end
+                end
+            end
             % Check if they have started moving already
             if thistrial.checkMoving && thisFrameTime >= thistrial.checkMoving
                 % If they are still pressing the button, abort
@@ -515,8 +573,8 @@ try
                     nextflip = 0;
                 end
                 
-                [thistrial.VBLTimestamp(frame) thistrial.StimulusOnsetTime(frame) ...
-                    thistrial.FlipTimestamp(frame) thistrial.Missed(frame) ...
+                [thistrial.VBLTimestamp(frame), thistrial.StimulusOnsetTime(frame), ...
+                    thistrial.FlipTimestamp(frame), thistrial.Missed(frame), ...
                     thistrial.Beampos(frame)] = ...
                     Screen('Flip',experimentdata.screenInfo.curWindow,nextflip,thistrial.dontclear);
                 % If the background is not white, then draw it
@@ -724,7 +782,7 @@ try
         currentTrial = currentTrial+1;
         
         % If they are pressing the 'q' key, then quit
-        [keyCode,keyCode,keyCode] = KbCheck(-1);
+        [~,~,keyCode] = KbCheck(-1);
         if find(keyCode,1)==KbName('q') % q = quit
             currentTrial = inf;
             writetolog(e,'Pressed q, quitting');

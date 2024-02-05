@@ -131,6 +131,16 @@ codes.DRTstart = 60;
 codes.DRTtimeout = 61;
 % DRT beep stopped (button press)
 codes.DRTpressed = 62;
+
+% audio stroop test
+codes.audioStroopstart1 = 70;
+codes.audioStroopstart2 = 71;
+codes.audioStroopstart3 = 72;
+codes.audioStroopstart4 = 73;
+codes.audioStroop1pressed = 75;
+codes.audioStroop2pressed = 76;
+codes.audioStrooptimeout = 77;
+
 % Target on: value in file will be 1000 + target number
 codes.targetOn = 1000;
 % Sent a tactor stimuli: value in file will be 2000 + sequence number
