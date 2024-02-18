@@ -53,7 +53,7 @@ if isempty(arduinoBoard)
     arduinoBoard = '[]';
 end
 
-runstring = sprintf('matlab -nojvm -r "d = arduinoserver(3010,500,%s,%s,%s,%s,%d);listen(d)" &',...
+runstring = sprintf('matlab -nojvm -r "d = arduinoserver(3010,500,''%s'',''%s'',%s,%s,%d);listen(d)" &',...
         arduinoPort,arduinoBoard,inputPinsString,outputPinsString,debug);
 
 runstring
