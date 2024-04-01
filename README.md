@@ -16,4 +16,4 @@ https://htmlpreview.github.io/?https://raw.githubusercontent.com/JasonFriedman/R
 
 Jason Friedman
 
-[![DOI](https://zenodo.org/badge/6585698.svg)](https://zenodo.org/doi/)
+[![DOI](https://zenodo.org/badge/6585698.svg)](https://doi.org/10.5281/zenodo.10438)
