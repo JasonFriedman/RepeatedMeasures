@@ -14,8 +14,6 @@ The documentation for using the toolkit can be found here in the "docs" director
 
 https://htmlpreview.github.io/?https://raw.githubusercontent.com/JasonFriedman/RepeatedMeasures/master/docs/protocolDocumentation/index.html
 
-==============
 Jason Friedman
-https://github.com/JasonFriedman/RepeatedMeasures/
 
 [![DOI](https://zenodo.org/badge/6585698.svg)](https://zenodo.org/doi/)
