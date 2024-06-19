@@ -7,6 +7,7 @@ function texts = defaultstrings
 texts.SUCCESS = 'Success';
 texts.TOO_EARLY = 'Too early';
 texts.TOO_LATE = 'Too late';
+texts.TARGET_TOO_EARLY = 'Too early';
 texts.TARGET_TOO_LATE = 'Too late';
 texts.TOO_SLOW = 'Too slow!!!';
 texts.NOT_FAR_ENOUGH_LEFT = 'Not far enough left';

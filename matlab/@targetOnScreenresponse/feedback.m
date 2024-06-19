@@ -66,19 +66,34 @@ elseif isfield(thistrial,'pressedLocation')
     
     
     % If we are giving feedback on arrival time
-    if isfield(thistrial,'arrivalFeedback')
+    if ~isnan(r.arrivalFeedbackStart)
         arrivaltime = thistrial.pressedTime - thistrial.frameInfo.startFrame(1);
-        if arrivaltime > str2double(thistrial.arrivalFeedback.cutofftime)
+        if arrivaltime < r.arrivalFeedbackStart
+            thistrial.successful = -3;
+            thistrial.questSuccess = -1;
+            writetolog(e,'Arrived at target too early');
+            thistrial.responseText = experimentdata.texts.TARGET_TOO_EARLY;
+            if thistrial.textFeedback == 0
+                thistrial.textFeedback = 1;
+            end
+            if thistrial.auditoryFeedback
+                thistrial.playsound = 1;
+            end
+        end
+    end
+    if ~isnan(r.arrivalFeedbackEnd)
+        arrivaltime = thistrial.pressedTime - thistrial.frameInfo.startFrame(1);
+        if arrivaltime > r.arrivalFeedbackEnd
             thistrial.successful = -3;
             thistrial.questSuccess = -1;
             writetolog(e,'Arrived at target too late');
             thistrial.responseText = experimentdata.texts.TARGET_TOO_LATE;
-            thistrial.playsound = 1;
-            if isfield(thistrial.arrivalFeedback,'text')
+            if thistrial.textFeedback == 0
                 thistrial.textFeedback = 1;
             end
-        else
-            % do nothing
+            if thistrial.auditoryFeedback
+                thistrial.playsound = 1;
+            end
         end
     end
 else
