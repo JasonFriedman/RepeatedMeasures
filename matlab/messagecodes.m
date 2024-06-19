@@ -100,6 +100,8 @@ codes.DAQ_sendTrigger = 150;
 
 codes.ARDUINO_sendTrigger = 155;
 
+codes.NIDAQ_sendTrigger = 157;
+
 codes.REDAMBER_getSensorStates = 160;
 codes.REDAMBER_addresses = 161;
 

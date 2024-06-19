@@ -207,6 +207,12 @@ if ~isempty(thistrial.trigger)
             if ~isfield(devices,'arduino')
                 error('Cannot have arduino triggers in trials without defining the arduino client / server');
             end
+        elseif strcmp(thistrial.trigger{k}.type,'NIDAQ')
+            devices = get(e,'devices');
+            if ~isfield(devices,'NIDAQ')
+                error('Cannot have NI DAQ triggers in trials without defining the NI DAQ client / server');
+            end
+
         else
             error(['Unknown trigger type ' thistrial.trigger{k}.type]);
         end

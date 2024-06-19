@@ -41,6 +41,13 @@ elseif strcmp(type,'arduino')
     else
         sendTrigger(devices.arduino,0);
     end
+elseif strcmp(type,'NIDAQ')
+    devices = get(e,'devices');
+    if onoff
+        sendTrigger(devices.NIDAQ,uint8(value));
+    else
+        sendTrigger(devices.NIDAQ,0);
+    end
 else
     error(['Unsupported trigger type: ' type]);
 end

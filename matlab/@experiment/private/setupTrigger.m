@@ -14,6 +14,8 @@ if ~isempty(thistrial.trigger)
             % Nothing to do here for setting up serialport server trigger
         elseif strcmp(thistrial.trigger{k}.type,'arduino')
             % Nothing to do here for setting up arduino
+        elseif strcmp(thistrial.trigger{k}.type,'NIDAQ')
+            % Nothing to do here for setting up NIDAQ
         else
             error(['Unsupported trigger type: ' thistrial.trigger{k}.type]);
         end
