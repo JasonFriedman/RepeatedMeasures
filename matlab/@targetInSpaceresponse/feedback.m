@@ -9,6 +9,13 @@ if r.checkGoingForward && isfield(dataSummary,'goingforwardratio') && all(dataSu
     thistrial.responseText = 'Not moving forward enough';
     thistrial.playsound = 1;
     thistrial.questSuccess = -1;
+elseif r.checkFixation && isfield(dataSummary,'fixationok') && ~dataSummary.fixationok
+    fprintf('Not fixating enough\n');
+    thistrial.successful = -1;
+    thistrial.responseText = 'Not fixating on the dot enough!!!';
+    thistrial.playsound = 1;
+    thistrial.questSuccess = -1;
+    thistrial.textFeedback = 1;
 else
     hitTarget = thistrial.pressedLocation;
     

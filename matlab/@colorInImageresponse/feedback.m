@@ -24,7 +24,7 @@ end
 
 % Show duration feedback if necessary
 if ~isempty(r.durationFeedback) && r.durationFeedback(1)>=0 && r.durationFeedback(2)<inf
-    % Start at the end, go backwards until the first time it is in the start target
+    % Start at the end, go backwards until the last time it is in the start target
     startsample = NaN;
     for k=size(xyz,1):-1:1
         lastposition = calculateLastPosition(d,xyz(k,:),thistrial,inf);

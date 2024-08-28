@@ -7,7 +7,10 @@ started = 0;
 
 lastposition = round(thistrial.lastpositionVisual);
 
-if ~isempty(lastposition)
+% needs to be < and not <= because we look at the location +1
+if ~isempty(lastposition) && all(lastposition>0) && ...
+        lastposition(1)< experimentdata.screenInfo.screenRect(3) && ...
+        lastposition(2) < experimentdata.screenInfo.screenRect(4)
     imageNum = r.imageNum;
     
     % Rect is left,top,right,bottom
