@@ -3,11 +3,11 @@
 function rv = methods(c)
 
 if nargout > 0
-    rv1 = methods('mouseclient');
+    rv1 = methods('keyboardclient');
     rv2 = methods('socketclient');
     rv = {rv1{:} rv2{:}}';
 else
-    methods('mouseclient');
+    methods('keyboardclient');
     methods('socketclient');
 end
 
