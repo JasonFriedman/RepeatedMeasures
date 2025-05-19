@@ -59,11 +59,28 @@ experimentdata.screenInfo.bckgnd = 0;
 % Prepare staircases if appropriate
 experimentdata = prepareStaircase(e,experimentdata,0);
 
-
+% check if auditory stroop is used and microphone requested
+useAudioStroopMicrophone = 0;
+for k=1:numel(e.protocol.trial)
+    if isfield(e.protocol.trial{k},'audioStroop') && isfield(e.protocol.trial{k}.audioStroop,'recordMicrophone') && ...
+        e.protocol.trial{k}.audioStroop.recordMicrophone
+            useAudioStroopMicrophone = 1;
+        break;
+    end
+end
+    
 % Put everything inside a giant "try" so that we can close the screen if it crashes
 try
+    % Open PsychPortAudio in the right mode (depending on whether there is
+    % sound ouput and/or input)
     if ~isempty(experimentdata.sounds) || ~isempty(experimentdata.beeps)
-        experimentdata.pahandle = PsychPortAudio('Open', [], [], 0, experimentdata.freq, experimentdata.nrchannels);
+        if useAudioStroopMicrophone==0
+            experimentdata.pahandle = PsychPortAudio('Open', [], 1, 0, experimentdata.freq, experimentdata.nrchannels);
+        else 
+            experimentdata.pahandle = PsychPortAudio('Open', [], 3, 0, experimentdata.freq, experimentdata.nrchannels);
+            % Set aside a 10s audio buffer
+            PsychPortAudio('GetAudioData', experimentdata.pahandle, 10);
+        end
     end
     % Call psychtoolbox to open the screen (can take a while)
     PsychImaging('PrepareConfiguration');
@@ -485,7 +502,7 @@ try
                     % play the beep
                     nextNumber = ceil(rand*thistrial.audioStroop.numStimuli);
                     if thistrial.audioStroop.type==1
-                        PsychPortAudio('FillBuffer', experimentdata.pahandle, experimentdata.beepbuffer{thistrial.audioStroop.numbers(nextNumber)});
+                        PsychPortAudio('FillBuffer', experimentdata.pahandle,experimentdata.beepbuffer{thistrial.audioStroop.numbers(nextNumber)});
                     else
                         PsychPortAudio('FillBuffer',experimentdata.pahandle,experimentdata.audioBuffer(thistrial.audioStroop.numbers(nextNumber)));
                     end
@@ -515,6 +532,19 @@ try
                 elseif thistrial.audioStroop.state==1 && thisFrameTime > thistrial.audioStroop.nextaudioStrooponset(end) + thistrial.audioStroop.trialEndNoResponse
                     writetolog(e,sprintf('audioStroop timeout at %.3f',thisFrameTime));
                     PsychPortAudio('Stop',experimentdata.pahandle,0,0);
+                    % write to a file
+                    if thistrial.audioStroop.recordMicrophone
+                        audiodata = PsychPortAudio('GetAudioData', experimentdata.pahandle);
+                        if isfield(thistrial,'filename') && thistrial.recording
+                            if ~exist('wavcounter','var')
+                                wavcounter = 1;
+                            else
+                                wavcounter = wavcounter + 1;
+                            end
+                            wavfilename = sprintf('%s/%s_%03d.wav',e.resultDir,thistrial.filename,wavcounter);
+                            audiowrite(wavfilename,transpose(audiodata), 44100);
+                        end
+                    end
                     markEvent(e,codes.audioStrooptimeout);
                     thistrial.audioStroop.state = 0;
                     % As this was a timeout, finish the trial, then set the

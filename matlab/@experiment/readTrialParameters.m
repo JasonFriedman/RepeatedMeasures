@@ -70,10 +70,10 @@ DRTParams.description = {'Beep number to play (defined in the setup section)','M
 DRTParams.classdescription = {'Perform Detection Response Task (DRT)'};
 DRTParams.classname = 'DRT';
 
-audioStroopParams.name = {'type','numbers','toneDuration','trialEndNoResponse','minTimeBetween','maxTimeBetween','starttime','endtime','keysToPress'};
-audioStroopParams.type = {'number','matrix_1_n','number','number','number','number','number','number','string'};
-audioStroopParams.default = {1,[1 2],0.8,2.5,3,5,0,inf,['b','n']};
-audioStroopParams.required = [0 0 0 0 0 0 0 0 1];
+audioStroopParams.name = {'type','numbers','toneDuration','trialEndNoResponse','minTimeBetween','maxTimeBetween','starttime','endtime','keysToPress','recordMicrophone'};
+audioStroopParams.type = {'number','matrix_1_n','number','number','number','number','number','number','string','boolean'};
+audioStroopParams.default = {1,[1 2],0.8,2.5,3,5,0,inf,['b','n'],0};
+audioStroopParams.required = [0 0 0 0 0 0 0 0 1 0];
 audioStroopParams.description = {'Type of stroop - 1 = beeps, 2 = audio files','If beeps - then which beep numbers to play (defined in the setup section), if type is audiofiles then which files to play',...
     'Duration of the tone (in seconds), only relevant for tones',...
     'When to time out when there is no response (from start of tone), in seconds',...
@@ -81,7 +81,8 @@ audioStroopParams.description = {'Type of stroop - 1 = beeps, 2 = audio files','
     'Maximum time following end of previous trial before start of next trial (in seconds)',...
     'When to start the audio stroop, relative to the start of the trial, in seconds',...
     'When to end the audio stroop, relative to the start of the trial, in seconds (set to inf for the end of the trial)',...
-    'keys to press on keyboard to respond'};
+    'keys to press on keyboard to respond',...
+    'whether to record the microphone response'};
 audioStroopParams.classdescription = {'Perform audio stroop (as a dual task)'};
 audioStroopParams.classname = 'audiostroop';
 
