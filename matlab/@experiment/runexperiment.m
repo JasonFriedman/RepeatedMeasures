@@ -204,6 +204,8 @@ try
         while started~=1
             [started,keyCode,thistrial] = hasStarted(thistrial.thisstarttrial,e,experimentdata,thistrial);
             if thistrial.showPosition
+                thistrial.lastposition = [];
+                thistrial.lastpositionVisual = [];
                 preStart(thistrial.thisstimulus,experimentdata,thistrial,0);
                 DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,0);
                 [thistrial.lastposition,thistrial, experimentdata] = showPosition(e,thistrial,experimentdata,-1);
