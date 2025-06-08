@@ -5,9 +5,9 @@
 
 function [lastpositionVisual,thistrial] = showPosition(tc,thistrial,experimentdata,e,frame)
 
-if isfield(thistrial,'lastpositionVisual') && ~isempty(thistrial.lastpositionVisual)
+if isfield(thistrial,'lastpositionVisual') && ~isempty(thistrial.lastpositionVisual) && ~isnan(thistrial.lastpositionVisual(1))
     lastpositionVisual = thistrial.lastpositionVisual;
-elseif isfield(thistrial,'lastposition') && ~isempty(thistrial.lastposition)
+elseif isfield(thistrial,'lastposition') && ~isempty(thistrial.lastposition) && ~isempty(thistrial.lastpositionVisual) && ~isnan(thistrial.lastpositionVisual(1))
    lastpositionVisual(:,1) = thistrial.lastposition(:,1) * experimentdata.screenInfo.screenRect(3);
    lastpositionVisual(:,2) = (1-thistrial.lastposition(:,2)) * experimentdata.screenInfo.screenRect(4);
    thistrial.lastpositionVisual = lastpositionVisual;
