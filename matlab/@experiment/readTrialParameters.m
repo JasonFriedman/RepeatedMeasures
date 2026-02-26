@@ -45,7 +45,7 @@ triggerParams.name = {'time','type','value','duration'};
 triggerParams.type = {'number','string','number','number'};
 triggerParams.default = {0,'serial',1,0.05};
 triggerParams.required = [1 1 0 0];
-triggerParams.description = {'Trigger time (in seconds)','Type of trigger, one of ''serial'' or ''parallel'' or ''DAQ''','Value to send','Duration (in seconds)'};
+triggerParams.description = {'Trigger time (in seconds)','Type of trigger, one of ''serial'' or ''parallel'' or ''DAQ'' or ''arduino'' or ''NIDAQ'' ','Value to send','Duration (in seconds)'};
 triggerParams.classdescription = 'Provide a trigger at the specified time';
 triggerParams.classname = 'trigger';
 
@@ -213,7 +213,6 @@ if ~isempty(thistrial.trigger)
             if ~isfield(devices,'NIDAQ')
                 error('Cannot have NI DAQ triggers in trials without defining the NI DAQ client / server');
             end
-
         else
             error(['Unknown trigger type ' thistrial.trigger{k}.type]);
         end
