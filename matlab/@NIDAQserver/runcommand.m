@@ -16,5 +16,5 @@ codes = messagecodes;
 
 switch(command)
     case {codes.NIDAQ_sendTrigger}
-        write(d.dq,parameters{1});
+        d.dq.outputSingleScan(parameters{1});
 end

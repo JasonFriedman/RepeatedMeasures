@@ -1,4 +1,4 @@
-% DAQSERVER - create an DAQ server to listen for connections and sample
+% NIDAQSERVER - create an DAQ server to listen for connections and sample
 % the DAQ card (for an NI DAQ)
 %
 % d = NIDAQserver(port,maxsamplerate,inputdevice,inputchannels,outputdevice,outputchannels,debug)
@@ -33,7 +33,7 @@ if nargin<5 || isempty(outputdevice)
 end
 
 if nargin<6 || isempty(outputchannels)
-    outputchannels = 'port1/line0';
+    outputchannels = 'port0/line0';
 end
 
 if nargin<7 || isempty(debug)
@@ -42,7 +42,7 @@ end
 
 d.codes = messagecodes;
 
-d.dq = daq('ni');
+d.dq = daq.createSession('ni');
 d.numInput = 0;
 d.numOutput = 0;
 if ~isempty(inputdevice)
@@ -50,7 +50,7 @@ if ~isempty(inputdevice)
     d.numInput = numel(index);
 end
 if ~isempty(outputdevice)
-    [~,index] = addoutput(d.dq,outputdevice,outputchannels,'Digital');
+    [~,index] = d.dq.addDigitalChannel(outputdevice,outputchannels,'OutputOnly');
     d.numOutput = numel(index);
 end
 
