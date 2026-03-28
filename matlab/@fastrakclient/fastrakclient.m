@@ -1,4 +1,4 @@
-% FASTRAKCLIENT - create an object to connect to the fasttrak server and send commands to it 
+% FASTRAKCLIENT - create an object to connect to the fastrak server and send commands to it 
 %
 % ftc = fastrakclient(inputParams,experiment,debug)
 % inputParams.server is the server to connect to (for this machine, use 'localhost')

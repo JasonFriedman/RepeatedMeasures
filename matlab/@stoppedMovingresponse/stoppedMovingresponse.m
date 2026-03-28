@@ -9,7 +9,7 @@ params.description = {'The amount of time you need to stop before ending the tri
     'Need to move less than or equal to this to be considered not moving'};
 params.required = [0 0 0 0];
 params.default = {0.5, 0.1, NaN, 0};
-params.classdescription = 'This response is to stop a trial after the subject has stopped moving for a certain about of time.';
+params.classdescription = 'This response is to stop a trial after the subject has stopped moving for a certain amount of time.';
 params.classname = 'stoppedMovingresponse';
 params.parentclassname = 'response';
 

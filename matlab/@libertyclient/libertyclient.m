@@ -1,4 +1,4 @@
-% LIBERTYCLIENT - create an object to connect to the libery server and send commands to it 
+% LIBERTYCLIENT - create an object to connect to the liberty server and send commands to it 
 %
 % lc = libertyclient(inputParams,experiment,debug)
 % inputParams.server is the server to connect to (for this machine, use 'localhost')

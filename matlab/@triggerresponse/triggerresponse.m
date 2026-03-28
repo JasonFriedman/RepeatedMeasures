@@ -14,7 +14,7 @@ params.description = {'Type of trigger to wait for. Currently the only option is
     'Number of channels to look at (mainly important for making other channels). The trigger channel must be <= number of channels'};
 params.required = [1 1 0 0];
 params.default = {'DAQ',1,1,8};
-params.classdescription = 'The trial ends when the an external trigger is received';
+params.classdescription = 'The trial ends when an external trigger is received';
 params.classname = 'triggerresponse';
 params.parentclassname = 'response';
 

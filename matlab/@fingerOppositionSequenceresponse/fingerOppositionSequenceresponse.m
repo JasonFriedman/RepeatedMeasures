@@ -1,5 +1,5 @@
 % FINGEROPPOSITIONSEQUENCERESPONSE - class representing "finger opposition" sequence response
-% (i.e. you need to press touch the thumb and a certain finger in a certain order
+% (i.e. you need to press the thumb and a certain finger together in a certain order
 
 function [r,params] = fingerOppositionSequenceresponse(inputParams)
 

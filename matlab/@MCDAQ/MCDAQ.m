@@ -1,4 +1,4 @@
-% MCDAQ - a class to read or write to a Measuremtn computing DAQ card on Windows 32/64 bit (via the "Univeral Library")
+% MCDAQ - a class to read or write to a Measurement computing DAQ card on Windows 32/64 bit (via the "Universal Library")
 %
 % t = MCDAQ(dllpath,in_or_out,channels,range,numChannelsTotal)
 %

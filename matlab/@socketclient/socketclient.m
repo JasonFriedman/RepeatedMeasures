@@ -7,7 +7,7 @@
 % experiment is a pointer to the parent object (which must have a
 % function called "writetolog",e.g. writetolog(experiment,'Message');
 % If debug=1, then the client will print more messages
-% If noack=1, it does not require an acknoledgement
+% If noack=1, it does not require an acknowledgement
 %
 % You should not use this class directly, rather one of its children
 % e.g. optotrakclient

@@ -3,7 +3,7 @@ function [v,params] = fingerOppositionSequencestimulus(inputParams,experimentdat
 
 params.name = {'feedbackType'};
 params.type = {'number'};
-params.description = {'1 = show the currently touching finges, 2 = show calibration information'};
+params.description = {'1 = show the currently touching fingers, 2 = show calibration information'};
 params.required = [0];
 params.default = {1};
 params.classdescription = 'Provide feedback when using finger opposition sequence target';

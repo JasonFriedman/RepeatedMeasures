@@ -1,4 +1,4 @@
-% ATIFORCESENSORSCLIENT - create an onject to connect to the ATI force sensors server and send commands to it
+% ATIFORCESENSORSCLIENT - create an object to connect to the ATI force sensors server and send commands to it
 %
 % fc = ATIforcesensorsclient(inputParams,experiment,debug)
 %

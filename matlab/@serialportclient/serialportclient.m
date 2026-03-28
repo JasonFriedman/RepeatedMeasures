@@ -4,7 +4,7 @@ function [sc,params] = serialportclient(inputParams,experiment,debug)
 
 params.name = {'protocol','numcharacters','numvalues'};
 params.type = {'string','number','number'};
-params.description = {'Type of server to connect to (currently ''Arduino'' is the only option). For Arduino, the character s is sent on the serial port, and a comma separated list is expected in return','Number of characeters in total per sample','Number of values per sample'};
+params.description = {'Type of server to connect to (currently ''Arduino'' is the only option). For Arduino, the character s is sent on the serial port, and a comma separated list is expected in return','Number of characters in total per sample','Number of values per sample'};
 params.required = [1 0 0];
 params.default = {'Arduino',16,2};
 params.classdescription = 'Connect to a serial port and sample from it';

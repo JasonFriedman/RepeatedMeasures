@@ -10,7 +10,7 @@ params.description = {'Type of trigger to wait for. Currently the only option is
     'whether the trigger is a high value (1) or a low value (0)'};
 params.required = [1 1 0];
 params.default = {'DAQ',1,1};
-params.classdescription = 'The trial starts when the an external trigger is received';
+params.classdescription = 'The trial starts when an external trigger is received';
 params.classname = 'triggerstart';
 params.parentclassname = 'start';
 

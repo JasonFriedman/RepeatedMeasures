@@ -7,7 +7,7 @@
 % maxsamplerate the maximum it will do (to avoid buffer overflows)
 %
 % fixation box should be a 1 x 4 vector - [left top height width] - in
-% relative coodinates (i.e. from 0 to 1)
+% relative coordinates (i.e. from 0 to 1)
 %
 % e.g.
 % gs = gazepointserver(3021,100,0,[0.4 0.2 0.2 0.2],0.9);

@@ -1,4 +1,4 @@
-% TRACKSTARSERVER - create a trakStar server to listen for connections and sample
+% TRAKSTARSERVER - create a trakStar server to listen for connections and sample
 % 
 % For collecting data from an Ascension trakStar system
 % ts = trakStarserver(port,samplerate,no_of_receivers,dllpath,debug)
