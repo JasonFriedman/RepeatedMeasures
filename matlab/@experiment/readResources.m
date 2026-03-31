@@ -304,7 +304,7 @@ end
 % load the beeps
 if ~isempty(experimentdata.beeps)
     % First we have to initialise the sound (if not already initalized)
-    if ~validating && ~isempty(experimentdata.sounds)
+    if ~validating && isempty(experimentdata.sounds)
         InitializePsychSound;
     end
     % If not specified (from the audio files), set to empty (i.e. use default values)

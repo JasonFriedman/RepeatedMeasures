@@ -21,6 +21,6 @@ if nargin<4 || isempty(samplerate)
     samplerate = 240;
 end
 
-system(sprintf('matlab -nojvm -nosplash -r "l = libertyserver(3015,%d,%d,%d,1,%d,1);listen(l);" &',samplerate,nummarkers,recordOrientation,COMport));
+system(sprintf('matlab -nodesktop -nosplash -r "l = libertyserver(3015,%d,%d,%d,1,%d,1);listen(l);" &',samplerate,nummarkers,recordOrientation,COMport));
 
 

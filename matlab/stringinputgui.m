@@ -26,15 +26,16 @@ uicontrol('style','text','units','pixels',...
 
 editbox = uicontrol('style','edit','units','pixels',...
     'position',[10 35 190 30],'horizontalalignment','left',...
-    'keypressfcn',{@keypressed},'string',defaultvalue);
+    'callback',@enterPressed,...
+    'string',defaultvalue);
     
 OKbutton = uicontrol('style','pushbutton','units','pixels',...
     'position',[95 5 50 25],'string','OK',... 
-    'callback',{@submit});
+    'callback',@submit);
 
 uicontrol('style','pushbutton','units','pixels',... % cancel button
     'position',[150 5 50 25],'string','Cancel',... 
-    'callback',{@submit});
+    'callback',@submit);
 
 uicontrol(editbox) % Put blinking cursor in edit box.
 uiwait(f) % Wait till the GUI closes.
@@ -48,8 +49,13 @@ drawnow;
         close(f);
     end
 
+    function enterPressed(~,~)
+        result = get(editbox,'String');
+        close(f);
+    end
+
     function keypressed(~,varargin)
-        if strcmp(varargin{1}.Key,'return')
+        if strcmpi(varargin{1}.Key,'return') || strcmpi(varargin{1}.Key,'enter')
             drawnow;
             result = get(editbox,'String');
             close(f);
