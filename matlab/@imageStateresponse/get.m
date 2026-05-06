@@ -17,4 +17,6 @@ if nargin==2
     
 elseif nargin==1
     result = fields(h);
+else
+    error('get expects 1 or 2 input arguments');
 end
