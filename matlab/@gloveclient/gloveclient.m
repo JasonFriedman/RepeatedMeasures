@@ -26,6 +26,14 @@ if nargout>1
     return;
 end
 
+if nargin<1 || isempty(inputParams)
+    error('gloveclient requires inputParams');
+end
+
+if nargin<2 || isempty(experiment)
+    error('gloveclient requires experiment');
+end
+
 if nargin<3 || isempty(debug)
     debug = 0;
 end

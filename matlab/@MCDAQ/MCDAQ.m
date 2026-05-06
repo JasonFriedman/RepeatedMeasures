@@ -47,8 +47,8 @@ if nargin<3
     channels = [];
 end
 
-if nargin<4
-    t.range = [];
+if nargin<4 || isempty(range)
+    range = [];
 end
 
 if nargin<5

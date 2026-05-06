@@ -24,6 +24,14 @@ if nargout>1
     return;
 end
 
+if nargin<1 || isempty(inputParams)
+    error('fixedtrackerclient requires inputParams');
+end
+
+if nargin<2 || isempty(experiment)
+    error('fixedtrackerclient requires experiment');
+end
+
 if nargin<3 || isempty(debug)
     debug = 0;
 end

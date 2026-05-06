@@ -16,6 +16,14 @@
 
 function d = ATIforcesensorsserver(port,samplerate,channels,IPaddress,debug)
 
+if nargin<3 || isempty(channels)
+    error('ATIforcesensorsserver requires channels (parameter 3)');
+end
+
+if nargin<4 || isempty(IPaddress)
+    error('ATIforcesensorsserver requires IPaddress (parameter 4)');
+end
+
 if nargin<5 || isempty(debug)
     debug = 0;
 end

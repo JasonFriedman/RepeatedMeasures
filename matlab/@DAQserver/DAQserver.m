@@ -28,6 +28,10 @@ if nargin<5 || isempty(sampletype)
     sampletype=2;
 end
 
+if nargin<6 || isempty(range)
+    range = [];
+end
+
 if nargin<7 || isempty(numChannelsTotal)
     numChannelsTotal = 8;
 end

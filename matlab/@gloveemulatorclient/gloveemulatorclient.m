@@ -28,6 +28,14 @@ if nargout>1
     return;
 end
 
+if nargin<1 || isempty(inputParams)
+    error('gloveemulatorclient requires inputParams');
+end
+
+if nargin<2 || isempty(experiment)
+    error('gloveemulatorclient requires experiment');
+end
+
 if nargin<3 || isempty(debug)
     debug = 0;
 end

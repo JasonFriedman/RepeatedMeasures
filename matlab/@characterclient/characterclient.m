@@ -34,6 +34,10 @@ if nargout>1
     return;
 end
 
+if nargin<1 || isempty(inputParams)
+    error('characterclient requires inputParams');
+end
+
 if nargin<2 || isempty(debug)
     debug = 0;
 end

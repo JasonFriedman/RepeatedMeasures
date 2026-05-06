@@ -11,11 +11,17 @@
 
 function cs = characterserver(port,maxnumsamples,filename,debug)
 
-if isnumeric(filename)
+if nargin<2
+    error('characterserver requires at least port and maxnumsamples parameters');
+end
+
+if nargin<3 || isempty(filename)
+    filename = 'tmpfile.csv';
+elseif isnumeric(filename)
     filename = sprintf('file%d.csv',filename);
 end
 
-if nargin<3 || isempty(debug)
+if nargin<4 || isempty(debug)
     debug = 0;
 end
 

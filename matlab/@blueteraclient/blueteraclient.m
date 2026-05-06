@@ -27,6 +27,14 @@ if nargout>1
     return;
 end
 
+if nargin<1 || isempty(inputParams)
+    error('blueteraclient requires inputParams');
+end
+
+if nargin<2 || isempty(experiment)
+    error('blueteraclient requires experiment');
+end
+
 if nargin<3 || isempty(debug)
     debug = 0;
 end
