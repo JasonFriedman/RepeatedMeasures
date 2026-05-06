@@ -2,5 +2,4 @@
 % sendmessage(S,command)
 
 function sendmessage(p,command)
-
-putvalue(p.DIO,command);
+calllib(p.lib,'Out32',p.portaddress,command);

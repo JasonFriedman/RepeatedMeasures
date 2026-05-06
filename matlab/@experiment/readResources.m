@@ -64,13 +64,13 @@ serialparams.required = [1 0];
 serialparams.classname = 'serial';
 serialparams.classdescription = 'Define the parameters of the serial port to be used for sending triggers';
 
-parallelparams.name = {'portname'};
+parallelparams.name = {'portaddress'};
 parallelparams.type={'string'};
-parallelparams.description = {'The name of the serial port, e.g. LPT1'};
-parallelparams.default = {'LPT1'};
-parallelparams.required = [1];
+parallelparams.description = {'The address of the parallel port (can be found in device manager)'};
+parallelparams.default = {'3FE8'};
+parallelparams.required = 1;
 parallelparams.classname = 'parallel';
-parallelparams.classdescription = 'Define the parameters of the parallel port to be used for sending triggers';
+parallelparams.classdescription = 'Define the parameters of the parallel port to be used for sending triggers. Note that the files inpoutx64.dll and inpout32.h must be in the current directory';
 
 beepsparams.name = {'frequency','duration'};
 beepsparams.type = {'number','number'};
@@ -257,7 +257,7 @@ end
 if ~isempty(experimentdata.parallel) && ~validating
     parallelData = experimentdata.parallel;
     % connect to the parallel port
-    experimentdata.parallel = parallelport(parallelData.portname);
+    experimentdata.parallel = parallelport(parallelData.portaddress);
 end
 
 if ~isempty(experimentdata.staircases)
