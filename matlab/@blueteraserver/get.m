@@ -17,11 +17,11 @@ if nargin==2
     end
     if isafield
         if max(size(h))==1
-            eval(['result = h.' field ';']);
+            result = h.(field);
         else
             for i=1:size(h,1)
                 for j=1:size(h,2)
-                    eval(['result(i,j) = h(i,j).' field ';']);
+                    result(i,j) = h(i,j).(field);
                 end
             end
         end
