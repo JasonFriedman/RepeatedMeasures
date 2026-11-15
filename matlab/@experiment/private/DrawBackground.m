@@ -18,7 +18,7 @@ if ~isnan(boxes(1)) || (~isempty(labels) && ~isempty(labels(1)))
             Screen(screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
         end
         if ~isempty(thistrial.backgroundImage)
-            Screen('DrawTexture',screenInfo.curWindow,thistrial.backgroundImage);
+            Screen('DrawTexture',screenInfo.curWindow,experimentdata.textures(thistrial.backgroundImage));
         end
     end
 else

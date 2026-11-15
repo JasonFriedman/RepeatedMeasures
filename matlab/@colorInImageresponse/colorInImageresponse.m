@@ -23,7 +23,7 @@ params.description = {'Image number to use (from those defined in setup)',...
     'allowable cityblock distance from the color',...
     'Whether to provide feedback about the duration. If so, it should be a 1x2 matrix (1st is minimum time, 2nd is maximum time)'};
 params.required = [1 1 0 0 0 0 0 0 0 0 0];
-params.default = {1,1,[0 0 0],0,[0 0 0],[],[],[],[],0,[]};
+params.default = {1,1,[0 0 0],[0 0 0],0,[],[],[],[],0,[]};
 params.classdescription = 'The target(s) are defined by a color in an image';
 params.classname = 'colorInImageresponse';
 params.parentclassname = 'response';

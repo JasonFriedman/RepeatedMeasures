@@ -84,10 +84,10 @@ end
 
 for k=1:numel(spt)
     if ~any(strcmp(spt{k},{'dot','line','ellipse','rectangle','image'}))
-        if sc.showPositionType(1)=='@'
+        if ~isempty(spt{k}) && spt{k}(1)=='@'
             % Check that the function exists
             if exist(spt{k}(2:end))~=2
-                error(['Cannot find function for showPosition ' spt(2:end)]);
+                error(['Cannot find function for showPosition ' spt{k}(2:end)]);
             end
         else
             error(['Unknown showPositionType: ' spt{k}]);

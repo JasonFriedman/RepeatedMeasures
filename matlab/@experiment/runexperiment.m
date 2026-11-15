@@ -255,8 +255,8 @@ try
         % (otherwise ignore)
         
         if find(keyCode)==KbName('n') % n = skip to next event
-            currentTrial = currentTrial + 1;
             results.thistrial{currentTrial} = thistrial;
+            currentTrial = currentTrial + 1;
             writetolog(e,'Pressed n, skipping to next event');
             continue;
         elseif find(keyCode)==KbName('p') % p = go back to previous event
@@ -778,11 +778,13 @@ try
         elseif isstruct(dataSummary) && isfield(dataSummary,'filename')
             experimentdata.filename{currentTrial} = dataSummary.filename;
         end
+        % Store again so that the RT (added above) is also in the results struct
+        results.thistrial{currentTrial} = thistrial;
         if isfield(thistrial,'percentCoherent')
             experimentdata.percentCoherents(currentTrial) = str2double(thistrial.percentCoherent);
         end
         if isfield(thistrial,'noiseVar')
-            experimentdata.noiseLevels(currentTrial) = noiseVar;
+            experimentdata.noiseLevels(currentTrial) = thistrial.noiseVar;
         end
         if ~isempty(thistrial.filename)
             trialinfofilename = [e.resultDir '/trialinfo_' thistrial.filename '.mat'];
@@ -883,6 +885,11 @@ catch err
     end
     if ~isempty(experimentdata.serial)
         close(experimentdata.serial);
+    end
+    if ~isempty(experimentdata.sounds) || ~isempty(experimentdata.beeps)
+        try %#ok<TRYNC>
+            PsychPortAudio('Close');
+        end
     end
     % close the devices + log file
     closedevices(e);

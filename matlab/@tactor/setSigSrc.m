@@ -14,6 +14,6 @@ function setSigSrc(t,lownibble,highnibble)
 
 command = setSigSrcCommand(lownibble,highnibble);
 
-sendcommand(t,command);
+sendmessage(t,command);
 pause(0.1);
 readACK(t);

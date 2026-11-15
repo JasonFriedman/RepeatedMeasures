@@ -4,5 +4,5 @@
 
 function close(sc)
 
-close(gfc.glove);
-close(gfc.tracker);
+close(sc.glove);
+close(sc.tracker);

@@ -9,7 +9,8 @@ toFinish = false;
 
 if isfield(thistrial,'rotatedposition')
     lastposition(1:2) = thistrial.rotatedposition;
-    lastposition(2) = 1-lastsample(2);
+    lastposition(2) = 1-lastposition(2);
+    pressure = thistrial.pressure;
 elseif isempty(lastposition)
     m = get(e,'devices');
     if isfield(m,'tablet')

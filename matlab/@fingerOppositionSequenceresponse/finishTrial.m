@@ -61,7 +61,7 @@ else
             
             % If this is the next element in the series
             if thistrial.currentlyTouching == thistrial.fingersequence(thistrial.sequenceposition+1)
-                thistrial.sequenceposition = thistrial.sequenceposition+1
+                thistrial.sequenceposition = thistrial.sequenceposition+1;
                 if thistrial.sequenceposition==numel(thistrial.fingersequence)
                     toFinish = true;
                 end

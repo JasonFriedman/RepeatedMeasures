@@ -27,4 +27,4 @@ end
 
 [r,parent] = readParameters(params,inputParams);
 
-r = class(r,'colorInImagestart',response(parent));
+r = class(r,'colorInImagestart',start(parent));

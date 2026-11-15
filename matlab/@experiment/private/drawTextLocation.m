@@ -11,7 +11,7 @@ textsize =Screen('TextBounds', screenInfo.curWindow,thetext);
 textwidth =Screen('DrawText', screenInfo.curWindow,...
     thetext,location(1)-textsize(3)/2, ...
     location(2)-textsize(4)/2,[255 255 255]);
-if nargin<7 || isempty(noflip) || noflip==0
+if nargin<8 || isempty(noflip) || noflip==0
     Screen('Flip',screenInfo.curWindow,1);
     % If the background is not white, then draw it
     if ~all(thistrial.backgroundColor==0)

@@ -26,7 +26,7 @@ end
 
 % Check that the video file exists
 if ~exist(['stimuli/' v.filename],'file')
-    error(['The video file to play stimuli/' v.filename '.avi does not exist']);
+    error(['The video file to play stimuli/' v.filename ' does not exist']);
 end
 
 v = class(v,'videostimulus',stimulus(parent));

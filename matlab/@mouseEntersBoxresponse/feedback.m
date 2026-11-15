@@ -4,7 +4,7 @@
 function thistrial = feedback(r,e,thistrial,previoustrial,experimentdata,dataSummary,results)
 
 % If this trial was not recorded, then can't provide feedback
-if isnan(dataSummary)
+if ~isstruct(dataSummary)
     return
 end
 

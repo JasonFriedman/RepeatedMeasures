@@ -26,4 +26,4 @@ if numel(lastsample)>0
 end
 
 % check the keyboard also
-[keyisdown,secs, keyCode ] = kbCheck(-1);
+[keyisdown,secs, keyCode ] = KbCheck(-1);
