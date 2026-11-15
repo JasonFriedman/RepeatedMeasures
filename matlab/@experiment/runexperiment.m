@@ -69,6 +69,13 @@ for k=1:numel(e.protocol.trial)
     end
 end
     
+% Format of results.mat (GNU Octave cannot write v7.3 files)
+if exist('OCTAVE_VERSION','builtin')
+    matFileVersion = '-v7';
+else
+    matFileVersion = '-v7.3';
+end
+
 % Put everything inside a giant "try" so that we can close the screen if it crashes
 try
     % Open PsychPortAudio in the right mode (depending on whether there is
@@ -839,7 +846,7 @@ try
     % Save the overall results struct
     if exist('results','var')
         resultfilename = [e.resultDir '/results.mat'];
-        save(resultfilename,'-v7.3','results');
+        save(resultfilename,matFileVersion,'results');
         writetolog(e,sprintf('Saved result data to file %s',resultfilename));
     else
         results = [];
@@ -871,7 +878,7 @@ catch err
     % Save the overall results struct
     resultfilename = [e.resultDir '/results.mat'];
     if exist('results','var')
-        save(resultfilename,'-v7.3','results');
+        save(resultfilename,matFileVersion,'results');
         writetolog(e,sprintf('Saved result data to file %s',resultfilename));
     else
         writetolog(e,sprintf('No variable results to write to file'));
