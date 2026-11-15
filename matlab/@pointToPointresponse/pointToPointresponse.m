@@ -9,7 +9,7 @@ params.description = {'The start point for the centre out movement (from those d
     'Number of repetitions to perform. The trial will end when this number of repetitions has been reached (or the recordingTime has been reached)',...
     'Whether to beep after each successful movement','The amount of time (in seconds) that you need to be at the target for'};
 params.required = [1 1 0 0 1 0 0];
-params.default = {[0 0],[0 1],0.02,0.02,10,0,0};
+params.default = {1,2,0.02,0.02,10,0,0};
 params.classdescription = 'This response is for (possibly repeated) point to point measurements.';
 params.classname = 'pointToPointresponse';
 params.parentclassname = 'response';
