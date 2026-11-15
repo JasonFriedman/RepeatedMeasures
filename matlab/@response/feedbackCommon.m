@@ -22,7 +22,7 @@ elseif thistrial.hitTarget == 0
 elseif thistrial.hitTarget == thistrial.targetNum
     thistrial.successful=1;
     thistrial.questSuccess = 1;
-    writetolog(e,['Succesful to target' num2str(thistrial.hitTarget)]);
+    writetolog(e,['Successful to target' num2str(thistrial.hitTarget)]);
     thistrial.responseText = experimentdata.texts.SUCCESS;
 else
     thistrial.successful = 0;

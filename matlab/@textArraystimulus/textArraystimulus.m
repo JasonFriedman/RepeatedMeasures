@@ -13,7 +13,7 @@ params.description = {'The character to draw in the array (e.g. ''*'')',...
     'y location of the array (either between 0 or 1, or ''center'')'};
 params.required = [1 0 0 0 1 0 0 0];
 params.default = {'*',4.3,10,10,[],[255 255 255],0,0};
-params.classdescription = 'Draw ';
+params.classdescription = 'Draw an array (rows x columns) of a character at the specified positions';
 params.classname = 'textArraystimulus';
 params.parentclassname = 'stimulus';
 

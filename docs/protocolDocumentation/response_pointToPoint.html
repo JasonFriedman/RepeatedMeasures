@@ -4,8 +4,8 @@
 This response is for (possibly repeated) point to point measurements.<BR><BR>
 <TABLE border="1">
 <TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
-<TR><TD>start</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>[0,0]</TD><TD>The start point for the centre out movement (from those defined in setup.positions)</TD></TR>
-<TR><TD>end</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>[0,1]</TD><TD>The end point for the centre out movement (from those defined in setup.positions)</TD></TR>
+<TR><TD>start</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>The start point for the centre out movement (the number of a target from those defined in setup.targetPosition)</TD></TR>
+<TR><TD>end</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>2</TD><TD>The end point for the centre out movement (the number of a target from those defined in setup.targetPosition)</TD></TR>
 <TR><TD>startDistance</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0.02</TD><TD>How close to the start point you need to be to start a trial (inf for any distance), relative to screen width (1 = screen width)</TD></TR>
 <TR><TD>endDistance</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0.02</TD><TD>How close to the end point you need to be to end a trial (inf for any distance), in pixels</TD></TR>
 <TR><TD>repetitions</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>10</TD><TD>Number of repetitions to perform. The trial will end when this number of repetitions has been reached (or the recordingTime has been reached)</TD></TR>

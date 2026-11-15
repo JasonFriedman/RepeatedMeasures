@@ -217,7 +217,7 @@ try
                 DrawBackground(experimentdata,thistrial,experimentdata.boxes,experimentdata.labels,0);
                 [thistrial.lastposition,thistrial, experimentdata] = showPosition(e,thistrial,experimentdata,-1);
                 Screen('Flip',experimentdata.screenInfo.curWindow,1);
-                % If the background is not white, then draw it
+                % If the background is not black, then draw it
                 if ~all(thistrial.backgroundColor==0)
                     Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
                 end
@@ -298,7 +298,7 @@ try
             [thistrial.lastposition,thistrial, experimentdata] = showPosition(e,thistrial,experimentdata,-1);
         end
         Screen('Flip',experimentdata.screenInfo.curWindow,1);
-        % If the background is not white, then draw it
+        % If the background is not black, then draw it
         if ~all(thistrial.backgroundColor==0)
             Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
         end
@@ -329,7 +329,7 @@ try
                 [thistrial.lastposition,thistrial] = showPosition(e,thistrial,experimentdata,-1);
             end
             Screen('Flip',experimentdata.screenInfo.curWindow,1);
-            % If the background is not white, then draw it
+            % If the background is not black, then draw it
             if ~all(thistrial.backgroundColor==0)
                 Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
             end
@@ -366,7 +366,7 @@ try
                     [thistrial.lastposition,thistrial] = showPosition(e,thistrial,experimentdata,-1);
                 end
                 Screen('Flip',experimentdata.screenInfo.curWindow,1);
-                % If the background is not white, then draw it
+                % If the background is not black, then draw it
                 if ~all(thistrial.backgroundColor==0)
                     Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
                 end
@@ -616,7 +616,7 @@ try
                     thistrial.FlipTimestamp(frame), thistrial.Missed(frame), ...
                     thistrial.Beampos(frame)] = ...
                     Screen('Flip',experimentdata.screenInfo.curWindow,nextflip,thistrial.dontclear);
-                % If the background is not white, then draw it
+                % If the background is not black, then draw it
                 if ~all(thistrial.backgroundColor==0)
                     Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
                 end
@@ -630,7 +630,7 @@ try
                     [thistrial.lastposition,thistrial] = showPosition(e,thistrial,experimentdata,frame);
                 end
                 Screen('Flip',experimentdata.screenInfo.curWindow,0,thistrial.dontclear);
-                % If the background is not white, then draw it
+                % If the background is not black, then draw it
                 if ~all(thistrial.backgroundColor==0)
                     Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
                 end
@@ -745,7 +745,7 @@ try
         elseif thistrial.textFeedback==1 && isfield(thistrial,'responseText')
             if ~thistrial.textFeedbackShowBackground
                 Screen('Flip',experimentdata.screenInfo.curWindow,0,0);
-                % If the background is not white, then draw it
+                % If the background is not black, then draw it
                 if ~all(thistrial.backgroundColor==0)
                     Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
                 end
