@@ -85,7 +85,7 @@ for k=1:numel(params.name)
     item.children = [];
     if isstruct(t)
         item.type = 'struct';
-        item.children = convert(t);
+        item.children = [convert(parentParams(t)) convert(t)];
         if isstruct(item.default) || isobject(item.default)
             item.default = [];
         end
@@ -93,7 +93,7 @@ for k=1:numel(params.name)
         item.type = 'oneof';
         item.children = struct;
         for m=1:numel(t)
-            item.children.(t{m}.classname) = convert(t{m});
+            item.children.(t{m}.classname) = [convert(parentParams(t{m})) convert(t{m})];
         end
     else
         item.type = t;
