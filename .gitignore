@@ -6,3 +6,6 @@
 *.swp
 
 *.asv
+__pycache__/
+.pytest_cache/
+*.pyc
