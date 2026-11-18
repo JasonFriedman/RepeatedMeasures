@@ -82,11 +82,11 @@ end
 fprintf(fp,'<h2 id="setup">Setup options</h2>\n');
 fprintf(fp,'<p>Options in <code>experimentDescription.setup</code>.</p>\n');
 fprintf(fp,'<p>The recording devices (<a href="#devices">listed above</a>) are also options in the setup section.</p>\n');
-makeTable(fp,setupParams,[],struct('file','index.html','title','Setup options','prefix','setup-','summarize',1));
+makeTable(fp,setupParams,struct('file','index.html','title','Setup options','prefix','setup-','summarize',1));
 
 fprintf(fp,'<h2 id="trial">Trial options</h2>\n');
 fprintf(fp,'<p>Options in each <code>experimentDescription.trial{n}</code> (or in <code>experimentDescription.common</code>).</p>\n');
-makeTable(fp,trialParams,[],struct('file','index.html','title','Trial options','prefix','trial-','summarize',1));
+makeTable(fp,trialParams,struct('file','index.html','title','Trial options','prefix','trial-','summarize',1));
 
 closePage(fp);
 fclose(fp);
@@ -138,11 +138,11 @@ fp = fopen(['docs/protocolDocumentation/' fn],'w');
 usedIn.field = fieldName;
 openPage(fp,char(params.classname),pageKind(params),usedIn);
 fprintf(fp,'<p class="lead">%s</p>\n',esc(char(params.classdescription)));
-makeTable(fp,params,[],struct('file',fn,'title',char(params.classname),'prefix','','summarize',0));
+makeTable(fp,params,struct('file',fn,'title',char(params.classname),'prefix','','summarize',0));
 closePage(fp);
 fclose(fp);
 
-function makeTable(fp,params,superclassparams,thisPage)
+function makeTable(fp,params,thisPage)
 
 thefields = fields(params);
 for k=1:numel(thefields)
@@ -151,35 +151,40 @@ for k=1:numel(thefields)
     end
 end
 
-if isempty(superclassparams) && isfield(params,'parentclassname')
-    [~,superclassparams] = feval(params.parentclassname);
+% the options of the parent class, its parent, ... (e.g. forcesensors -> DAQclient -> socketclient)
+ancestors = getAncestorParams(params);
+nInherited = 0;
+for a=1:numel(ancestors)
+    nInherited = nInherited + numel(ancestors{a}.name);
 end
 
-if isempty(params.name) && (isempty(superclassparams) || isempty(superclassparams.name))
+if isempty(params.name) && nInherited==0
     fprintf(fp,'<p class="empty">This has no options.</p>\n');
     return;
 end
 
 fprintf(fp,'<div class="table-wrap"><table class="params">\n');
 fprintf(fp,'<thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>\n');
-for j=[2 1]
+groups = [{params} ancestors];
+documented = {};
+for j=1:numel(groups)
+    p = groups{j};
+    if isempty(p.name)
+        continue;
+    end
     if j==1
-        p = superclassparams;
-        if isempty(p) || isempty(p.name)
-            continue;
-        end
-        fprintf(fp,'<tbody class="inherited"><tr class="group"><th colspan="4">Options of all %ss (from %s)</th></tr>\n',...
-            lower(pageKind(params)),esc(params.parentclassname));
-    else
-        p = params;
-        if isempty(p.name)
-            continue;
-        end
-        if ~isempty(superclassparams) && ~isempty(superclassparams.name)
+        if nInherited>0
             fprintf(fp,'<tbody><tr class="group"><th colspan="4">Options of %s</th></tr>\n',esc(char(params.classname)));
         else
             fprintf(fp,'<tbody>\n');
         end
+    elseif j==numel(groups)
+        % the options of the base class (e.g. socketclient) apply to the whole kind
+        fprintf(fp,'<tbody class="inherited"><tr class="group"><th colspan="4">Options of all %ss (from %s)</th></tr>\n',...
+            lower(pageKind(params)),esc(groups{j-1}.parentclassname));
+    else
+        fprintf(fp,'<tbody class="inherited"><tr class="group"><th colspan="4">Options from %s</th></tr>\n',...
+            esc(groups{j-1}.parentclassname));
     end
     for k=1:numel(p.name)
         if strcmp(p.type{k},'ignore')
@@ -195,10 +200,11 @@ for j=[2 1]
         if iscell(required)
             required = required{1};
         end
-        if j==1 && any(strcmp(params.name,p.name{k}))
-            rowId = ''; % also defined by the class itself (the row below has the anchor)
+        if any(strcmp(documented,p.name{k}))
+            rowId = ''; % also defined further up (that row has the anchor)
         else
             rowId = sprintf(' id="%s%s"',thisPage.prefix,esc(p.name{k}));
+            documented{end+1} = p.name{k}; %#ok<AGROW>
         end
         fprintf(fp,'<tr%s><td class="name"><code>%s</code>%s</td>',rowId,esc(p.name{k}),requiredLabel(required));
         sections = struct('stimulus',{{'stimuli','stimuli'}},'targetType',{{'responses','responses'}},'starttrial',{{'starts','trial starts'}});

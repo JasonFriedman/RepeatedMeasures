@@ -37,7 +37,7 @@ for k=1:numel(setupParams.name)
     if any(strcmp(setupParams.name{k},clients)) && isstruct(setupParams.type{k})
         isDevice(k) = true;
         p = setupParams.type{k};
-        schema.devices.(setupParams.name{k}) = [convert(parentParams(p)) convert(p)];
+        schema.devices.(setupParams.name{k}) = [convert(p) parentParams(p)];
         schema.descriptions.devices.(setupParams.name{k}) = char(p.classdescription);
     end
 end
@@ -61,10 +61,12 @@ for m=1:numel(options)
 end
 cached = schema;
 
-function p = parentParams(params)
-p = struct('name',{{}},'type',{{}},'description',{{}},'required',[],'default',{{}});
-if isfield(params,'parentclassname')
-    [obj,p] = feval(params.parentclassname); %#ok<ASGLU>
+function out = parentParams(params)
+% the options of the parent class, its parent, ... (converted, in that order)
+out = convert(struct('name',{{}},'type',{{}},'description',{{}},'required',[],'default',{{}}));
+ancestors = getAncestorParams(params);
+for a=1:numel(ancestors)
+    out = [out convert(ancestors{a})]; %#ok<AGROW>
 end
 
 function params = subset(params,keep)
@@ -85,7 +87,7 @@ for k=1:numel(params.name)
     item.children = [];
     if isstruct(t)
         item.type = 'struct';
-        item.children = [convert(parentParams(t)) convert(t)];
+        item.children = [convert(t) parentParams(t)];
         if isstruct(item.default) || isobject(item.default)
             item.default = [];
         end
@@ -93,7 +95,7 @@ for k=1:numel(params.name)
         item.type = 'oneof';
         item.children = struct;
         for m=1:numel(t)
-            item.children.(t{m}.classname) = [convert(parentParams(t{m})) convert(t{m})];
+            item.children.(t{m}.classname) = [convert(t{m}) parentParams(t{m})];
         end
     else
         item.type = t;

@@ -28,32 +28,16 @@ for k=1:numel(thefields)
     end
 end
 
-% get the parameters for the parent class
-if isfield(params,'parentclassname')
-    eval(['[v_tmp,paramsParent] = ' params.parentclassname '();']);
-    if numel(paramsParent.name)==0
-        newParamsParent = struct();
-    end
-    for m=1:numel(paramsParent.name)
-        if isfield(newParams,paramsParent.name{m})
-            newParamsParent.(paramsParent.name{m}) = newParams.(paramsParent.name{m});
-            newParams = rmfield(newParams,paramsParent.name{m});
+% Options of the parent class (and its parent, ...) are passed on to the parent class
+newParamsParent = struct;
+ancestors = getAncestorParams(params);
+for a=1:numel(ancestors)
+    for m=1:numel(ancestors{a}.name)
+        if isstruct(newParams) && isfield(newParams,ancestors{a}.name{m})
+            newParamsParent.(ancestors{a}.name{m}) = newParams.(ancestors{a}.name{m});
+            newParams = rmfield(newParams,ancestors{a}.name{m});
         end
     end
-    % Also do for grandparent (if exists)
-    if isfield(paramsParent,'parentclassname')
-        eval(['[v_tmp,paramsGrandParent] = ' paramsParent.parentclassname '();']);
-        if numel(paramsGrandParent.name)>0
-            for m=1:numel(paramsGrandParent.name)
-                if isfield(newParams,paramsGrandParent.name{m})
-                    newParamsParent.(paramsGrandParent.name{m}) = newParams.(paramsGrandParent.name{m});
-                    newParams = rmfield(newParams,paramsGrandParent.name{m});
-                end
-            end
-        end
-    end
-else
-    newParamsParent = struct;
 end
 
 if isempty(params.name)

@@ -83,102 +83,6 @@
   "devices": {
     "ATIforcesensors": [
       {
-        "name": "server",
-        "type": "string",
-        "required": 1,
-        "default": "localhost",
-        "description": "Location of the server (e.g. 'localhost' or an IP address) ",
-        "children": null
-      },
-      {
-        "name": "port",
-        "type": "number",
-        "required": 1,
-        "default": 0,
-        "description": "Port to connect to the server on",
-        "children": null
-      },
-      {
-        "name": "showPositionType",
-        "type": "string",
-        "required": 0,
-        "default": "dot",
-        "description": "If showing position, how to show the current position (either 'dot','line','ellipse', 'rectangle' or 'image' or the name of a function with an @ before it). Line means a line from the last point to the current point. Note that if showPosition=1, it will always be shown. If showPosition=2 and imagestimulus is used,it will only be shown when in state 1. If showPosition=3, then the fields below will be used to determine the position. If showPosition=4, it is the same as 3, but the position is only shown until the trial starts. If showPosition=5, it is the same as 3, but if using image stimuli, only show position if it is in state 1.If using a function, the function will get called every frame (data can be stored between calls in the thistrial struct): thistrial = yourFunctionName(experimentdata,thistrial,lastpositionVisual,e,frame);",
-        "children": null
-      },
-      {
-        "name": "showPositionColor",
-        "type": "cellarray",
-        "required": 0,
-        "default": [192, 192, 192],
-        "description": "If showing position, the color of the feedback (each number between 0 and 255). Should be a N * (P*3) array (P= number of dots). Can either have one row, or a row for each frame. If showing image, the imagenumber to show. If it is a cell array, then each cell can specify for an individual trial.",
-        "children": null
-      },
-      {
-        "name": "showPositionSize",
-        "type": "matrix",
-        "required": 0,
-        "default": 6,
-        "description": "If showing position and showPositionType is a dot, then a 1*P array (with the size of the each dot in pixels. If type is a rectangle, then a 1*(P*2) array (width and height).",
-        "children": null
-      },
-      {
-        "name": "showPositionRotationCenter",
-        "type": "cellarray",
-        "required": 0,
-        "default": [[0.5, 0.5]],
-        "description": "If showing position, the center of rotation (if showPositionRotationAngle is not zero). Should be a P * 2 matrix (p = number of dots), in relative screen coordinates (i.e. between 0 and 1)",
-        "children": null
-      },
-      {
-        "name": "showPositionRotationAngle",
-        "type": "cellarray",
-        "required": 0,
-        "default": ["NaN"],
-        "description": "If showing position, the angle to rotate about the center of rotation (in radians). Should be a P * 1 matrix (p = number of dots), or a cell for each trial with a P*1 matrix",
-        "children": null
-      },
-      {
-        "name": "startRotationFrame",
-        "type": "matrix",
-        "required": 0,
-        "default": "-Inf",
-        "description": "If showing position, the frame to start the rotation (if there is one). To start before the trial (i.e. while waiting for start), set to -inf. Should be a 1*P  matrix (p=number of dots) or N*P (one row for each trial).",
-        "children": null
-      },
-      {
-        "name": "displayRangeX",
-        "type": "cellarray",
-        "required": 0,
-        "default": [[0, 0, 0, 0, 0]],
-        "description": "Range of values to show when using showPosition=3 as the dot position on the x axis. The ith row corresponds to the ith sensor. Use the first two values to show the x values, next two for y. e.g. [-1 1 0 0 0] to show x values of -1 to 1 as the dot x position. Use the last value to show time, e.g. [0 0 0 0 1] will move across the screen in 1 s. If the time (last) value is set to -inf, only show before trial starts. If set to inf, only show during (and not before) trial. This should be a cell array with either a single cell for all trials, or a cell for each trial. To show multiple points, use an M*(N*P) matrix (M sensors, N=2*dims+1, P dots)",
-        "children": null
-      },
-      {
-        "name": "displayRangeY",
-        "type": "cellarray",
-        "required": 0,
-        "default": [[0, 0, 0, 0, 0]],
-        "description": "Range of values to show when using showPosition=3 as the dot position on the y axis. The ith row corresponds to the ith sensor. Use the first two values to show the x values, next two for y, e.g. [0 0 -10 10 0] to show y values of -0.5 to 0.5 as the dot y position. Use the last value to show time, e.g. [0 0 0 0 1] will move up the screen in 1 s. If the time (last) value is set to -inf, only show before trial starts. If set to inf, only show during (and not before) trial. This should be a cell array with either a single cell for all trials, or a cell for each trial. To show multiple points, use an M*(N*P) matrix (M sensors, N=2*dims+1, P dots)",
-        "children": null
-      },
-      {
-        "name": "offsetX",
-        "type": "matrix",
-        "required": 0,
-        "default": 0.5,
-        "description": "x offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
-        "children": null
-      },
-      {
-        "name": "offsetY",
-        "type": "matrix",
-        "required": 0,
-        "default": 0.5,
-        "description": "y offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
-        "children": null
-      },
-      {
         "name": "numsensors",
         "type": "number",
         "required": 1,
@@ -193,9 +97,7 @@
         "default": 200,
         "description": "Sample rate (in Hz)",
         "children": null
-      }
-    ],
-    "DAQ": [
+      },
       {
         "name": "server",
         "type": "string",
@@ -291,7 +193,9 @@
         "default": 0.5,
         "description": "y offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
         "children": null
-      },
+      }
+    ],
+    "DAQ": [
       {
         "name": "numchannels",
         "type": "number",
@@ -299,9 +203,7 @@
         "default": null,
         "description": "Number of DAQ channels to sample",
         "children": null
-      }
-    ],
-    "NIDAQ": [
+      },
       {
         "name": "server",
         "type": "string",
@@ -397,7 +299,9 @@
         "default": 0.5,
         "description": "y offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
         "children": null
-      },
+      }
+    ],
+    "NIDAQ": [
       {
         "name": "numchannels",
         "type": "number",
@@ -405,9 +309,7 @@
         "default": null,
         "description": "Number of NI DAQ channels to sample",
         "children": null
-      }
-    ],
-    "arduino": [
+      },
       {
         "name": "server",
         "type": "string",
@@ -503,7 +405,9 @@
         "default": 0.5,
         "description": "y offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
         "children": null
-      },
+      }
+    ],
+    "arduino": [
       {
         "name": "numchannels",
         "type": "number",
@@ -511,9 +415,7 @@
         "default": null,
         "description": "Number of arduino channels to sample",
         "children": null
-      }
-    ],
-    "bluetera": [
+      },
       {
         "name": "server",
         "type": "string",
@@ -609,13 +511,111 @@
         "default": 0.5,
         "description": "y offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
         "children": null
-      },
+      }
+    ],
+    "bluetera": [
       {
         "name": "addresses",
         "type": "cellarray",
         "required": 1,
         "default": null,
         "description": "cell array with the hardware addresses of the sensors to be used",
+        "children": null
+      },
+      {
+        "name": "server",
+        "type": "string",
+        "required": 1,
+        "default": "localhost",
+        "description": "Location of the server (e.g. 'localhost' or an IP address) ",
+        "children": null
+      },
+      {
+        "name": "port",
+        "type": "number",
+        "required": 1,
+        "default": 0,
+        "description": "Port to connect to the server on",
+        "children": null
+      },
+      {
+        "name": "showPositionType",
+        "type": "string",
+        "required": 0,
+        "default": "dot",
+        "description": "If showing position, how to show the current position (either 'dot','line','ellipse', 'rectangle' or 'image' or the name of a function with an @ before it). Line means a line from the last point to the current point. Note that if showPosition=1, it will always be shown. If showPosition=2 and imagestimulus is used,it will only be shown when in state 1. If showPosition=3, then the fields below will be used to determine the position. If showPosition=4, it is the same as 3, but the position is only shown until the trial starts. If showPosition=5, it is the same as 3, but if using image stimuli, only show position if it is in state 1.If using a function, the function will get called every frame (data can be stored between calls in the thistrial struct): thistrial = yourFunctionName(experimentdata,thistrial,lastpositionVisual,e,frame);",
+        "children": null
+      },
+      {
+        "name": "showPositionColor",
+        "type": "cellarray",
+        "required": 0,
+        "default": [192, 192, 192],
+        "description": "If showing position, the color of the feedback (each number between 0 and 255). Should be a N * (P*3) array (P= number of dots). Can either have one row, or a row for each frame. If showing image, the imagenumber to show. If it is a cell array, then each cell can specify for an individual trial.",
+        "children": null
+      },
+      {
+        "name": "showPositionSize",
+        "type": "matrix",
+        "required": 0,
+        "default": 6,
+        "description": "If showing position and showPositionType is a dot, then a 1*P array (with the size of the each dot in pixels. If type is a rectangle, then a 1*(P*2) array (width and height).",
+        "children": null
+      },
+      {
+        "name": "showPositionRotationCenter",
+        "type": "cellarray",
+        "required": 0,
+        "default": [[0.5, 0.5]],
+        "description": "If showing position, the center of rotation (if showPositionRotationAngle is not zero). Should be a P * 2 matrix (p = number of dots), in relative screen coordinates (i.e. between 0 and 1)",
+        "children": null
+      },
+      {
+        "name": "showPositionRotationAngle",
+        "type": "cellarray",
+        "required": 0,
+        "default": ["NaN"],
+        "description": "If showing position, the angle to rotate about the center of rotation (in radians). Should be a P * 1 matrix (p = number of dots), or a cell for each trial with a P*1 matrix",
+        "children": null
+      },
+      {
+        "name": "startRotationFrame",
+        "type": "matrix",
+        "required": 0,
+        "default": "-Inf",
+        "description": "If showing position, the frame to start the rotation (if there is one). To start before the trial (i.e. while waiting for start), set to -inf. Should be a 1*P  matrix (p=number of dots) or N*P (one row for each trial).",
+        "children": null
+      },
+      {
+        "name": "displayRangeX",
+        "type": "cellarray",
+        "required": 0,
+        "default": [[0, 0, 0, 0, 0]],
+        "description": "Range of values to show when using showPosition=3 as the dot position on the x axis. The ith row corresponds to the ith sensor. Use the first two values to show the x values, next two for y. e.g. [-1 1 0 0 0] to show x values of -1 to 1 as the dot x position. Use the last value to show time, e.g. [0 0 0 0 1] will move across the screen in 1 s. If the time (last) value is set to -inf, only show before trial starts. If set to inf, only show during (and not before) trial. This should be a cell array with either a single cell for all trials, or a cell for each trial. To show multiple points, use an M*(N*P) matrix (M sensors, N=2*dims+1, P dots)",
+        "children": null
+      },
+      {
+        "name": "displayRangeY",
+        "type": "cellarray",
+        "required": 0,
+        "default": [[0, 0, 0, 0, 0]],
+        "description": "Range of values to show when using showPosition=3 as the dot position on the y axis. The ith row corresponds to the ith sensor. Use the first two values to show the x values, next two for y, e.g. [0 0 -10 10 0] to show y values of -0.5 to 0.5 as the dot y position. Use the last value to show time, e.g. [0 0 0 0 1] will move up the screen in 1 s. If the time (last) value is set to -inf, only show before trial starts. If set to inf, only show during (and not before) trial. This should be a cell array with either a single cell for all trials, or a cell for each trial. To show multiple points, use an M*(N*P) matrix (M sensors, N=2*dims+1, P dots)",
+        "children": null
+      },
+      {
+        "name": "offsetX",
+        "type": "matrix",
+        "required": 0,
+        "default": 0.5,
+        "description": "x offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
+        "children": null
+      },
+      {
+        "name": "offsetY",
+        "type": "matrix",
+        "required": 0,
+        "default": 0.5,
+        "description": "y offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
         "children": null
       }
     ],
@@ -637,6 +637,22 @@
         "children": null
       },
       {
+        "name": "server",
+        "type": "string",
+        "required": 1,
+        "default": "localhost",
+        "description": "Location of the server (e.g. 'localhost' or an IP address) ",
+        "children": null
+      },
+      {
+        "name": "port",
+        "type": "number",
+        "required": 1,
+        "default": 0,
+        "description": "Port to connect to the server on",
+        "children": null
+      },
+      {
         "name": "showPositionType",
         "type": "string",
         "required": 0,
@@ -714,128 +730,112 @@
         "required": 0,
         "default": 0.5,
         "description": "y offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
-        "children": null
-      },
-      {
-        "name": "server",
-        "type": "string",
-        "required": 1,
-        "default": "localhost",
-        "description": "Location of the server (e.g. 'localhost' or an IP address) ",
-        "children": null
-      },
-      {
-        "name": "port",
-        "type": "number",
-        "required": 1,
-        "default": 0,
-        "description": "Port to connect to the server on",
         "children": null
       }
     ],
     "fastrak": [
-      {
-        "name": "server",
-        "type": "string",
-        "required": 1,
-        "default": "localhost",
-        "description": "Location of the server (e.g. 'localhost' or an IP address) ",
-        "children": null
-      },
-      {
-        "name": "port",
-        "type": "number",
-        "required": 1,
-        "default": 0,
-        "description": "Port to connect to the server on",
-        "children": null
-      },
-      {
-        "name": "showPositionType",
-        "type": "string",
-        "required": 0,
-        "default": "dot",
-        "description": "If showing position, how to show the current position (either 'dot','line','ellipse', 'rectangle' or 'image' or the name of a function with an @ before it). Line means a line from the last point to the current point. Note that if showPosition=1, it will always be shown. If showPosition=2 and imagestimulus is used,it will only be shown when in state 1. If showPosition=3, then the fields below will be used to determine the position. If showPosition=4, it is the same as 3, but the position is only shown until the trial starts. If showPosition=5, it is the same as 3, but if using image stimuli, only show position if it is in state 1.If using a function, the function will get called every frame (data can be stored between calls in the thistrial struct): thistrial = yourFunctionName(experimentdata,thistrial,lastpositionVisual,e,frame);",
-        "children": null
-      },
-      {
-        "name": "showPositionColor",
-        "type": "cellarray",
-        "required": 0,
-        "default": [192, 192, 192],
-        "description": "If showing position, the color of the feedback (each number between 0 and 255). Should be a N * (P*3) array (P= number of dots). Can either have one row, or a row for each frame. If showing image, the imagenumber to show. If it is a cell array, then each cell can specify for an individual trial.",
-        "children": null
-      },
-      {
-        "name": "showPositionSize",
-        "type": "matrix",
-        "required": 0,
-        "default": 6,
-        "description": "If showing position and showPositionType is a dot, then a 1*P array (with the size of the each dot in pixels. If type is a rectangle, then a 1*(P*2) array (width and height).",
-        "children": null
-      },
-      {
-        "name": "showPositionRotationCenter",
-        "type": "cellarray",
-        "required": 0,
-        "default": [[0.5, 0.5]],
-        "description": "If showing position, the center of rotation (if showPositionRotationAngle is not zero). Should be a P * 2 matrix (p = number of dots), in relative screen coordinates (i.e. between 0 and 1)",
-        "children": null
-      },
-      {
-        "name": "showPositionRotationAngle",
-        "type": "cellarray",
-        "required": 0,
-        "default": ["NaN"],
-        "description": "If showing position, the angle to rotate about the center of rotation (in radians). Should be a P * 1 matrix (p = number of dots), or a cell for each trial with a P*1 matrix",
-        "children": null
-      },
-      {
-        "name": "startRotationFrame",
-        "type": "matrix",
-        "required": 0,
-        "default": "-Inf",
-        "description": "If showing position, the frame to start the rotation (if there is one). To start before the trial (i.e. while waiting for start), set to -inf. Should be a 1*P  matrix (p=number of dots) or N*P (one row for each trial).",
-        "children": null
-      },
-      {
-        "name": "displayRangeX",
-        "type": "cellarray",
-        "required": 0,
-        "default": [[0, 0, 0, 0, 0]],
-        "description": "Range of values to show when using showPosition=3 as the dot position on the x axis. The ith row corresponds to the ith sensor. Use the first two values to show the x values, next two for y. e.g. [-1 1 0 0 0] to show x values of -1 to 1 as the dot x position. Use the last value to show time, e.g. [0 0 0 0 1] will move across the screen in 1 s. If the time (last) value is set to -inf, only show before trial starts. If set to inf, only show during (and not before) trial. This should be a cell array with either a single cell for all trials, or a cell for each trial. To show multiple points, use an M*(N*P) matrix (M sensors, N=2*dims+1, P dots)",
-        "children": null
-      },
-      {
-        "name": "displayRangeY",
-        "type": "cellarray",
-        "required": 0,
-        "default": [[0, 0, 0, 0, 0]],
-        "description": "Range of values to show when using showPosition=3 as the dot position on the y axis. The ith row corresponds to the ith sensor. Use the first two values to show the x values, next two for y, e.g. [0 0 -10 10 0] to show y values of -0.5 to 0.5 as the dot y position. Use the last value to show time, e.g. [0 0 0 0 1] will move up the screen in 1 s. If the time (last) value is set to -inf, only show before trial starts. If set to inf, only show during (and not before) trial. This should be a cell array with either a single cell for all trials, or a cell for each trial. To show multiple points, use an M*(N*P) matrix (M sensors, N=2*dims+1, P dots)",
-        "children": null
-      },
-      {
-        "name": "offsetX",
-        "type": "matrix",
-        "required": 0,
-        "default": 0.5,
-        "description": "x offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
-        "children": null
-      },
-      {
-        "name": "offsetY",
-        "type": "matrix",
-        "required": 0,
-        "default": 0.5,
-        "description": "y offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
-        "children": null
-      },
       {
         "name": "numReceivers",
         "type": "number",
         "required": 1,
         "default": null,
         "description": "Number of fastrak receivers present",
+        "children": null
+      },
+      {
+        "name": "server",
+        "type": "string",
+        "required": 1,
+        "default": "localhost",
+        "description": "Location of the server (e.g. 'localhost' or an IP address) ",
+        "children": null
+      },
+      {
+        "name": "port",
+        "type": "number",
+        "required": 1,
+        "default": 0,
+        "description": "Port to connect to the server on",
+        "children": null
+      },
+      {
+        "name": "showPositionType",
+        "type": "string",
+        "required": 0,
+        "default": "dot",
+        "description": "If showing position, how to show the current position (either 'dot','line','ellipse', 'rectangle' or 'image' or the name of a function with an @ before it). Line means a line from the last point to the current point. Note that if showPosition=1, it will always be shown. If showPosition=2 and imagestimulus is used,it will only be shown when in state 1. If showPosition=3, then the fields below will be used to determine the position. If showPosition=4, it is the same as 3, but the position is only shown until the trial starts. If showPosition=5, it is the same as 3, but if using image stimuli, only show position if it is in state 1.If using a function, the function will get called every frame (data can be stored between calls in the thistrial struct): thistrial = yourFunctionName(experimentdata,thistrial,lastpositionVisual,e,frame);",
+        "children": null
+      },
+      {
+        "name": "showPositionColor",
+        "type": "cellarray",
+        "required": 0,
+        "default": [192, 192, 192],
+        "description": "If showing position, the color of the feedback (each number between 0 and 255). Should be a N * (P*3) array (P= number of dots). Can either have one row, or a row for each frame. If showing image, the imagenumber to show. If it is a cell array, then each cell can specify for an individual trial.",
+        "children": null
+      },
+      {
+        "name": "showPositionSize",
+        "type": "matrix",
+        "required": 0,
+        "default": 6,
+        "description": "If showing position and showPositionType is a dot, then a 1*P array (with the size of the each dot in pixels. If type is a rectangle, then a 1*(P*2) array (width and height).",
+        "children": null
+      },
+      {
+        "name": "showPositionRotationCenter",
+        "type": "cellarray",
+        "required": 0,
+        "default": [[0.5, 0.5]],
+        "description": "If showing position, the center of rotation (if showPositionRotationAngle is not zero). Should be a P * 2 matrix (p = number of dots), in relative screen coordinates (i.e. between 0 and 1)",
+        "children": null
+      },
+      {
+        "name": "showPositionRotationAngle",
+        "type": "cellarray",
+        "required": 0,
+        "default": ["NaN"],
+        "description": "If showing position, the angle to rotate about the center of rotation (in radians). Should be a P * 1 matrix (p = number of dots), or a cell for each trial with a P*1 matrix",
+        "children": null
+      },
+      {
+        "name": "startRotationFrame",
+        "type": "matrix",
+        "required": 0,
+        "default": "-Inf",
+        "description": "If showing position, the frame to start the rotation (if there is one). To start before the trial (i.e. while waiting for start), set to -inf. Should be a 1*P  matrix (p=number of dots) or N*P (one row for each trial).",
+        "children": null
+      },
+      {
+        "name": "displayRangeX",
+        "type": "cellarray",
+        "required": 0,
+        "default": [[0, 0, 0, 0, 0]],
+        "description": "Range of values to show when using showPosition=3 as the dot position on the x axis. The ith row corresponds to the ith sensor. Use the first two values to show the x values, next two for y. e.g. [-1 1 0 0 0] to show x values of -1 to 1 as the dot x position. Use the last value to show time, e.g. [0 0 0 0 1] will move across the screen in 1 s. If the time (last) value is set to -inf, only show before trial starts. If set to inf, only show during (and not before) trial. This should be a cell array with either a single cell for all trials, or a cell for each trial. To show multiple points, use an M*(N*P) matrix (M sensors, N=2*dims+1, P dots)",
+        "children": null
+      },
+      {
+        "name": "displayRangeY",
+        "type": "cellarray",
+        "required": 0,
+        "default": [[0, 0, 0, 0, 0]],
+        "description": "Range of values to show when using showPosition=3 as the dot position on the y axis. The ith row corresponds to the ith sensor. Use the first two values to show the x values, next two for y, e.g. [0 0 -10 10 0] to show y values of -0.5 to 0.5 as the dot y position. Use the last value to show time, e.g. [0 0 0 0 1] will move up the screen in 1 s. If the time (last) value is set to -inf, only show before trial starts. If set to inf, only show during (and not before) trial. This should be a cell array with either a single cell for all trials, or a cell for each trial. To show multiple points, use an M*(N*P) matrix (M sensors, N=2*dims+1, P dots)",
+        "children": null
+      },
+      {
+        "name": "offsetX",
+        "type": "matrix",
+        "required": 0,
+        "default": 0.5,
+        "description": "x offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
+        "children": null
+      },
+      {
+        "name": "offsetY",
+        "type": "matrix",
+        "required": 0,
+        "default": 0.5,
+        "description": "y offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
         "children": null
       }
     ],
@@ -869,14 +869,6 @@
     ],
     "forcesensors": [
       {
-        "name": "numchannels",
-        "type": "number",
-        "required": 1,
-        "default": null,
-        "description": "Number of DAQ channels to sample",
-        "children": null
-      },
-      {
         "name": "gains",
         "type": "matrix",
         "required": 1,
@@ -891,9 +883,15 @@
         "default": 0,
         "description": "Offsets (one per channel), usually in N",
         "children": null
-      }
-    ],
-    "g4": [
+      },
+      {
+        "name": "numchannels",
+        "type": "number",
+        "required": 1,
+        "default": null,
+        "description": "Number of DAQ channels to sample",
+        "children": null
+      },
       {
         "name": "server",
         "type": "string",
@@ -989,13 +987,111 @@
         "default": 0.5,
         "description": "y offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
         "children": null
-      },
+      }
+    ],
+    "g4": [
       {
         "name": "numsensors",
         "type": "number",
         "required": 1,
         "default": 1,
         "description": "Number of g4 receivers present",
+        "children": null
+      },
+      {
+        "name": "server",
+        "type": "string",
+        "required": 1,
+        "default": "localhost",
+        "description": "Location of the server (e.g. 'localhost' or an IP address) ",
+        "children": null
+      },
+      {
+        "name": "port",
+        "type": "number",
+        "required": 1,
+        "default": 0,
+        "description": "Port to connect to the server on",
+        "children": null
+      },
+      {
+        "name": "showPositionType",
+        "type": "string",
+        "required": 0,
+        "default": "dot",
+        "description": "If showing position, how to show the current position (either 'dot','line','ellipse', 'rectangle' or 'image' or the name of a function with an @ before it). Line means a line from the last point to the current point. Note that if showPosition=1, it will always be shown. If showPosition=2 and imagestimulus is used,it will only be shown when in state 1. If showPosition=3, then the fields below will be used to determine the position. If showPosition=4, it is the same as 3, but the position is only shown until the trial starts. If showPosition=5, it is the same as 3, but if using image stimuli, only show position if it is in state 1.If using a function, the function will get called every frame (data can be stored between calls in the thistrial struct): thistrial = yourFunctionName(experimentdata,thistrial,lastpositionVisual,e,frame);",
+        "children": null
+      },
+      {
+        "name": "showPositionColor",
+        "type": "cellarray",
+        "required": 0,
+        "default": [192, 192, 192],
+        "description": "If showing position, the color of the feedback (each number between 0 and 255). Should be a N * (P*3) array (P= number of dots). Can either have one row, or a row for each frame. If showing image, the imagenumber to show. If it is a cell array, then each cell can specify for an individual trial.",
+        "children": null
+      },
+      {
+        "name": "showPositionSize",
+        "type": "matrix",
+        "required": 0,
+        "default": 6,
+        "description": "If showing position and showPositionType is a dot, then a 1*P array (with the size of the each dot in pixels. If type is a rectangle, then a 1*(P*2) array (width and height).",
+        "children": null
+      },
+      {
+        "name": "showPositionRotationCenter",
+        "type": "cellarray",
+        "required": 0,
+        "default": [[0.5, 0.5]],
+        "description": "If showing position, the center of rotation (if showPositionRotationAngle is not zero). Should be a P * 2 matrix (p = number of dots), in relative screen coordinates (i.e. between 0 and 1)",
+        "children": null
+      },
+      {
+        "name": "showPositionRotationAngle",
+        "type": "cellarray",
+        "required": 0,
+        "default": ["NaN"],
+        "description": "If showing position, the angle to rotate about the center of rotation (in radians). Should be a P * 1 matrix (p = number of dots), or a cell for each trial with a P*1 matrix",
+        "children": null
+      },
+      {
+        "name": "startRotationFrame",
+        "type": "matrix",
+        "required": 0,
+        "default": "-Inf",
+        "description": "If showing position, the frame to start the rotation (if there is one). To start before the trial (i.e. while waiting for start), set to -inf. Should be a 1*P  matrix (p=number of dots) or N*P (one row for each trial).",
+        "children": null
+      },
+      {
+        "name": "displayRangeX",
+        "type": "cellarray",
+        "required": 0,
+        "default": [[0, 0, 0, 0, 0]],
+        "description": "Range of values to show when using showPosition=3 as the dot position on the x axis. The ith row corresponds to the ith sensor. Use the first two values to show the x values, next two for y. e.g. [-1 1 0 0 0] to show x values of -1 to 1 as the dot x position. Use the last value to show time, e.g. [0 0 0 0 1] will move across the screen in 1 s. If the time (last) value is set to -inf, only show before trial starts. If set to inf, only show during (and not before) trial. This should be a cell array with either a single cell for all trials, or a cell for each trial. To show multiple points, use an M*(N*P) matrix (M sensors, N=2*dims+1, P dots)",
+        "children": null
+      },
+      {
+        "name": "displayRangeY",
+        "type": "cellarray",
+        "required": 0,
+        "default": [[0, 0, 0, 0, 0]],
+        "description": "Range of values to show when using showPosition=3 as the dot position on the y axis. The ith row corresponds to the ith sensor. Use the first two values to show the x values, next two for y, e.g. [0 0 -10 10 0] to show y values of -0.5 to 0.5 as the dot y position. Use the last value to show time, e.g. [0 0 0 0 1] will move up the screen in 1 s. If the time (last) value is set to -inf, only show before trial starts. If set to inf, only show during (and not before) trial. This should be a cell array with either a single cell for all trials, or a cell for each trial. To show multiple points, use an M*(N*P) matrix (M sensors, N=2*dims+1, P dots)",
+        "children": null
+      },
+      {
+        "name": "offsetX",
+        "type": "matrix",
+        "required": 0,
+        "default": 0.5,
+        "description": "x offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
+        "children": null
+      },
+      {
+        "name": "offsetY",
+        "type": "matrix",
+        "required": 0,
+        "default": 0.5,
+        "description": "y offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
         "children": null
       }
     ],
@@ -1099,6 +1195,14 @@
     ],
     "glove": [
       {
+        "name": "getRawData",
+        "type": "boolean",
+        "required": 0,
+        "default": 0,
+        "description": "Whether to get raw data from the glove - an integer between 0 and 255 (otherwise receive calibrated joint angles)",
+        "children": null
+      },
+      {
         "name": "server",
         "type": "string",
         "required": 1,
@@ -1193,14 +1297,6 @@
         "default": 0.5,
         "description": "y offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
         "children": null
-      },
-      {
-        "name": "getRawData",
-        "type": "boolean",
-        "required": 0,
-        "default": 0,
-        "description": "Whether to get raw data from the glove - an integer between 0 and 255 (otherwise receive calibrated joint angles)",
-        "children": null
       }
     ],
     "gloveemulator": [],
@@ -1221,6 +1317,14 @@
         "description": "Parameters for a glove (i.e., host and port). Use \"emulator\" to use an emalated glove (see gloveemulator documentation for more details)",
         "children": {
           "glove": [
+            {
+              "name": "getRawData",
+              "type": "boolean",
+              "required": 0,
+              "default": 0,
+              "description": "Whether to get raw data from the glove - an integer between 0 and 255 (otherwise receive calibrated joint angles)",
+              "children": null
+            },
             {
               "name": "server",
               "type": "string",
@@ -1315,14 +1419,6 @@
               "required": 0,
               "default": 0.5,
               "description": "y offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
-              "children": null
-            },
-            {
-              "name": "getRawData",
-              "type": "boolean",
-              "required": 0,
-              "default": 0,
-              "description": "Whether to get raw data from the glove - an integer between 0 and 255 (otherwise receive calibrated joint angles)",
               "children": null
             }
           ],
@@ -1356,111 +1452,13 @@
         "children": {
           "fastrak": [
             {
-              "name": "server",
-              "type": "string",
-              "required": 1,
-              "default": "localhost",
-              "description": "Location of the server (e.g. 'localhost' or an IP address) ",
-              "children": null
-            },
-            {
-              "name": "port",
-              "type": "number",
-              "required": 1,
-              "default": 0,
-              "description": "Port to connect to the server on",
-              "children": null
-            },
-            {
-              "name": "showPositionType",
-              "type": "string",
-              "required": 0,
-              "default": "dot",
-              "description": "If showing position, how to show the current position (either 'dot','line','ellipse', 'rectangle' or 'image' or the name of a function with an @ before it). Line means a line from the last point to the current point. Note that if showPosition=1, it will always be shown. If showPosition=2 and imagestimulus is used,it will only be shown when in state 1. If showPosition=3, then the fields below will be used to determine the position. If showPosition=4, it is the same as 3, but the position is only shown until the trial starts. If showPosition=5, it is the same as 3, but if using image stimuli, only show position if it is in state 1.If using a function, the function will get called every frame (data can be stored between calls in the thistrial struct): thistrial = yourFunctionName(experimentdata,thistrial,lastpositionVisual,e,frame);",
-              "children": null
-            },
-            {
-              "name": "showPositionColor",
-              "type": "cellarray",
-              "required": 0,
-              "default": [192, 192, 192],
-              "description": "If showing position, the color of the feedback (each number between 0 and 255). Should be a N * (P*3) array (P= number of dots). Can either have one row, or a row for each frame. If showing image, the imagenumber to show. If it is a cell array, then each cell can specify for an individual trial.",
-              "children": null
-            },
-            {
-              "name": "showPositionSize",
-              "type": "matrix",
-              "required": 0,
-              "default": 6,
-              "description": "If showing position and showPositionType is a dot, then a 1*P array (with the size of the each dot in pixels. If type is a rectangle, then a 1*(P*2) array (width and height).",
-              "children": null
-            },
-            {
-              "name": "showPositionRotationCenter",
-              "type": "cellarray",
-              "required": 0,
-              "default": [[0.5, 0.5]],
-              "description": "If showing position, the center of rotation (if showPositionRotationAngle is not zero). Should be a P * 2 matrix (p = number of dots), in relative screen coordinates (i.e. between 0 and 1)",
-              "children": null
-            },
-            {
-              "name": "showPositionRotationAngle",
-              "type": "cellarray",
-              "required": 0,
-              "default": ["NaN"],
-              "description": "If showing position, the angle to rotate about the center of rotation (in radians). Should be a P * 1 matrix (p = number of dots), or a cell for each trial with a P*1 matrix",
-              "children": null
-            },
-            {
-              "name": "startRotationFrame",
-              "type": "matrix",
-              "required": 0,
-              "default": "-Inf",
-              "description": "If showing position, the frame to start the rotation (if there is one). To start before the trial (i.e. while waiting for start), set to -inf. Should be a 1*P  matrix (p=number of dots) or N*P (one row for each trial).",
-              "children": null
-            },
-            {
-              "name": "displayRangeX",
-              "type": "cellarray",
-              "required": 0,
-              "default": [[0, 0, 0, 0, 0]],
-              "description": "Range of values to show when using showPosition=3 as the dot position on the x axis. The ith row corresponds to the ith sensor. Use the first two values to show the x values, next two for y. e.g. [-1 1 0 0 0] to show x values of -1 to 1 as the dot x position. Use the last value to show time, e.g. [0 0 0 0 1] will move across the screen in 1 s. If the time (last) value is set to -inf, only show before trial starts. If set to inf, only show during (and not before) trial. This should be a cell array with either a single cell for all trials, or a cell for each trial. To show multiple points, use an M*(N*P) matrix (M sensors, N=2*dims+1, P dots)",
-              "children": null
-            },
-            {
-              "name": "displayRangeY",
-              "type": "cellarray",
-              "required": 0,
-              "default": [[0, 0, 0, 0, 0]],
-              "description": "Range of values to show when using showPosition=3 as the dot position on the y axis. The ith row corresponds to the ith sensor. Use the first two values to show the x values, next two for y, e.g. [0 0 -10 10 0] to show y values of -0.5 to 0.5 as the dot y position. Use the last value to show time, e.g. [0 0 0 0 1] will move up the screen in 1 s. If the time (last) value is set to -inf, only show before trial starts. If set to inf, only show during (and not before) trial. This should be a cell array with either a single cell for all trials, or a cell for each trial. To show multiple points, use an M*(N*P) matrix (M sensors, N=2*dims+1, P dots)",
-              "children": null
-            },
-            {
-              "name": "offsetX",
-              "type": "matrix",
-              "required": 0,
-              "default": 0.5,
-              "description": "x offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
-              "children": null
-            },
-            {
-              "name": "offsetY",
-              "type": "matrix",
-              "required": 0,
-              "default": 0.5,
-              "description": "y offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
-              "children": null
-            },
-            {
               "name": "numReceivers",
               "type": "number",
               "required": 1,
               "default": null,
               "description": "Number of fastrak receivers present",
               "children": null
-            }
-          ],
-          "liberty": [
+            },
             {
               "name": "server",
               "type": "string",
@@ -1556,7 +1554,9 @@
               "default": 0.5,
               "description": "y offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
               "children": null
-            },
+            }
+          ],
+          "liberty": [
             {
               "name": "numsensors",
               "type": "number",
@@ -1595,6 +1595,102 @@
               "required": 0,
               "default": [0, 0, 0, 1, 0, 0, 0, 1, 0],
               "description": "a 1x9 vector with the alignment frame. The first 3 are the zero position, the next three the direction of the x axis, the next three the direction of the y axis (in the coordinates of the transmitter cube",
+              "children": null
+            },
+            {
+              "name": "server",
+              "type": "string",
+              "required": 1,
+              "default": "localhost",
+              "description": "Location of the server (e.g. 'localhost' or an IP address) ",
+              "children": null
+            },
+            {
+              "name": "port",
+              "type": "number",
+              "required": 1,
+              "default": 0,
+              "description": "Port to connect to the server on",
+              "children": null
+            },
+            {
+              "name": "showPositionType",
+              "type": "string",
+              "required": 0,
+              "default": "dot",
+              "description": "If showing position, how to show the current position (either 'dot','line','ellipse', 'rectangle' or 'image' or the name of a function with an @ before it). Line means a line from the last point to the current point. Note that if showPosition=1, it will always be shown. If showPosition=2 and imagestimulus is used,it will only be shown when in state 1. If showPosition=3, then the fields below will be used to determine the position. If showPosition=4, it is the same as 3, but the position is only shown until the trial starts. If showPosition=5, it is the same as 3, but if using image stimuli, only show position if it is in state 1.If using a function, the function will get called every frame (data can be stored between calls in the thistrial struct): thistrial = yourFunctionName(experimentdata,thistrial,lastpositionVisual,e,frame);",
+              "children": null
+            },
+            {
+              "name": "showPositionColor",
+              "type": "cellarray",
+              "required": 0,
+              "default": [192, 192, 192],
+              "description": "If showing position, the color of the feedback (each number between 0 and 255). Should be a N * (P*3) array (P= number of dots). Can either have one row, or a row for each frame. If showing image, the imagenumber to show. If it is a cell array, then each cell can specify for an individual trial.",
+              "children": null
+            },
+            {
+              "name": "showPositionSize",
+              "type": "matrix",
+              "required": 0,
+              "default": 6,
+              "description": "If showing position and showPositionType is a dot, then a 1*P array (with the size of the each dot in pixels. If type is a rectangle, then a 1*(P*2) array (width and height).",
+              "children": null
+            },
+            {
+              "name": "showPositionRotationCenter",
+              "type": "cellarray",
+              "required": 0,
+              "default": [[0.5, 0.5]],
+              "description": "If showing position, the center of rotation (if showPositionRotationAngle is not zero). Should be a P * 2 matrix (p = number of dots), in relative screen coordinates (i.e. between 0 and 1)",
+              "children": null
+            },
+            {
+              "name": "showPositionRotationAngle",
+              "type": "cellarray",
+              "required": 0,
+              "default": ["NaN"],
+              "description": "If showing position, the angle to rotate about the center of rotation (in radians). Should be a P * 1 matrix (p = number of dots), or a cell for each trial with a P*1 matrix",
+              "children": null
+            },
+            {
+              "name": "startRotationFrame",
+              "type": "matrix",
+              "required": 0,
+              "default": "-Inf",
+              "description": "If showing position, the frame to start the rotation (if there is one). To start before the trial (i.e. while waiting for start), set to -inf. Should be a 1*P  matrix (p=number of dots) or N*P (one row for each trial).",
+              "children": null
+            },
+            {
+              "name": "displayRangeX",
+              "type": "cellarray",
+              "required": 0,
+              "default": [[0, 0, 0, 0, 0]],
+              "description": "Range of values to show when using showPosition=3 as the dot position on the x axis. The ith row corresponds to the ith sensor. Use the first two values to show the x values, next two for y. e.g. [-1 1 0 0 0] to show x values of -1 to 1 as the dot x position. Use the last value to show time, e.g. [0 0 0 0 1] will move across the screen in 1 s. If the time (last) value is set to -inf, only show before trial starts. If set to inf, only show during (and not before) trial. This should be a cell array with either a single cell for all trials, or a cell for each trial. To show multiple points, use an M*(N*P) matrix (M sensors, N=2*dims+1, P dots)",
+              "children": null
+            },
+            {
+              "name": "displayRangeY",
+              "type": "cellarray",
+              "required": 0,
+              "default": [[0, 0, 0, 0, 0]],
+              "description": "Range of values to show when using showPosition=3 as the dot position on the y axis. The ith row corresponds to the ith sensor. Use the first two values to show the x values, next two for y, e.g. [0 0 -10 10 0] to show y values of -0.5 to 0.5 as the dot y position. Use the last value to show time, e.g. [0 0 0 0 1] will move up the screen in 1 s. If the time (last) value is set to -inf, only show before trial starts. If set to inf, only show during (and not before) trial. This should be a cell array with either a single cell for all trials, or a cell for each trial. To show multiple points, use an M*(N*P) matrix (M sensors, N=2*dims+1, P dots)",
+              "children": null
+            },
+            {
+              "name": "offsetX",
+              "type": "matrix",
+              "required": 0,
+              "default": 0.5,
+              "description": "x offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
+              "children": null
+            },
+            {
+              "name": "offsetY",
+              "type": "matrix",
+              "required": 0,
+              "default": 0.5,
+              "description": "y offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
               "children": null
             }
           ],
@@ -1826,102 +1922,6 @@
     ],
     "liberty": [
       {
-        "name": "server",
-        "type": "string",
-        "required": 1,
-        "default": "localhost",
-        "description": "Location of the server (e.g. 'localhost' or an IP address) ",
-        "children": null
-      },
-      {
-        "name": "port",
-        "type": "number",
-        "required": 1,
-        "default": 0,
-        "description": "Port to connect to the server on",
-        "children": null
-      },
-      {
-        "name": "showPositionType",
-        "type": "string",
-        "required": 0,
-        "default": "dot",
-        "description": "If showing position, how to show the current position (either 'dot','line','ellipse', 'rectangle' or 'image' or the name of a function with an @ before it). Line means a line from the last point to the current point. Note that if showPosition=1, it will always be shown. If showPosition=2 and imagestimulus is used,it will only be shown when in state 1. If showPosition=3, then the fields below will be used to determine the position. If showPosition=4, it is the same as 3, but the position is only shown until the trial starts. If showPosition=5, it is the same as 3, but if using image stimuli, only show position if it is in state 1.If using a function, the function will get called every frame (data can be stored between calls in the thistrial struct): thistrial = yourFunctionName(experimentdata,thistrial,lastpositionVisual,e,frame);",
-        "children": null
-      },
-      {
-        "name": "showPositionColor",
-        "type": "cellarray",
-        "required": 0,
-        "default": [192, 192, 192],
-        "description": "If showing position, the color of the feedback (each number between 0 and 255). Should be a N * (P*3) array (P= number of dots). Can either have one row, or a row for each frame. If showing image, the imagenumber to show. If it is a cell array, then each cell can specify for an individual trial.",
-        "children": null
-      },
-      {
-        "name": "showPositionSize",
-        "type": "matrix",
-        "required": 0,
-        "default": 6,
-        "description": "If showing position and showPositionType is a dot, then a 1*P array (with the size of the each dot in pixels. If type is a rectangle, then a 1*(P*2) array (width and height).",
-        "children": null
-      },
-      {
-        "name": "showPositionRotationCenter",
-        "type": "cellarray",
-        "required": 0,
-        "default": [[0.5, 0.5]],
-        "description": "If showing position, the center of rotation (if showPositionRotationAngle is not zero). Should be a P * 2 matrix (p = number of dots), in relative screen coordinates (i.e. between 0 and 1)",
-        "children": null
-      },
-      {
-        "name": "showPositionRotationAngle",
-        "type": "cellarray",
-        "required": 0,
-        "default": ["NaN"],
-        "description": "If showing position, the angle to rotate about the center of rotation (in radians). Should be a P * 1 matrix (p = number of dots), or a cell for each trial with a P*1 matrix",
-        "children": null
-      },
-      {
-        "name": "startRotationFrame",
-        "type": "matrix",
-        "required": 0,
-        "default": "-Inf",
-        "description": "If showing position, the frame to start the rotation (if there is one). To start before the trial (i.e. while waiting for start), set to -inf. Should be a 1*P  matrix (p=number of dots) or N*P (one row for each trial).",
-        "children": null
-      },
-      {
-        "name": "displayRangeX",
-        "type": "cellarray",
-        "required": 0,
-        "default": [[0, 0, 0, 0, 0]],
-        "description": "Range of values to show when using showPosition=3 as the dot position on the x axis. The ith row corresponds to the ith sensor. Use the first two values to show the x values, next two for y. e.g. [-1 1 0 0 0] to show x values of -1 to 1 as the dot x position. Use the last value to show time, e.g. [0 0 0 0 1] will move across the screen in 1 s. If the time (last) value is set to -inf, only show before trial starts. If set to inf, only show during (and not before) trial. This should be a cell array with either a single cell for all trials, or a cell for each trial. To show multiple points, use an M*(N*P) matrix (M sensors, N=2*dims+1, P dots)",
-        "children": null
-      },
-      {
-        "name": "displayRangeY",
-        "type": "cellarray",
-        "required": 0,
-        "default": [[0, 0, 0, 0, 0]],
-        "description": "Range of values to show when using showPosition=3 as the dot position on the y axis. The ith row corresponds to the ith sensor. Use the first two values to show the x values, next two for y, e.g. [0 0 -10 10 0] to show y values of -0.5 to 0.5 as the dot y position. Use the last value to show time, e.g. [0 0 0 0 1] will move up the screen in 1 s. If the time (last) value is set to -inf, only show before trial starts. If set to inf, only show during (and not before) trial. This should be a cell array with either a single cell for all trials, or a cell for each trial. To show multiple points, use an M*(N*P) matrix (M sensors, N=2*dims+1, P dots)",
-        "children": null
-      },
-      {
-        "name": "offsetX",
-        "type": "matrix",
-        "required": 0,
-        "default": 0.5,
-        "description": "x offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
-        "children": null
-      },
-      {
-        "name": "offsetY",
-        "type": "matrix",
-        "required": 0,
-        "default": 0.5,
-        "description": "y offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
-        "children": null
-      },
-      {
         "name": "numsensors",
         "type": "number",
         "required": 1,
@@ -1960,9 +1960,7 @@
         "default": [0, 0, 0, 1, 0, 0, 0, 1, 0],
         "description": "a 1x9 vector with the alignment frame. The first 3 are the zero position, the next three the direction of the x axis, the next three the direction of the y axis (in the coordinates of the transmitter cube",
         "children": null
-      }
-    ],
-    "mouse": [
+      },
       {
         "name": "server",
         "type": "string",
@@ -2058,7 +2056,9 @@
         "default": 0.5,
         "description": "y offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
         "children": null
-      },
+      }
+    ],
+    "mouse": [
       {
         "name": "maxx",
         "type": "number",
@@ -2074,9 +2074,7 @@
         "default": 0,
         "description": "Maximum y coordinate on the screen (i.e. vertical screen height in pixels)",
         "children": null
-      }
-    ],
-    "optotrak": [
+      },
       {
         "name": "server",
         "type": "string",
@@ -2172,7 +2170,9 @@
         "default": 0.5,
         "description": "y offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
         "children": null
-      },
+      }
+    ],
+    "optotrak": [
       {
         "name": "numbermarkers",
         "type": "number",
@@ -2245,9 +2245,7 @@
             "children": null
           }
         ]
-      }
-    ],
-    "redamber": [
+      },
       {
         "name": "server",
         "type": "string",
@@ -2343,7 +2341,9 @@
         "default": 0.5,
         "description": "y offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
         "children": null
-      },
+      }
+    ],
+    "redamber": [
       {
         "name": "addresses",
         "type": "cellarray",
@@ -2351,9 +2351,7 @@
         "default": null,
         "description": "cell array with the hardware addresses of the sensors (gems) to be used",
         "children": null
-      }
-    ],
-    "serialport": [
+      },
       {
         "name": "server",
         "type": "string",
@@ -2449,7 +2447,9 @@
         "default": 0.5,
         "description": "y offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
         "children": null
-      },
+      }
+    ],
+    "serialport": [
       {
         "name": "protocol",
         "type": "string",
@@ -2473,9 +2473,7 @@
         "default": 2,
         "description": "Number of values per sample",
         "children": null
-      }
-    ],
-    "tablet": [
+      },
       {
         "name": "server",
         "type": "string",
@@ -2571,7 +2569,9 @@
         "default": 0.5,
         "description": "y offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
         "children": null
-      },
+      }
+    ],
+    "tablet": [
       {
         "name": "maxx",
         "type": "number",
@@ -2595,10 +2595,7 @@
         "default": 1,
         "description": "Whether to show position only when touching (0=also when not touching, 1=only when touching). If this is 0, then note that showPositionColor can have in the second row the color for when the pen is not touching",
         "children": null
-      }
-    ],
-    "trackeremulator": [],
-    "trakStar": [
+      },
       {
         "name": "server",
         "type": "string",
@@ -2694,7 +2691,10 @@
         "default": 0.5,
         "description": "y offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
         "children": null
-      },
+      }
+    ],
+    "trackeremulator": [],
+    "trakStar": [
       {
         "name": "numsensors",
         "type": "number",
@@ -2717,6 +2717,102 @@
         "required": 0,
         "default": 36,
         "description": "Tracking range in inches. can be 36,72 or 144",
+        "children": null
+      },
+      {
+        "name": "server",
+        "type": "string",
+        "required": 1,
+        "default": "localhost",
+        "description": "Location of the server (e.g. 'localhost' or an IP address) ",
+        "children": null
+      },
+      {
+        "name": "port",
+        "type": "number",
+        "required": 1,
+        "default": 0,
+        "description": "Port to connect to the server on",
+        "children": null
+      },
+      {
+        "name": "showPositionType",
+        "type": "string",
+        "required": 0,
+        "default": "dot",
+        "description": "If showing position, how to show the current position (either 'dot','line','ellipse', 'rectangle' or 'image' or the name of a function with an @ before it). Line means a line from the last point to the current point. Note that if showPosition=1, it will always be shown. If showPosition=2 and imagestimulus is used,it will only be shown when in state 1. If showPosition=3, then the fields below will be used to determine the position. If showPosition=4, it is the same as 3, but the position is only shown until the trial starts. If showPosition=5, it is the same as 3, but if using image stimuli, only show position if it is in state 1.If using a function, the function will get called every frame (data can be stored between calls in the thistrial struct): thistrial = yourFunctionName(experimentdata,thistrial,lastpositionVisual,e,frame);",
+        "children": null
+      },
+      {
+        "name": "showPositionColor",
+        "type": "cellarray",
+        "required": 0,
+        "default": [192, 192, 192],
+        "description": "If showing position, the color of the feedback (each number between 0 and 255). Should be a N * (P*3) array (P= number of dots). Can either have one row, or a row for each frame. If showing image, the imagenumber to show. If it is a cell array, then each cell can specify for an individual trial.",
+        "children": null
+      },
+      {
+        "name": "showPositionSize",
+        "type": "matrix",
+        "required": 0,
+        "default": 6,
+        "description": "If showing position and showPositionType is a dot, then a 1*P array (with the size of the each dot in pixels. If type is a rectangle, then a 1*(P*2) array (width and height).",
+        "children": null
+      },
+      {
+        "name": "showPositionRotationCenter",
+        "type": "cellarray",
+        "required": 0,
+        "default": [[0.5, 0.5]],
+        "description": "If showing position, the center of rotation (if showPositionRotationAngle is not zero). Should be a P * 2 matrix (p = number of dots), in relative screen coordinates (i.e. between 0 and 1)",
+        "children": null
+      },
+      {
+        "name": "showPositionRotationAngle",
+        "type": "cellarray",
+        "required": 0,
+        "default": ["NaN"],
+        "description": "If showing position, the angle to rotate about the center of rotation (in radians). Should be a P * 1 matrix (p = number of dots), or a cell for each trial with a P*1 matrix",
+        "children": null
+      },
+      {
+        "name": "startRotationFrame",
+        "type": "matrix",
+        "required": 0,
+        "default": "-Inf",
+        "description": "If showing position, the frame to start the rotation (if there is one). To start before the trial (i.e. while waiting for start), set to -inf. Should be a 1*P  matrix (p=number of dots) or N*P (one row for each trial).",
+        "children": null
+      },
+      {
+        "name": "displayRangeX",
+        "type": "cellarray",
+        "required": 0,
+        "default": [[0, 0, 0, 0, 0]],
+        "description": "Range of values to show when using showPosition=3 as the dot position on the x axis. The ith row corresponds to the ith sensor. Use the first two values to show the x values, next two for y. e.g. [-1 1 0 0 0] to show x values of -1 to 1 as the dot x position. Use the last value to show time, e.g. [0 0 0 0 1] will move across the screen in 1 s. If the time (last) value is set to -inf, only show before trial starts. If set to inf, only show during (and not before) trial. This should be a cell array with either a single cell for all trials, or a cell for each trial. To show multiple points, use an M*(N*P) matrix (M sensors, N=2*dims+1, P dots)",
+        "children": null
+      },
+      {
+        "name": "displayRangeY",
+        "type": "cellarray",
+        "required": 0,
+        "default": [[0, 0, 0, 0, 0]],
+        "description": "Range of values to show when using showPosition=3 as the dot position on the y axis. The ith row corresponds to the ith sensor. Use the first two values to show the x values, next two for y, e.g. [0 0 -10 10 0] to show y values of -0.5 to 0.5 as the dot y position. Use the last value to show time, e.g. [0 0 0 0 1] will move up the screen in 1 s. If the time (last) value is set to -inf, only show before trial starts. If set to inf, only show during (and not before) trial. This should be a cell array with either a single cell for all trials, or a cell for each trial. To show multiple points, use an M*(N*P) matrix (M sensors, N=2*dims+1, P dots)",
+        "children": null
+      },
+      {
+        "name": "offsetX",
+        "type": "matrix",
+        "required": 0,
+        "default": 0.5,
+        "description": "x offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
+        "children": null
+      },
+      {
+        "name": "offsetY",
+        "type": "matrix",
+        "required": 0,
+        "default": 0.5,
+        "description": "y offset when using showPosition.  This can either be a 1*P matrix [P is the number of dots] (same for every trial), or an NxP matrix (one row for each trial).",
         "children": null
       }
     ],
