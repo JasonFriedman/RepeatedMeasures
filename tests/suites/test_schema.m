@@ -5,6 +5,7 @@ cases = [];
 cases = rmtestCase(cases,'all classes have well-formed parameter definitions',@wellFormed);
 cases = rmtestCase(cases,'class hierarchy matches the declared parent class',@parentsMatch);
 cases = rmtestCase(cases,'setup and trial parameter lists can be built',@topLevel);
+cases = rmtestCase(cases,'options are inherited from all ancestor classes, not only the parent',@inheritance);
 cases = rmtestCase(cases,'message codes for commands are unique',@uniqueCodes);
 cases = rmtestCase(cases,'protocol documentation can be generated',@documentation);
 cases = rmtestCase(cases,'documentation in docs/ is up to date with the code',@documentationCurrent);
@@ -134,6 +135,65 @@ for f = {'stimulus','starttrial','targetType'}
     t = params.type{strcmp(params.name,f{1})};
     rmtestAssert(iscell(t) && numel(t)>3,'trial.%s should offer several classes',f{1});
 end
+
+function inheritance(info)
+% forcesensors -> DAQclient -> socketclient: the options of every ancestor must be
+% accepted by readParameters, listed by protocolSchema and shown in the documentation
+addpath([info.root '/matlab/protocolBuilder']);
+[~,params] = forcesensorsclient([]);
+ancestors = getAncestorParams(params);
+rmtestAssert('equal',cellfun(@(a) char(a.classname),ancestors,'UniformOutput',false),{'DAQ','socketclient'});
+in = struct('gains','1','offsets','0','numchannels','2','server','localhost','port','3010');
+[v,parent] = readParameters(params,in);
+rmtestAssert(isfield(v,'gains') && ~isfield(v,'server') && ~isfield(v,'numchannels'),'only the options of forcesensors should stay');
+rmtestAssert(isfield(parent,'numchannels') && isfield(parent,'server') && isfield(parent,'port'),'the parent and grandparent options should be passed on');
+% a class whose parent gets none of its own options (only the grandparent's)
+[v,parent] = readParameters(params,rmfield(in,'numchannels')); %#ok<ASGLU>
+rmtestAssert(isfield(parent,'server') && ~isfield(parent,'numchannels'),'grandparent options without parent options');
+% every class: the schema lists the options of all its ancestors
+schema = protocolSchema;
+groups = {'devices','stimulus','targetType','starttrial'};
+suffix = {'client','stimulus','response','start'};
+problems = {};
+for g=1:numel(groups)
+    names = fieldnames(schema.(groups{g}));
+    for k=1:numel(names)
+        cls = [names{k} suffix{g}];
+        if ~exist(['@' cls],'dir') && ~exist([info.root '/matlab/@' cls],'dir')
+            continue; % e.g. ATIforcesensors: the client is not called <name>client
+        end
+        if any(strcmp(groups{g},{'devices'}))
+            [~,p] = feval(cls,[]);
+        else
+            [~,p] = feval(cls);
+        end
+        expected = {};
+        a = getAncestorParams(p);
+        for m=1:numel(a)
+            expected = [expected a{m}.name]; %#ok<AGROW>
+        end
+        listed = schema.(groups{g}).(names{k});
+        if isempty(listed) || ~isfield(listed,'name')
+            listed = {};
+        else
+            listed = {listed.name};
+        end
+        missing = setdiff(expected,listed);
+        if ~isempty(missing)
+            problems{end+1} = sprintf('%s is missing inherited options: %s',cls,strjoin(missing,', ')); %#ok<AGROW>
+        end
+    end
+end
+rmtestAssert(isempty(problems),'%s',sprintf('\n    %s',problems{:}));
+% and the documentation page of forcesensors shows them
+[workDir,oldDir] = rmtestWorkDir();
+makeProtocolDocumentation;
+txt = fileread('docs/protocolDocumentation/DAQclient_forcesensors.html');
+rmtestCleanup(workDir,oldDir);
+for name = {'gains','numchannels','server','port','showPositionType'}
+    rmtestAssert(~isempty(strfind(txt,['<code>' name{1} '</code>'])),'the forcesensors page does not show %s',name{1}); %#ok<STREMP>
+end
+rmtestAssert(~isempty(strfind(txt,'Options from DAQclient')) && ~isempty(strfind(txt,'(from socketclient)')),'the forcesensors page should group the inherited options'); %#ok<STREMP>
 
 function uniqueCodes(info)
 src = fileread([info.root '/matlab/messagecodes.m']);
