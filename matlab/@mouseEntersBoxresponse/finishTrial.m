@@ -3,11 +3,17 @@
 
 function [toFinish,thistrial,experimentdata] = finishTrial(r,thistrial,experimentdata,e,lastposition,frame)
 
-if nargin<5
-    m = get(e,'devices');
+m = get(e,'devices');
+if nargin<5 || isfield(m,'mouse')
+    % With a mouse, always sample the mouse itself: the position passed in by
+    % runexperiment is empty unless showPosition is used, and has the y axis the
+    % other way around
     lastsample = getsample(m.mouse);
-    lastposition(1) = lastsample(1) * experimentdata.screenInfo.screenRect(3);
-    lastposition(2) = (1-lastsample(2)) * experimentdata.screenInfo.screenRect(4);
+    lastposition = [];
+    if numel(lastsample)>1
+        lastposition(1) = lastsample(1) * experimentdata.screenInfo.screenRect(3);
+        lastposition(2) = (1-lastsample(2)) * experimentdata.screenInfo.screenRect(4);
+    end
 else
     if numel(lastposition)>0
         % convert to pixels - for nonmouse devices

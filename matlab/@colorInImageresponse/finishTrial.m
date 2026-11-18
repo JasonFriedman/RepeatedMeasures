@@ -10,7 +10,7 @@ lastposition = round(thistrial.lastpositionVisual);
 if ~isempty(thistrial.showPositionFeedback)
     for k=1:size(thistrial.showPositionFeedback)
         if isnan(thistrial.showPositionFeedback(k,3)) && frame >= thistrial.showPositionFeedback(k,2)
-            thistrial.showPositionFeedback(k,3:4) = lastpositionVisual;
+            thistrial.showPositionFeedback(k,3:4) = lastposition(1:2);
         end
     end
 end

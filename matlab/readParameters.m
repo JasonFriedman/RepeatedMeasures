@@ -75,7 +75,7 @@ if iscell(newParams)
             v{m}.(newParamsFields{k}) = parseField(params,newParamsFields{k},newParams{m}.(newParamsFields{k}));
         end
         for k=1:numel(params.name)
-            if params.required(k) && ~any(ismember(newParamsFields,params.name{k})) && ~strcmp(params.type{k},'ignore')
+            if any(params.required(k)==[1 3]) && ~any(ismember(newParamsFields,params.name{k})) && ~strcmp(params.type{k},'ignore')
                 error(['Must specify ' params.name{k} ' for ' params.classname]);
             end
         end

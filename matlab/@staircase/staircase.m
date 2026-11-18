@@ -20,8 +20,8 @@ if nargout>1
     return;
 end
 
-s.debug = debug;
-
 s = readParameters(params,inputParams);
+
+s.debug = debug;
 
 s = class(s,'staircase');

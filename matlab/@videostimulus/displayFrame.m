@@ -19,13 +19,13 @@ end
 if tex==0 % this should never be run
     % if tex==0, it is not ready to draw a new frame
     % yet, so wait until the next refresh
-    Screen('WaitBlanking', windowPtr , 1);
+    Screen('WaitBlanking', experimentdata.screenInfo.curWindow , 1);
 elseif tex<0
     % it is finished
     Screen('Flip',experimentdata.screenInfo.curWindow,1);
     % If the background is not white, then draw it
     if ~all(thistrial.backgroundColor==0)
-        Screen(screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
+        Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
     end
     breakfromloop = 1;
     % Close the video to free the memory / resources

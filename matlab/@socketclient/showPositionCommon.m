@@ -25,7 +25,8 @@ else
     % It is to show a different colour when the pen is touching (row 1) or not (row 2)
 
     if size(thisShowPositionColor,1)==2
-        if lastsample(4) > 0
+        % first row = pen touching (pressure > 0), second row = not touching
+        if ~isfield(thistrial,'pressure') || thistrial.pressure > 0
             therow = 1;
         else
             therow = 2;

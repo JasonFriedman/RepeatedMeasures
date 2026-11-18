@@ -139,7 +139,7 @@ for j=1:2
                     if round(p.default{k}.(f{m}))==p.default{k}.(f{m})
                         fprintf(fp,'%d</BR>',p.default{k}.(f{m}));
                     else
-                        printf(fp,'%.2f</BR>',p.default{k}.(f{m}));
+                        fprintf(fp,'%.2f</BR>',p.default{k}.(f{m}));
                     end
                 end
                 fprintf(fp,'</TD>');

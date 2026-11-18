@@ -24,16 +24,16 @@ for p=1:size(lastpositionVisual,1) % number of dots
             Screen('DrawDots', experimentdata.screenInfo.curWindow, dots, m.showPositionSize(p), color,[],1);
         end
     elseif strcmp(m.showPositionType,'ellipse')
-        for z=1:size(lastPositionVisual,2)
+        for z=1:size(lastpositionVisual,2)
             % left top right bottom (4xN matrix)
-            rect = [lastpositionVisual(p,z,z,1) - m.showPositionSize(p,z,1)/2;
+            rect = [lastpositionVisual(p,z,1) - m.showPositionSize(p,z,1)/2;
                 lastpositionVisual(p,z,2) - m.showPositionSize(p,z,2)/2;
                 lastpositionVisual(p,z,1) + m.showPositionSize(p,z,1)/2;
                 lastpositionVisual(p,z,2) + m.showPositionSize(p,z,2)/2];
             Screen('FillOval', experimentdata.screenInfo.curWindow, color, rect);
         end
     elseif strcmp(m.showPositionType,'rectangle')
-        for z=1:size(lastPositionVisual,2)
+        for z=1:size(lastpositionVisual,2)
             left = 0.55 * experimentdata.screenInfo.screenRect(3);
             top = lastpositionVisual(p,z,2);
             height = 0.9 * experimentdata.screenInfo.screenRect(4) - top;
@@ -45,7 +45,7 @@ for p=1:size(lastpositionVisual,1) % number of dots
             Screen('FillRect', experimentdata.screenInfo.curWindow, color, rect);
         end
     elseif strcmp(m.showPositionType,'image')
-        for z=1:size(lastPositionVisual,2)
+        for z=1:size(lastpositionVisual,2)
             imageNum = thisShowPositionColor(z);
             thissize = size(experimentdata.images{imageNum});
             % left top right bottom

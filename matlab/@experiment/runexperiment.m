@@ -69,6 +69,13 @@ for k=1:numel(e.protocol.trial)
     end
 end
     
+% Format of results.mat (GNU Octave cannot write v7.3 files)
+if exist('OCTAVE_VERSION','builtin')
+    matFileVersion = '-v7';
+else
+    matFileVersion = '-v7.3';
+end
+
 % Put everything inside a giant "try" so that we can close the screen if it crashes
 try
     % Open PsychPortAudio in the right mode (depending on whether there is
@@ -255,8 +262,8 @@ try
         % (otherwise ignore)
         
         if find(keyCode)==KbName('n') % n = skip to next event
-            currentTrial = currentTrial + 1;
             results.thistrial{currentTrial} = thistrial;
+            currentTrial = currentTrial + 1;
             writetolog(e,'Pressed n, skipping to next event');
             continue;
         elseif find(keyCode)==KbName('p') % p = go back to previous event
@@ -778,11 +785,13 @@ try
         elseif isstruct(dataSummary) && isfield(dataSummary,'filename')
             experimentdata.filename{currentTrial} = dataSummary.filename;
         end
+        % Store again so that the RT (added above) is also in the results struct
+        results.thistrial{currentTrial} = thistrial;
         if isfield(thistrial,'percentCoherent')
             experimentdata.percentCoherents(currentTrial) = str2double(thistrial.percentCoherent);
         end
         if isfield(thistrial,'noiseVar')
-            experimentdata.noiseLevels(currentTrial) = noiseVar;
+            experimentdata.noiseLevels(currentTrial) = thistrial.noiseVar;
         end
         if ~isempty(thistrial.filename)
             trialinfofilename = [e.resultDir '/trialinfo_' thistrial.filename '.mat'];
@@ -837,7 +846,7 @@ try
     % Save the overall results struct
     if exist('results','var')
         resultfilename = [e.resultDir '/results.mat'];
-        save(resultfilename,'-v7.3','results');
+        save(resultfilename,matFileVersion,'results');
         writetolog(e,sprintf('Saved result data to file %s',resultfilename));
     else
         results = [];
@@ -869,7 +878,7 @@ catch err
     % Save the overall results struct
     resultfilename = [e.resultDir '/results.mat'];
     if exist('results','var')
-        save(resultfilename,'-v7.3','results');
+        save(resultfilename,matFileVersion,'results');
         writetolog(e,sprintf('Saved result data to file %s',resultfilename));
     else
         writetolog(e,sprintf('No variable results to write to file'));
@@ -883,6 +892,11 @@ catch err
     end
     if ~isempty(experimentdata.serial)
         close(experimentdata.serial);
+    end
+    if ~isempty(experimentdata.sounds) || ~isempty(experimentdata.beeps)
+        try %#ok<TRYNC>
+            PsychPortAudio('Close');
+        end
     end
     % close the devices + log file
     closedevices(e);

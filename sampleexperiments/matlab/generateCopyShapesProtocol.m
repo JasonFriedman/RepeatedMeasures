@@ -317,6 +317,7 @@ else
 end
 experimentDescription.trial{offset+1}.stimulus.showImage.stimuli = imageNum;
 experimentDescription.trial{offset+1}.recordingTime = 0;
+experimentDescription.trial{offset+1}.recording = 0;
 
 experimentDescription.trial{offset+1}.starttrial = starttrial;
 

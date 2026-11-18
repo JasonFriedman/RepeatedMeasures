@@ -11,7 +11,7 @@ elseif thisstimulus.calibrationType==2
 end
 drawText(thistrial,experimentdata.screenInfo,'Courier',100,0,thetext,1);
 
-if isfield(experimentdata,'ATIforcesensors') && frame==1 % Do the actual zeroing
-    devices = get(e,'devices');
+devices = get(e,'devices');
+if isfield(devices,'ATIforcesensors') && frame==1 % Do the actual zeroing
     biasSensors(devices.ATIforcesensors);
 end

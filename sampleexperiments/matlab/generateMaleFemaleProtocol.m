@@ -43,7 +43,7 @@ for m=1:numel(targets)
     experimentDescription.trial{n}.targetNum = correct(neworder(m));
     experimentDescription.trial{n}.recordingTime = 3;
     experimentDescription.trial{n}.textFeedback = 1;
-    experimentDescription.trial{n}.filename = sprintf('%d_%d',correct(neworder(m)),targets(neworder(m)));
+    experimentDescription.trial{n}.filename = sprintf('%d_%d_T%d',correct(neworder(m)),targets(neworder(m)),m);
 end
 
 tree = struct2xml(experimentDescription);

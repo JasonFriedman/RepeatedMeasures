@@ -329,6 +329,9 @@ if ~isempty(experimentdata.beeps)
     end
 end
 
+% A single label is read as a struct rather than a cell array
+experimentdata = makecellifnot(experimentdata,'labels');
+
 if ~isempty(experimentdata.strings)
     str = experimentdata.strings;
     if ~iscell(str)

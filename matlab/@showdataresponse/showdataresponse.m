@@ -19,7 +19,7 @@ params.description = {'which columns from the data to use (same columns as in th
     'Number of image to show in background (from images listed in setup)','How long to show the feedback (in seconds)'};
 params.required = [1 0 0 0 0 0 0 0 0 0];
 params.default = {1,'dot',[192 192 192],6,...
-    {0 0 0 0 0},{0 0 0 0 0},0.5,0.5,[],5};
+    [0 0 0 0 0],[0 0 0 0 0],0.5,0.5,[],5};
 params.classdescription = 'This response does not stop the trial, but shows feedback (similar to showPosition).';
 params.classname = 'showdataresponse';
 params.parentclassname = 'response';

@@ -15,7 +15,7 @@ function d = keyboardserver(port,samplerate,debug)
 d.waitEachCycle = [];
 d.codes = [];
 
-if nargin<5 || isempty(debug)
+if nargin<3 || isempty(debug)
     debug = 0;
 end
 

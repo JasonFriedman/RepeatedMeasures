@@ -1,6 +1,6 @@
 % MOVEMENTTHRESHOLDRESPONSE - class representing "movement threshold" response (i.e., moving past a certain location)
 
-function [r,params] = movementThresholdresponse()
+function [r,params] = movementThresholdresponse(inputParams)
 
 params.name = {'thresholdAxis','thresholdAmount'};
 params.type = {'number','number'};
