@@ -30,7 +30,7 @@ elseif isnan(thistrial.targetNum(1))
 elseif hitTarget == thistrial.targetNum
     thistrial.successful=1;
     thistrial.questSuccess = 1;
-    writetolog(e,['Succesful to target ' num2str(hitTarget)]);
+    writetolog(e,['Successful to target ' num2str(hitTarget)]);
     thistrial.responseText = experimentdata.texts.SUCCESS;
 else
     thistrial.successful=0;

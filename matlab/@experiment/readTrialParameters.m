@@ -29,7 +29,7 @@ audioFileParams.name = {'number','starttime'};
 audioFileParams.type = {'number','number'};
 audioFileParams.default = {1,0};
 audioFileParams.required=  [1 1];
-audioFileParams.description = {'Number of the file to play (from the .wav files specified in experimendata.setup.sounds)','start time from the start of the trial (in seconds)'};
+audioFileParams.description = {'Number of the file to play (from the .wav files specified in setup.sounds)','start time from the start of the trial (in seconds)'};
 audioFileParams.classdescription = 'Play a wav file at a specified time';
 audioFileParams.classname = 'playAudioFile';
 
@@ -45,7 +45,7 @@ triggerParams.name = {'time','type','value','duration'};
 triggerParams.type = {'number','string','number','number'};
 triggerParams.default = {0,'serial',1,0.05};
 triggerParams.required = [1 1 0 0];
-triggerParams.description = {'Trigger time (in seconds)','Type of trigger, one of ''serial'' or ''parallel'' or ''DAQ'' or ''arduino'' or ''NIDAQ'' ','Value to send','Duration (in seconds)'};
+triggerParams.description = {'Trigger time (in seconds)','Type of trigger, one of ''serial'', ''parallel'', ''DAQ'', ''serialportserver'', ''arduino'' or ''NIDAQ''','Value to send','Duration (in seconds)'};
 triggerParams.classdescription = 'Provide a trigger at the specified time';
 triggerParams.classname = 'trigger';
 
@@ -103,7 +103,7 @@ params.description = {'Whether to check the subject is still moving at this time
     'whether to show the background when giving feedback','text feedback color','whether to check the recording at the end of the trial (and give feedback if there is a problem, e.g. missing markers)',...
     'whether to provide auditory feedback (usually when incorrect)','filename to save the results (without extension)','recording time in seconds',...
     'how movement onset is determined','whether to record','details of audio (wav) files to play',...
-    'which boxes to show','which labels to show','beeps througout the trial','external triggers to send','Background color (1x3 RGB matrix, [0 0 0] = black, [255 255 255] = white)',...
+    'which boxes to show','which labels to show','beeps throughout the trial','external triggers to send','Background color (1x3 RGB matrix, [0 0 0] = black, [255 255 255] = white)',...
     'Number of image to show in background (from images listed in setup)', 'when to produce tactile stimulation (vibration)',...
     'Staircase number this trial is updating / getting value from (NaN if no staircase). The staircases should be defined in the setup section','Whether to clear the background between frames (e.g. set to true to leave a trace)',...
     'whether to include detection response task (DRT)','whether to include an audio stroop task (as a dual task)','the stimulus to show for this trial','how the trial starts','the response for this trial'};
@@ -253,12 +253,12 @@ elseif isstruct(thistrialprotocol.targetType)
     responsename_all = fields(thistrialprotocol.targetType);
     responsename = responsename_all{1};
     if ~exist([responsename 'response'],'file')
-        error(['These is no class called ' responsename 'response']);
+        error(['There is no class called ' responsename 'response']);
     end
     eval(['thistrial.thisresponse = ' responsename 'response(thistrialprotocol.targetType.' responsename ');']);
 else
     if ~exist([thistrialprotocol.targetType 'response'],'file')
-        error(['These is no class called ' thistrialprotocol.targetType 'response']);
+        error(['There is no class called ' thistrialprotocol.targetType 'response']);
     end
     eval(['thistrial.thisresponse = ' thistrialprotocol.targetType 'response(struct);']);
 end

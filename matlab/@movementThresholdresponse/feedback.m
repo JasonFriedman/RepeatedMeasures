@@ -50,7 +50,7 @@ if thistrial.targetNum>0 && stimuliFrames > 0
             if lastLocation < threshold
                 thistrial.successful = 1;
                 thistrial.questSuccess = 1;
-                writetolog(e,'Succesful to left target');
+                writetolog(e,'Successful to left target');
                 thistrial.responseText = experimentdata.texts.SUCCESS;
             elseif ~separateMarkers && lastLocation < 0
                 thistrial.successful = 0;

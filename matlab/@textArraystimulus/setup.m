@@ -21,7 +21,7 @@ Screen('TextStyle', experimentdata.screenInfo.curWindow, 0);
 % desired x value in pixels
 % viewing angle:
 % V = 2 * arctan(S/2D); % see wikipedia
-S_horizontal_cm = 2* experimentdata.viewingDistance * tan(s.visualAngleHorizontal/180*pi/2); % desired height in cm
+S_horizontal_cm = 2* experimentdata.viewingDistance * tan(s.visualAngleHorizontal/180*pi/2); % desired width in cm
 S_horizontal_pixels = S_horizontal_cm / experimentdata.monitorWidth * experimentdata.screenInfo.screenRect(3);
 
 thistrial.textArrayFontSize = round(S_horizontal_pixels / textBounds(3)* 16);

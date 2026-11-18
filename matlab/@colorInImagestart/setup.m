@@ -1,6 +1,6 @@
 % SETUP - Do any preparation needed for starting the trial
 % Do not call directly, this will be called by runexperiment
-% In general, this method should be overrided by the subclass
+% In general, this method should be overridden by the subclass
 
 function thistrial = setup(s,thistrial)
 

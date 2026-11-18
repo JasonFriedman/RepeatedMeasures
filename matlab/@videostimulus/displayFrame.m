@@ -23,7 +23,7 @@ if tex==0 % this should never be run
 elseif tex<0
     % it is finished
     Screen('Flip',experimentdata.screenInfo.curWindow,1);
-    % If the background is not white, then draw it
+    % If the background is not black, then draw it
     if ~all(thistrial.backgroundColor==0)
         Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
     end

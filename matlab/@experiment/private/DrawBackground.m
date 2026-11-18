@@ -13,7 +13,7 @@ if ~isnan(boxes(1)) || (~isempty(labels) && ~isempty(labels(1)))
     end
     if toflip
         Screen('Flip',screenInfo.curWindow,1);
-        % If the background is not white, then draw it
+        % If the background is not black, then draw it
         if ~all(thistrial.backgroundColor==0)
             Screen(screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
         end
@@ -26,7 +26,7 @@ else
         % draw blank screen
         Screen('DrawingFinished',screenInfo.curWindow, 0);
         Screen('Flip', screenInfo.curWindow, 0, thistrial.dontclear);
-        % If the background is not white, then draw it
+        % If the background is not black, then draw it
         if ~all(thistrial.backgroundColor==0)
             Screen(screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
         end
