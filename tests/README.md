@@ -25,6 +25,7 @@ matlab -batch "cd tests; r = runAllTests('simulated'); exit(any(strcmp({r.status
 | `test_readParameters` | parsing and checking of protocol parameters (types, matrix sizes, required / unknown fields, nested structs, lists, parent classes) |
 | `test_schema` | every client / stimulus / response / start / staircase class describes its parameters consistently, defaults match the declared types, the class hierarchy matches `parentclassname`, command codes are unique, `makeProtocolDocumentation` runs and `docs/` is up to date |
 | `test_protocols` | XML round trip, all protocols in `sampleexperiments/protocols` load, every `generate*Protocol.m` sample produces a protocol that validates, and broken protocols give the expected error messages |
+| `test_protocolBuilder` | the protocol builder: the schema matches the classes, options are found, mistakes are reported with suggestions, designs / blocks, and a builder protocol equals the hand-written sample |
 | `test_run_experiment` | whole experiments are run through `runexperiment` (keyboard, mouse and a generic simulated device): trial start, responses, feedback, reaction times, timeouts, beeps, triggers, event markers, quitting with `q`, and the files that are written |
 | `hardware/test_devices` | (only in `'hardware'` mode) records 2 s from each real device listed in `hardware/rmtestHardwareConfig.m` and checks the samples, the data file and the event marker |
 
