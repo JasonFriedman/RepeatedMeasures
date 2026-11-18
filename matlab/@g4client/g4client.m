@@ -25,6 +25,7 @@ params.description = {'Number of g4 receivers present'};
 params.required = [1];
 params.default = {1};
 params.classdescription = 'Connect to the g4 to sample from it';
+params.showPositionValues = 'Each sensor gives 3 values: x, y and z. displayRangeX and displayRangeY have 7 columns: [xmin xmax ymin ymax zmin zmax time]. With several sensors, use one row for each sensor (numsensors rows); a single row is used for every sensor, and the movements of all the sensors are added.';
 params.classname = 'g4';
 params.parentclassname = 'socketclient';
 
@@ -50,18 +51,6 @@ end
     
 lc = class(lc,'g4client',socketclient(parent,experiment,debug));
 
-displayRangeX = get(lc.socketclient,'displayRangeX');
-% Fix displayRangeX / Y if necessary by repeating for the number of sensors
-if size(displayRangeX,1)==1 && lc.numsensors>1
-    displayRangeX = repmat(displayRangeX,lc.numsensors,1);
-    lc.socketclient = set(lc.socketclient,'displayRangeX',displayRangeX);
-    set(lc,'socketclient',lc.socketclient);
-end
-
-displayRangeY = get(lc.socketclient,'displayRangeY');
-if size(displayRangeY,1)==1 && lc.numsensors>1
-    displayRangeY = repmat(displayRangeY,lc.numsensors,1);
-    lc.socketclient = set(lc.socketclient,'displayRangeY',displayRangeY);
-    set(lc,'socketclient',lc.socketclient);
-
-end
+% Use a one-row displayRangeX / displayRangeY for every sensor
+% (each cell is a trial, so repeat the rows within each cell)
+lc.socketclient = repeatRowsForSensors(lc.socketclient,lc.numsensors,3);

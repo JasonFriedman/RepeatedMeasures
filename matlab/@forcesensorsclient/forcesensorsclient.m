@@ -25,6 +25,7 @@ params.description = {'Gains (one per channel), usually in N / V',...
 params.required = [1 1];
 params.default = {1,0};
 params.classdescription = 'This client connects to a DAQ server to sample force sensors.';
+params.showPositionValues = 'Each sensor gives one value: its force (offset + gain * voltage). Use one row with 2 * numchannels + 1 columns, [min1 max1 min2 max2 ... time], or one row for each sensor with 3 columns, [min max time]. For example, with 2 sensors, displayRangeX = {[0 20 0 0 0]} moves the dot right as the force of sensor 1 goes from 0 to 20, and displayRangeY = {[0 0 0 20 0]} moves it down as the force of sensor 2 goes from 0 to 20.';
 params.classname = 'forcesensors';
 params.parentclassname = 'DAQclient';
 

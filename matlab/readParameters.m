@@ -23,7 +23,7 @@ end
 
 thefields = fields(params);
 for k=1:numel(thefields)
-    if ~any(strcmp({'name','type','description','required','default','classname','classdescription','parentclassname'},thefields{k}))
+    if ~any(strcmp({'name','type','description','required','default','classname','classdescription','parentclassname','showPositionValues'},thefields{k}))
         error(['Unknown field ' thefields{k} ' in ' params.classname]);
     end
 end

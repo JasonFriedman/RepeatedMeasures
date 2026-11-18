@@ -19,6 +19,7 @@ params.description = {'Number of trakStar receivers present','Hemisphere to use,
 params.required = [1 0 0];
 params.default = {[],'FRONT',36};
 params.classdescription = 'Connect to a trakStar server to record trakStar 6D data';
+params.showPositionValues = 'Each sensor gives 3 values: x, y and z. Use one row for each sensor with 7 columns, [xmin xmax ymin ymax zmin zmax time], or a single row with 6 * numsensors + 1 columns (the pairs for all the sensors in order, then time).';
 params.classname = 'trakStar';
 params.parentclassname = 'socketclient';
 

@@ -12,6 +12,7 @@ cases = rmtestCase(cases,'a protocol without a recording device is rejected',@no
 cases = rmtestCase(cases,'an unknown stimulus / response / start is rejected',@unknownClasses);
 cases = rmtestCase(cases,'unknown or missing trial parameters are rejected',@badTrialParameters);
 cases = rmtestCase(cases,'misspelled or misplaced options are rejected with a suggestion',@misspelled);
+cases = rmtestCase(cases,'displayRangeX / displayRangeY must fit the values of the device',@displayRange);
 cases = rmtestCase(cases,'repeated filenames are rejected',@repeatedFilenames);
 cases = rmtestCase(cases,'resources that trials refer to must be defined in setup',@missingResources);
 cases = rmtestCase(cases,'common parameters are copied to every trial',@commonParameters);
@@ -160,6 +161,70 @@ try
     rmtestAssert('error',@() check(d),'Unknown field Color in showTextstimulus. Did you mean color');
     d = minimalProtocol; d.trial{2}.beep.Time = 1;
     rmtestAssert('error',@() check(d),'Unknown field Time in beep. Did you mean time');
+catch err
+    rmtestCleanup(workDir,oldDir); rethrow(err);
+end
+rmtestCleanup(workDir,oldDir);
+
+function d = positionProtocol(device)
+switch device
+    case 'forcesensors'
+        d.setup.forcesensors = struct('server','localhost','port',3010,'numchannels',3,'gains',[1 1 1],'offsets',[0 0 0]);
+    case 'liberty'
+        d.setup.liberty = struct('server','localhost','port',3015,'numsensors',2);
+    case 'mouse'
+        d.setup.mouse = struct('server','localhost','port',3003,'maxx',1280,'maxy',720);
+end
+d.trial{1}.stimulus = 'fixation';
+d.trial{1}.recordingTime = 2;
+d.trial{1}.filename = 'a';
+d.trial{1}.showPosition = 3;
+
+function displayRange(info)
+[workDir,oldDir] = rmtestWorkDir();
+try
+    % force sensors: one value per sensor, so 2*3+1 = 7 columns
+    d = positionProtocol('forcesensors');
+    d.setup.forcesensors.displayRangeX = {[0 20 0 0 0]};
+    d.setup.forcesensors.displayRangeY = {[0 0 0 0 0]};
+    rmtestAssert('error',@() check(d),'displayRangeX has 5 columns, but forcesensors gives 3 value\(s\) per row, so it needs 7 columns');
+    d.setup.forcesensors.displayRangeX = {[0 20 0 0 0 0 0]};
+    rmtestAssert('error',@() check(d),'displayRangeY is 1x5, but it must be the same size as displayRangeX \(1x7\)');
+    d.setup.forcesensors.displayRangeY = {[0 0 0 20 0 0 0]};
+    check(d);
+    % one row per sensor: 3 columns each
+    d.setup.forcesensors.displayRangeX = {[0 20 0;0 0 0;0 0 0]};
+    d.setup.forcesensors.displayRangeY = {[0 0 0;0 20 0;0 0 0]};
+    check(d);
+    d.setup.forcesensors.displayRangeX = {[0 20 0;0 0 0]};
+    d.setup.forcesensors.displayRangeY = {[0 0 0;0 20 0]};
+    rmtestAssert('error',@() check(d),'has 2 rows, but forcesensors gives 3 values');
+    % two dots need two offsets and two colors
+    d.setup.forcesensors.displayRangeX = {[0 20 0 0 0 0 0 0 0 0 0 0 0 0]};
+    d.setup.forcesensors.displayRangeY = {[0 0 0 0 0 0 0 0 0 0 20 0 0 0]};
+    rmtestAssert('error',@() check(d),'shows 2 dots, so offsetX and offsetY need 2 columns');
+    d.setup.forcesensors.offsetX = [0.3 0.7]; d.setup.forcesensors.offsetY = [0.5 0.5];
+    rmtestAssert('error',@() check(d),'showPositionColor needs 6 columns');
+    d.setup.forcesensors.showPositionColor = [255 0 0 0 0 255];
+    check(d);
+    % not checked when the position is not calculated
+    d = positionProtocol('forcesensors');
+    d.setup.forcesensors.displayRangeX = {[0 20 0 0 0]};
+    d.trial{1}.showPosition = 1;
+    check(d);
+    % Liberty with 2 sensors: 3 values each; a single row is used for every sensor
+    d = positionProtocol('liberty');
+    d.setup.liberty.displayRangeX = {[-10 10 0 0 0 0 0]};
+    d.setup.liberty.displayRangeY = {[0 0 -10 10 0 0 0]};
+    check(d);
+    d.setup.liberty.displayRangeX = {[-10 10 0 0 0]};
+    d.setup.liberty.displayRangeY = {[0 0 -10 10 0]};
+    rmtestAssert('error',@() check(d),'has 5 columns. liberty gives 3 values for each sensor, so use 7 columns');
+    d.setup.liberty.displayRangeX = {[-10 10 0 0 0 0 0 0 0 0 0 0 0]};
+    d.setup.liberty.displayRangeY = {[0 0 -10 10 0 0 0 0 0 0 0 0 0]};
+    check(d); % a single row with a pair for every value of both sensors
+    % the defaults fit the mouse
+    check(positionProtocol('mouse'));
 catch err
     rmtestCleanup(workDir,oldDir); rethrow(err);
 end

@@ -19,6 +19,7 @@ params.description = {'cell array with the hardware addresses of the sensors to 
 params.required = [1];
 params.default = {[]};
 params.classdescription = 'Connect to a bluetera server to record orientation + acceleration data';
+params.showPositionValues = 'The first 7 values of each sample are used (in the order of the data file). displayRangeX and displayRangeY have 15 columns: a [min max] pair for each of the 7 values, then time.';
 params.classname = 'bluetera';
 params.parentclassname = 'socketclient';
 
