@@ -38,6 +38,7 @@ warning(warnState);
 addpath([root '/matlab']);
 addpath([root '/matlab/xmltree']);
 addpath([root '/matlab/msocket']);
+addpath([root '/matlab/protocolBuilder']);
 addpath([testsDir '/helpers']);
 addpath([testsDir '/suites']);
 if info.octave
