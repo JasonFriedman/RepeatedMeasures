@@ -11,6 +11,7 @@ end
 cases = rmtestCase(cases,'a protocol without a recording device is rejected',@noDevice);
 cases = rmtestCase(cases,'an unknown stimulus / response / start is rejected',@unknownClasses);
 cases = rmtestCase(cases,'unknown or missing trial parameters are rejected',@badTrialParameters);
+cases = rmtestCase(cases,'misspelled or misplaced options are rejected with a suggestion',@misspelled);
 cases = rmtestCase(cases,'repeated filenames are rejected',@repeatedFilenames);
 cases = rmtestCase(cases,'resources that trials refer to must be defined in setup',@missingResources);
 cases = rmtestCase(cases,'common parameters are copied to every trial',@commonParameters);
@@ -128,6 +129,37 @@ try
     rmtestAssert('error',@() check(d),'Unknown field colour');
     d = minimalProtocol; d.trial{2}.backgroundColor = [0 0];
     rmtestAssert('error',@() check(d),'Width of matrix backgroundColor');
+catch err
+    rmtestCleanup(workDir,oldDir); rethrow(err);
+end
+rmtestCleanup(workDir,oldDir);
+
+function misspelled(info)
+[workDir,oldDir] = rmtestWorkDir();
+try
+    d = minimalProtocol; d.trial{2}.startTrial = 'keyboard';
+    rmtestAssert('error',@() check(d),'Unknown field startTrial in trial. Did you mean starttrial');
+    % a trial option put inside the stimulus (it used to be ignored silently)
+    d = minimalProtocol; d.trial{1}.stimulus.startTrial = 'keyboard';
+    rmtestAssert('error',@() check(d),'did you mean trial\{n\}.starttrial rather than trial\{n\}.stimulus.startTrial');
+    d = minimalProtocol; d.trial{1}.stimulus.targetType = 'dummy';
+    rmtestAssert('error',@() check(d),'trial\{n\}.targetType rather than');
+    % two stimuli
+    d = minimalProtocol; d.trial{1}.stimulus.fixation = struct;
+    d.trial{1}.stimulus.fixation.dummyNotUsed = [];
+    d.trial{1}.stimulus = struct('showText',struct('text','a'),'fixation','');
+    rmtestAssert('error',@() check(d),'should contain exactly one stimulus');
+    d = minimalProtocol; d.trial{2}.stimulus = struct('showtext',struct('text','a'));
+    rmtestAssert('error',@() check(d),'no stimulus called showtext. Did you mean showText');
+    d = minimalProtocol; d.trial{2}.targetType = struct('Keyboard',struct('keytopress',{{'a'}}));
+    rmtestAssert('error',@() check(d),'no response called Keyboard. Did you mean keyboard');
+    % options of a class without options of its own (the keyboard client)
+    d = minimalProtocol; d.setup.keyboard.Port = 3002;
+    rmtestAssert('error',@() check(d),'Unknown field Port in keyboard. Did you mean port');
+    d = minimalProtocol; d.trial{1}.stimulus.showText.Color = [1 1 1];
+    rmtestAssert('error',@() check(d),'Unknown field Color in showTextstimulus. Did you mean color');
+    d = minimalProtocol; d.trial{2}.beep.Time = 1;
+    rmtestAssert('error',@() check(d),'Unknown field Time in beep. Did you mean time');
 catch err
     rmtestCleanup(workDir,oldDir); rethrow(err);
 end

@@ -239,8 +239,7 @@ if ~isfield(thistrialprotocol,'stimulus')
 end
 
 if isstruct(thistrialprotocol.stimulus)
-    stimulusname_all = fields(thistrialprotocol.stimulus);
-    stimulusname = stimulusname_all{1};
+    stimulusname = checkOneClass(thistrialprotocol.stimulus,'stimulus','stimulus',params.name);
     eval(['thistrial.thisstimulus = ' stimulusname 'stimulus(thistrialprotocol.stimulus.' stimulusname ',experimentdata);']);
 else
     eval(['thistrial.thisstimulus = ' thistrialprotocol.stimulus 'stimulus([],experimentdata);']);
@@ -250,8 +249,7 @@ writetolog(e,'Read stimulus');
 if ~isfield(thistrialprotocol,'targetType')
     thistrial.thisresponse = dummyresponse(struct);
 elseif isstruct(thistrialprotocol.targetType)
-    responsename_all = fields(thistrialprotocol.targetType);
-    responsename = responsename_all{1};
+    responsename = checkOneClass(thistrialprotocol.targetType,'targetType','response',params.name);
     if ~exist([responsename 'response'],'file')
         error(['There is no class called ' responsename 'response']);
     end
@@ -267,8 +265,7 @@ writetolog(e,'Read target type');
 if ~isfield(thistrialprotocol,'starttrial')
     thistrial.thisstarttrial = dontWaitstart(struct);
 elseif isstruct(thistrialprotocol.starttrial)
-    starttrial_all = fields(thistrialprotocol.starttrial);
-    starttrialname = starttrial_all{1};
+    starttrialname = checkOneClass(thistrialprotocol.starttrial,'starttrial','start',params.name);
     if ~exist([starttrialname 'start'],'file')
         error(['There is no class called ' starttrialname 'start']);
     end

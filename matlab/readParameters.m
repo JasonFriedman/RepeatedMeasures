@@ -41,6 +41,12 @@ for a=1:numel(ancestors)
 end
 
 if isempty(params.name)
+    % no options of its own: anything that is left (and was not for a parent) is unknown
+    if isstruct(newParams) && ~isempty(fields(newParams))
+        leftover = fields(newParams);
+        error(['Unknown field ' leftover{1} ' in ' char(params.classname) '.' ...
+            suggestName(leftover{1},ancestorNames(ancestors))]);
+    end
     v = struct();
     return;
 end
@@ -104,6 +110,14 @@ for m=1:numel(params.name)
         elseif iscell(params.type{m})
             % If it is a cell array, the child can be any of the classes
             % So pick the appropriate one
+            options = cellfun(@(x) char(x.classname),params.type{m},'UniformOutput',false);
+            if isstruct(thisparam)
+                given = fields(thisparam);
+                if numel(given)~=1
+                    error('The parameter %s in %s should contain one of %s, but it contains %s',...
+                        thisparamname,char(params.classname),strjoin(options,', '),strjoin(given',', '));
+                end
+            end
             cellsetVal = 0;
             for n=1:numel(params.type{m})
                 if strcmp(params.type{m}{n}.classname,fields(thisparam))
@@ -113,7 +127,12 @@ for m=1:numel(params.name)
                 end
             end
             if cellsetVal==0
-                error(['The parameter ' thisparamname ' did not match any of the options in ' params.classname]);
+                if isstruct(thisparam)
+                    given = fields(thisparam);
+                    error(['The parameter ' thisparamname ' did not match any of the options in ' char(params.classname) ...
+                        ': ' given{1} ' is not one of ' strjoin(options,', ') '.' suggestName(given{1},options)]);
+                end
+                error(['The parameter ' thisparamname ' did not match any of the options in ' char(params.classname)]);
             end
         elseif strcmp(params.type{m},'matrix')
             newparam = str2num(thisparam); %#ok
@@ -162,7 +181,16 @@ for m=1:numel(params.name)
     end
 end
 if setVal==0
-    error(['Unknown field ' thisparamname ' in ' params.classname]);
+    error(['Unknown field ' thisparamname ' in ' char(params.classname) '.' ...
+        suggestName(thisparamname,[params.name ancestorNames(getAncestorParams(params))])]);
+end
+end
+
+%%%%%%%%%%%%%%%%%%%%
+function names = ancestorNames(ancestors)
+names = {};
+for a=1:numel(ancestors)
+    names = [names ancestors{a}.name]; %#ok<AGROW>
 end
 end
 

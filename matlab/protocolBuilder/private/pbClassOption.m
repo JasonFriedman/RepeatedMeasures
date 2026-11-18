@@ -14,6 +14,9 @@ elseif ischar(v)
     opts = struct;
 elseif isstruct(v)
     f = fieldnames(v);
+    if numel(f)~=1
+        error('protocolBuilder:type','%s should contain exactly one %s, but it contains %s',where,kind,strjoin(f',', '));
+    end
     name = f{1};
     opts = v.(name);
 else
