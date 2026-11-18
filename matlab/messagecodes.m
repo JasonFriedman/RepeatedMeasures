@@ -7,7 +7,7 @@ codes.dummy = -1;
 codes.closesocket = 1;
 % Need to provide filename as first argument (without extension), the 
 % program will prefix it with the appropriate data type (e.g. opto_) 
-% and add .csv at the end (as the files are comma seperated files)
+% and add .csv at the end (as the files are comma separated files)
 % The second argument is the number of markers. The third argument is the
 % maximum number of frames to record
 codes.setuprecording = 2;

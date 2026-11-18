@@ -1,6 +1,6 @@
 Repeated Measures is MATLAB software for running psychophysics and motor control experiments. It is built on top of the psychtoolbox.
 
-It has been tested on OSX and Windows (XP or 7), although many of the devices will only work with Windows.
+It has been tested on OSX and Windows, although many of the devices will only work with Windows.
 
 To install repeated measures, follow the instructions here:
 

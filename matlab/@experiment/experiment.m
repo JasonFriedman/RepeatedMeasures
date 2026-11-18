@@ -2,6 +2,8 @@
 %
 % e = experiment(protocolFile,resultDir)
 % where protocolFile is an .xml file describing the protocol for this experiment
+% and resultDir is the directory where the log file and the results will be written
+% (it is created if it does not exist)
 
 function e = experiment(protocolFile,resultDir)
 

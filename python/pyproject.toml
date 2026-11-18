@@ -1,0 +1,15 @@
+[project]
+name = "repeatedmeasures"
+version = "0.0.1"
+description = "Groundwork for a Python port of RepeatedMeasures"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[tool.setuptools.package-data]
+repeatedmeasures = ["schema.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

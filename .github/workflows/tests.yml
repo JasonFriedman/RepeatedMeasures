@@ -1,0 +1,19 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  octave:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install GNU Octave
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends octave
+      - name: Run the tests (simulated devices and Psychtoolbox)
+        run: |
+          cd tests
+          octave --no-gui --eval "r = runAllTests('simulated'); exit(any(strcmp({r.status},'failed')))"

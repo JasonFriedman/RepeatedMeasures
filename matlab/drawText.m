@@ -1,6 +1,6 @@
 % DRAWTEXT - draw text using the psychtoolbox, centered on the screen
 %
-% textsize = drawText(thistrial,screenInfo,font,fontsize,fontstyle,thetext,noflip,textsize)
+% textsize = drawText(thistrial,screenInfo,font,fontsize,fontstyle,thetext,noflip,textsize,textColor,swapDirection)
 
 
 function textsize = drawText(thistrial,screenInfo,font,fontsize,fontstyle,thetext,noflip,textsize,textColor,swapDirection)
@@ -42,7 +42,7 @@ end
 
 if nargin<7 || isempty(noflip) || noflip==0
     Screen('Flip',screenInfo.curWindow,1);
-    % If the background is not white, then draw it
+    % If the background is not black, then draw it
     if ~all(thistrial.backgroundColor==0)
         Screen(screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
     end

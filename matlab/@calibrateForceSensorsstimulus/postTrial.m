@@ -30,7 +30,7 @@ if s.calibrationType==1
     parameters(1,s.calibrationSensor) = experimentdata.forcesensorsOffsets(s.calibrationSensor);
     % restore the old gain
     parameters(2,s.calibrationSensor) = thistrial.initialparameters(2,s.calibrationSensor);
-    fprintf('Zerored sensors %d\n',s.calibrationSensor);
+    fprintf('Zeroed sensors %d\n',s.calibrationSensor);
     
     m.command = codes.FORCESENSORS_setParameters;
     m.parameters = parameters;
