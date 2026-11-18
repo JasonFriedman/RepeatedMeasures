@@ -7,7 +7,7 @@ thisimage = experimentdata.images{s.stimuli};
 thistrial.textureIndex = Screen('MakeTexture',experimentdata.screenInfo.curWindow,thisimage);
 Screen('DrawTexture',experimentdata.screenInfo.curWindow,thistrial.textureIndex);
 Screen('Flip',experimentdata.screenInfo.curWindow,1);
-% If the background is not white, then draw it
+% If the background is not black, then draw it
 if ~all(thistrial.backgroundColor==0)
     Screen(experimentdata.screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
 end

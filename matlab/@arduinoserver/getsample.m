@@ -14,7 +14,7 @@ if numel(d.inputPins)==0
     data = [];
 end
 
-% These is no timing information returned, so use getSecs 
+% There is no timing information returned, so use getSecs 
 framenumber = GetSecs;
 
 data = double(data);

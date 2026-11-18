@@ -13,7 +13,7 @@ textwidth =Screen('DrawText', screenInfo.curWindow,...
     location(2)-textsize(4)/2,[255 255 255]);
 if nargin<8 || isempty(noflip) || noflip==0
     Screen('Flip',screenInfo.curWindow,1);
-    % If the background is not white, then draw it
+    % If the background is not black, then draw it
     if ~all(thistrial.backgroundColor==0)
         Screen(screenInfo.curWindow,'FillRect',thistrial.backgroundColor);
     end

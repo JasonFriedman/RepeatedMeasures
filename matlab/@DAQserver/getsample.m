@@ -18,7 +18,7 @@ else
     data(2:nummarkers+1) = result;
 end
 
-% These is no timing information returned, so use getSecs 
+% There is no timing information returned, so use getSecs 
 framenumber = GetSecs;
 
 data = double(data);
