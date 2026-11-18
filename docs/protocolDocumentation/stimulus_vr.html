@@ -1,23 +1,40 @@
-<HTML>
-<HEAD><TITLE>vr</TITLE></HEAD>
-<BODY><H1>vr</H1>
-Virtual reality (rendered glove)<BR><BR>
-<TABLE border="1">
-<TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
-<TR><TD>stimuliOnTime</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>Time for the hand to appear (0 = from the start)</TD></TR>
-<TR><TD>stimuliOffTime</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>Inf</TD><TD>Time for the hand to disappear (inf = never)</TD></TR>
-<TR><TD>showFlipped</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>whether to flip the screen horizontally (for viewing in a mirror</TD></TR>
-<TR><TD>basejointangles</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>whether this trial defines base joint angles (for a later angleshift)</TD></TR>
-<TR><TD>target</TD><TD>No</TD><TD><A title="follow link to see details of the struct" HREF="target.html">struct</A></TD><TD>[]</TD><TD>details of the targets to display</TD></TR>
-<TR><TD>calibrate</TD><TD>No</TD><TD><A title="follow link to see details of the struct" HREF="calibrate.html">struct</A></TD><TD>[]</TD><TD>initial parameters for the calibration</TD></TR>
-<TR><TD>angleshift</TD><TD>No</TD><TD>loadArray</TD><TD>[]</TD><TD>filename of the angleshift</TD></TR>
-<TR><TD>positionshift</TD><TD>No</TD><TD>loadArray</TD><TD>[]</TD><TD>filename of the positionshift</TD></TR>
-<TR><TD>orientationshift</TD><TD>No</TD><TD>loadArray</TD><TD>[]</TD><TD>filename of the orientationshift</TD></TR>
-<TR><TD>timeshift</TD><TD>No</TD><TD>loadArray</TD><TD>[]</TD><TD>filename of the timeshift</TD></TR>
-<TR><TD>cameralocation</TD><TD>No</TD><TD><A title="A 1 by 3 matrix (see description for how to fill it)">1 by 3 matrix</A></TD><TD>[]</TD><TD>camera location (x,y,z), if not specified the value from setup.vr is used</TD></TR>
-<TR><TD>center</TD><TD>No</TD><TD><A title="A 1 by 3 matrix (see description for how to fill it)">1 by 3 matrix</A></TD><TD>[]</TD><TD>center of scene (x,y,z), if not specified the value from setup.vr is used</TD></TR>
-<TR><TD>up</TD><TD>No</TD><TD><A title="A 1 by 3 matrix (see description for how to fill it)">1 by 3 matrix</A></TD><TD>[]</TD><TD>up direction (x,y,z), if not specified the value from setup.vr is used</TD></TR>
-<TR><TD>frustum</TD><TD>No</TD><TD><A title="follow link to see details of the struct" HREF="frustum.html">struct</A></TD><TD>[]</TD><TD>Viewing transformation, if not specified the value from setup.vr is used</TD></TR>
-<TR><TD>showPositionType</TD><TD>No</TD><TD>string</TD><TD>'hand'</TD><TD>If showPosition is being used (must be set for this trial separately), what type of position to show. Can be either 'hand' to show the hand, or 'fingertips' to show only the fingertips</TD></TR>
-<TR><TD>showPositionFingers</TD><TD>No</TD><TD><A title="A 1 by 5 matrix (see description for how to fill it)">1 by 5 matrix</A></TD><TD>[1,1,1,1,1]</TD><TD>If showPositionType is 'fingertips', then which fingertips to show (set to 1 to show the fingertip, 0 to not show that fingertip)</TD></TR>
-</TABLE></BODY></HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>vr (stimulus) &ndash; Repeated Measures</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="home" href="../index.html">Repeated Measures</a><span class="sep">/</span><a href="index.html">Protocol reference</a></div></header>
+<main class="wrap">
+<p class="kind">Stimulus</p>
+<h1>vr</h1>
+<p class="used-in">Used in <a href="index.html#trial-stimulus"><code>trial{n}.stimulus</code></a></p>
+<p class="lead">Virtual reality (rendered glove)</p>
+<div class="table-wrap"><table class="params">
+<thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+<tr id="stimuliOnTime"><td class="name"><code>stimuliOnTime</code></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>0</code></td><td>Time for the hand to appear (0 = from the start)</td></tr>
+<tr id="stimuliOffTime"><td class="name"><code>stimuliOffTime</code></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>Inf</code></td><td>Time for the hand to disappear (inf = never)</td></tr>
+<tr id="showFlipped"><td class="name"><code>showFlipped</code></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>0</code></td><td>whether to flip the screen horizontally (for viewing in a mirror</td></tr>
+<tr id="basejointangles"><td class="name"><code>basejointangles</code></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>0</code></td><td>whether this trial defines base joint angles (for a later angleshift)</td></tr>
+<tr id="target"><td class="name"><code>target</code></td><td class="type"><a href="target.html">struct</a></td><td class="default"><span class="none">&ndash;</span></td><td>details of the targets to display</td></tr>
+<tr id="calibrate"><td class="name"><code>calibrate</code></td><td class="type"><a href="calibrate.html">struct</a></td><td class="default"><span class="none">&ndash;</span></td><td>initial parameters for the calibration</td></tr>
+<tr id="angleshift"><td class="name"><code>angleshift</code></td><td class="type">loadArray</td><td class="default"><span class="none">&ndash;</span></td><td>filename of the angleshift</td></tr>
+<tr id="positionshift"><td class="name"><code>positionshift</code></td><td class="type">loadArray</td><td class="default"><span class="none">&ndash;</span></td><td>filename of the positionshift</td></tr>
+<tr id="orientationshift"><td class="name"><code>orientationshift</code></td><td class="type">loadArray</td><td class="default"><span class="none">&ndash;</span></td><td>filename of the orientationshift</td></tr>
+<tr id="timeshift"><td class="name"><code>timeshift</code></td><td class="type">loadArray</td><td class="default"><span class="none">&ndash;</span></td><td>filename of the timeshift</td></tr>
+<tr id="cameralocation"><td class="name"><code>cameralocation</code></td><td class="type"><abbr title="A 1 by 3 matrix (see the description for how to fill it)">1&times;3 matrix</abbr></td><td class="default"><span class="none">&ndash;</span></td><td>camera location (x,y,z), if not specified the value from setup.vr is used</td></tr>
+<tr id="center"><td class="name"><code>center</code></td><td class="type"><abbr title="A 1 by 3 matrix (see the description for how to fill it)">1&times;3 matrix</abbr></td><td class="default"><span class="none">&ndash;</span></td><td>center of scene (x,y,z), if not specified the value from setup.vr is used</td></tr>
+<tr id="up"><td class="name"><code>up</code></td><td class="type"><abbr title="A 1 by 3 matrix (see the description for how to fill it)">1&times;3 matrix</abbr></td><td class="default"><span class="none">&ndash;</span></td><td>up direction (x,y,z), if not specified the value from setup.vr is used</td></tr>
+<tr id="frustum"><td class="name"><code>frustum</code></td><td class="type"><a href="frustum.html">struct</a></td><td class="default"><span class="none">&ndash;</span></td><td>Viewing transformation, if not specified the value from setup.vr is used</td></tr>
+<tr id="showPositionType"><td class="name"><code>showPositionType</code></td><td class="type">string</td><td class="default"><code>'hand'</code></td><td>If showPosition is being used (must be set for this trial separately), what type of position to show. Can be either 'hand' to show the hand, or 'fingertips' to show only the fingertips</td></tr>
+<tr id="showPositionFingers"><td class="name"><code>showPositionFingers</code></td><td class="type"><abbr title="A 1 by 5 matrix (see the description for how to fill it)">1&times;5 matrix</abbr></td><td class="default"><code>[1 1 1 1 1]</code></td><td>If showPositionType is 'fingertips', then which fingertips to show (set to 1 to show the fingertip, 0 to not show that fingertip)</td></tr>
+</tbody>
+</table></div>
+</main>
+<footer class="site"><div class="wrap">Generated by <code>makeProtocolDocumentation</code>. <a href="https://github.com/JasonFriedman/RepeatedMeasures">Repeated Measures on GitHub</a></div></footer>
+</body>
+</html>

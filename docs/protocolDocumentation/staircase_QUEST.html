@@ -1,15 +1,32 @@
-<HTML>
-<HEAD><TITLE>QUEST</TITLE></HEAD>
-<BODY><H1>QUEST</H1>
-A QUEST staircase. See documentation for QuestCreate for more details about the parameters<BR><BR>
-<TABLE border="1">
-<TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
-<TR><TD>tGuess</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>Prior threshold estimate</TD></TR>
-<TR><TD>tGuessSd</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0.50</TD><TD>Standard deviation of guess</TD></TR>
-<TR><TD>pThreshold</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0.75</TD><TD>threshold criterion (midpoint of table will yield this threshold)</TD></TR>
-<TR><TD>beta</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>3.50</TD><TD>beta parameter of Weibull function (steepness)</TD></TR>
-<TR><TD>delta</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0.01</TD><TD>delta parameter of Weibull function (fraction of trials the observer presses blindly)</TD></TR>
-<TR><TD>gamma</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0.50</TD><TD>gamma parameter of Weibull function (fraction of trials that will generate response 1 when stimulus intensity = -inf)</TD></TR>
-<TR><TD>min</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>-Inf</TD><TD>minimum value to show - the value shown will always be >= to this value, regardless of what Quest suggests</TD></TR>
-<TR><TD>max</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>Inf</TD><TD>maximum value to show - the value shown will always be <= to this value, regardless of what Quest suggests</TD></TR>
-</TABLE></BODY></HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QUEST (staircase) &ndash; Repeated Measures</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="home" href="../index.html">Repeated Measures</a><span class="sep">/</span><a href="index.html">Protocol reference</a></div></header>
+<main class="wrap">
+<p class="kind">Staircase</p>
+<h1>QUEST</h1>
+<p class="used-in">Used in <a href="index.html#setup-staircases"><code>setup.staircases</code></a></p>
+<p class="lead">A QUEST staircase. See documentation for QuestCreate for more details about the parameters</p>
+<div class="table-wrap"><table class="params">
+<thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+<tr id="tGuess"><td class="name"><code>tGuess</code><span class="req req1">required</span></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>0</code></td><td>Prior threshold estimate</td></tr>
+<tr id="tGuessSd"><td class="name"><code>tGuessSd</code><span class="req req1">required</span></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>0.5</code></td><td>Standard deviation of guess</td></tr>
+<tr id="pThreshold"><td class="name"><code>pThreshold</code><span class="req req1">required</span></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>0.75</code></td><td>threshold criterion (midpoint of table will yield this threshold)</td></tr>
+<tr id="beta"><td class="name"><code>beta</code></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>3.5</code></td><td>beta parameter of Weibull function (steepness)</td></tr>
+<tr id="delta"><td class="name"><code>delta</code></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>0.01</code></td><td>delta parameter of Weibull function (fraction of trials the observer presses blindly)</td></tr>
+<tr id="gamma"><td class="name"><code>gamma</code></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>0.5</code></td><td>gamma parameter of Weibull function (fraction of trials that will generate response 1 when stimulus intensity = -inf)</td></tr>
+<tr id="min"><td class="name"><code>min</code></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>-Inf</code></td><td>minimum value to show - the value shown will always be &gt;= to this value, regardless of what Quest suggests</td></tr>
+<tr id="max"><td class="name"><code>max</code></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>Inf</code></td><td>maximum value to show - the value shown will always be &lt;= to this value, regardless of what Quest suggests</td></tr>
+</tbody>
+</table></div>
+</main>
+<footer class="site"><div class="wrap">Generated by <code>makeProtocolDocumentation</code>. <a href="https://github.com/JasonFriedman/RepeatedMeasures">Repeated Measures on GitHub</a></div></footer>
+</body>
+</html>

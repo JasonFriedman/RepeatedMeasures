@@ -1,0 +1,72 @@
+:root {
+  --bg: #fdfdfc; --text: #1f2422; --muted: #626b67; --line: #e1e4e1;
+  --head: #f3f4f2; --accent: #1f6f5c; --code: #f1f3f0; --req: #8a4b14;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #161a18; --text: #e3e7e4; --muted: #9aa49f; --line: #2f3633;
+    --head: #1e2321; --accent: #72c4ab; --code: #232927; --req: #e0a36b;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+a { color: var(--accent); text-underline-offset: 2px; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+header.site { border-bottom: 1px solid var(--line); padding: 14px 0; font-size: 15px; }
+header.site a { text-decoration: none; }
+header.site .home { font-weight: 600; color: var(--text); }
+header.site .sep { color: var(--muted); margin: 0 10px; }
+main { padding-top: 40px; padding-bottom: 48px; }
+h1 { font-size: 32px; line-height: 1.2; margin: 0 0 12px; letter-spacing: -0.01em; }
+h2 { font-size: 22px; margin: 44px 0 10px; padding-top: 8px; }
+p { margin: 0 0 12px; max-width: 760px; }
+.kind { margin: 0 0 4px; color: var(--muted); font-size: 14px; text-transform: uppercase; letter-spacing: 0.06em; }
+.lead { font-size: 18px; color: var(--muted); }
+.used-in { color: var(--muted); font-size: 15px; }
+.empty { color: var(--muted); font-style: italic; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.9em; }
+p code, li code { background: var(--code); padding: 1px 5px; border-radius: 3px; }
+pre { background: var(--code); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px;
+  overflow-x: auto; font-size: 14px; line-height: 1.5; max-width: 860px; }
+pre code { font-size: 1em; }
+nav.toc ul { list-style: none; padding: 0; margin: 16px 0 8px; display: flex; flex-wrap: wrap; gap: 6px 22px; }
+nav.toc a { text-decoration: none; }
+nav.toc a:hover { text-decoration: underline; }
+.table-wrap { overflow-x: auto; margin: 12px 0 8px; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+thead th { background: var(--head); font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em;
+  color: var(--muted); font-weight: 600; border-bottom: 1px solid var(--line); }
+tr.group th { background: transparent; font-weight: 600; font-size: 14px; color: var(--muted);
+  padding-top: 18px; text-transform: none; letter-spacing: 0; }
+tbody.inherited td { color: var(--muted); }
+td.name { white-space: nowrap; }
+td.name code { font-weight: 600; color: var(--text); }
+td.type, td.default { white-space: nowrap; }
+td.type { color: var(--muted); }
+td.type a { white-space: normal; }
+td.type abbr { white-space: nowrap; }
+table.params td.type { max-width: 260px; white-space: normal; }
+td.default code { white-space: nowrap; }
+abbr { text-decoration: underline dotted; text-underline-offset: 3px; cursor: help; }
+.none { color: var(--muted); }
+.req { display: block; font-size: 12px; color: var(--req); margin-top: 2px; }
+table.classes td:first-child { white-space: nowrap; width: 1%; padding-right: 28px; }
+table.classes code { font-weight: 600; }
+tr:target td { background: var(--code); }
+footer.site { border-top: 1px solid var(--line); padding: 18px 0 40px; color: var(--muted); font-size: 14px; }
+@media (max-width: 640px) {
+  h1 { font-size: 26px; }
+  .wrap { padding: 0 16px; }
+  th, td { padding: 8px 8px; }
+  table.params thead { display: none; }
+  table.params, table.params tbody, table.params tr, table.params td, table.params th { display: block; width: auto; }
+  table.params tr { border-bottom: 1px solid var(--line); padding: 10px 0; }
+  table.params td, table.params th { border: 0; padding: 2px 0; }
+  table.params tr.group { padding: 16px 0 4px; }
+  table.params td.name .req { display: inline; margin-left: 8px; }
+  table.params td.type, table.params td.default { display: inline-block; max-width: none; margin-right: 14px; font-size: 14px; }
+  table.params td.default::before { content: "default "; color: var(--muted); font-size: 13px; }
+  table.classes td:first-child { padding-right: 12px; }
+}

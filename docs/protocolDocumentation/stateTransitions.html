@@ -1,16 +1,33 @@
-<HTML>
-<HEAD><TITLE>stateTransitions</TITLE></HEAD>
-<BODY><H1>stateTransitions</H1>
-Describes of how to transition from state to state. The current state corresponds to the image that will be shown (i.e. row from stimuli)<BR><BR>
-<TABLE border="1">
-<TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
-<TR><TD>currentState</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>The state the program is currently in</TD></TR>
-<TR><TD>position</TD><TD>Yes</TD><TD><A title="A matrix (see description for how to fill it)">matrix</A></TD><TD>1</TD><TD>Either the position needed to trigger the change (index of the positions in targetPosition) if positionType=0, otherwise the color (1x3 matrix) from the image specified in positionType</TD></TR>
-<TR><TD>distanceAllowed</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>the maximum distance from the position that will trigger the change (i.e. distance must be less than this), ignored if positionType>0</TD></TR>
-<TR><TD>minimumDistance</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>the minimum distance from the position that will trigger the change (i.e. distance must be greater than this), ignored if positionType>0</TD></TR>
-<TR><TD>penTouching</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>whether the pen must be touching (If not using a tablet set to 0, for a tablet 0 = doesn't matter, 1 = must touch, 2 = must not touch)</TD></TR>
-<TR><TD>timeElapsed</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>the minimum amount of time that has elapsed since arriving in this state (in seconds)</TD></TR>
-<TR><TD>newState</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>the state to move to if all the conditions are satisfied</TD></TR>
-<TR><TD>positionType</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>positionType = 0 means to use positions from targetPosition, positionType>1 means to use a color from image number position (e.g. position=2 means use image 2). In this case specify the color in position</TD></TR>
-<TR><TD>colorDistance</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>allowable cityblock distance from the color (only used if positionType>0)</TD></TR>
-</TABLE></BODY></HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>stateTransitions (section) &ndash; Repeated Measures</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="home" href="../index.html">Repeated Measures</a><span class="sep">/</span><a href="index.html">Protocol reference</a></div></header>
+<main class="wrap">
+<p class="kind">Section</p>
+<h1>stateTransitions</h1>
+<p class="used-in">Used in <a href="stimulus_images.html#stateTransitions"><code>stateTransitions</code></a> of <a href="stimulus_images.html">images</a></p>
+<p class="lead">Describes of how to transition from state to state. The current state corresponds to the image that will be shown (i.e. row from stimuli)</p>
+<div class="table-wrap"><table class="params">
+<thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+<tr id="currentState"><td class="name"><code>currentState</code><span class="req req1">required</span></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>1</code></td><td>The state the program is currently in</td></tr>
+<tr id="position"><td class="name"><code>position</code><span class="req req1">required</span></td><td class="type"><abbr title="A matrix (see the description for how to fill it)">matrix</abbr></td><td class="default"><code>1</code></td><td>Either the position needed to trigger the change (index of the positions in targetPosition) if positionType=0, otherwise the color (1x3 matrix) from the image specified in positionType</td></tr>
+<tr id="distanceAllowed"><td class="name"><code>distanceAllowed</code><span class="req req1">required</span></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>1</code></td><td>the maximum distance from the position that will trigger the change (i.e. distance must be less than this), ignored if positionType&gt;0</td></tr>
+<tr id="minimumDistance"><td class="name"><code>minimumDistance</code></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>0</code></td><td>the minimum distance from the position that will trigger the change (i.e. distance must be greater than this), ignored if positionType&gt;0</td></tr>
+<tr id="penTouching"><td class="name"><code>penTouching</code></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>0</code></td><td>whether the pen must be touching (If not using a tablet set to 0, for a tablet 0 = doesn't matter, 1 = must touch, 2 = must not touch)</td></tr>
+<tr id="timeElapsed"><td class="name"><code>timeElapsed</code></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>0</code></td><td>the minimum amount of time that has elapsed since arriving in this state (in seconds)</td></tr>
+<tr id="newState"><td class="name"><code>newState</code><span class="req req1">required</span></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>1</code></td><td>the state to move to if all the conditions are satisfied</td></tr>
+<tr id="positionType"><td class="name"><code>positionType</code></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>0</code></td><td>positionType = 0 means to use positions from targetPosition, positionType&gt;1 means to use a color from image number position (e.g. position=2 means use image 2). In this case specify the color in position</td></tr>
+<tr id="colorDistance"><td class="name"><code>colorDistance</code></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>0</code></td><td>allowable cityblock distance from the color (only used if positionType&gt;0)</td></tr>
+</tbody>
+</table></div>
+</main>
+<footer class="site"><div class="wrap">Generated by <code>makeProtocolDocumentation</code>. <a href="https://github.com/JasonFriedman/RepeatedMeasures">Repeated Measures on GitHub</a></div></footer>
+</body>
+</html>
