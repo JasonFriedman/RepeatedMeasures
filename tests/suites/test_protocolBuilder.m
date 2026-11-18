@@ -99,6 +99,7 @@ rmtestAssert('error',@() protocolTrial(p,'stimulus','showtext','recordingTime',1
 rmtestAssert('error',@() protocolTrial(p,'stimulus','showText','recordingTime',1),'showText needs: text');
 rmtestAssert('error',@() protocolTrial(p,'stimulus',{'showText','text','a','colour',[1 1 1]},'recordingTime',1),'Did you mean color');
 rmtestAssert('error',@() protocolTrial(p,'stimulus','fixation'),'recordingTime must be specified');
+rmtestAssert('error',@() protocolTrial(p,'stimulus',struct('showText',struct('text','a'),'startTrial','keyboard'),'recordingTime',1,'recording',0),'exactly one stimulus');
 rmtestAssert('error',@() protocolTrial(p,'stimulus','fixation','recordingTime',2),'filename is needed');
 rmtestAssert('error',@() protocolTrial(p,'stimulus','fixation','recordingTime','2','recording',0),'single number');
 rmtestAssert('error',@() protocolTrial(p,'stimulus','fixation','recordingTime',2,'recording',0,'backgroundColor',[0 0]),'3 column');
