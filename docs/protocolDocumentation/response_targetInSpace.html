@@ -1,16 +1,33 @@
-<HTML>
-<HEAD><TITLE>targetInSpace</TITLE></HEAD>
-<BODY><H1>targetInSpace</H1>
-The target(s) are locations in space<BR><BR>
-<TABLE border="1">
-<TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
-<TR><TD>delayedFeedback</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>Whether the feedback is to be shown in the following trial</TD></TR>
-<TR><TD>checkGoingForward</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>Whether it should be checked that the marker continually moves forward</TD></TR>
-<TR><TD>checkFixation</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>Whether fixation should be checked (with an eye tracker) - the bounding box is specified to the eye tracker server</TD></TR>
-<TR><TD>targets</TD><TD>Yes</TD><TD><A title="A matrix (see description for how to fill it)">matrix</A></TD><TD>[]</TD><TD>The possible targets for this trial</TD></TR>
-<TR><TD>threshold</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>3</TD><TD>How close to the target the marker needs to be to hit it</TD></TR>
-<TR><TD>endtime</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>The amount of time you need to be at the target for (in seconds)</TD></TR>
-<TR><TD>dimensionsToUse</TD><TD>No</TD><TD><A title="A matrix (see description for how to fill it)">matrix</A></TD><TD>NaN</TD><TD>Dimensions to use to compare the target position , e.g. to just use x and y and not z, set to [1 2]. Default (NaN) is to use all dimensions. The number of dimensions should match the number of dimensions of the targets as defined in targetPosition. Alternatively, it can be set to how much to multiply the values with each row referring to one output dimension, e.g. if there are two xyz sensors, then [0.5 0 0 0.5 0 0;0 0.5 0 0 0.5 0]would generate an average of sensor 1 and 2. In this case, the number of rows should match the dimensions of the targets.</TD></TR>
-<TR><TD>arrivalFeedbackStart</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>NaN</TD><TD>If this number is not NaN, then when the target needs to arrive (in seconds) after to NOT get a "too early" feedback</TD></TR>
-<TR><TD>arrivalFeedbackEnd</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>NaN</TD><TD>If this number is not NaN, then when the target needs to arrive (in seconds) before to NOT get a "too late" feedback</TD></TR>
-</TABLE></BODY></HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>targetInSpace (response) &ndash; Repeated Measures</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="home" href="../index.html">Repeated Measures</a><span class="sep">/</span><a href="index.html">Protocol reference</a></div></header>
+<main class="wrap">
+<p class="kind">Response</p>
+<h1>targetInSpace</h1>
+<p class="used-in">Used in <a href="index.html#trial-targetType"><code>trial{n}.targetType</code></a></p>
+<p class="lead">The target(s) are locations in space</p>
+<div class="table-wrap"><table class="params">
+<thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+<tr id="delayedFeedback"><td class="name"><code>delayedFeedback</code></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>0</code></td><td>Whether the feedback is to be shown in the following trial</td></tr>
+<tr id="checkGoingForward"><td class="name"><code>checkGoingForward</code></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>0</code></td><td>Whether it should be checked that the marker continually moves forward</td></tr>
+<tr id="checkFixation"><td class="name"><code>checkFixation</code></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>0</code></td><td>Whether fixation should be checked (with an eye tracker) - the bounding box is specified to the eye tracker server</td></tr>
+<tr id="targets"><td class="name"><code>targets</code><span class="req req1">required</span></td><td class="type"><abbr title="A matrix (see the description for how to fill it)">matrix</abbr></td><td class="default"><span class="none">&ndash;</span></td><td>The possible targets for this trial</td></tr>
+<tr id="threshold"><td class="name"><code>threshold</code></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>3</code></td><td>How close to the target the marker needs to be to hit it</td></tr>
+<tr id="endtime"><td class="name"><code>endtime</code></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>0</code></td><td>The amount of time you need to be at the target for (in seconds)</td></tr>
+<tr id="dimensionsToUse"><td class="name"><code>dimensionsToUse</code></td><td class="type"><abbr title="A matrix (see the description for how to fill it)">matrix</abbr></td><td class="default"><code>NaN</code></td><td>Dimensions to use to compare the target position , e.g. to just use x and y and not z, set to [1 2]. Default (NaN) is to use all dimensions. The number of dimensions should match the number of dimensions of the targets as defined in targetPosition. Alternatively, it can be set to how much to multiply the values with each row referring to one output dimension, e.g. if there are two xyz sensors, then [0.5 0 0 0.5 0 0;0 0.5 0 0 0.5 0]would generate an average of sensor 1 and 2. In this case, the number of rows should match the dimensions of the targets.</td></tr>
+<tr id="arrivalFeedbackStart"><td class="name"><code>arrivalFeedbackStart</code></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>NaN</code></td><td>If this number is not NaN, then when the target needs to arrive (in seconds) after to NOT get a &quot;too early&quot; feedback</td></tr>
+<tr id="arrivalFeedbackEnd"><td class="name"><code>arrivalFeedbackEnd</code></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>NaN</code></td><td>If this number is not NaN, then when the target needs to arrive (in seconds) before to NOT get a &quot;too late&quot; feedback</td></tr>
+</tbody>
+</table></div>
+</main>
+<footer class="site"><div class="wrap">Generated by <code>makeProtocolDocumentation</code>. <a href="https://github.com/JasonFriedman/RepeatedMeasures">Repeated Measures on GitHub</a></div></footer>
+</body>
+</html>

@@ -1,16 +1,33 @@
-<HTML>
-<HEAD><TITLE>vr</TITLE></HEAD>
-<BODY><H1>vr</H1>
-rendering parameters for virtual reality<BR><BR>
-<TABLE border="1">
-<TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
-<TR><TD>scale</TD><TD>No</TD><TD><A title="A 1 by 3 matrix (see description for how to fill it)">1 by 3 matrix</A></TD><TD>[1,1,1]</TD><TD>Scale factor for the hand</TD></TR>
-<TR><TD>rotate</TD><TD>No</TD><TD><A title="A 1 by 3 matrix (see description for how to fill it)">1 by 3 matrix</A></TD><TD>[0,0,0]</TD><TD>Rotation to apply to the hand</TD></TR>
-<TR><TD>translation</TD><TD>No</TD><TD><A title="A 1 by 3 matrix (see description for how to fill it)">1 by 3 matrix</A></TD><TD>[0,0,0]</TD><TD>Translation to apply to the hand</TD></TR>
-<TR><TD>stereomode</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>stereomode (see Psychtoolbox for the values)</TD></TR>
-<TR><TD>eyedistance</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>eye distance (when using stereo)</TD></TR>
-<TR><TD>cameralocation</TD><TD>No</TD><TD><A title="A 1 by 3 matrix (see description for how to fill it)">1 by 3 matrix</A></TD><TD>[0,2,22]</TD><TD>camera location (x,y,z)</TD></TR>
-<TR><TD>center</TD><TD>No</TD><TD><A title="A 1 by 3 matrix (see description for how to fill it)">1 by 3 matrix</A></TD><TD>[5,5,5]</TD><TD>center of scene (x,y,z)</TD></TR>
-<TR><TD>up</TD><TD>No</TD><TD><A title="A 1 by 3 matrix (see description for how to fill it)">1 by 3 matrix</A></TD><TD>[0,1,0]</TD><TD>up direction (x,y,z)</TD></TR>
-<TR><TD>frustum</TD><TD>No</TD><TD><A title="follow link to see details of the struct" HREF="frustum.html">struct</A></TD><TD>left: -5</BR>right: 5</BR>bottom: -5</BR>top: 5</BR>nearVal: 2</BR>farVal: 500</BR></TD><TD>Viewing transformation</TD></TR>
-</TABLE></BODY></HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>vr (section) &ndash; Repeated Measures</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="home" href="../index.html">Repeated Measures</a><span class="sep">/</span><a href="index.html">Protocol reference</a></div></header>
+<main class="wrap">
+<p class="kind">Section</p>
+<h1>vr</h1>
+<p class="used-in">Used in <a href="index.html#setup-vr"><code>setup.vr</code></a></p>
+<p class="lead">rendering parameters for virtual reality</p>
+<div class="table-wrap"><table class="params">
+<thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+<tr id="scale"><td class="name"><code>scale</code></td><td class="type"><abbr title="A 1 by 3 matrix (see the description for how to fill it)">1&times;3 matrix</abbr></td><td class="default"><code>[1 1 1]</code></td><td>Scale factor for the hand</td></tr>
+<tr id="rotate"><td class="name"><code>rotate</code></td><td class="type"><abbr title="A 1 by 3 matrix (see the description for how to fill it)">1&times;3 matrix</abbr></td><td class="default"><code>[0 0 0]</code></td><td>Rotation to apply to the hand</td></tr>
+<tr id="translation"><td class="name"><code>translation</code></td><td class="type"><abbr title="A 1 by 3 matrix (see the description for how to fill it)">1&times;3 matrix</abbr></td><td class="default"><code>[0 0 0]</code></td><td>Translation to apply to the hand</td></tr>
+<tr id="stereomode"><td class="name"><code>stereomode</code></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>0</code></td><td>stereomode (see Psychtoolbox for the values)</td></tr>
+<tr id="eyedistance"><td class="name"><code>eyedistance</code></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>1</code></td><td>eye distance (when using stereo)</td></tr>
+<tr id="cameralocation"><td class="name"><code>cameralocation</code></td><td class="type"><abbr title="A 1 by 3 matrix (see the description for how to fill it)">1&times;3 matrix</abbr></td><td class="default"><code>[0 2 22]</code></td><td>camera location (x,y,z)</td></tr>
+<tr id="center"><td class="name"><code>center</code></td><td class="type"><abbr title="A 1 by 3 matrix (see the description for how to fill it)">1&times;3 matrix</abbr></td><td class="default"><code>[5 5 5]</code></td><td>center of scene (x,y,z)</td></tr>
+<tr id="up"><td class="name"><code>up</code></td><td class="type"><abbr title="A 1 by 3 matrix (see the description for how to fill it)">1&times;3 matrix</abbr></td><td class="default"><code>[0 1 0]</code></td><td>up direction (x,y,z)</td></tr>
+<tr id="frustum"><td class="name"><code>frustum</code></td><td class="type"><a href="frustum.html">struct</a></td><td class="default"><code>left: -5<br>right: 5<br>bottom: -5<br>top: 5<br>nearVal: 2<br>farVal: 500</code></td><td>Viewing transformation</td></tr>
+</tbody>
+</table></div>
+</main>
+<footer class="site"><div class="wrap">Generated by <code>makeProtocolDocumentation</code>. <a href="https://github.com/JasonFriedman/RepeatedMeasures">Repeated Measures on GitHub</a></div></footer>
+</body>
+</html>

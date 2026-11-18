@@ -1,18 +1,35 @@
-<HTML>
-<HEAD><TITLE>colorInImage</TITLE></HEAD>
-<BODY><H1>colorInImage</H1>
-The target(s) are defined by a color in an image<BR><BR>
-<TABLE border="1">
-<TR><TD>Name</TD><TD>Required</TD><TD>Type</TD><TD>Default value</TD><TD>Description</TD>
-<TR><TD>imageNum</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>Image number to use (from those defined in setup)</TD></TR>
-<TR><TD>startImageNum</TD><TD>Yes</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>1</TD><TD>Image number for when the movement has started, for use with timing feedback</TD></TR>
-<TR><TD>color</TD><TD>No</TD><TD><A title="A 1 by 3 matrix (see description for how to fill it)">1 by 3 matrix</A></TD><TD>[0,0,0]</TD><TD>color in the image that signifies the target</TD></TR>
-<TR><TD>colorStart</TD><TD>No</TD><TD><A title="A 1 by 3 matrix (see description for how to fill it)">1 by 3 matrix</A></TD><TD>[0,0,0]</TD><TD>color in the image that signifies the start point, for use with timing feedback</TD></TR>
-<TR><TD>endtime</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>The amount of time you need to be at the target for (in seconds)</TD></TR>
-<TR><TD>points</TD><TD>No</TD><TD><A title="A n by 6 matrix (see description for how to fill it)">n by 6 matrix</A></TD><TD>[]</TD><TD>Points to earn for this trial (based on position at the end of the trial). Should be a n*6 matrix. Each row includes (1) image number, (2-4) RGB color (5) number of points (6) tolerance of RGB color (city-block distance)</TD></TR>
-<TR><TD>showPositionFeedback</TD><TD>No</TD><TD><A title="A n by 2 matrix (see description for how to fill it)">n by 2 matrix</A></TD><TD>[]</TD><TD>Show position feedback at certain frames in trial. Each row has 2 columns: (1) image number, (2) frame number. Can only use one of points or showPositionFeedback</TD></TR>
-<TR><TD>showPathFeedback</TD><TD>No</TD><TD>string</TD><TD>[]</TD><TD>Show feedback on the path taken at the end of the trial. This should either be 1, or an image, or empty. If it is an image, the color of the image will specify the color of the feedback</TD></TR>
-<TR><TD>showBackground</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>[]</TD><TD>Whether to show background during the feedback presentation. Either an image number, or empty</TD></TR>
-<TR><TD>distance</TD><TD>No</TD><TD><A title="A single number (i.e. not a matrix)">number</A></TD><TD>0</TD><TD>allowable cityblock distance from the color</TD></TR>
-<TR><TD>durationFeedback</TD><TD>No</TD><TD><A title="A 1 by 2 matrix (see description for how to fill it)">1 by 2 matrix</A></TD><TD>[]</TD><TD>Whether to provide feedback about the duration. If so, it should be a 1x2 matrix (1st is minimum time, 2nd is maximum time)</TD></TR>
-</TABLE></BODY></HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>colorInImage (response) &ndash; Repeated Measures</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="home" href="../index.html">Repeated Measures</a><span class="sep">/</span><a href="index.html">Protocol reference</a></div></header>
+<main class="wrap">
+<p class="kind">Response</p>
+<h1>colorInImage</h1>
+<p class="used-in">Used in <a href="index.html#trial-targetType"><code>trial{n}.targetType</code></a></p>
+<p class="lead">The target(s) are defined by a color in an image</p>
+<div class="table-wrap"><table class="params">
+<thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+<tr id="imageNum"><td class="name"><code>imageNum</code><span class="req req1">required</span></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>1</code></td><td>Image number to use (from those defined in setup)</td></tr>
+<tr id="startImageNum"><td class="name"><code>startImageNum</code><span class="req req1">required</span></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>1</code></td><td>Image number for when the movement has started, for use with timing feedback</td></tr>
+<tr id="color"><td class="name"><code>color</code></td><td class="type"><abbr title="A 1 by 3 matrix (see the description for how to fill it)">1&times;3 matrix</abbr></td><td class="default"><code>[0 0 0]</code></td><td>color in the image that signifies the target</td></tr>
+<tr id="colorStart"><td class="name"><code>colorStart</code></td><td class="type"><abbr title="A 1 by 3 matrix (see the description for how to fill it)">1&times;3 matrix</abbr></td><td class="default"><code>[0 0 0]</code></td><td>color in the image that signifies the start point, for use with timing feedback</td></tr>
+<tr id="endtime"><td class="name"><code>endtime</code></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>0</code></td><td>The amount of time you need to be at the target for (in seconds)</td></tr>
+<tr id="points"><td class="name"><code>points</code></td><td class="type"><abbr title="A n by 6 matrix (see the description for how to fill it)">n&times;6 matrix</abbr></td><td class="default"><span class="none">&ndash;</span></td><td>Points to earn for this trial (based on position at the end of the trial). Should be a n*6 matrix. Each row includes (1) image number, (2-4) RGB color (5) number of points (6) tolerance of RGB color (city-block distance)</td></tr>
+<tr id="showPositionFeedback"><td class="name"><code>showPositionFeedback</code></td><td class="type"><abbr title="A n by 2 matrix (see the description for how to fill it)">n&times;2 matrix</abbr></td><td class="default"><span class="none">&ndash;</span></td><td>Show position feedback at certain frames in trial. Each row has 2 columns: (1) image number, (2) frame number. Can only use one of points or showPositionFeedback</td></tr>
+<tr id="showPathFeedback"><td class="name"><code>showPathFeedback</code></td><td class="type">string</td><td class="default"><span class="none">&ndash;</span></td><td>Show feedback on the path taken at the end of the trial. This should either be 1, or an image, or empty. If it is an image, the color of the image will specify the color of the feedback</td></tr>
+<tr id="showBackground"><td class="name"><code>showBackground</code></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><span class="none">&ndash;</span></td><td>Whether to show background during the feedback presentation. Either an image number, or empty</td></tr>
+<tr id="distance"><td class="name"><code>distance</code></td><td class="type"><abbr title="A single number (not a matrix)">number</abbr></td><td class="default"><code>0</code></td><td>allowable cityblock distance from the color</td></tr>
+<tr id="durationFeedback"><td class="name"><code>durationFeedback</code></td><td class="type"><abbr title="A 1 by 2 matrix (see the description for how to fill it)">1&times;2 matrix</abbr></td><td class="default"><span class="none">&ndash;</span></td><td>Whether to provide feedback about the duration. If so, it should be a 1x2 matrix (1st is minimum time, 2nd is maximum time)</td></tr>
+</tbody>
+</table></div>
+</main>
+<footer class="site"><div class="wrap">Generated by <code>makeProtocolDocumentation</code>. <a href="https://github.com/JasonFriedman/RepeatedMeasures">Repeated Measures on GitHub</a></div></footer>
+</body>
+</html>
