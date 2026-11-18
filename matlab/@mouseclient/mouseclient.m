@@ -22,6 +22,7 @@ params.description = {'Maximum x coordinate on the screen (i.e. horizontal scree
 params.required = [1 1];
 params.default = {0,0};
 params.classdescription = 'Connect to the mouse server to sample the mouse location';
+params.showPositionValues = 'The mouse gives 2 values: x and y. displayRangeX and displayRangeY have 5 columns: [xmin xmax ymin ymax time].';
 params.classname = 'mouse';
 params.parentclassname = 'socketclient';
 

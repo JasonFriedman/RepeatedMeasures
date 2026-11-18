@@ -138,6 +138,14 @@ fp = fopen(['docs/protocolDocumentation/' fn],'w');
 usedIn.field = fieldName;
 openPage(fp,char(params.classname),pageKind(params),usedIn);
 fprintf(fp,'<p class="lead">%s</p>\n',esc(char(params.classdescription)));
+if isfield(params,'showPositionValues')
+    fprintf(fp,'<h2 id="showing-the-position">Showing the position</h2>\n');
+    fprintf(fp,'<p>With <code>showPosition</code> = 3, 4 or 5 in a trial, the position of the dot is calculated from the values of the device using ');
+    fprintf(fp,'<a href="#displayRangeX"><code>displayRangeX</code></a> and <a href="#displayRangeY"><code>displayRangeY</code></a>.</p>\n');
+    fprintf(fp,'<p>%s</p>\n',esc(params.showPositionValues));
+    fprintf(fp,'<p>The sizes are checked by <code>validate</code>.</p>\n');
+    fprintf(fp,'<h2 id="options">Options</h2>\n');
+end
 makeTable(fp,params,struct('file',fn,'title',char(params.classname),'prefix','','summarize',0));
 closePage(fp);
 fclose(fp);
@@ -146,7 +154,7 @@ function makeTable(fp,params,thisPage)
 
 thefields = fields(params);
 for k=1:numel(thefields)
-    if ~any(strcmp({'name','type','description','required','default','classname','classdescription','parentclassname'},thefields{k}))
+    if ~any(strcmp({'name','type','description','required','default','classname','classdescription','parentclassname','showPositionValues'},thefields{k}))
         error(['Unknown field ' thefields{k} ' in ' params.classname]);
     end
 end

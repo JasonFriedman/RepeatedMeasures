@@ -19,6 +19,7 @@ params.description = {'Number of DAQ channels to sample'};
 params.required = 1;
 params.default = {[]};
 params.classdescription = 'This client connects to a DAQ server to sample one or more channels (e.g. for a button box or force sensors).';
+params.showPositionValues = 'Each channel gives one value. Use one row with 2 * numchannels + 1 columns, [min1 max1 min2 max2 ... time], or one row for each channel with 3 columns, [min max time].';
 params.classname = 'DAQ';
 params.parentclassname = 'socketclient';
 

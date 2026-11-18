@@ -25,8 +25,13 @@ end
 
 count = 0;
 filenames = {};
+calculatedPosition = 0;
 for k=1:numel(p.trial)
     thistrial = readTrialParameters(e,p.trial{k},experimentdata,1);
+    % showPosition = 3, 4, 5 calculate the position from displayRangeX / displayRangeY
+    if any(thistrial.showPosition==[3 4 5])
+        calculatedPosition = 1;
+    end
     if ~isempty(thistrial.filename)
         count = count+1;
         filenames{count} = thistrial.filename;
@@ -35,6 +40,15 @@ end
 
 % Check for duplicate filenames (from
 % http://www.mathworks.com/matlabcentral/newsreader/view_thread/304505)
+% Check that displayRangeX / displayRangeY etc. fit the values each device gives
+% (otherwise the experiment crashes the first time the position is shown)
+if calculatedPosition
+    for k=1:length(devicelist)
+        [numValues,perSensor] = numPositionValuesOf(e.devices.(devicelist{k}));
+        checkShowPosition(e.devices.(devicelist{k}),numValues,devicelist{k},perSensor);
+    end
+end
+
 if ~isempty(filenames)
     [un idx_last idx] = unique(filenames);
     unique_idx = accumarray(idx(:),(1:length(idx))',[],@(x) {x});
@@ -46,4 +60,13 @@ if ~isempty(filenames)
         end
         error('Repeated filenames: Data will be overwritten!');
     end
+end
+
+function [numValues,perSensor] = numPositionValuesOf(device)
+% numPositionValues has a second output only for devices that repeat rows for each sensor
+perSensor = NaN;
+try
+    [numValues,perSensor] = numPositionValues(device);
+catch
+    numValues = numPositionValues(device);
 end

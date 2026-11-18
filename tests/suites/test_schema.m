@@ -194,6 +194,7 @@ for name = {'gains','numchannels','server','port','showPositionType'}
     rmtestAssert(~isempty(strfind(txt,['<code>' name{1} '</code>'])),'the forcesensors page does not show %s',name{1}); %#ok<STREMP>
 end
 rmtestAssert(~isempty(strfind(txt,'Options from DAQclient')) && ~isempty(strfind(txt,'(from socketclient)')),'the forcesensors page should group the inherited options'); %#ok<STREMP>
+rmtestAssert(~isempty(strfind(txt,'Showing the position')) && ~isempty(strfind(txt,'2 * numchannels + 1 columns')),'the forcesensors page should explain displayRangeX / displayRangeY'); %#ok<STREMP>
 
 function uniqueCodes(info)
 src = fileread([info.root '/matlab/messagecodes.m']);

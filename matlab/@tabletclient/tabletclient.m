@@ -25,6 +25,7 @@ params.description = {'Maximum x value in tablet coordinates (43600 for the Cint
 params.required = [1 1 0];
 params.default = {1,1,1};
 params.classdescription = 'Connects to server to sample location and other information from a WACOM tablet';
+params.showPositionValues = 'The tablet gives 2 values: x and y of the pen. displayRangeX and displayRangeY have 5 columns: [xmin xmax ymin ymax time].';
 params.classname = 'tablet';
 params.parentclassname = 'socketclient';
 
