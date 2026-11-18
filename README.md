@@ -10,9 +10,11 @@ A tutorial on how to use Repeated Measures can be found here:
 
 https://github.com/JasonFriedman/RepeatedMeasures/wiki/Tutorial
 
-The documentation for using the toolkit can be found here in the "docs" directory or here:
+The project page is at https://jasonfriedman.github.io/RepeatedMeasures/
 
-https://htmlpreview.github.io/?https://raw.githubusercontent.com/JasonFriedman/RepeatedMeasures/master/docs/protocolDocumentation/index.html
+The documentation for using the toolkit can be found in the "docs" directory or here:
+
+https://jasonfriedman.github.io/RepeatedMeasures/protocolDocumentation/index.html
 
 Jason Friedman
 

@@ -1,8 +1,188 @@
-<HTML><HEAD><TITLE>Repeated measures documentation></TITLE></HEAD>
-<BODY>
-<H1>Repeated measures documentation</H1>
-<UL>
-<LI><A HREF="protocolDocumentation/index.html">Protocol documentation</A></LI>
-</UL>
-</BODY>
-</HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repeated Measures – MATLAB software for psychophysics and motor control experiments</title>
+<meta name="description" content="Repeated Measures is MATLAB software for running psychophysics and motor control experiments, built on top of the Psychtoolbox.">
+<style>
+  :root {
+    --bg: #fbfaf7;
+    --surface: #ffffff;
+    --text: #1d2321;
+    --muted: #5d6662;
+    --line: #dfe3df;
+    --accent: #1f6f5c;
+    --accent-soft: #e4f0ec;
+    --code: #f1f3f0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141816;
+      --surface: #1b201e;
+      --text: #e6e9e7;
+      --muted: #9ba5a0;
+      --line: #2e3532;
+      --accent: #6cc3a8;
+      --accent-soft: #1f2e29;
+      --code: #222826;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  a { color: var(--accent); }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+  header { padding: 64px 0 40px; border-bottom: 1px solid var(--line); }
+  .eyebrow { font-size: 14px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+  h1 { font-size: 44px; line-height: 1.1; margin: 0 0 16px; letter-spacing: -.02em; }
+  .lead { font-size: 20px; color: var(--muted); margin: 0 0 28px; max-width: 640px; }
+  .buttons { display: flex; flex-wrap: wrap; gap: 12px; }
+  .button {
+    display: inline-block; padding: 10px 18px; border-radius: 8px; text-decoration: none;
+    font-weight: 600; font-size: 15px; border: 1px solid var(--accent);
+  }
+  .button.primary { background: var(--accent); color: var(--bg); }
+  .button.secondary { color: var(--accent); }
+  main section { padding: 40px 0; border-bottom: 1px solid var(--line); }
+  h2 { font-size: 24px; margin: 0 0 16px; letter-spacing: -.01em; }
+  p { margin: 0 0 14px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 8px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px;
+    text-decoration: none; color: var(--text); display: block;
+  }
+  a.card:hover { border-color: var(--accent); }
+  .card h3 { margin: 0 0 6px; font-size: 17px; color: var(--accent); }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+  ul.tags { list-style: none; padding: 0; margin: 8px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  ul.tags li { background: var(--accent-soft); border-radius: 999px; padding: 3px 12px; font-size: 14px; }
+  pre {
+    background: var(--code); border: 1px solid var(--line); border-radius: 8px;
+    padding: 14px 16px; overflow-x: auto; font-size: 14px; line-height: 1.5;
+  }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  p code, li code { background: var(--code); padding: 1px 5px; border-radius: 4px; font-size: .9em; }
+  .note { color: var(--muted); font-size: 15px; }
+  footer { padding: 32px 0 56px; color: var(--muted); font-size: 15px; }
+  @media (max-width: 600px) {
+    header { padding: 40px 0 28px; }
+    h1 { font-size: 34px; }
+    .lead { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">MATLAB · Psychtoolbox</p>
+    <h1>Repeated Measures</h1>
+    <p class="lead">MATLAB software for running psychophysics and motor control experiments, built on top of the Psychtoolbox.</p>
+    <div class="buttons">
+      <a class="button primary" href="https://github.com/JasonFriedman/RepeatedMeasures">View on GitHub</a>
+      <a class="button secondary" href="https://github.com/JasonFriedman/RepeatedMeasures/archive/refs/heads/master.zip">Download .zip</a>
+      <a class="button secondary" href="protocolDocumentation/index.html">Protocol reference</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <h2>How it works</h2>
+    <p>An experiment is described in a <strong>protocol file</strong> (XML): the recording devices to use, and a list of trials. Each trial says what is shown (the <em>stimulus</em>), how the trial starts, and what counts as a response.</p>
+    <p>Repeated Measures runs the trials, records from all the devices at the same time, marks events (stimulus onset, beeps, triggers) in the data, gives feedback, and saves one data file per trial. Each device runs in its own server, so recording continues at the device's own rate while the screen is updated.</p>
+    <p>It has been tested on macOS and Windows, although many of the devices only work with Windows.</p>
+  </section>
+
+  <section>
+    <h2>Getting started</h2>
+    <div class="cards">
+      <a class="card" href="https://github.com/JasonFriedman/RepeatedMeasures/wiki/Install">
+        <h3>Install</h3>
+        <p>Install MATLAB, the Psychtoolbox and Repeated Measures.</p>
+      </a>
+      <a class="card" href="https://github.com/JasonFriedman/RepeatedMeasures/wiki/Tutorial">
+        <h3>Tutorial</h3>
+        <p>Run a first experiment step by step.</p>
+      </a>
+      <a class="card" href="https://github.com/JasonFriedman/RepeatedMeasures/tree/master/sampleexperiments">
+        <h3>Sample experiments</h3>
+        <p>Ready-made experiments with their stimuli and protocol generators.</p>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Writing protocols</h2>
+    <p>Protocol files are usually generated by a short MATLAB script. The <strong>protocol builder</strong> takes care of devices, instructions, repetitions, randomization, breaks and file names, and checks every option as it is set:</p>
+<pre><code>p = protocolNew;
+p = protocolDevice(p,'tablet','maxx',48767,'maxy',30479);
+p = protocolInstruction(p,'Press space to start');
+conditions = protocolDesign('side',{'left','right'},'soa',[0 50 150]);
+p = protocolBlock(p,conditions,@myTrial,'repetitions',12);
+protocolSave(p,'protocols/subject1.xml');</code></pre>
+    <div class="cards">
+      <a class="card" href="https://github.com/JasonFriedman/RepeatedMeasures/tree/master/matlab/protocolBuilder">
+        <h3>Protocol builder</h3>
+        <p>Guide and reference for building protocol files in MATLAB.</p>
+      </a>
+      <a class="card" href="protocolDocumentation/index.html">
+        <h3>Protocol reference</h3>
+        <p>Every option of the setup and of a trial, with types and defaults. Generated from the code.</p>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2>What it supports</h2>
+    <p><strong>Recording devices</strong></p>
+    <ul class="tags">
+      <li>Keyboard</li><li>Mouse</li><li>Wacom tablets</li>
+      <li>Polhemus Liberty, Fastrak, G4</li><li>trakStar</li><li>Optotrak</li>
+      <li>CyberGlove</li><li>Force sensors (DAQ, ATI)</li><li>NI-DAQ, Measurement Computing DAQ</li>
+      <li>Arduino</li><li>Serial port</li><li>Gazepoint eye tracker</li>
+      <li>Bluetera, Red Amber IMUs</li><li>GoPro and video</li>
+    </ul>
+    <p style="margin-top:20px"><strong>Stimuli</strong></p>
+    <ul class="tags">
+      <li>Text</li><li>Images and image sequences</li><li>Video</li><li>Shapes and fixation</li>
+      <li>Random dot kinematograms</li><li>Symbols and text arrays</li><li>Finger opposition sequences</li><li>Virtual reality</li>
+    </ul>
+    <p style="margin-top:20px"><strong>Responses and trial starts</strong></p>
+    <ul class="tags">
+      <li>Key presses and sequences</li><li>Buttons and pedals</li><li>Mouse targets</li>
+      <li>Reaching to targets in space</li><li>Point-to-point movements</li><li>Movement thresholds</li>
+      <li>Colors in an image</li><li>External triggers</li>
+    </ul>
+    <p class="note" style="margin-top:20px">Also: beeps and sounds, serial, parallel, DAQ and Arduino triggers, a detection response task (DRT), QUEST staircases and on-screen feedback.</p>
+  </section>
+
+  <section>
+    <h2>Testing</h2>
+    <p>A test suite runs whole experiments with simulated devices, so it works with or without devices plugged in, in MATLAB or GNU Octave:</p>
+<pre><code>cd tests
+results = runAllTests;</code></pre>
+    <p><a href="https://github.com/JasonFriedman/RepeatedMeasures/tree/master/tests">How the tests work</a> · <a href="https://github.com/JasonFriedman/RepeatedMeasures/blob/master/docs/BUGS.md">Known issues</a></p>
+  </section>
+
+  <section>
+    <h2>Citing</h2>
+    <p>If you use Repeated Measures in your research, please cite it using its DOI: <a href="https://doi.org/10.5281/zenodo.10438">10.5281/zenodo.10438</a>.</p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    Repeated Measures is maintained by <a href="https://github.com/JasonFriedman">Jason Friedman</a>.
+  </div>
+</footer>
+
+</body>
+</html>
