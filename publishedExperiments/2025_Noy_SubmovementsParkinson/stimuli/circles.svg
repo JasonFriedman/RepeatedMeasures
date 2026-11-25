@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20001102//EN" "http://www.w3.org/TR/2000/CR-SVG-20001102/DTD/svg-20001102.dtd">
+<svg version="1.1" height="1440" width="2560" xmlns="http://www.w3.org/2000/svg">
+<circle cx="256" cy="144" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="532" cy="144" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="809" cy="144" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="1085" cy="144" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="1362" cy="144" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="1638" cy="144" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="1915" cy="144" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="256" cy="420" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="532" cy="420" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="809" cy="420" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="1085" cy="420" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="1362" cy="420" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="1638" cy="420" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="1915" cy="420" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="256" cy="697" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="532" cy="697" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="809" cy="697" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="1085" cy="697" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="1362" cy="697" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="1638" cy="697" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="1915" cy="697" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="256" cy="973" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="532" cy="973" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="809" cy="973" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="1085" cy="973" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="1362" cy="973" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="1638" cy="973" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="1915" cy="973" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="256" cy="1250" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="532" cy="1250" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="809" cy="1250" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="1085" cy="1250" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="1362" cy="1250" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="1638" cy="1250" r="102" stroke="black" stroke-width="4" fill="white"/>
+<circle cx="1915" cy="1250" r="102" stroke="black" stroke-width="4" fill="white"/>
+</svg>

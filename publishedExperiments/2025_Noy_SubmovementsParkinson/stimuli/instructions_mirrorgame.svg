@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20001102//EN" "http://www.w3.org/TR/2000/CR-SVG-20001102/DTD/svg-20001102.dtd">
+<svg version="1.1" height="1440" width="2560" xmlns="http://www.w3.org/2000/svg">
+<rect width="100%" height="100%" fill="black"/>
+<ellipse cx="1280" cy="5.040000e+02" rx="72" ry="144" stroke="red" stroke-width="0" fill="red"/>
+<ellipse cx="1.356800e+03" cy="936" rx="72" ry="144" stroke="blue" stroke-width="0" fill="blue"/>
+<foreignObject x="50" y="50" width="1024" height="720">
+<p xmlns="http://www.w3.org/1999/xhtml" style="font-size:60px;color:white;font-family:Arial;text-align:left">
+The red ellipse will move left and right. By moving the stylus (pen) left and right, you will control the position of the blue ellipse. You should track the motion of the red ellipse with the blue ellipse as well as you can
+</p>
+</foreignObject>
+<foreignObject x="1486" y="50" width="1024" height="720">
+<p xmlns="http://www.w3.org/1999/xhtml" style="font-size:60px;color:white;font-family:Arial;text-align:right">
+האליפסה האדומה תנועה שמאלה וימינה. על ידי הזזת העט לימין או לשמאל תוכל/י לשלוט במיקום האליפסה הכחולה. עליך לעקוב כמיטב יכולתך באמצעות האליפסה הכחולה אחרי האליפסה האדומה
+</p>
+</foreignObject>
+<foreignObject x="50" y="720" width="1024" height="720">
+<p xmlns="http://www.w3.org/1999/xhtml" style="font-size:60px;color:white;font-family:Arial;text-align:left">
+Красный эллипс будет двигаться влево и вправо. Перемещая стилус (ручку) влево и вправо, Вы можете управлять положением синего эллипса. Вы должны управлять движением синего эллипса так, чтобы он повторял траекторию движения красного эллипса насколько возможно точно
+</p>
+</foreignObject>
+</svg>

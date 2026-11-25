@@ -19,3 +19,5 @@ https://jasonfriedman.github.io/RepeatedMeasures/protocolDocumentation/index.htm
 Jason Friedman
 
 [![DOI](https://zenodo.org/badge/6585698.svg)](https://doi.org/10.5281/zenodo.10438)
+
+The code used to generate the protocols for published experiments that used Repeated Measures is in the [publishedExperiments](publishedExperiments/) directory.
